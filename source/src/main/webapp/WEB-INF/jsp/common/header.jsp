@@ -1,12 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
-</body>
-</html>
+<header class="header">
+  <div class="header-inner">
+    <a href="${pageContext.request.contextPath}/home" class="header-logo">
+      <img src="${pageContext.request.contextPath}/images/logo/logo.png" alt="こぜピタ" />
+    </a>
+  </div>
+</header>
