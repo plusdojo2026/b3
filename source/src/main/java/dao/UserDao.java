@@ -52,6 +52,43 @@ public class UserDao {
 		return user;
 	}
 
+	public boolean existsByLoginId(String loginId) {
+		boolean exists = false;
+		Connection conn = null;
+
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+
+			conn = DriverManager.getConnection(
+					"jdbc:mysql://localhost:3306/b3?characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=GMT%2B9",
+					"root", "password");
+
+			String sql = "SELECT COUNT(*) FROM users WHERE login_id = ?";
+
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			pStmt.setString(1, loginId);
+
+			ResultSet rs = pStmt.executeQuery();
+
+			if (rs.next()) {
+				exists = rs.getInt(1) > 0;
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+		return exists;
+	}
+
 	public boolean insertWithWallet(User user) {
 		boolean result = false;
 		Connection conn = null;

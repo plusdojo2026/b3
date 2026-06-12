@@ -1,12 +1,57 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
+	pageEncoding="UTF-8"%>
+<!doctype html>
+<html lang="ja">
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ログイン - こぜピタ</title>
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/common.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/mypage_login.css">
+<script src="${pageContext.request.contextPath}/js/login.js" defer></script>
 </head>
 <body>
+	<div class="app">
+		<!-- ヘッダーここから -->
+		<header class="header">
+			<a href="${pageContext.request.contextPath}/LoginServlet"
+				class="logo">ロゴ</a>
+			<div class="page-title">ログイン</div>
+		</header>
+		<!-- ヘッダーここまで -->
+		<!-- メインここから -->
+		<main class="main">
 
+
+			<form method="POST"
+				action="${pageContext.request.contextPath}/LoginServlet"
+				id="login-form">
+
+				<label class="logins" id="login-label-top"> ユーザーID <input
+					type="text" name="loginId" class="login-input" id="loginId"
+					maxlength="20" required>
+				</label><label class="logins"> パスワード <input type="password"
+					name="password" class="login-input" id="password" maxlength="20"
+					required>
+				</label> <label class="auto-login"> <input type="checkbox"
+					name="autoLogin" id="autoLogin"> 次回から自動ログイン
+				</label>
+				<%
+				if (request.getAttribute("errorMsg") != null) {
+				%>
+				<p class="error-message"><%=request.getAttribute("errorMsg")%></p>
+				<%
+				}
+				%>
+				<div class="form-buttons">
+					<input type="submit" class="login-button" name="submit"
+						id="loginBtn" value="ログイン">
+				</div>
+			</form>
+		</main>
+		<!-- メインここまで -->
+	</div>
 </body>
 </html>

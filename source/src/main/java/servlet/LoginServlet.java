@@ -16,21 +16,28 @@ import dto.User;
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	// ログイン画面を表示する
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		request.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response);
+	}
+
+	// ログイン処理
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
 		request.setCharacterEncoding("UTF-8");
 
-		// 入力された値を取得
 		String loginId = request.getParameter("loginId");
 		String password = request.getParameter("password");
 
-		// null対策
 		loginId = loginId == null ? "" : loginId.trim();
 		password = password == null ? "" : password.trim();
 
 		if (loginId.isEmpty() || password.isEmpty()) {
-			response.sendRedirect("login.jsp?error=1");
+			request.setAttribute("errorMsg", "ユーザーIDまたはパスワードを入力してください。");
+			request.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response);
 			return;
 		}
 
@@ -41,10 +48,11 @@ public class LoginServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.setAttribute("loginUser", user);
 
-			response.sendRedirect("home.jsp");
+			response.sendRedirect(request.getContextPath() + "/HomeServlet");
 
 		} else {
-			response.sendRedirect("login.jsp?error=1");
+			request.setAttribute("errorMsg", "ユーザーIDまたはパスワードが違います。");
+			request.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response);
 		}
 	}
 }

@@ -53,10 +53,37 @@ public class SignupServlet extends HttpServlet {
 			request.getRequestDispatcher("/WEB-INF/jsp/signup.jsp").forward(request, response);
 			return;
 		}
+		// ユーザーID形式チェック
+		if (!loginId.matches("^[A-Za-z0-9]{4,20}$")) {
+			request.setAttribute("errorMsg", "ユーザーIDは4〜20文字の半角英数字で入力してください。");
+			request.getRequestDispatcher("/WEB-INF/jsp/signup.jsp").forward(request, response);
+			return;
+		}
 
+		// ニックネーム長さチェック
+		if (nickname.length() > 30) {
+			request.setAttribute("errorMsg", "ニックネームは30文字以内で入力してください。");
+			request.getRequestDispatcher("/WEB-INF/jsp/signup.jsp").forward(request, response);
+			return;
+		}
+
+		// パスワード形式チェック
+		if (!password.matches("^(?=.*[A-Za-z])(?=.*[0-9])[!-~]{8,20}$")) {
+			request.setAttribute("errorMsg", "パスワードは8〜20文字で、半角英字と数字を両方含めてください。");
+			request.getRequestDispatcher("/WEB-INF/jsp/signup.jsp").forward(request, response);
+			return;
+		}
+
+		// ログインID重複チェック
+		UserDao dao = new UserDao();
+
+		if (dao.existsByLoginId(loginId)) {
+			request.setAttribute("errorMsg", "このユーザーIDは既に使われています。");
+			request.getRequestDispatcher("/WEB-INF/jsp/signup.jsp").forward(request, response);
+			return;
+		}
 		User user = new User(0, 0, loginId, password, nickname, "green", false, "ja");
 
-		UserDao dao = new UserDao();
 		boolean result = dao.insertWithWallet(user);
 
 		if (result) {
