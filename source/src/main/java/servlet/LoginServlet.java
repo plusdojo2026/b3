@@ -25,7 +25,7 @@ public class LoginServlet extends HttpServlet {
 		String loginId = request.getParameter("loginId");
 		String password = request.getParameter("password");
 
-		// null対策 + 前後の空白削除
+		// null対策
 		loginId = loginId == null ? "" : loginId.trim();
 		password = password == null ? "" : password.trim();
 

@@ -15,24 +15,42 @@ import dto.User;
 public class SignupServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	// 新規登録画面を表示
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		request.getRequestDispatcher("/WEB-INF/jsp/signup.jsp").forward(request, response);
+	}
+
+	// 新規登録フォームが送信されたときの処理
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
 		request.setCharacterEncoding("UTF-8");
-//入力値を取得
-		String loginId = request.getParameter("loginId");
-		String password = request.getParameter("password");
-		String passwordConfirm = request.getParameter("password_confirm");
-		String nickname = request.getParameter("nickname");
 
-		if (loginId == null || loginId.isEmpty() || password == null || password.isEmpty() || passwordConfirm == null
-				|| passwordConfirm.isEmpty() || nickname == null || nickname.isEmpty()) {
-			response.sendRedirect("signup.jsp");
+		// 入力値を取得
+		String loginId = request.getParameter("loginId");
+		String nickname = request.getParameter("nickname");
+		String password = request.getParameter("password");
+		String passwordConfirm = request.getParameter("passwordConfirm");
+
+		// null対策
+		loginId = loginId == null ? "" : loginId.trim();
+		nickname = nickname == null ? "" : nickname.trim();
+		password = password == null ? "" : password.trim();
+		passwordConfirm = passwordConfirm == null ? "" : passwordConfirm.trim();
+
+		// 未入力チェック
+		if (loginId.isEmpty() || nickname.isEmpty() || password.isEmpty() || passwordConfirm.isEmpty()) {
+			request.setAttribute("errorMsg", "未入力の項目があります。");
+			request.getRequestDispatcher("/WEB-INF/jsp/signup.jsp").forward(request, response);
 			return;
 		}
 
+		// パスワード確認
 		if (!password.equals(passwordConfirm)) {
-			response.sendRedirect("signup.jsp");
+			request.setAttribute("errorMsg", "パスワードが一致しません。");
+			request.getRequestDispatcher("/WEB-INF/jsp/signup.jsp").forward(request, response);
 			return;
 		}
 
@@ -42,10 +60,11 @@ public class SignupServlet extends HttpServlet {
 		boolean result = dao.insertWithWallet(user);
 
 		if (result) {
-//			ここに、チュートリアル機能をのちに記述
-			response.sendRedirect("home.jsp");
+			// ここに、チュートリアル機能をのちに記述
+			response.sendRedirect(request.getContextPath() + "/LoginServlet");
 		} else {
-			response.sendRedirect("signup.jsp");
+			request.setAttribute("errorMsg", "登録に失敗しました。");
+			request.getRequestDispatcher("/WEB-INF/jsp/signup.jsp").forward(request, response);
 		}
 	}
 }
