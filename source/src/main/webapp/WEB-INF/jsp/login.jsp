@@ -32,7 +32,7 @@
 				<label class="logins" id="login-label-top"> ユーザーID <input
 					type="text" name="loginId" class="login-input" id="loginId"
 					maxlength="20" required>
-				</label><label class="logins"> パスワード <input type="password"
+				</label><label class="logins logins-bottom"> パスワード <input type="password"
 					name="password" class="login-input" id="password" maxlength="20"
 					required>
 				</label> <label class="auto-login"> <input type="checkbox"
