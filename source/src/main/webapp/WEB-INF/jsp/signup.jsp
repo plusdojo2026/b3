@@ -42,7 +42,13 @@
 					<input type="password" name="passwordConfirm" class="signup-input"
 					id="passwordConfirm" maxlength="20" required>
 				</label>
-
+				<%
+				if (request.getAttribute("errorMsg") != null) {
+				%>
+				<p class="error-message"><%=request.getAttribute("errorMsg")%></p>
+				<%
+				}
+				%>
 				<div class="form-buttons">
 					<input type="reset" class="reset-button" name="reset" id="resetBtn"
 						value="リセット"> <input type="submit" class="signup-button"
