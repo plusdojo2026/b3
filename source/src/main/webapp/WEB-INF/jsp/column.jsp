@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,18 +36,58 @@
 		<!-- listの中身を１件ずつcolに入れて繰り返す -->
 		<c:forEach var="col" items="${list}">
 		
-			<!-- １件分のコラムを表示するブロック -->
-			<div class="column-item" data-category="${col.category}">
+			<!-- タイトルを、言語に応じて変数に入れる -->
+			<c:if test="${lang == 'ja'}">
+				<c:set var="title" value="${col.title_ja}"/>
+			</c:if>
+			<c:if test="${lang == 'en'}">
+				<c:set var="title" value="${col.title_en}"/>
+			</c:if>
 			
-				<!-- コラムのタイトルを表示 -->
-				<div class="column-title">
-					${col.title_ja}
-					<span class="toggle-icon">▼</span>
-				</div>
+			<!-- 本文を、言語に応じて変数に入れる -->
+			<c:if test="${lang == 'ja'}">
+				<c:set var="body" value="${col.column_ja}"/>
+			</c:if>
+			<c:if test="${lang == 'en'}">
+				<c:set var="body" value="${col.column_en}"/>
+			</c:if>
+			
+				<!-- １件分のコラムを表示するブロック -->
+				<div class="column-item" data-category="${col.category}">
 				
-				<!-- 30文字まで -->
-				<div class="column-short">
-				</div>
+					<!-- コラムのタイトルを表示 -->
+					<div class="column-title">
+						${title}
+						<span class="toggle-icon">▼</span>
+					</div>
+					
+					<!-- 30文字まで -->
+					<div class="column-short">
+						
+						<!-- 30文字より長い場合 -->
+						<c:if test="${fn:length(body) > 30}">
+						 	${fn:substring(body, 0, 30)}...
+						</c:if>
+						
+						<!-- 30文字以下の場合 -->
+						<c:if test="${fn:length(body) <= 30}">
+							${body}
+						</c:if>
+						
+					</div>
+					
+					<!-- 本文（全文） -->
+					<div class="column-full" style="display:none;">
+						${body}
+					</div>
+			</div>
+		
+		</c:forEach>
+	
+	</div>
+	
+	<div id="noResultMessage" style="display:none;">
+		該当するコラムが見つかりませんでした
 	</div>
 	
 	</main>
