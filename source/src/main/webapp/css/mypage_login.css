@@ -3,118 +3,165 @@
 /* --------------------------- */
 /* -------- signup.jsp -------- */
 /* --------------------------- */
-
 .signup-nav {
-  border: 1px solid green;
-  border-radius: 8px;
-  padding: 10px 12px;
-  margin: 28px 0;
-  text-align: center;
-  font-size: 16px;
+	border: 1px solid green;
+	border-radius: 8px;
+	padding: 10px 12px;
+	margin: 28px 0;
+	text-align: center;
+	font-size: 16px;
 }
 
 /* フォーム全体 */
 #signup-form {
-  width: 100%;
+	width: 100%;
 }
-
 
 .logins {
-  display: block;
-  position: relative;
-  margin-bottom: 22px;
-  padding-left: 12px;
-  font-size: 15px;
+	display: block;
+	position: relative;
+	margin-bottom: 22px;
+	padding-left: 12px;
+	font-size: 15px;
 }
 
-
 .logins::before {
-  content: "";
-  width: 6px;
-  height: 28px;
-  background-color: green;
-
-  position: absolute;
-  left: 0;
-  top: 0;
+	content: "";
+	width: 6px;
+	height: 28px;
+	background-color: green;
+	position: absolute;
+	left: 0;
+	top: 0;
 }
 
 /* 注意事項 */
 .input-note {
-  display: block;
-  margin-top: 3px;
-  margin-bottom: 5px;
-  font-size: 11px;
-  color: #333;
+	display: block;
+	margin-top: 3px;
+	margin-bottom: 5px;
+	font-size: 11px;
+	color: #333;
 }
 
 /* 入力欄 */
 .signup-input {
-  width: 100%;
-  height: 26px;
-  border: 1px solid green;
-  border-radius: 4px;
-  padding: 4px 8px;
-  font-size: 15px;
+	width: 100%;
+	height: 26px;
+	border: 1px solid green;
+	border-radius: 4px;
+	padding: 4px 8px;
+	font-size: 15px;
 }
 
 /* 入力中 */
 .signup-input:focus {
-  outline: none;
-  border: 2px solid green;
+	outline: none;
+	border: 2px solid green;
 }
 
 /* ボタンエリア */
 .form-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 28px;
-  margin-top: 44px;
+	display: flex;
+	justify-content: right;
+	gap: 28px;
+}
+
+/* 会員登録画面-ボタンたち */
+.reset-button, .signup-button {
+	width: 78px;
+	height: 42px;
+	border-radius: 6px;
+	font-size: 14px;
+	cursor: pointer;
 }
 
 /* リセットボタン */
-.reset-button,
-.signup-button {
-  width: 78px;
-  height: 42px;
-  border-radius: 6px;
-  font-size: 14px;
-  cursor: pointer;
-}
-
-/* リセット */
 .reset-button {
-  background-color: white;
-  color: black;
-  border: 1px solid black;
+	background-color: white;
+	color: black;
+	border: 1px solid black;
 }
 
-/* 登録 */
+/* 登録ボタン */
 .signup-button {
-  background-color: green;
-  color: white;
-  border: 1px solid green;
+	background-color: green;
+	color: white;
+	border: 1px solid green;
 }
 
-.reset-button:hover,
-.signup-button:hover {
-  opacity: 0.75;
+.reset-button:hover, .signup-button:hover {
+	opacity: 0.75;
 }
-
 
 /* --------------------------- */
 /* -------- login.jsp -------- */
 /* --------------------------- */
 
+/* フォーム全体 */
+#login-form {
+	width: 100%;
+}
 
+#login-label-top {
+	margin-top: 101px;
+}
 
+/* 入力欄 */
+.login-input {
+	width: 100%;
+	height: 26px;
+	border: 1px solid green;
+	border-radius: 4px;
+	padding: 4px 8px;
+	font-size: 15px;
+	margin-top: 24px;
+}
 
+/* 入力中 */
+.login-input:focus {
+	outline: none;
+	border: 2px solid green;
+}
 
+/* 次回以降自動ログインボタン */
+.auto-login {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+	margin: 16px 0 12px;
+	font-size: 14px;
+}
 
+.auto-login input {
+	width: 16px;
+	height: 16px;
+}
 
+/* ログインボタン */
+.login-button {
+	border-radius: 6px;
+	font-size: 14px;
+	cursor: pointer;
+	height: 42px;
+	width: 100%;
+	background-color: green;
+	color: white;
+	border: 1px solid green;
+}
+
+.login-button:hover {
+	opacity: 0.75;
+}
+/* エラーメッセージ */
+.error-message {
+	color: red;
+	text-align: center;
+	font-size: 13px;
+	margin: 0 0 12px 0;
+}
 
 /* --------------------------- */
 /* -------- mypage.jsp -------- */
 /* --------------------------- */
-
-
