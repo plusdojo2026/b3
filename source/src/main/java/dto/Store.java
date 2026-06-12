@@ -68,5 +68,27 @@ public class Store implements Serializable{
 		this.cashlessType = cashlessType;
 	}
 	
-	
+	public Store() {
+	    this.id = 0;
+	    this.nameJa = "";
+	    this.nameEn = "";
+	    this.addressJa = "";
+	    this.addressEn = "";
+	    this.latitude = 0.0;
+	    this.longitude = 0.0;
+	    this.category = "";
+	    this.cashlessType = "";
+	}
+	public Store(int id, String nameJa, String nameEn, String addressJa, String addressEn,
+            double latitude, double longitude, String category, String cashlessType) {
+   this.id = id;
+   this.nameJa = nameJa;
+   this.nameEn = nameEn;
+   this.addressJa = addressJa;
+   this.addressEn = addressEn;
+   this.latitude = latitude;
+   this.longitude = longitude;
+   this.category = category;
+   this.cashlessType = cashlessType;
+}
 }
