@@ -12,20 +12,35 @@
 <!-- 検索機能 -->
 
 <div name="search_map" id="search_map">
-	<input type="text" placeholder="施設名、住所">
+	<input type="text" id="keyword" placeholder="施設名、住所">
 	<div class="search_btn">
-		<a href=""><img src="/webapp/images/.png" alt="検索"></a>
+		<img src="/webapp/images/search.png" alt="検索">
 	</div>
 </div>
 
 <!-- カテゴリー -->
-<!-- 施設のリスト -->
-	<!-- カテゴリー表示 -->
-	<!-- 施設の情報 -->
-	<!--　使用可能キャッシュレス -->
-	<!-- 施設マップ移動ボタン -->
-	
+<div class="filter-container">
+	<button type="button" class="filter-btn active" data-category="Cashonly" aria-pressed="true">
+    現金のみ
+  </button>
+  <button type="button" class="filter-btn" data-category="Cashlessonly" aria-pressed="false">
+    キャッシュレスのみ
+  </button>
+  <button type="button" class="filter-btn" data-category="Both" aria-pressed="false">
+    両対応
+  </button>
+  <button type="button" class="filter-btn" data-category="ATM" aria-pressed="false">
+    ATM
+  </button>
+  <button type="button" class="filter-btn" data-category="Exchange" aria-pressed="false">
+    外貨両替機
+  </button>
+ </div>
+<!-- 施設のリスト(内容はjsで) -->
+<div id="store_list">
+</div>
 	</main>
 <jsp:include page="/WEB-INF/jsp/common/footer.jsp" />
+<script src="js/store_info.js"></script>
 </body>
 </html>
