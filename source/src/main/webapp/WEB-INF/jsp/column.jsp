@@ -49,7 +49,7 @@
 		<div class="category-btn" data-category="贈り物">贈り物</div>
 		<div class="category-btn" data-category="ビジネス">ビジネス</div>
 		<div class="category-btn" data-category="恋愛・結婚">恋愛・結婚</div>
-		<div class="category-btn" data-category="家族・親戚">家族・親戚</div>
+		<div class="category-btn" data-category="家庭・親戚">家庭・親戚</div>
 		<div class="category-btn" data-category="雑学">雑学</div>
 	</div>
 	
