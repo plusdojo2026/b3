@@ -38,7 +38,7 @@
 				</label> <label class="logins"> パスワード <span class="input-note">※英字のみ、数字のみ、記号のみ不可</span>
 					<input type="password" name="password" class="signup-input"
 					id="password" maxlength="20" required>
-				</label> <label class="logins"> パスワードの再入力 <span class="input-note">※上記と同一のものを入力してください</span>
+				</label> <label class="logins logins-bottom"> パスワードの再入力 <span class="input-note">※上記と同一のものを入力してください</span>
 					<input type="password" name="passwordConfirm" class="signup-input"
 					id="passwordConfirm" maxlength="20" required>
 				</label>
