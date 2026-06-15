@@ -103,14 +103,14 @@ public class StoreServlet extends HttpServlet {
 	            Store s = list.get(i);
 	            sb.append("{")
 	              .append("\"id\":").append(s.getId()).append(",")
-	              .append("\"name_ja\":\"").append(s.getNameJa()).append("\",")
-	              .append("\"name_en\":\"").append(s.getNameEn()).append("\",")
-	              .append("\"address_ja\":\"").append(s.getAddressJa()).append("\",")
-	              .append("\"address_en\":\"").append(s.getAddressEn()).append("\",")
+	              .append("\"name_ja\":\"").append(s.getName_ja()).append("\",")
+	              .append("\"name_en\":\"").append(s.getName_en()).append("\",")
+	              .append("\"address_ja\":\"").append(s.getAddress_ja()).append("\",")
+	              .append("\"address_en\":\"").append(s.getAddress_en()).append("\",")
 	              .append("\"latitude\":").append(s.getLatitude()).append(",")
 	              .append("\"longitude\":").append(s.getLongitude()).append(",")
 	              .append("\"category\":\"").append(s.getCategory()).append("\",")
-	              .append("\"cashless_type\":\"").append(s.getCashlessType()).append("\"")
+	              .append("\"cashless_type\":\"").append(s.getCashless_type()).append("\"")
 	              .append("}");
 
 	            if (i < list.size() - 1) sb.append(",");
