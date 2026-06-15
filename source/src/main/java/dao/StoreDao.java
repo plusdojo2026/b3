@@ -21,18 +21,18 @@ public class StoreDao {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 
 			// データベースに接続する
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/webapp2?"
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b3?"
 					+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
 					"root", "password");
 
 			// SQL文を準備する
-			String sql = "SELECT id,name_ja,name_en,address_ja,address_en,latitude,longitude,category,cashlessType "
-			        + "FROM store WHERE "
+			String sql = "SELECT id,name_ja,name_en,address_ja,address_en,latitude,longitude,category,cashless_type "
+			        + "FROM stores WHERE "
 			        + "BINARY name_ja LIKE BINARY ? AND "
 			        + "BINARY name_en LIKE BINARY ? AND "
 			        + "BINARY address_ja LIKE BINARY ? AND "
 			        + "BINARY address_en LIKE BINARY ? AND "
-			        + "BINARY cashlessType LIKE BINARY ? ";
+			        + "BINARY cashless_type LIKE BINARY ? ";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			
 
@@ -48,14 +48,14 @@ public class StoreDao {
 	        while (rs.next()) {
                 Store s = new Store();
                 s.setId(rs.getInt("id"));
-                s.setNameJa(rs.getString("name_ja"));
-                s.setNameEn(rs.getString("name_en"));
-                s.setAddressJa(rs.getString("address_ja"));
-                s.setAddressEn(rs.getString("address_en"));
+                s.setName_ja(rs.getString("name_ja"));
+                s.setName_en(rs.getString("name_en"));
+                s.setAddress_ja(rs.getString("address_ja"));
+                s.setAddress_en(rs.getString("address_en"));
                 s.setLatitude(rs.getDouble("latitude"));
                 s.setLongitude(rs.getDouble("longitude"));
                 s.setCategory(rs.getString("category"));
-                s.setCashlessType(rs.getString("cashlessType"));
+                s.setCashless_type(rs.getString("cashlessType"));
 
                 cardList.add(s);	        
 			}
