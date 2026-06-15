@@ -10,15 +10,21 @@
 	href="${pageContext.request.contextPath}/css/mypage_login.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/common.css">
-<script src="${pageContext.request.contextPath}/js/signup.js" defer></script>
+<script src="${pageContext.request.contextPath}/js/common.js" defer></script>
+<script src="${pageContext.request.contextPath}/js/payment.js" defer></script>
+<link rel="icon" href="${pageContext.request.contextPath}/favicon/favicon.png">
 </head>
 <body>
 	<div class="app">
 		<!-- ヘッダーここから -->
 		<header class="header">
-			<a href="${pageContext.request.contextPath}/SignupServlet"
-				class="logo">ロゴ</a>
-			<div class="page-title">ユーザー登録</div>
+			<a href="${pageContext.request.contextPath}/SignupServlet"> <img
+				src="${pageContext.request.contextPath}/images/logo/logo.png"
+				alt="ロゴ" class="logo"></a>
+			<div class="page-title">会員登録</div>
+			<a href="${pageContext.request.contextPath}/SignupServlet"> <img
+				src="${pageContext.request.contextPath}/images/logo/home.png"
+				alt="ホーム" class="toHome"></a>
 		</header>
 		<!-- ヘッダーここまで -->
 		<!-- メインここから -->
@@ -38,9 +44,10 @@
 				</label> <label class="logins"> パスワード <span class="input-note">※英字のみ、数字のみ、記号のみ不可</span>
 					<input type="password" name="password" class="signup-input"
 					id="password" maxlength="20" required>
-				</label> <label class="logins logins-bottom"> パスワードの再入力 <span class="input-note">※上記と同一のものを入力してください</span>
-					<input type="password" name="passwordConfirm" class="signup-input"
-					id="passwordConfirm" maxlength="20" required>
+				</label> <label class="logins logins-bottom"> パスワードの再入力 <span
+					class="input-note">※上記と同一のものを入力してください</span> <input type="password"
+					name="passwordConfirm" class="signup-input" id="passwordConfirm"
+					maxlength="20" required>
 				</label>
 				<%
 				if (request.getAttribute("errorMsg") != null) {

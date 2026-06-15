@@ -9,16 +9,22 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/common.css">
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/mypage_login.css">
-<script src="${pageContext.request.contextPath}/js/login.js" defer></script>
+	href="${pageContext.request.contextPath}/css/login.css">
+<script src="${pageContext.request.contextPath}/js/common.js" defer></script>
+<script src="${pageContext.request.contextPath}/js/payment.js" defer></script>
+<link rel="icon" href="${pageContext.request.contextPath}/favicon/favicon.png">
 </head>
 <body>
 	<div class="app">
 		<!-- ヘッダーここから -->
 		<header class="header">
-			<a href="${pageContext.request.contextPath}/LoginServlet"
-				class="logo">ロゴ</a>
-			<div class="page-title">ログイン</div>
+			<a href="${pageContext.request.contextPath}/SignupServlet"> <img
+				src="${pageContext.request.contextPath}/images/logo/logo.png"
+				alt="ロゴ" class="logo"></a>
+			<div class="page-title">会員登録</div>
+			<a href="${pageContext.request.contextPath}/SignupServlet"> <img
+				src="${pageContext.request.contextPath}/images/logo/home.png"
+				alt="ホーム" class="toHome"></a>
 		</header>
 		<!-- ヘッダーここまで -->
 		<!-- メインここから -->
@@ -32,9 +38,9 @@
 				<label class="logins" id="login-label-top"> ユーザーID <input
 					type="text" name="loginId" class="login-input" id="loginId"
 					maxlength="20" required>
-				</label><label class="logins logins-bottom"> パスワード <input type="password"
-					name="password" class="login-input" id="password" maxlength="20"
-					required>
+				</label><label class="logins logins-bottom"> パスワード <input
+					type="password" name="password" class="login-input" id="password"
+					maxlength="20" required>
 				</label> <label class="auto-login"> <input type="checkbox"
 					name="autoLogin" id="autoLogin"> 次回から自動ログイン
 				</label>

@@ -28,7 +28,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 20px;
+  padding: 2px 12px;
   margin-bottom: 12px;
 }
 
@@ -42,7 +42,7 @@ body {
 
 /* ホームボタン */
 .toHome {
-  width: 60px;
+  width: 45px;
   text-align: right;
   text-decoration: none;
   color: green;
