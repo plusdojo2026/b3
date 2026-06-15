@@ -6,6 +6,7 @@ pageEncoding="UTF-8"%>
 <head>
 <meta charset="UTF-8">
 <title>ぴったり価格ガイド</title>
+<link rel="stylesheet" href="/b3/css/common.css">
 </head>
 <body>
 <jsp:include page="/WEB-INF/jsp/common/header.jsp" />
@@ -13,8 +14,8 @@ pageEncoding="UTF-8"%>
 	<%--任意の金額入力フォーム（金額を入力して探す）（上限は￥2,000） --%>
 	<form action="CoinSupportServlet" method="GET">
 	<h3>金額を入力して探す<span>（上限は￥2,000）</span></h3>
-	<input type="number" inputmode="numeric" id="amountInput" name="amountInput" 
-	min="0" max="2000" placeholder="￥500-">
+	<input type="number"  inputmode="numeric" id="amountInput" name="amountInput" 
+	 min="0" max="2000" placeholder="￥500-">
 	
 	<%--検索ボタン --%>
 	<button type="submit" id="btnSearchAmount" name="submitType" value="manual">検索</button>
@@ -45,7 +46,7 @@ pageEncoding="UTF-8"%>
 	
 	<%--その他のおすすめ商品（現在の小銭合計をwalletsテーブルから取得） --%>
 	<div class="recItemsArea">
-	<h3>その他のおすすめ商品<span>￥${totalCoins}</span></h3>
+	<h3>その他のおすすめ商品<span>￥${totalCoins}以下</span></h3>
 	
 	
 	<%--ソートを選択できるドロップダウン --%>
