@@ -1,1 +1,66 @@
 @charset "UTF-8";
+
+/* --------------------------- */
+/* --------payment.jsp-------- */
+/* --------------------------- */
+.payment-nav {
+	margin-top: 42px;
+	text-align: center;
+}
+
+.amount-input {
+	display: flex;
+	margin: 18px auto;
+	padding: 8px;
+	font-size: 46px;
+	font-weight: 480;
+	text-align: right;
+	border-radius: 8px;
+	border: 1px solid green;
+	width: 280px;
+	height: 90px;
+}
+
+.money_isUse {
+	font-size: 13px;
+	text-align: center;
+	margin-top: 48px;
+}
+
+.form-button {
+	display: flex;
+	justify-content: center;
+}
+
+.payment-button {
+	width: 320px;
+	height: 48px;
+	border-radius: 6px;
+	font-size: 14px;
+	cursor: pointer;
+	background-color: green;
+	color: white;
+	border: 1px solid green;
+	font-weight: 450;
+	font-size: 107%
+}
+
+.payment-nav-buttons {
+	display: flex;
+	justify-content: center;
+	gap: 28px;
+}
+
+.payment-btn {
+	width: 146px;
+	height: 48px;
+	border-radius: 6px;
+	font-size: 14px;
+	cursor: pointer;
+	background-color: green;
+	color: white;
+	border: 1px solid green;
+	margin-top: 20px;
+	font-weight: 450;
+	font-size: 107%
+}

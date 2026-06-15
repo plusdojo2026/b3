@@ -19,11 +19,11 @@
 	<div class="app">
 		<!-- ヘッダーここから -->
 		<header class="header">
-			<a href="${pageContext.request.contextPath}/SignupServlet"> <img
+			<a href="${pageContext.request.contextPath}/HomeServlet"> <img
 				src="${pageContext.request.contextPath}/images/logo/logo.png"
 				alt="ロゴ" class="logo"></a>
 			<div class="page-title">支出登録</div>
-			<a href="${pageContext.request.contextPath}/SignupServlet"> <img
+			<a href="${pageContext.request.contextPath}/HomeServlet"> <img
 				src="${pageContext.request.contextPath}/images/logo/home.png"
 				alt="ホーム" class="toHome"></a>
 		</header>
@@ -38,7 +38,15 @@
 				<label class="payments"> <input type="text" name="amount"
 					class="amount-input" id="amountInput" maxlength="8">
 				</label>
+				<div class="money_isUse">使用できない紙幣・硬貨のチェックを外してください​</div>
+				<div class="form-button">
+					<input type="submit" name="submit" class="payment-button"
+						id="paymentBtn" value="支払い">
+				</div>
 			</form>
+			<div class="payment-nav-buttons">
+			<input type="submit" class="payment-btn" value="戻る">
+			<input type="submit" class="payment-btn" value="支出ログ"></div>
 		</main>
 		<!-- メインここまで -->
 		<!-- フッターここから -->
