@@ -36,7 +36,9 @@
 				class="nav-item">仮</a>
 			<div class="nav-space"></div>
 			<a href="${pageContext.request.contextPath}/ColumnServlet"
-				class="nav-item">仮</a> <a href="${pageContext.request.contextPath}/MyPageServlet" class="nav-item">仮</a> <a
+				class="nav-item">仮</a> <a
+				href="${pageContext.request.contextPath}/MyPageServlet"
+				class="nav-item">仮</a> <a
 				href="${pageContext.request.contextPath}/PaymentServlet"
 				class="nav-center">仮</a>
 		</footer>

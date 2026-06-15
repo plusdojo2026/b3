@@ -12,7 +12,8 @@
 	href="${pageContext.request.contextPath}/css/payment.css">
 <script src="${pageContext.request.contextPath}/js/common.js" defer></script>
 <script src="${pageContext.request.contextPath}/js/payment.js" defer></script>
-<link rel="icon" href="${pageContext.request.contextPath}/favicon/favicon.png">
+<link rel="icon"
+	href="${pageContext.request.contextPath}/favicon/favicon.png">
 </head>
 <body>
 	<div class="app">
@@ -40,6 +41,21 @@
 			</form>
 		</main>
 		<!-- メインここまで -->
+		<!-- フッターここから -->
+		<footer class="bottom-menu">
+			<a href="${pageContext.request.contextPath}/CoinSupportServlet"
+				class="nav-item">仮</a> <a
+				href="${pageContext.request.contextPath}/StoreServlet"
+				class="nav-item">仮</a>
+			<div class="nav-space"></div>
+			<a href="${pageContext.request.contextPath}/ColumnServlet"
+				class="nav-item">仮</a> <a
+				href="${pageContext.request.contextPath}/MyPageServlet"
+				class="nav-item">仮</a> <a
+				href="${pageContext.request.contextPath}/PaymentServlet"
+				class="nav-center">仮</a>
+		</footer>
+		<!-- フッターここまで -->
 	</div>
 </body>
 </html>
