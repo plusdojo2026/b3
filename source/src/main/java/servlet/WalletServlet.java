@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.WalletDao;
+import dto.Wallet;
+
 /**
  * Servlet implementation class WalletServlet
  */
@@ -29,9 +32,17 @@ public class WalletServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
 		// TODO Auto-generated method stub
-		// response.getWriter().append("Served at:").append(request.getContextPath());←なにこれ
+		// response.getWriter().append("Served at:").append(request.getContextPath());
 
+		WalletDao walletDao = new WalletDao();
+		try {
+			Wallet wallet = walletDao.selectById(1);      //今はid=1
+			request.setAttribute("wallet", wallet);
+		} catch (Exception e) {
+		}
 		// 予算登録ページにフォワード
 		request.getRequestDispatcher("/WEB-INF/jsp/wallet.jsp").forward(request, response);
 	}
@@ -43,8 +54,9 @@ public class WalletServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		// doGet(request, response);←なにこれ
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
+
 		// リクエストパラメータを取得する。
 		String tenThousandYen = request.getParameter("tenThousandYen");
 		String fiveThousandYen = request.getParameter("fiveThousandYen");
