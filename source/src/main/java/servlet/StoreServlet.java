@@ -46,11 +46,11 @@ public class StoreServlet extends HttpServlet {
 	        double userLat = Double.parseDouble(request.getParameter("lat"));
 	        double userLng = Double.parseDouble(request.getParameter("lng"));
 
-	        StoreDAO dao = new StoreDAO();
-	        List<StoreDTO> storeList = dao.getStoresByCategories(categories,keyword);
+	        StoreDao dao = new StoreDao();
+	        List<Store> storeList = dao.getStoresByCategories(categories,keyword);
 
 	        //距離を計算。DTOへ
-	        for (StoreDTO s : storeList) {
+	        for (Store s : storeList) {
 	            double dist = calcDistance(userLat, userLng, s.getLatitude(), s.getLongitude());
 	            s.setDistance(dist);
 	        }
@@ -77,7 +77,7 @@ public class StoreServlet extends HttpServlet {
 	        return R * c; 
 	    }
 	 // DTO→JSON変換
-		private String toJson(List<StoreDTO> list) {
+		private String toJson(List<Store> list) {
 	        StringBuilder sb = new StringBuilder();
 	        sb.append("[");
 

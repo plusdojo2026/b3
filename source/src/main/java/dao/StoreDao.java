@@ -8,35 +8,67 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import servlet.StoreDTO;
+import dto.Store;
 
 public class StoreDao {
-
-	public List<StoreDTO>getStoresByCategoriesAndKeyword(String[] categories, String keyword){
+	
+	public List<Store> getStoresByCategories(String[] categories, String[] keywords) {
 		Connection conn = null;
-		List<StoreDTO> list = new ArrayList<>();
-
-				 
-		//カテゴリーが複数選ばれても動くように
-			for(int i = 0; i < categories.length; i++) {
-				sql.append("?");
-				if(if < categories.length - 1)sql.append(",");
-			}
+		List<Store> cardList = new ArrayList<Store>();
 		
-		//検索キーワードを空白で分ける
-		List<String> words = new ArrayList<>();
-		if(keyword != null && !keyword.isEmpty()) {
-			for(String w : keyword.split("[\\\\s　")) {
-				if(!w.isEmpty()) words.add(w);
-			}
-		}
-		
-		for (int i = 0; i < words.size(); i++) {
-		    sql.append(" AND (");
-		    sql.append("name_ja LIKE ? OR name_en LIKE ? OR ");
-		    sql.append("address_ja LIKE ? OR address_en LIKE ?");
-		    sql.append(")");
-		}
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("com.mysql.cj.jdbc.Driver");
 
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/webapp2?"
+					+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+					"root", "password");
+
+			// SQL文を準備する
+			String sql = "SELECT id,name_ja,name_en,address_ja,address_en,latitude,longitude,category, cashlessType"
+					+ " FROM store WHERE "
+					+ "name_ja LIKE ? AND "
+					+ "name_en LIKE ? AND "
+					+ "address_ja LIKE ? AND "
+					+ "cashlessType LIKE ? AND ";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			
+			// SQL文を実行し、結果表を取得する
+			ResultSet rs = pStmt.executeQuery();
+			
+	        while (rs.next()) {
+                Store s = new Store();
+                s.setId(rs.getInt("id"));
+                s.setNameJa(rs.getString("name_ja"));
+                s.setNameEn(rs.getString("name_en"));
+                s.setAddressJa(rs.getString("address_ja"));
+                s.setAddressEn(rs.getString("address_en"));
+                s.setLatitude(rs.getDouble("latitude"));
+                s.setLongitude(rs.getDouble("longitude"));
+                s.setCategory(rs.getString("category"));
+                s.setCashlessType(rs.getString("cashlessType"));
+
+                cardList.add(s);	        
+			}
+		}catch (SQLException e) {
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			} finally {
+				// データベースを切断
+				if (conn != null) {
+					try {
+						conn.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
+			
+			}
+		// 結果を返す
+				return cardList;
 	}
 }
+
+		
