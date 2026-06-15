@@ -77,6 +77,5 @@
 		</footer>
 		<!-- フッターここまで -->
 	</div>
-	<jsp:include page="/WEB-INF/jsp/common/footer.jsp" />
 </body>
 </html>
