@@ -26,12 +26,12 @@ public class StoreDao {
 					"root", "password");
 
 			// SQL文を準備する
-			String sql = "SELECT id,name_ja,name_en,address_ja,address_en,latitude,longitude,category, cashlessType"
-					+ " FROM store WHERE "
-					+ "name_ja LIKE ? AND "
-					+ "name_en LIKE ? AND "
-					+ "address_ja LIKE ? AND "
-					+ "cashlessType LIKE ? AND ";
+			String sql = "SELECT id,name_ja,name_en,address_ja,address_en,latitude,longitude,category,cashlessType "
+			        + "FROM store WHERE "
+			        + "BINARY name_ja LIKE BINARY ? AND "
+			        + "BINARY name_en LIKE BINARY ? AND "
+			        + "BINARY address_ja LIKE BINARY ? AND "
+			        + "BINARY cashlessType LIKE BINARY ? ";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			
 			// SQL文を実行し、結果表を取得する

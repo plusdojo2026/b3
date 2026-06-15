@@ -5,11 +5,17 @@ import java.io.PrintWriter;
 import java.util.Comparator;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import dao.StoreDao;
+import dto.Store;
+
+
 
 /**
  * Servlet implementation class StoreServlet
@@ -33,7 +39,7 @@ public class StoreServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 			//検索
-			String[] keyword = request.getParameterValues("keyword")
+			String[] keyword = request.getParameterValues("keyword");
 			//カテゴリーフィルタ
 			String[] categories = request.getParameterValues("category");
 	        
@@ -56,7 +62,7 @@ public class StoreServlet extends HttpServlet {
 	        }
 
 	        // 距離の昇順にソート
-	        storeList.sort(Comparator.comparingDouble(StoreDTO::getDistance));
+	        storeList.sort(Comparator.comparingDouble(Store::getDistance));
 
 	        // JSONで返す
 	        response.setContentType("application/json; charset=UTF-8");
@@ -82,7 +88,7 @@ public class StoreServlet extends HttpServlet {
 	        sb.append("[");
 
 	        for (int i = 0; i < list.size(); i++) {
-	            StoreDTO s = list.get(i);
+	            Store s = list.get(i);
 	            sb.append("{")
 	              .append("\"id\":").append(s.getId()).append(",")
 	              .append("\"name_ja\":\"").append(s.getNameJa()).append("\",")
@@ -108,6 +114,8 @@ public class StoreServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/store_info.jsp");
+		dispatcher.forward(request, response);
 	}
 
 }
