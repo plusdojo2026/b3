@@ -2,11 +2,14 @@ package servlet;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import dao.ProductDao;
 
 /**
  * Servlet implementation class CoinSupportServlet
@@ -26,10 +29,15 @@ public class CoinSupportServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws
+	ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
-	
+		// ページにフォワードする
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/coin_support.jsp");
+		dispatcher.forward(request, response);
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
@@ -48,7 +56,8 @@ public class CoinSupportServlet extends HttpServlet {
 	int targetPrice = 0;
 	
 //	お財布の合計額(仮で350円）
-    int totalCoins = 350;
+	ProductDao productDao = new ProductDao();
+	int totalCoins = productDao.totalCoins();
     
 //  ボタンが押されたときの条件分岐
     if ("manual".equals(submitType)) {
