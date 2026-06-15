@@ -1,7 +1,6 @@
 package servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Comparator;
 import java.util.List;
 
@@ -23,27 +22,19 @@ import dto.Store;
 public class StoreServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public StoreServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+ 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		request.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html; charset=UTF-8");
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
-			//検索
+	//検索
 			String[] keyword = request.getParameterValues("keyword");
 			//カテゴリーフィルタ
 			String[] categories = request.getParameterValues("category");
 	        
+			String name_ja = request.getParameter("name_ja");
+	        String name_en = request.getParameter("name_en");
+	        String address_ja = request.getParameter("address_ja");
+	        String address_en = request.getParameter("address_en");
+	        String cashlessType = request.getParameter("cashlessType");
+			
 	        //デフォルト表示を現金のみonにする
 	        if (categories == null || categories.length == 0) {
 	            categories = new String[]{"Cashonly"};
@@ -70,7 +61,9 @@ public class StoreServlet extends HttpServlet {
 			*/
 	        
 	        StoreDao dao = new StoreDao();
-	        List<Store> storeList = dao.getStoresByCategories(categories,keyword);
+	        
+	        //error
+			List<Store> storeList = dao.getStoresByCategories(name_ja,name_en,address_ja,address_en,cashlessType,categories,keyword);
 
 	        //距離を計算。DTOへ
 	        for (Store s : storeList) {
@@ -82,10 +75,12 @@ public class StoreServlet extends HttpServlet {
 	        storeList.sort(Comparator.comparingDouble(Store::getDistance));
 
 	        // JSONで返す
-	        response.setContentType("application/json; charset=UTF-8");
-	        PrintWriter out = response.getWriter();
-	        out.print(toJson(storeList));
-	        out.flush();
+	        
+	        
+//	        response.setContentType("application/json; charset=UTF-8");
+//	        PrintWriter out = response.getWriter();
+//	        out.print(toJson(storeList));
+//	        out.flush();
 	    }
 
 	    // 距離計算の中身 ハヴァサイン公式
@@ -120,8 +115,9 @@ public class StoreServlet extends HttpServlet {
 
 	            if (i < list.size() - 1) sb.append(",");
 	        }
-
+	        
 	        sb.append("]");
+	        System.out.println(sb.toString());
 	        return sb.toString();
 	    }
 		

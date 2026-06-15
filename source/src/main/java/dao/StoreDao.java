@@ -12,7 +12,7 @@ import dto.Store;
 
 public class StoreDao {
 	
-	public List<Store> getStoresByCategories(String[] categories, String[] keywords) {
+	public List<Store> getStoresByCategories(String nameJa,String nameEn,String addressJa,String addressEn,String cashlessType,String[] categories, String[] keywords) {
 		Connection conn = null;
 		List<Store> cardList = new ArrayList<Store>();
 		
@@ -31,8 +31,16 @@ public class StoreDao {
 			        + "BINARY name_ja LIKE BINARY ? AND "
 			        + "BINARY name_en LIKE BINARY ? AND "
 			        + "BINARY address_ja LIKE BINARY ? AND "
+			        + "BINARY address_en LIKE BINARY ? AND "
 			        + "BINARY cashlessType LIKE BINARY ? ";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
+			
+
+			pStmt.setString(1, "%" + nameJa + "%");
+			pStmt.setString(2, "%" + nameEn + "%");
+			pStmt.setString(3, "%" + addressJa + "%");
+			pStmt.setString(4, "%" + addressEn + "%");
+			pStmt.setString(5, "%" + cashlessType + "%");
 			
 			// SQL文を実行し、結果表を取得する
 			ResultSet rs = pStmt.executeQuery();
