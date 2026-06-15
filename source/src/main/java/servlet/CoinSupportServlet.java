@@ -83,12 +83,15 @@ public class CoinSupportServlet extends HttpServlet {
     
 //	DAOを呼び出す
     if (searchSign) {
-        // ★ここに、後でDAOの処理を書く
-        // // ぴったり使い切る組み合わせ
-//        List<Products> matchComboList = productDao.getMatchCombos(targetPrice);
-        
-        // その他のおすすめ商品
-//        List<Products> recItemsList = productDao.getRecommendProducts(targetPrice);
+    	if (searchSign) {
+    		// DAOのメソッドを1回だけ呼び出して、金額以下の全商品を仕入れる
+//    		java.util.List<Product> recItemsList = productDao.getRecommendProducts(targetPrice);
+    		
+    		// 【超重要】仕入れたリストを、Gsonを使って一瞬でJSON（文字）に変換する
+//    		String recItemsJson = new com.google.gson.Gson().toJson(recItemsList);
+    		
+    		// JSP（JavaScript）にお土産としてJSONを渡す
+//    		request.setAttribute("recItemsJson", recItemsJson);
     } else {
         // まだ何もボタンを押していない（初期表示）ときは、空っぽのリストをJSPに送る
         request.setAttribute("matchComboList", new java.util.ArrayList<>());
@@ -104,7 +107,7 @@ public class CoinSupportServlet extends HttpServlet {
 //	JSPを表示する
 	request.getRequestDispatcher("/WEB-INF/jsp/coin_support.jsp").forward(request, response);
 	}
-	
+	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
