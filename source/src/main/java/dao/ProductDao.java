@@ -12,7 +12,7 @@ public class ProductDao {
     PreparedStatement pstmt = null;
     
     //1. お財布の中の小銭の合計金額をDBから計算して持ってくるメソッド
-    public int totalCoins() {
+    public int totalCoins(int id) {
        int total = 0;
     
 	try {
@@ -25,10 +25,12 @@ public class ProductDao {
 				"root", "password");
 
 		// SQL文を準備する
-		String sql = "SELECT (five_hundred_yen*500+ one_hundred_yen*100+ fifty_yen*50+ ten_yen*10+ five_yen*5+ one_yen*1)AS total FROM wallets";
+		String sql = "SELECT (five_hundred_yen*500+ one_hundred_yen*100+ fifty_yen*50+ ten_yen*10+ five_yen*5+ one_yen*1) "
+				+ "AS total FROM wallets where id=?";
 		
 		//SQL文をセットして実行する準備
 		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, id);
 		
 		// SQLを実行して、結果を矢印（rs）で受け取る
 		rs = pstmt.executeQuery();
@@ -58,3 +60,5 @@ public class ProductDao {
 		}return total;
 	}
 }
+	//2. 任意の金額または、小銭合計をぴったり使い切る組み合わせを表示するメソッド
+	

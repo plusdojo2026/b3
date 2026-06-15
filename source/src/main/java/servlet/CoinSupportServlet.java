@@ -2,14 +2,15 @@ package servlet;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.ProductDao;
+import dto.User;
 
 /**
  * Servlet implementation class CoinSupportServlet
@@ -35,10 +36,18 @@ public class CoinSupportServlet extends HttpServlet {
 		response.setContentType("text/html; charset=UTF-8");
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
-		// ページにフォワードする
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/coin_support.jsp");
-		dispatcher.forward(request, response);
-
+		
+		//ユーザーごとのidを取得
+		HttpSession session = request.getSession();
+		User loginUser = (User) session.getAttribute("loginUser");
+		int id = 0;
+	    if (loginUser != null) {
+	        id = loginUser.getId(); 
+	    } else {
+	        // ログイン画面に送還する処理
+	        response.sendRedirect("LoginServlet");
+	        return;
+	    }
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -49,15 +58,15 @@ public class CoinSupportServlet extends HttpServlet {
 	String[] categories = request.getParameterValues("category");
 	String submitType = request.getParameter("submitType");
 	
-//	ボタンが押されたかをチェックする目印(押されていないときは、商品リストを表示しないようにするため
+//	ボタンが押されたかをチェックする目印(押されていないときは、商品リストを表示しないようにするため）
 	boolean searchSign = false;
 	
 //	ボタンの種類によって、検索に使う金額（targetPrice）を決める
 	int targetPrice = 0;
 	
-//	お財布の合計額(仮で350円）
+//	財布の小銭合計額
 	ProductDao productDao = new ProductDao();
-	int totalCoins = productDao.totalCoins();
+	int totalCoins = productDao.totalCoins(id);
     
 //  ボタンが押されたときの条件分岐
     if ("manual".equals(submitType)) {
@@ -78,7 +87,7 @@ public class CoinSupportServlet extends HttpServlet {
         // // ぴったり使い切る組み合わせ
 //        List<Products> matchComboList = productDao.getMatchCombos(targetPrice);
         
-        // ② その他のおすすめ商品
+        // その他のおすすめ商品
 //        List<Products> recItemsList = productDao.getRecommendProducts(targetPrice);
     } else {
         // まだ何もボタンを押していない（初期表示）ときは、空っぽのリストをJSPに送る
