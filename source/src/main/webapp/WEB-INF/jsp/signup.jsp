@@ -12,7 +12,7 @@
 	href="${pageContext.request.contextPath}/css/common.css">
 <script src="${pageContext.request.contextPath}/js/common.js" defer></script>
 <script src="${pageContext.request.contextPath}/js/payment.js" defer></script>
-<link rel="icon" href="${pageContext.request.contextPath}/favicon/favicon.png">
+<link rel="icon" href="${pageContext.request.contextPath}/favicon/favicon2.png">
 </head>
 <body>
 	<div class="app">
