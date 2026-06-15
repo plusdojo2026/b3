@@ -3,6 +3,7 @@ package servlet;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -48,7 +49,8 @@ public class ColumnServlet extends HttpServlet {
 		request.setAttribute("list", list);
 		
 		// JSPへフォワード
-		request.getRequestDispatcher("/webapp/WEB-INF/jsp/column.jsp").forward(request, response);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/column.jsp");
+		dispatcher.forward(request, response);
 	}
 	
 	/**
@@ -58,5 +60,5 @@ public class ColumnServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
-
+	
 }
