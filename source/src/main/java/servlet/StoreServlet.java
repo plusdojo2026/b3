@@ -5,7 +5,6 @@ import java.io.PrintWriter;
 import java.util.Comparator;
 import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -37,7 +36,7 @@ public class StoreServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
 			//検索
 			String[] keyword = request.getParameterValues("keyword");
 			//カテゴリーフィルタ
@@ -48,10 +47,26 @@ public class StoreServlet extends HttpServlet {
 	            categories = new String[]{"Cashonly"};
 	        }
 
-	        //現在位置
-	        double userLat = Double.parseDouble(request.getParameter("lat"));
-	        double userLng = Double.parseDouble(request.getParameter("lng"));
+	        
+	     //  フロントが無いので仮の座標を直接入れる（東京駅）
+	        double userLat = 35.681236;
+	        double userLng = 139.767125;
 
+	        //現在位置(初期値０)
+
+	        /*
+	        double userLat = 0;
+	        double userLng = 0;
+
+	        //それぞれの値がおかしいとき
+	        try {
+	            userLat = Double.parseDouble(request.getParameter("lat"));
+	            userLng = Double.parseDouble(request.getParameter("lng"));
+	        } catch (Exception e) {
+	            throw new ServletException("lat/lng が不正です");
+	        }
+			*/
+	        
 	        StoreDao dao = new StoreDao();
 	        List<Store> storeList = dao.getStoresByCategories(categories,keyword);
 
@@ -114,8 +129,8 @@ public class StoreServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/store_info.jsp");
-		dispatcher.forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/jsp/store_info.jsp").forward(request, response);
+		
 	}
 
 }
