@@ -6,11 +6,31 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>コラム</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>コラム - こぜピタ</title>
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/common.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/column.css">
+<script src="${pageContext.request.contextPath}/js/common.js" defer></script>
+<script src="${pageContext.request.contextPath}/js/column.js" defer></script>
+<link rel="icon"
+	href="${pageContext.request.contextPath}/favicon/favicon.png">
 </head>
 <body>
-<jsp:include page="/WEB-INF/jsp/common/header.jsp" />
+<div class="app">
+		<!-- ヘッダーここから -->
+		<header class="header">
+			<a href="${pageContext.request.contextPath}/HomeServlet"> <img
+				src="${pageContext.request.contextPath}/images/logo/logo.png"
+				alt="ロゴ" class="logo"></a>
+			<div class="page-title">コラム</div>
+			<a href="${pageContext.request.contextPath}/HomeServlet"> <img
+				src="${pageContext.request.contextPath}/images/logo/home.png"
+				alt="ホーム" class="toHome"></a>
+		</header>
+		<!-- ヘッダーここまで -->
 	<main>
 	
 	<!-- 検索フォーム -->
@@ -95,6 +115,19 @@
 	</div>
 	
 	</main>
-<jsp:include page="/WEB-INF/jsp/common/footer.jsp" />
+<!-- フッターここから -->
+		<footer class="bottom-menu">
+			<a href="${pageContext.request.contextPath}/CoinSupportServlet"
+				class="nav-item">仮</a> <a
+				href="${pageContext.request.contextPath}/StoreServlet"
+				class="nav-item">仮</a>
+			<div class="nav-space"></div>
+			<a href="${pageContext.request.contextPath}/ColumnServlet"
+				class="nav-item">仮</a> <a href="${pageContext.request.contextPath}/MyPageServlet" class="nav-item">仮</a> <a
+				href="${pageContext.request.contextPath}/PaymentServlet"
+				class="nav-center">仮</a>
+		</footer>
+		<!-- フッターここまで -->
+	</div>
 </body>
 </html>
