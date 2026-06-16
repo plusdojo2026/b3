@@ -85,19 +85,23 @@
 						<span class="toggle-icon">▼</span>
 					</div>
 					
-					<!-- 30文字まで -->
+					<!-- 30文字まで（閉じている時） -->
 					<div class="column-short">
-						
-						<!-- 30文字より長い場合 -->
-						<c:if test="${fn:length(body) > 30}">
-						 	${fn:substring(body, 0, 30)}...
-						</c:if>
-						
-						<!-- 30文字以下の場合 -->
-						<c:if test="${fn:length(body) <= 30}">
-							${body}
-						</c:if>
-						
+					    <c:choose>
+					        <c:when test="${fn:length(body) > 30}">
+					            ${fn:substring(body, 0, 30)}...
+					        </c:when>
+					        <c:otherwise>
+					            ${body}
+					        </c:otherwise>
+					    </c:choose>
+					</div>
+					
+					<!-- 31文字目以降（開いた時に表示する部分） -->
+					<div class="column-full" style="display:none;">
+					    <c:if test="${fn:length(body) > 30}">
+					        ${fn:substring(body, 30, fn:length(body))}
+					    </c:if>
 					</div>
 					
 					<!-- 本文（全文） -->
