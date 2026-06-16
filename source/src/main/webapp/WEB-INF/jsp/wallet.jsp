@@ -91,7 +91,7 @@
 				</div>
 
 				<div class="button-regist">
-					<button type="submit">登録</button>
+					<button type="submit" name="submit" value="更新">登録</button>
 				</div>
 
 			</form>

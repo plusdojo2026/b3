@@ -7,13 +7,16 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.WalletDao;
+import dto.User;
 import dto.Wallet;
 
 /**
  * Servlet implementation class WalletServlet
  */
+
 @WebServlet("/WalletServlet")
 public class WalletServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -30,6 +33,7 @@ public class WalletServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
@@ -37,12 +41,37 @@ public class WalletServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		// response.getWriter().append("Served at:").append(request.getContextPath());
 
-		WalletDao walletDao = new WalletDao();
+		
+		WalletDao walletDao = new WalletDao(); //Walletデータを操作する
+		
+		//ユーザ情報を取得←一旦仮のIdで進める
+		//HttpSession session = request.getSession();
+        //User user = (User) session.getAttribute("loginUser");
+        //int walletId = user.getWalletId();
+
 		try {
-			Wallet wallet = walletDao.selectById(1);      //今はid=1
+			Wallet wallet = walletDao.selectById(1); //今は仮でid=1 (WalletId)に変更する
+
+			//合計金額の計算
+			int totalAmount =
+	                wallet.getTenThousandYen() * 10000 +
+	                wallet.getFiveThousandYen() * 5000 +
+	                wallet.getOneThousandYen() * 1000 +
+	                wallet.getFiveHundredYen() * 500 +
+	                wallet.getOneHundredYen() * 100 +
+	                wallet.getFiftyYen() * 50 +
+	                wallet.getTenYen() * 10 +
+	                wallet.getFiveYen() * 5 +
+	                wallet.getOneYen();
+			
 			request.setAttribute("wallet", wallet);
+			request.setAttribute("totalAmount", totalAmount);
+			
+			
 		} catch (Exception e) {
+			 e.printStackTrace();
 		}
+
 		// 予算登録ページにフォワード
 		request.getRequestDispatcher("/WEB-INF/jsp/wallet.jsp").forward(request, response);
 	}
@@ -56,23 +85,49 @@ public class WalletServlet extends HttpServlet {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
+		
+		HttpSession session = request.getSession();
+		User user = (User) session.getAttribute("loginUser");
+		int id; //= user.getWalletId();
+		
+		if (user == null) {
+		    id = 1; // 仮ユーザー
+		} else {
+		    id = user.getWalletId();
+		}
+
 
 		// リクエストパラメータを取得する。
-		String tenThousandYen = request.getParameter("tenThousandYen");
-		String fiveThousandYen = request.getParameter("fiveThousandYen");
-		String oneThousandYen = request.getParameter("oneThousandYen");
-		String fiveHundredYen = request.getParameter("fiveHundredYen");
-		String oneHundredYen = request.getParameter("oneHundredYen");
-		String fiftyYen = request.getParameter("fiftyYen");
-		String tenYen = request.getParameter("tenYen");
-		String fiveYen = request.getParameter("fiveYen");
-		String oneYen = request.getParameter("oneYen");
+
+		int tenThousandYen = Integer.parseInt(request.getParameter("tenThousandYen"));
+		int fiveThousandYen = Integer.parseInt(request.getParameter("fiveThousandYen"));
+		int oneThousandYen = Integer.parseInt(request.getParameter("oneThousandYen"));
+		int fiveHundredYen = Integer.parseInt(request.getParameter("fiveHundredYen"));
+		int oneHundredYen = Integer.parseInt(request.getParameter("oneHundredYen"));
+		int fiftyYen = Integer.parseInt(request.getParameter("fiftyYen"));
+		int tenYen = Integer.parseInt(request.getParameter("tenYen"));
+		int fiveYen = Integer.parseInt(request.getParameter("fiveYen"));
+		int oneYen = Integer.parseInt(request.getParameter("oneYen"));
 
 		// 合計金額を計算する
-		int totalAmount = Integer.parseInt(tenThousandYen) * 10000 + Integer.parseInt(fiveThousandYen) * 5000
-				+ Integer.parseInt(oneThousandYen) * 1000 + Integer.parseInt(fiveHundredYen) * 500
-				+ Integer.parseInt(oneHundredYen) * 100 + Integer.parseInt(fiftyYen) * 50
-				+ Integer.parseInt(tenYen) * 10 + Integer.parseInt(fiveYen) * 5 + Integer.parseInt(oneYen) * 1;
+		int totalAmount = tenThousandYen * 10000 + fiveThousandYen * 5000 + oneThousandYen * 1000 + fiveHundredYen * 500
+				+ oneHundredYen * 100 + fiftyYen * 50 + tenYen * 10 + fiveYen * 5 + oneYen;
+
+		
+		// 入力した枚数を更新する。
+		WalletDao wDao = new WalletDao();
+		String submit = request.getParameter("submit");  //jspの登録ボタンからの値を受け取る
+		//更新ボタンが押された時の処理
+		if ("更新".equals(submit)) {
+			if (wDao.update(new Wallet(id, tenThousandYen, fiveThousandYen, oneThousandYen, fiveHundredYen,
+					oneHundredYen, fiftyYen, tenYen, fiveYen, oneYen))) {
+				response.sendRedirect("WalletServlet"); //WalletServletにリダイレクトする
+				return;
+			} else {
+				response.sendRedirect("WalletServlet");
+				return;
+			}
+		}
 
 		// 合計金額の値をjspに渡す
 		request.setAttribute("totalAmount", totalAmount);

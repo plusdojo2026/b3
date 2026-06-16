@@ -32,7 +32,7 @@
 		
 		<main>
 			<%--任意の金額入力フォーム（金額を入力して探す）（上限は￥2,000） --%>
-			<form action="CoinSupportServlet" method="GET">
+			<form action="${pageContext.request.contextPath}/CoinSupportServlet" method="GET">
 				<h3>
 					金額を入力して探す<span>（上限は￥2,000）</span>
 				</h3>
@@ -44,7 +44,7 @@
 					value="manual">検索</button>
 			</form>
 			<%--財布の小銭から探す（上限は￥2,000） --%>
-			<form action="CoinSupportServlet" method="GET">
+			<form action="${pageContext.request.contextPath}/CoinSupportServlet" method="GET">
 				<h3>
 					財布の小銭から探す<span>（上限は￥2,000）</span>
 				</h3>
@@ -64,9 +64,7 @@
 				<h3>ぴったり使い切る組み合わせ</h3>
 
 				<ul class="matchList">
-					<c:forEach var="item" items="${matchComboList}">
-						<li>${item.storeId}${item.nameJa} ${item.price}円</li>
-					</c:forEach>
+					
 				</ul>
 			</div>
 
@@ -103,10 +101,8 @@
 
 			<%--小銭合計以下のおすすめ商品（リストで表示）（最大30件まで）（さらに読み込むボタン(JSで操作））--%>
 			<div class="recItemsArea">
-				<ul class="recList" id="recIemsList">
-					<c:forEach var="item" items="${recItemsList}">
-						<li>${item.storeName}${item.nameJa} ${item.price}円</li>
-					</c:forEach>
+				<ul class="recList" id="recItemsList">
+					
 				</ul>
 
 				<div class="more-btn">
@@ -132,5 +128,12 @@
 		</footer>
 		<!-- フッターここまで -->
 	</div>
+	
+	<script>
+	'use strict';
+	//JSPを仲介して、Javaから届いたデータを、JavaScriptが読める配列データに翻訳
+	const allProducts =${recItemsJson};
+	</script>
+	<script src="${pageContext.request.contextPath}/js/coin_support.js" defer></script>
 </body>
 </html>

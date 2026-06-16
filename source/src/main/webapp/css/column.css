@@ -1,1 +1,15 @@
 @charset "UTF-8";
+
+.main {
+	padding-left: 16px;
+	padding-right: 16px;
+	box-sizing: border-box;
+}
+
+.search-box{
+	width: 300px;
+	display: flex;
+	justify-content: center; /* 横方向の中央寄せ */
+	padding-left: 30px;
+	margin: 20px 0 0 0;
+}

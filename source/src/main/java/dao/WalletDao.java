@@ -42,8 +42,10 @@ public class WalletDao {
 		throw new Exception("wallet_idの取得に失敗しました");
 	}
 
-	public int update(Wallet wallet) throws Exception {
+	//更新
+	public boolean update(Wallet wallet)  {
 		Connection conn = null;
+		boolean result = false;
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 
@@ -69,11 +71,12 @@ public class WalletDao {
 
 			pStmt.setInt(10, wallet.getId());
 
-			return pStmt.executeUpdate();
+			if (pStmt.executeUpdate() == 1) {
+				result = true;
+			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			return -1;
 		} finally {
 			if (conn != null) {
 				try {
@@ -85,9 +88,10 @@ public class WalletDao {
 			}
 
 		}
+		return result;
 	}
 
-	public Wallet selectById(int id) throws Exception {
+	public Wallet selectById(int id)  {
 		Connection conn = null;
 		try {
 
