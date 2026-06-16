@@ -19,8 +19,22 @@ public class HomeServlet extends HttpServlet {
 	// ホーム画面を表示する
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 
-		request.getRequestDispatcher("/WEB-INF/jsp/home.jsp").forward(request, response);
+		// ユーザーごとのidを取得
+		HttpSession session = request.getSession();
+		User loginUser = (User) session.getAttribute("loginUser");
+		int id = 0;
+		if (loginUser != null) {
+			id = loginUser.getId();
+		} else {
+			// ログイン画面に送還する処理
+			response.sendRedirect("LoginServlet");
+			return;
+		}
+
 	}
-
 }
