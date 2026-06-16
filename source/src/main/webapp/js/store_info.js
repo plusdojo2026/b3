@@ -121,10 +121,7 @@ function displayStores(list) {
 			? `<p>現在地からの距離: ${s.distance.toFixed(2)} km</p>`
 			: '';
 
-		div.innerHTML = `<h3>${s.name_ja}</h3>
-                 <p>${s.address_ja}</p>
-                 <p>${s.category}</p>
-                 ${distanceText}`;
+		div.innerHTML = `<h3>${s.name_ja}</h3> <p>${s.address_ja}</p> <p>${s.category}</p> ${distanceText}`;
 		container.appendChild(div);
 	});
 }
