@@ -76,7 +76,9 @@ public class ProductDao {
     				"root", "password");
 
     		// SQL文を準備する
-    		String sql = "SELECT * from products where price<=?";
+    		String sql = "SELECT p.*, s.name_ja AS store_name_ja, s.name_en AS store_name_en FROM products p "
+    		           + "INNER JOIN stores s ON p.store_id = s.id "
+    		           + "WHERE p.price <= ?";
     		
     		//SQL文をセットして実行する準備
     		PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -94,6 +96,8 @@ public class ProductDao {
     				p.setName_en(rs.getString("name_en"));
     				p.setPrice(rs.getInt("price"));
     				p.setCategory(rs.getString("category"));
+    				p.setStore_name_ja(rs.getString("store_name_ja")); 
+    			    p.setStore_name_en(rs.getString("store_name_en"));
     				list.add(p);
     				}
         } catch (SQLException e) {

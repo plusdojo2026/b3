@@ -13,6 +13,8 @@ public class Product implements Serializable{
 	private String category;
 	private LocalDateTime created_at;
     private LocalDateTime updated_at;
+    private String store_name_ja; 
+	private String store_name_en;
 	
     //コンストラクタ
 	public Product(int id, int store_id, String name_ja, String name_en, int price, String category,
@@ -27,7 +29,13 @@ public class Product implements Serializable{
 		this.created_at = created_at;
 		this.updated_at = updated_at;
 	}
-	
+	//追加のコンストラクタ
+	 public Product(String store_name_ja, String store_name_en) {
+		super();
+		this.store_name_ja = store_name_ja;
+		this.store_name_en = store_name_en;
+	}
+	 
 	//引数のないコンストラクタ
 	public Product() {
 		super();
@@ -82,6 +90,18 @@ public class Product implements Serializable{
 	}
 	public void setUpdated_at(LocalDateTime updated_at) {
 		this.updated_at = updated_at;
+	}
+	public String getStore_name_ja() {
+		return store_name_ja;
+	}
+	public void setStore_name_ja(String store_name_ja) {
+		this.store_name_ja = store_name_ja;
+	}
+	public String getStore_name_en() {
+		return store_name_en;
+	}
+	public void setStore_name_en(String store_name_en) {
+		this.store_name_en = store_name_en;
 	}
 	
 }
