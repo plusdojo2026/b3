@@ -22,7 +22,7 @@
 			<a href="${pageContext.request.contextPath}/SignupServlet"> <img
 				src="${pageContext.request.contextPath}/images/logo/logo.png"
 				alt="ロゴ" class="logo"></a>
-			<div class="page-title">会員登録</div>
+			<div class="page-title">ログイン</div>
 			<a href="${pageContext.request.contextPath}/SignupServlet"> <img
 				src="${pageContext.request.contextPath}/images/logo/home.png"
 				alt="ホーム" class="toHome"></a>
@@ -57,6 +57,8 @@
 						id="loginBtn" value="ログイン">
 				</div>
 			</form>
+			<a href="${pageContext.request.contextPath}/SignupServlet"
+				class="acount-msg">アカウントをお持ちでない方はこちら</a>
 		</main>
 		<!-- メインここまで -->
 	</div>

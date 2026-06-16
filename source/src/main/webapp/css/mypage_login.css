@@ -34,6 +34,7 @@
 	left: 0;
 	top: 0;
 }
+
 .logins-bottom {
 	margin-bottom: 16px;
 }
@@ -95,6 +96,26 @@
 
 .reset-button:hover, .signup-button:hover {
 	opacity: 0.75;
+}
+/* 新規登録・ログインリンク */
+.acount-msg {
+	text-decoration: none;
+	font-size: 12px;
+	display: block;
+	text-align: right;
+	color: blue;
+	margin: 24px 0 0 8px;
+}
+
+.acount-msg:visited {
+	color: blue;
+	text-decoration: none;
+}
+
+.acount-msg:hover {
+	text-decoration: none;
+	color: #1d6fb8;
+	text-shadow: #333;
 }
 
 /* --------------------------- */
