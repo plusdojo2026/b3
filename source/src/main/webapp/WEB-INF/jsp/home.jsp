@@ -28,6 +28,7 @@
 				alt="ホーム" class="toHome"></a>
 		</header>
 		<!-- ヘッダーここまで -->
+		<a href="${pageContext.request.contextPath}/WalletServlet">予算登録・編集へ</a>
 		<!-- 下部ナビここから -->
 		<footer class="bottom-menu">
 			<a href="${pageContext.request.contextPath}/CoinSupportServlet"
