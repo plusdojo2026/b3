@@ -9,8 +9,86 @@ window.onload = function() {
 
 // 1. タイトルを押したら本文を開閉する処理
 function setupAccordion() {
-	const titles = document.quelySelectorAll(".column-title")
+	const titles = document.querySelectorAll(".column-title");
+	
+	// １つずつ処理を設定
+	titles.forEach(function (title){
+		
+		// タイトルがクリックされた時の動作
+		title.addEventListener("click", function(){
+			
+			// クリックされたタイトルが属するコラム全体を取得
+			const item = title.closest(".column-item");
+			
+			// コラム全体部分を取得
+			const full = item.querySelector(".column-full");
+			
+			// ▼マークのアイコン部分を取得
+			const icon = title.querySelector(".toggle-icon");
+			
+			// 現在開いているかどうかを判定
+			const isOpen = full.style.display === "block";
+			
+			// 開いていれば閉じる、閉じていれば開く
+			full.style.display = isOpen ? "none" : "block";
+			
+			// アイコンを ▼（閉じている） / ▲（開いている） に切り替え
+			icon.textContent = isOpen ? "▼" : "▲";
+		});
+	});
 }
 
 
+// 2. カテゴリボタンを押したら絞り込みする処理
+function setupCategoryFilter() {
+	
+	// 全てのカテゴリボタンを取得
+	const buttons = document.querySelectorAll(".category-btn");
+	
+	// ボタンごとにクリック処理を設定
+	buttons.forEach(function (btn) {
+		
+		btn.addEventListener("click", function() {
+			
+			// 押されたボタンのカテゴリ名を取得
+			const category = btn.dataset.category;
+			
+			// 全てのコラムを取得
+			const items = document.querySelectorAll(".column-item");
+			
+			// コラムを１つずつチェック
+			items.forEach(function (item) {
+				
+				// コラムが持つカテゴリを取得
+				const itemCategory = item.dataset.category;
+				
+				// 全てなら全部を表示、それ以外なら一致するカテゴリだけ表示する
+				item.style.display = 
+					(category === "全て" || category === itemCategory)
+						? "block" : "none";
+			});
+			
+			// 絞り込み後に結果が０件であるというメッセージを表示するかチェック
+			checkNoResult();
+		});
+	});
+};
 
+// 3. 表示されているコラムが０件の際に表示するメッセージ
+
+function checkNoResult() {
+	
+	// 全てのコラムを取得
+	const item = document.querySelectorAll(".column-item");
+	
+	// 「display が none ではない」＝表示されているコラムだけを抽出
+	const visible = Array.from(item).filter(function(i) {
+		return i.style.display !== "none";
+	});
+	
+	// 「該当するコラムが見つかりません」メッセージの要素を取得
+	const msg = document.getElementById("noResultMessage");
+	
+	// 表示されているコラムが 0 件ならメッセージを表示、それ以外は非表示
+	msg.style.display = visible.length === 0 ? "block" : "none"; 
+}

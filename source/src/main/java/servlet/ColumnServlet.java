@@ -39,6 +39,7 @@ public class ColumnServlet extends HttpServlet {
 		if (lang == null) {
 			lang = "ja";
 		}
+		
 		request.setAttribute("lang", lang);
 		
 		// DB取得
