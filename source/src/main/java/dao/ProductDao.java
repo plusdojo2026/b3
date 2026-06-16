@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import dto.Product;
 
@@ -63,8 +64,8 @@ public class ProductDao {
     
     }
     //2. 任意の金額または、小銭合計以下の商品を表示するメソッド(ぴったりになる組み合わせやソート、カテゴリー分けは、JSで制御）
-    public java.util.List<Product> getRecommendProducts(int targetPrice) {
-        java.util.List<Product> list = new java.util.ArrayList<>();
+    public List<Product> getProducts(int targetPrice) {
+        List<Product> list = new java.util.ArrayList<>();
         try {
     		// JDBCドライバを読み込む
     		Class.forName("com.mysql.cj.jdbc.Driver");
@@ -75,7 +76,7 @@ public class ProductDao {
     				"root", "password");
 
     		// SQL文を準備する
-    		String sql = "SELECT * from products whre price<=?";
+    		String sql = "SELECT * from products where price<=?";
     		
     		//SQL文をセットして実行する準備
     		PreparedStatement pstmt = conn.prepareStatement(sql);
