@@ -31,12 +31,12 @@
 				alt="ホーム" class="toHome"></a>
 		</header>
 		<!-- ヘッダーここまで -->
-	<main>
+	<main class="main">
 	
 	<!-- 検索フォーム -->
 	<div class="search-box">
 		<form method="GET" action="ColumnServlet">
-			<input type="text" name="keyword" maxlength="30" placeholder="検索したい文字を入力してください。">
+			<input type="text" name="keyword" maxlength="30" placeholder="検索したい内容を入力">
 			<button type="submit">検索</button>
 		</form>
 	</div>
