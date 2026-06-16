@@ -13,8 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import dao.StoreDao;
 import dto.Store;
 
-
-
 /**
  * Servlet implementation class StoreServlet
  */
@@ -24,7 +22,7 @@ public class StoreServlet extends HttpServlet {
        
  
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	//検索
+			//検索
 			String[] keyword = request.getParameterValues("keyword");
 			//カテゴリーフィルタ
 			String[] categories = request.getParameterValues("category");
@@ -62,7 +60,6 @@ public class StoreServlet extends HttpServlet {
 	        
 	        StoreDao dao = new StoreDao();
 	        
-	        //error
 			List<Store> storeList = dao.getStoresByCategories(name_ja,name_en,address_ja,address_en,cashlessType,categories,keyword);
 
 	        //距離を計算。DTOへ
@@ -74,8 +71,11 @@ public class StoreServlet extends HttpServlet {
 	        // 距離の昇順にソート
 	        storeList.sort(Comparator.comparingDouble(Store::getDistance));
 
-	        // JSONで返す
-	        
+	        // リクエストスコープへ入れる
+	        request.setAttribute("storeList", storeList);
+
+	        // JSPにフォワード
+	        request.getRequestDispatcher("/WEB-INF/jsp/store_info.jsp").forward(request, response);
 	        
 //	        response.setContentType("application/json; charset=UTF-8");
 //	        PrintWriter out = response.getWriter();
@@ -84,18 +84,39 @@ public class StoreServlet extends HttpServlet {
 	    }
 
 	    // 距離計算の中身 ハヴァサイン公式
-	    private double calcDistance(double lat1, double lng1, double lat2, double lng2) {
-	        double R = 6371; 
-	        double dLat = Math.toRadians(lat2 - lat1);
-	        double dLng = Math.toRadians(lng2 - lng1);
-	        double a = Math.sin(dLat/2) * Math.sin(dLat/2) +
-	                   Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2)) *
-	                   Math.sin(dLng/2) * Math.sin(dLng/2);
-	        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-	        return R * c; 
-	    }
+	
+	private double calcDistance(double lat1, double lng1, double lat2, double lng2) {
+		//地球の赤道半径 (km)
+		double EARTH_RADIUS = 6371.0;
+		
+		//dLat:2点間の緯度の差　dLng：2点間の経度の差　ラジアンに変換
+		double dLat = Math.toRadians(lat2 - lat1);
+	    double dLng = Math.toRadians(lng2 - lng1);
+	    
+	    //緯度をラジアンに変換(cos計算で使う)
+	    double lat1R = Math.toRadians(lat1);
+	    double lat2R = Math.toRadians(lat2);
+	    
+	    //緯度差・経度差の半分のサイン
+	    double sinHalfLat = Math.sin(dLat/2);
+	    double sinHalfLng = Math.sin(dLng/2);
+	    
+	    //a( 2点間の角距離(角度で表した距離)の中間値)の計算
+	    double a = sinHalfLat * sinHalfLat +
+	            Math.cos(lat1R) * Math.cos(lat2R) *
+	            sinHalfLng * sinHalfLng;
+	    
+	    //ⅽ(中心から見た 2点間の中心角(ラジアン))
+	    double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+	    
+	    //2点間の地表距離を返す
+	    return EARTH_RADIUS * c;
+	    
+	}
+	
+	    
 	 // DTO→JSON変換
-		private String toJson(List<Store> list) {
+		/*private String toJson(List<Store> list) {
 	        StringBuilder sb = new StringBuilder();
 	        sb.append("[");
 
@@ -119,7 +140,7 @@ public class StoreServlet extends HttpServlet {
 	        sb.append("]");
 	        System.out.println(sb.toString());
 	        return sb.toString();
-	    }
+	    }*/
 		
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
