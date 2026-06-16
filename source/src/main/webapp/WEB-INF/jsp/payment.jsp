@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+String errorMsg = (String) request.getAttribute("errorMsg");
+%>
 <!doctype html>
 <html lang="ja">
 <head>
@@ -32,21 +35,36 @@
 		<main class="main">
 			<div class="payment-nav">合計金額を入力してください</div>
 
+			<%
+			if (errorMsg != null) {
+			%>
+			<div class="error-message"><%=errorMsg%></div>
+			<%
+			}
+			%>
+
 			<form method="POST"
 				action="${pageContext.request.contextPath}/PaymentServlet"
 				id="payment-form">
 				<label class="payments"> <input type="text" name="amount"
 					class="amount-input" id="amountInput" maxlength="8">
 				</label>
+
 				<div class="money_isUse">使用できない紙幣・硬貨のチェックを外してください​</div>
+
 				<div class="form-button">
 					<input type="submit" name="submit" class="payment-button"
 						id="paymentBtn" value="支払い">
 				</div>
 			</form>
+
 			<div class="payment-nav-buttons">
-			<input type="submit" class="payment-btn" value="戻る">
-			<input type="submit" class="payment-btn" value="支出ログ"></div>
+				<input type="button" class="payment-btn" value="戻る"
+					onclick="location.href='${pageContext.request.contextPath}/HomeServlet'">
+
+				<input type="button" class="payment-btn" value="支出ログ"
+					onclick="location.href='${pageContext.request.contextPath}/PaymentLogServlet'">
+			</div>
 		</main>
 		<!-- メインここまで -->
 		<!-- フッターここから -->

@@ -131,7 +131,7 @@ INSERT INTO products (
     name_ja,
     name_en,
     price,
-    categoly
+    category
 ) VALUES
 -- コンビニの商品
 (1, 'おにぎり（鮭）', 'Salmon Rice Ball', 150, 'food'),

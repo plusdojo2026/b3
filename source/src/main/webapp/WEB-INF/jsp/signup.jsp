@@ -12,7 +12,8 @@
 	href="${pageContext.request.contextPath}/css/common.css">
 <script src="${pageContext.request.contextPath}/js/common.js" defer></script>
 <script src="${pageContext.request.contextPath}/js/payment.js" defer></script>
-<link rel="icon" href="${pageContext.request.contextPath}/favicon/favicon.png">
+<link rel="icon"
+	href="${pageContext.request.contextPath}/favicon/favicon.png">
 </head>
 <body>
 	<div class="app">
@@ -62,6 +63,8 @@
 						name="submit" id="signupBtn" value="登録">
 				</div>
 			</form>
+			<a href="${pageContext.request.contextPath}/LoginServlet"
+				class="acount-msg">アカウントを既にお持ちの方はこちら</a>
 		</main>
 		<!-- メインここまで -->
 	</div>

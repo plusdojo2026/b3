@@ -21,7 +21,7 @@ public class Breakdown {
 		this.id = id;
 	}
 
-	public int getpPaymentId() {
+	public int getPaymentId() {
 		return paymentId;
 	}
 
