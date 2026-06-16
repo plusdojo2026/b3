@@ -172,12 +172,12 @@ INSERT INTO stores (
 -- 架空の麴町コンビニ
 ('コンビニ麴町ステーション店', 'Kojimachi Station Convenience Store',
  '東京都千代田区麴町3-5-12', '3-5-12 Kojimachi, Chiyoda-ku, Tokyo',
- 35.684512, 139.737821, 'convenience_store', 'credit, ic, qr'),
+ 35.684512, 139.737821, 'both', 'credit, ic, qr'),
 
 -- 架空の麴町ドラッグストア
 ('ドラッグストア麴町メディカル', 'Kojimachi Medical Drugstore',
  '東京都千代田区麴町4-2-8', '4-2-8 Kojimachi, Chiyoda-ku, Tokyo',
- 35.685103, 139.735944, 'drugstore', 'credit, qr');
+ 35.685103, 139.735944, 'both', 'credit, qr');
 
 create table columns (		
 id int AUTO_INCREMENT PRIMARY KEY,		

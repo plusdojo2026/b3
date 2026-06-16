@@ -58,9 +58,13 @@
 				<button type="button" class="filter-btn" data-category="Exchange"
 					aria-pressed="false">外貨両替機</button>
 			</div>
+			
+			
 			<!-- 施設のリスト(内容はjsで) -->
 			<div id="store_list"></div>
 		</main>
+		
+		
 		<!-- フッターここから -->
 		<footer class="bottom-menu">
 			<a href="${pageContext.request.contextPath}/CoinSupportServlet"
