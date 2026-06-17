@@ -1,41 +1,51 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-/**
- * Servlet implementation class PaymentLogServlet
- */
+import dao.PaymentDao;
+import dto.Payment;
+import dto.User;
+
 @WebServlet("/PaymentLogServlet")
 public class PaymentLogServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public PaymentLogServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+	// ログ画面を表示する
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
+
+		HttpSession session = request.getSession();
+		User loginUser = (User) session.getAttribute("loginUser");
+
+		if (loginUser == null) {
+			response.sendRedirect(request.getContextPath() + "/LoginServlet");
+			return;
+		}
+
+		try {
+			PaymentDao paymentDao = new PaymentDao();
+			List<Payment> paymentList = paymentDao.findByUserId(loginUser.getId());
+
+			request.setAttribute("paymentList", paymentList);
+			request.getRequestDispatcher("/WEB-INF/jsp/payment_log.jsp").forward(request, response);
+			return;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			request.setAttribute("errorMsg", "支出ログの取得に失敗しました。");
+			request.getRequestDispatcher("/WEB-INF/jsp/payment_log.jsp").forward(request, response);
+			return;
+		}
 	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
-
 }

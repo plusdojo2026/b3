@@ -5,6 +5,9 @@ String errorMsg = (String) request.getAttribute("errorMsg");
 Integer amount = (Integer) request.getAttribute("amount");
 Integer payAmount = (Integer) request.getAttribute("payAmount");
 Integer change = (Integer) request.getAttribute("change");
+String amountText = String.format("%,d", amount);
+String payAmountText = String.format("%,d", payAmount);
+String changeText = String.format("%,d", change);
 int[] moneyTypes = (int[]) request.getAttribute("moneyTypes");
 int[] payCounts = (int[]) request.getAttribute("payCounts");
 
@@ -46,7 +49,7 @@ String[] moneyImagePaths = { "tenThousandYen.png", "fiveThousandYen.png", "oneTh
 					<div class="amount-label">合計金額は</div>
 					<div class="amount-large">
 						￥
-						<%=amount%></div>
+						<%=amountText%></div>
 					<div class="amount-text">です。</div>
 				</div>
 
@@ -73,7 +76,7 @@ String[] moneyImagePaths = { "tenThousandYen.png", "fiveThousandYen.png", "oneTh
 				</div>
 
 				<div class="total-pay-amount">
-					総支払金額：<%=payAmount%>
+					総支払金額：¥<%=payAmountText%>
 				</div>
 
 				<div class="suggestion-buttons">
