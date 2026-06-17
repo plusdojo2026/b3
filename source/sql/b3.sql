@@ -119,9 +119,10 @@ create table products (
 id int AUTO_INCREMENT PRIMARY KEY,		
 store_id int ,		
 name_ja varchar (30),		
-name_en varchar (30),		
+name_en varchar (100),		
 price int ,		
-categoly varchar (30),		
+category varchar (30),	
+image_url VARCHAR(100),
 created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP		
 );
@@ -131,19 +132,53 @@ INSERT INTO products (
     name_ja,
     name_en,
     price,
-    category
+    category,
+    image_url
 ) VALUES
 -- コンビニの商品
-(1, 'おにぎり（鮭）', 'Salmon Rice Ball', 150, 'food'),
-(1, '緑茶ペットボトル', 'Green Tea Bottle', 120, 'drink'),
-(1, 'チョコレートバー', 'Chocolate Bar', 110, 'sweets'),
-(1, 'カップラーメン', 'Cup Ramen', 198, 'food'),         
-(1, 'ポテトチップス', 'Potato Chips', 158, 'sweets'),
+(1, 'おにぎり（鮭）', 'Salmon Rice Ball', 150, 'food', 'test.png'),
+(1, '緑茶ペットボトル', 'Green Tea Bottle', 120, 'drink', 'test.png'),
+(1, 'チョコレートバー', 'Chocolate Bar', 110, 'sweets', 'test.png'),
+(1, 'カップラーメン', 'Cup Ramen', 198, 'food', 'test.png'),         
+(1, 'ポテトチップス', 'Potato Chips', 158, 'sweets', 'test.png'),
 
 -- ドラッグストアの商品
-(2, 'ハンドソープ', 'Hand Soap', 298, 'daily'),
-(2, 'ビタミンCサプリ', 'Vitamin C Supplement', 680, 'daily'),
-(2, 'マスク（5枚入り）', 'Face Mask (5pcs)', 198, 'daily');
+(2, 'ハンドソープ', 'Hand Soap', 298, 'daily', 'test.png'),
+(2, 'ビタミンCサプリ', 'Vitamin C Supplement', 680, 'daily', 'test.png'),
+(2, 'マスク（5枚入り）', 'Face Mask (5pcs)', 198, 'daily', 'test.png'),
+
+-- セブンイレブン
+(3, '手巻おにぎり 炭火焼銀しゃけ', 'Hand-Rolled Rice Ball Salmon', 232, 'food', 'temaki_salmon.png'),
+(3, '手巻おにぎり 焼たらこ', 'Hand-Rolled Rice Ball Cod roe', 235, 'food', 'temaki_codRoe.png'),
+(3, '手巻おにぎり 熟成仕立て紀州南高梅', 'Hand-Rolled Rice Ball Plum',196, 'food', 'temaki_plum.png'),
+(3, '手巻おにぎり 具たっぷり辛子明太子', 'Hand-Rolled Rice Ball Spicy cod roe', 232, 'food', 'temaki_spicyCodRoe.png'),
+(3, '手巻おにぎり ツナマヨネーズ', 'Hand-Rolled Rice Ball Tuna mayo',196 , 'food', 'temaki_tunamayo.png'),
+(3, '手巻おにぎり 北海道昆布', 'Hand-Rolled Rice Ball Kelp',196 , 'food', 'temaki_kelp.png'),
+(3, '手巻おにぎり 炭火牛焼肉', 'Hand-Rolled Rice Ball',246, 'food', 'temaki_.png'),
+(3, '手巻おにぎり 海老マヨネーズ', 'Hand-Rolled Rice Ball',213, 'food', 'temaki_.png'),
+(3, '味付海苔おにぎり　明太子マヨネーズ', 'Seasoned Seaweed Rice Ball Spicy cod roe',213 , 'food', 'azinori_spicyCodRoe.png'),
+(3, '直巻おむすび ねぎ塩豚タン', 'Seaweed-Wrapped Rice Ball Negi-Shio Pork Tongue',237 , 'food', 'zikamaki_negishio.png'),
+(3, '直巻おむすび 和風ツナマヨネーズ', 'Seaweed-Wrapped Rice Ball Japanese-Style Tuna Mayo',213 , 'food', 'zikamaki_tunamayo.png'),
+(3, '直巻おむすび とり五目', 'Seaweed-Wrapped Rice Ball Chicken and Mixed Vegetable',213, 'food', 'zikamaki_gomoku.png'),
+(3, '小麦香る練乳ミルクフランス', 'France Bread with Condensed Milk Cream',159, 'food', 'kashipan_milkFrance.png'),
+(3, '7Pダブルデニッシュ　チョコ＆バナナクリーム', 'Chocolate & Banana Cream Denish',170, 'food', 'kashipan_denishChocoBanana.png'),
+(3, '7Pぐるぐるミルク', 'Milk Swirl Bread',127, 'food', 'kashipan_milkSwirl.png'),
+(3, 'チョコクリームのふわもちちぎりパン', 'Soft & Chewy Pull-Apart Bread with Chocolate Cream',170, 'food', 'kashipan_chigiri.png'),
+(3, 'ふんわりコッペ　つぶあん&マーガリン', 'Red Bean & Margarine Koppe Bread',127, 'food', 'kashipan_koppeAnn.png'),
+(3, 'サクふわメロンパン', 'Melon Pan',127, 'food', 'kashipan_melon.png'),
+(3, '7プレミアム　しっとり食感のたまご蒸しパン', 'Steamed Egg Cake',116, 'food', 'kashipan_mushipan.png'),
+(3, 'チョコ&ホイップロール', 'Chocolate-Coated Whipped Cream Bun',159, 'food', 'kashipan_chocoWhipped.png'),
+(3, '濃厚トマトソースの大きなピザパン', 'Pizza Bread',203, 'food', 'souzaipan_pizza.png'),
+(3, 'こだわりソースのふんわりコロッケパン', 'Croquette Roll',181, 'food', 'souzaipan_croquette.png'),
+(3, '粗挽きポークフランク粒マスタードマヨ使用', 'Pork Sausage Roll',213, 'food', 'souzaipan_porkSausage.png'),
+(3, 'つゆまで旨い　牛丼', 'Beef Bowl',645, 'food', 'chilled_gyuudon.png'),
+(3, '8品目の中華丼', 'Chinese-Style Rice Bowl',645, 'food', 'chilled_chuuka.png'),
+(3, 'じっくり煮込んだポークカレー', 'Pork Curry',537, 'food', 'chilled_curry.png'),
+(3, '味しみロースかつ丼', 'Pork Cutlet Rice Bowl',699, 'food', 'chilled_katsu.png'),
+(3, '肉の旨味とデミグラスのコク　ミートソース', 'Meat Sauce Pasta',496, 'food', 'pasta_meatSauce.png'),
+(3, 'ケチャップソースの大盛ナポリタン', 'Napolitan Pasta',537, 'food', 'pasta_napolitan.png');
+
+
 
 create table stores (		
 id int AUTO_INCREMENT PRIMARY KEY,		
