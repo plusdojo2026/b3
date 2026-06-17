@@ -12,9 +12,92 @@ if ( allProducts !== null) {
     console.error("【警告】allProducts が見つかりません。");
 }
 
-//JSPでつくったulを持ってくる(任意の金額または現在の財布の小銭以下の商品を表示)
-const recListUl = document.getElementById('recItemsList');
+//JSPでつくったulを持ってくる
+const recListUl = document.getElementById('recItemsList');//その他のおすすめ商品
+const matchComboUl = document.getElementById('matchComboList');//ぴったりの組み合わせ商品
 
+//どちらのボタンが押されたか判断
+if (submitType === "manual") {
+    // 「金額を入力して探す」の時は、入力欄の数字を取る(targetAmountにamountInputからとってきた値を数字に変換して代入)
+    targetAmount=Number(document.getElementById('amountInput').value);
+} else if (submitType === "wallet") {
+    // 「小銭を使い切る」の時は、Servletから届いたtotalCoinsの値を使う
+    targetAmount=totalCoins;
+}
+
+//①ぴったり小銭消費
+//全ての組み合わせを収納するリスト
+const allMatchedPatterns = [];
+
+//商品数1つから4つまでの組み合わせで考えられるものすべて計算
+//1つの商品でぴったりなもの
+for (let i = 0; i < allProducts.length; i++) {
+    if (allProducts[i].price === targetAmount) {
+        allMatchedPatterns.push(`${allProducts[i].store_name_ja} ${allProducts[i].name_ja} ￥${allProducts[i].price}`);
+    }
+}
+// 2つの商品の合計でぴったりなもの
+for (let i = 0; i < allProducts.length; i++) {
+    for (let j = i + 1; j < allProducts.length; j++) {
+        if (allProducts[i].price + allProducts[j].price === targetAmount) {
+            allMatchedPatterns.push(`${allProducts[i].store_name_ja} ${allProducts[i].name_ja} 
+            ＋ [${allProducts[j].store_name_ja}] ${allProducts[j].name_ja} ＝ ￥${targetAmount}`);
+        }
+    }
+}
+
+// 3つの商品の合計でぴったりなもの
+for (let i = 0; i < allProducts.length; i++) {
+    for (let j = i + 1; j < allProducts.length; j++) {
+        for (let k = j + 1; k < allProducts.length; k++) {
+            if (allProducts[i].price + allProducts[j].price + allProducts[k].price === targetAmount) {
+                allMatchedPatterns.push(`${allProducts[i].store_name_ja} ${allProducts[i].name_ja} 
+                ＋ [${allProducts[j].store_name_ja}] ${allProducts[j].name_ja} 
+                ＋ [${allProducts[k].store_name_ja}] ${allProducts[k].name_ja} ＝ ￥${targetAmount}`);
+            }
+        }
+    }
+}
+
+// 4つの商品の合計でぴったりなもの
+for (let i = 0; i < allProducts.length; i++) {
+    for (let j = i + 1; j < allProducts.length; j++) {
+        for (let k = j + 1; k < allProducts.length; k++) {
+            for (let m = k + 1; m < allProducts.length; m++) {
+                const total = allProducts[i].price + allProducts[j].price + allProducts[k].price + allProducts[m].price;
+                if (total === targetAmount) {
+                    allMatchedPatterns.push(`${allProducts[i].store_name_ja} ${allProducts[i].name_ja} 
+                    ＋ [${allProducts[j].store_name_ja}] ${allProducts[j].name_ja} 
+                    ＋ [${allProducts[k].store_name_ja}] ${allProducts[k].name_ja} 
+                    ＋ [${allProducts[m].store_name_ja}] ${allProducts[m].name_ja} ＝ ￥${targetAmount}`);
+                }
+            }
+        }
+    }
+}
+//集まった全パターンをシャッフル
+for (let i = allMatchedPatterns.length - 1; i > 0; i--) {
+    const r = Math.floor(Math.random() * (i + 1));
+    const tmp = allMatchedPatterns[i];
+    allMatchedPatterns[i] = allMatchedPatterns[r];
+    allMatchedPatterns[r] = tmp;
+}
+
+//シャッフルした結果から最大3つだけをmatchComboUlに貼り付ける
+if (allMatchedPatterns.length === 0) {
+    const li = document.createElement('li');
+    li.textContent = " ぴったりになる組み合わせはありませんでした";
+    matchComboUl.appendChild(li);
+} else {
+    for (let i = 0; i < Math.min(3, allMatchedPatterns.length); i++) {
+        const li = document.createElement('li');
+        li.textContent = `【パターン${i + 1}】${allMatchedPatterns[i]}`;
+        matchComboUl.appendChild(li);
+    }
+}
+	
+	
+//②その他のおすすめ商品（金額以下の商品の表示）	
 //データを一件ずつ処理する
 allProducts.forEach(item => {
 
@@ -32,4 +115,6 @@ li.textContent = `${item.store_name_ja} ${item.name_ja} ￥${item.price}`;
     recListUl.appendChild(li);
     });
     
+
+
  

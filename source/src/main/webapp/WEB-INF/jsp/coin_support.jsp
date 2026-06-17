@@ -53,7 +53,7 @@
 				<p>
 					現在の財布の小銭合計<span>￥${totalCoins}</span>
 				</p>
-
+				
 
 				<%--この小銭を使いきる商品をみるボタン --%>
 				<button type="submit" id="btnUseAllCoins" name="submitType"
@@ -63,7 +63,7 @@
 			<div class="matchComboArea">
 				<h3>ぴったり使い切る組み合わせ</h3>
 
-				<ul class="matchList">
+				<ul class="matchList" id="matchComboList">
 					
 				</ul>
 			</div>
@@ -131,8 +131,14 @@
 	
 	<script>
 	'use strict';
-	//JSPを仲介して、Javaから届いたデータを、JavaScriptが読める配列データに翻訳
+	//JSPを仲介して、Servletから届いたデータを、JavaScriptが読める配列データに翻訳
 	const allProducts =${recItemsJson};
+	
+	//Servletから「どちらのボタンが押されたか」の目印をもらう
+	const submitType = "${submitType}";
+	
+	//Servletから小銭の合計をもらう
+	const totalCoins = ${totalCoins};
 	</script>
 	<script src="${pageContext.request.contextPath}/js/coin_support.js" defer></script>
 </body>
