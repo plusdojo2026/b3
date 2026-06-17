@@ -139,6 +139,9 @@
 	
 	//Servletから小銭の合計をもらう
 	const totalCoins = ${totalCoins};
+	
+	//入力フォームに入力された金額をもらう
+	const manualAmount = "${amountInput}";
 	</script>
 	<script src="${pageContext.request.contextPath}/js/coin_support.js" defer></script>
 </body>

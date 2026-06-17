@@ -105,6 +105,7 @@ public class CoinSupportServlet extends HttpServlet {
 //	DBからデータを取ってくる
 		request.setAttribute("totalCoins", totalCoins);
 		request.setAttribute("submitType", submitType);
+		request.setAttribute("amountInput", amountInput);
 //	request.setAttribute("matchComboList", matchComboList);
 //    request.setAttribute("recItemsList", recItemsList);
 
