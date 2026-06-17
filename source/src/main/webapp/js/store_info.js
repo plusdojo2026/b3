@@ -2,21 +2,10 @@
 
 console.log("JSファイルが正常に読み込まれました ");
 
-// JSPから持ってきた全商品データが見えるかチェック
-if ( allProducts !== null) {
-    console.log("【成功】JSPからデータが届いています！データ件数:", allProducts.length, "件");
-    console.log("中身の確認（最初の1件）:", allProducts[0]);
-} else {
-    console.error("【警告】allProducts が見つかりません。");
-}
-
-//店舗データ保持
-let store_list = [];
-
 //ページ読み込み処理
 document.addEventListener('DOMContentLoaded', () => {
 	//データ読み込み
-	loadStores();
+	displayStores(store_list);
 
 	//カテゴリーボタンON,OFF
 	document.querySelectorAll(".filter-btn").forEach(btn => {
@@ -52,6 +41,28 @@ function getKeyword() {
 	return el ? el.value.trim() : "";
 }
 
+function displayStores(list) {
+	const container = document.getElementById("store_list");
+	container.innerHTML = "";
+
+	list.forEach(s => {
+		const div = document.createElement("div");
+		div.className = "store-item";
+
+		const distanceText = s.distance !== undefined
+			? `<p>現在地からの距離: ${s.distance.toFixed(2)} km</p>`
+			: '';
+
+		div.innerHTML = `<h3>${s.name_ja}</h3>
+						<p>${s.address_ja}</p> 
+						<p>${s.category}</p> 
+						<p>${s.cashless_type}</p> 
+						${distanceText}`;
+		container.appendChild(div);
+	});
+}
+
+/*
 //位置情報追加を待ってから動くようにする
 function getCurrentPosition() {
 	return new Promise((resolve, reject) => {
@@ -69,6 +80,8 @@ function getCurrentPosition() {
 		);
 	});
 }
+
+
 
 //サーブレットへ Ajaxで検索リクエストを送る
 async function fetchStores() {
@@ -119,26 +132,6 @@ function category_filter() {
 
 	displayStores(filtered);
 }
-
+*/
 //店舗リストに表示
 
-function displayStores(list) {
-	const container = document.getElementById("store_list");
-	container.innerHTML = "";
-
-	list.forEach(s => {
-		const div = document.createElement("div");
-		div.className = "store-item";
-
-		const distanceText = s.distance !== undefined
-			? `<p>現在地からの距離: ${s.distance.toFixed(2)} km</p>`
-			: '';
-
-		div.innerHTML = `<h3>${s.name_ja}</h3>
-						<p>${s.address_ja}</p> 
-						<p>${s.category}</p> 
-						<p>${s.cashless_type}</p> 
-						${distanceText}`;
-		container.appendChild(div);
-	});
-}

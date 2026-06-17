@@ -40,7 +40,7 @@
 			<div name="search_map" id="search_map">
 				<input type="text" id="keyword" placeholder="施設名、住所">
 				<div class="search_btn">
-					<img src="/webapp/images/search.png" alt="検索">
+					<img src="/webapp/images/nav/search.png" alt="検索">
 				</div>
 			</div>
 
@@ -81,5 +81,9 @@
 		</footer>
 		<!-- フッターここまで -->
 	</div>
+	
+<script>
+const store_list = JSON.parse(String.raw`${storeListJson}`);
+</script>
 </body>
 </html>
