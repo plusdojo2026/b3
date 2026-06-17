@@ -13,6 +13,7 @@ import dto.Store;
 public class StoreDao {
 	
 	public List<Store> getStoresByCategories(String nameJa,String nameEn,String addressJa,String addressEn,String cashlessType,String[] categories, String[] keywords) {
+		
 		Connection conn = null;
 		List<Store> cardList = new ArrayList<Store>();
 		
@@ -27,25 +28,63 @@ public class StoreDao {
 
 			// SQL文を準備する
 			String sql = "SELECT id,name_ja,name_en,address_ja,address_en,latitude,longitude,category,cashless_type "
-			        + "FROM stores WHERE "
-			        + "BINARY name_ja LIKE BINARY ? AND "
-			        + "BINARY name_en LIKE BINARY ? AND "
-			        + "BINARY address_ja LIKE BINARY ? AND "
-			        + "BINARY address_en LIKE BINARY ? AND "
-			        + "BINARY cashless_type LIKE BINARY ? ";
+			        + "FROM stores "
+			        + "WHERE "
+			        + "name_ja LIKE ? AND "
+			        + "name_en LIKE ? AND "
+			        + "address_ja LIKE ? AND "
+			        + "address_en LIKE ? AND "
+			        + "cashless_type LIKE ? ";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			
+			// name_ja
+			if (nameJa != null && !nameJa.isEmpty()) {
+			    pStmt.setString(1, "%" + nameJa + "%");
+			} else {
+			    pStmt.setString(1, "%");
+			}
 
-			pStmt.setString(1, "%" + nameJa + "%");
-			pStmt.setString(2, "%" + nameEn + "%");
-			pStmt.setString(3, "%" + addressJa + "%");
-			pStmt.setString(4, "%" + addressEn + "%");
-			pStmt.setString(5, "%" + cashlessType + "%");
+			// name_en
+			if (nameEn != null && !nameEn.isEmpty()) {
+			    pStmt.setString(2, "%" + nameEn + "%");
+			} else {
+			    pStmt.setString(2, "%");
+			}
+
+			// address_ja
+			if (addressJa != null && !addressJa.isEmpty()) {
+			    pStmt.setString(3, "%" + addressJa + "%");
+			} else {
+			    pStmt.setString(3, "%");
+			}
+
+			// address_en
+			if (addressEn != null && !addressEn.isEmpty()) {
+			    pStmt.setString(4, "%" + addressEn + "%");
+			} else {
+			    pStmt.setString(4, "%");
+			}
+
+			// cashless_type
+			if (cashlessType != null && !cashlessType.isEmpty()) {
+			    pStmt.setString(5, "%" + cashlessType + "%");
+			} else {
+			    pStmt.setString(5, "%");
+			}
+		
 			
 			// SQL文を実行し、結果表を取得する
+			System.out.println("SQL実行前");
 			ResultSet rs = pStmt.executeQuery();
+			System.out.println("SQL実行後");
 			
-	        while (rs.next()) {
+			
+			int count = 0;
+			while (rs.next()) {
+			    System.out.println("while内: " + count);
+			    count++;
+			    
+			
                 Store s = new Store();
                 s.setId(rs.getInt("id"));
                 s.setName_ja(rs.getString("name_ja"));
@@ -55,11 +94,13 @@ public class StoreDao {
                 s.setLatitude(rs.getDouble("latitude"));
                 s.setLongitude(rs.getDouble("longitude"));
                 s.setCategory(rs.getString("category"));
-                s.setCashless_type(rs.getString("cashlessType"));
+                s.setCashless_type(rs.getString("cashless_type"));
 
                 cardList.add(s);	        
 			}
+			System.out.println("取得件数: " + count);
 		}catch (SQLException e) {
+			System.out.println("SQLエラー: " + e.getMessage());
 				e.printStackTrace();
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();

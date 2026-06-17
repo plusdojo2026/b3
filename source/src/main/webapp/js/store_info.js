@@ -1,5 +1,15 @@
 'use strict';
 
+console.log("JSファイルが正常に読み込まれました ");
+
+// JSPから持ってきた全商品データが見えるかチェック
+if ( allProducts !== null) {
+    console.log("【成功】JSPからデータが届いています！データ件数:", allProducts.length, "件");
+    console.log("中身の確認（最初の1件）:", allProducts[0]);
+} else {
+    console.error("【警告】allProducts が見つかりません。");
+}
+
 //店舗データ保持
 let store_list = [];
 
@@ -73,6 +83,9 @@ async function fetchStores() {
 		keywords.forEach(k => params.append("keyword", k));
 	}
 
+	const cashlessType = document.getElementById("cashlessType")?.value ?? "";
+    params.append("cashlessType", cashlessType);
+    
 	try {
 		const position = await getCurrentPosition();
 		params.append("lat", position.lat);
@@ -121,7 +134,11 @@ function displayStores(list) {
 			? `<p>現在地からの距離: ${s.distance.toFixed(2)} km</p>`
 			: '';
 
-		div.innerHTML = `<h3>${s.name_ja}</h3> <p>${s.address_ja}</p> <p>${s.category}</p> ${distanceText}`;
+		div.innerHTML = `<h3>${s.name_ja}</h3>
+						<p>${s.address_ja}</p> 
+						<p>${s.category}</p> 
+						<p>${s.cashless_type}</p> 
+						${distanceText}`;
 		container.appendChild(div);
 	});
 }

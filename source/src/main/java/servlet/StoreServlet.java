@@ -1,7 +1,6 @@
 package servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Comparator;
 import java.util.List;
 
@@ -36,15 +35,14 @@ public class StoreServlet extends HttpServlet {
 		String address_en = request.getParameter("address_en");
 		String cashlessType = request.getParameter("cashlessType");
 
-		/*
+		/*表示されなくなるのでNG
 		// デフォルト表示を現金のみonにする
 		if (categories == null || categories.length == 0) {
 			categories = new String[] { "cashOnly" };
 		}
 		*/
 		/*
-		 * // フロントが無いので仮の座標を直接入れる（東京駅） double userLat = 35.681236; double userLng =
-		 * 139.767125;
+		 
 		 */
 		// 現在位置(初期値０)
 
@@ -71,27 +69,29 @@ public class StoreServlet extends HttpServlet {
 		List<Store> storeList = dao.getStoresByCategories(name_ja, name_en, address_ja, address_en, cashlessType,
 				categories, keyword);
 
-		// 距離を計算。DTOへ
-		for (Store s : storeList) {
-			double dist = calcDistance(userLat, userLng, s.getLatitude(), s.getLongitude());
-			s.setDistance(dist);
-		}
-
-		// 距離の昇順にソート
-		storeList.sort(Comparator.comparingDouble(Store::getDistance));
-
-		response.setContentType("application/json");
-		response.setCharacterEncoding("UTF-8");
-
-		// Gsonを使ってJSONに変換
-		Gson gson = new Gson();
-		String jsonOutput = gson.toJson(storeList);
-
-		// 送信
-		PrintWriter out = response.getWriter();
-		out.print(jsonOutput);
-		out.flush();
-
+		if (storeList != null && !storeList.isEmpty()) {
+			//距離の計算
+	        for (Store s : storeList) {
+	            double dist = calcDistance(userLat, userLng, s.getLatitude(), s.getLongitude());
+	            s.setDistance(dist);
+	        }
+	        // 距離の昇順にソート
+	        storeList.sort(Comparator.comparingDouble(Store::getDistance));
+	        
+	        // Gsonを使ってJSON文字列に変換
+	        Gson gson = new Gson();
+	        String storeListJson = gson.toJson(storeList);
+	        
+	        // リクエストスコープに格納
+	        request.setAttribute("storeListJson", storeListJson);
+	    } else {
+	        // データがない、または初期状態で何も出さない場合は空の配列を渡す
+	        request.setAttribute("storeListJson", "[]");
+	    }
+		
+		request.setAttribute("storeList", storeList);
+		
+		request.getRequestDispatcher("/WEB-INF/jsp/store_info.jsp").forward(request, response);
 //	        response.setContentType("application/json; charset=UTF-8");
 //	        PrintWriter out = response.getWriter();
 //	        out.print(toJson(storeList));
@@ -157,8 +157,6 @@ public class StoreServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
-		// request.getRequestDispatcher("/WEB-INF/jsp/store_info.jsp").forward(request,
-		// response);
 
 	}
 
