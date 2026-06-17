@@ -1,6 +1,9 @@
 package servlet;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -36,6 +39,7 @@ public class PaymentServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 
 		String amountStr = request.getParameter("amount");
+		String action = request.getParameter("action");
 
 		// 入力値チェック
 		if (amountStr == null || amountStr.length() == 0) {
@@ -86,6 +90,119 @@ public class PaymentServlet extends HttpServlet {
 			request.setAttribute("errorMsg", "財布情報が見つかりませんでした。");
 			request.getRequestDispatcher("/WEB-INF/jsp/payment.jsp").forward(request, response);
 			return;
+		}
+
+		if ("confirm".equals(action)) {
+			int[] confirmMoneyTypes = { 10000, 5000, 1000, 500, 100, 50, 10, 5, 1 };
+			int[] confirmPayCounts = new int[confirmMoneyTypes.length];
+
+			for (int i = 0; i < confirmPayCounts.length; i++) {
+				String payCountStr = request.getParameter("payCount" + i);
+
+				if (payCountStr == null || payCountStr.length() == 0) {
+					confirmPayCounts[i] = 0;
+				} else {
+					confirmPayCounts[i] = Integer.parseInt(payCountStr);
+				}
+			}
+
+			int confirmPayAmount = 0;
+
+			for (int i = 0; i < confirmMoneyTypes.length; i++) {
+				confirmPayAmount += confirmMoneyTypes[i] * confirmPayCounts[i];
+			}
+
+			int confirmChange = confirmPayAmount - amount;
+
+			Connection conn = null;
+
+			try {
+				Class.forName("com.mysql.cj.jdbc.Driver");
+
+				conn = DriverManager.getConnection(
+						"jdbc:mysql://localhost:3306/b3?characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=GMT%2B9",
+						"root", "password");
+
+				conn.setAutoCommit(false);
+
+				PaymentDao paymentDao = new PaymentDao();
+				Payment payment = new Payment(0, loginUser.getId(), amount);
+				int paymentId = paymentDao.insert(conn, payment);
+
+				BreakdownDao breakdownDao = new BreakdownDao();
+
+				for (int i = 0; i < confirmMoneyTypes.length; i++) {
+					if (confirmPayCounts[i] > 0) {
+						Breakdown breakdown = new Breakdown(0, paymentId, confirmMoneyTypes[i], confirmPayCounts[i]);
+						breakdownDao.insert(conn, breakdown);
+					}
+				}
+
+				int[] changeCounts = new int[confirmMoneyTypes.length];
+				int changeRemaining = confirmChange;
+
+				for (int i = 0; i < confirmMoneyTypes.length; i++) {
+					changeCounts[i] = changeRemaining / confirmMoneyTypes[i];
+					changeRemaining = changeRemaining % confirmMoneyTypes[i];
+				}
+
+				wallet.setTenThousandYen(wallet.getTenThousandYen() - confirmPayCounts[0] + changeCounts[0]);
+				wallet.setFiveThousandYen(wallet.getFiveThousandYen() - confirmPayCounts[1] + changeCounts[1]);
+				wallet.setOneThousandYen(wallet.getOneThousandYen() - confirmPayCounts[2] + changeCounts[2]);
+				wallet.setFiveHundredYen(wallet.getFiveHundredYen() - confirmPayCounts[3] + changeCounts[3]);
+				wallet.setOneHundredYen(wallet.getOneHundredYen() - confirmPayCounts[4] + changeCounts[4]);
+				wallet.setFiftyYen(wallet.getFiftyYen() - confirmPayCounts[5] + changeCounts[5]);
+				wallet.setTenYen(wallet.getTenYen() - confirmPayCounts[6] + changeCounts[6]);
+				wallet.setFiveYen(wallet.getFiveYen() - confirmPayCounts[7] + changeCounts[7]);
+				wallet.setOneYen(wallet.getOneYen() - confirmPayCounts[8] + changeCounts[8]);
+
+				String walletSql = "UPDATE wallets SET " + "ten_thousand_yen = ?, " + "five_thousand_yen = ?, "
+						+ "one_thousand_yen = ?, " + "five_hundred_yen = ?, " + "one_hundred_yen = ?, "
+						+ "fifty_yen = ?, " + "ten_yen = ?, " + "five_yen = ?, " + "one_yen = ? " + "WHERE id = ?";
+				PreparedStatement walletStmt = conn.prepareStatement(walletSql);
+
+				walletStmt.setInt(1, wallet.getTenThousandYen());
+				walletStmt.setInt(2, wallet.getFiveThousandYen());
+				walletStmt.setInt(3, wallet.getOneThousandYen());
+				walletStmt.setInt(4, wallet.getFiveHundredYen());
+				walletStmt.setInt(5, wallet.getOneHundredYen());
+				walletStmt.setInt(6, wallet.getFiftyYen());
+				walletStmt.setInt(7, wallet.getTenYen());
+				walletStmt.setInt(8, wallet.getFiveYen());
+				walletStmt.setInt(9, wallet.getOneYen());
+				walletStmt.setInt(10, loginUser.getWalletId());
+
+				walletStmt.executeUpdate();
+
+				conn.commit();
+
+				request.setAttribute("successMsg", "支出を登録しました。");
+				request.getRequestDispatcher("/WEB-INF/jsp/payment.jsp").forward(request, response);
+				return;
+
+			} catch (Exception e) {
+				e.printStackTrace();
+
+				if (conn != null) {
+					try {
+						conn.rollback();
+					} catch (Exception rollbackException) {
+						rollbackException.printStackTrace();
+					}
+				}
+
+				request.setAttribute("errorMsg", "支出登録に失敗しました。");
+				request.getRequestDispatcher("/WEB-INF/jsp/payment.jsp").forward(request, response);
+				return;
+			} finally {
+				if (conn != null) {
+					try {
+						conn.close();
+					} catch (Exception closeException) {
+						closeException.printStackTrace();
+					}
+				}
+			}
 		}
 
 		// 財布合計算出

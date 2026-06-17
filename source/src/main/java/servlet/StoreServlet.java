@@ -24,6 +24,10 @@ public class StoreServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		request.setCharacterEncoding("UTF-8");
+	    response.setContentType("text/html; charset=UTF-8");
+		
 		// 検索
 		String[] keyword = request.getParameterValues("keyword");
 		// カテゴリーフィルタ
@@ -77,17 +81,16 @@ public class StoreServlet extends HttpServlet {
 	        }
 	        // 距離の昇順にソート
 	        storeList.sort(Comparator.comparingDouble(Store::getDistance));
-	        
+		}
 	        // Gsonを使ってJSON文字列に変換
 	        Gson gson = new Gson();
 	        String storeListJson = gson.toJson(storeList);
 	        
-	        // リクエストスコープに格納
+	     // JSP に渡す
 	        request.setAttribute("storeListJson", storeListJson);
-	    } else {
-	        // データがない、または初期状態で何も出さない場合は空の配列を渡す
-	        request.setAttribute("storeListJson", "[]");
-	    }
+	        request.setAttribute("storeList", storeList);
+	        request.setAttribute("userLat", userLat);
+	        request.setAttribute("userLng", userLng);
 		
 		request.setAttribute("storeList", storeList);
 		
@@ -99,7 +102,6 @@ public class StoreServlet extends HttpServlet {
 	}
 
 	// 距離計算の中身 ハヴァサイン公式
-
 	private double calcDistance(double lat1, double lng1, double lat2, double lng2) {
 		// 地球の赤道半径 (km)
 		double EARTH_RADIUS = 6371.0;
@@ -126,28 +128,6 @@ public class StoreServlet extends HttpServlet {
 		return EARTH_RADIUS * c;
 
 	}
-
-	// DTO→JSON変換
-	/*
-	 * private String toJson(List<Store> list) { StringBuilder sb = new
-	 * StringBuilder(); sb.append("[");
-	 * 
-	 * for (int i = 0; i < list.size(); i++) { Store s = list.get(i); sb.append("{")
-	 * .append("\"id\":").append(s.getId()).append(",")
-	 * .append("\"name_ja\":\"").append(s.getName_ja()).append("\",")
-	 * .append("\"name_en\":\"").append(s.getName_en()).append("\",")
-	 * .append("\"address_ja\":\"").append(s.getAddress_ja()).append("\",")
-	 * .append("\"address_en\":\"").append(s.getAddress_en()).append("\",")
-	 * .append("\"latitude\":").append(s.getLatitude()).append(",")
-	 * .append("\"longitude\":").append(s.getLongitude()).append(",")
-	 * .append("\"category\":\"").append(s.getCategory()).append("\",")
-	 * .append("\"cashless_type\":\"").append(s.getCashless_type()).append("\"")
-	 * .append("}");
-	 * 
-	 * if (i < list.size() - 1) sb.append(","); }
-	 * 
-	 * sb.append("]"); System.out.println(sb.toString()); return sb.toString(); }
-	 */
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse

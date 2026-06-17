@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%
 String errorMsg = (String) request.getAttribute("errorMsg");
+String successMsg = (String) request.getAttribute("successMsg");
 %>
 <!doctype html>
 <html lang="ja">
@@ -34,21 +35,26 @@ String errorMsg = (String) request.getAttribute("errorMsg");
 		<!-- メインここから -->
 		<main class="main">
 			<div class="payment-nav">合計金額を入力してください</div>
-
-			<%
-			if (errorMsg != null) {
-			%>
-			<div class="error-message"><%=errorMsg%></div>
-			<%
-			}
-			%>
-
 			<form method="POST"
 				action="${pageContext.request.contextPath}/PaymentServlet"
 				id="payment-form">
 				<label class="payments"> <input type="text" name="amount"
 					class="amount-input" id="amountInput" maxlength="8">
 				</label>
+				<div class="message-area">
+					<%
+					if (errorMsg != null) {
+					%>
+					<span class="error-message"><%=errorMsg%></span>
+					<%
+					} else if (successMsg != null) {
+					%>
+					<span class="success-message"><%=successMsg%></span>
+					<%
+					}
+					%>
+				</div>
+
 
 				<div class="money_isUse">使用できない紙幣・硬貨のチェックを外してください​</div>
 

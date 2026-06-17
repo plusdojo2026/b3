@@ -84,7 +84,8 @@
 .reset-button {
 	background-color: white;
 	color: black;
-	border: 1px solid black;
+	border: 1px solid green;
+	box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.35);
 }
 
 /* 登録ボタン */
@@ -92,6 +93,7 @@
 	background-color: green;
 	color: white;
 	border: 1px solid green;
+	box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.35);
 }
 
 .reset-button:hover, .signup-button:hover {
@@ -173,6 +175,7 @@
 	background-color: green;
 	color: white;
 	border: 1px solid green;
+	box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.35);
 }
 
 .login-button:hover {
@@ -180,10 +183,13 @@
 }
 /* エラーメッセージ */
 .error-message {
+	height: 18px;
+	margin: 12px 0 12px 0;
 	color: red;
 	text-align: center;
 	font-size: 13px;
-	margin: 0 0 12px 0;
+	line-height: 18px;
+	background-color: #ffffff;
 }
 
 /* --------------------------- */
