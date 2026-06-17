@@ -2,6 +2,14 @@
 	pageEncoding="UTF-8"%>
 <%
 String errorMsg = (String) request.getAttribute("errorMsg");
+Integer amount = (Integer) request.getAttribute("amount");
+Integer payAmount = (Integer) request.getAttribute("payAmount");
+Integer change = (Integer) request.getAttribute("change");
+int[] moneyTypes = (int[]) request.getAttribute("moneyTypes");
+int[] payCounts = (int[]) request.getAttribute("payCounts");
+
+String[] moneyImagePaths = { "tenThousandYen.png", "fiveThousandYen.png", "oneThousandYen.png", "fiveHundredYen.png",
+		"oneHundredYen.png", "fiftyYen.png", "tenYen.png", "fiveYen.png", "oneYen.png" };
 %>
 <!doctype html>
 <html lang="ja">
@@ -33,38 +41,69 @@ String errorMsg = (String) request.getAttribute("errorMsg");
 		<!-- ヘッダーここまで -->
 		<!-- メインここから -->
 		<main class="main">
-			<div class="payment-nav">合計金額を入力してください</div>
-
-			<%
-			if (errorMsg != null) {
-			%>
-			<div class="error-message"><%=errorMsg%></div>
-			<%
-			}
-			%>
-
-			<form method="POST"
-				action="${pageContext.request.contextPath}/PaymentServlet"
-				id="payment-form">
-				<label class="payments"> <input type="text" name="amount"
-					class="amount-input" id="amountInput" maxlength="8">
-				</label>
-
-				<div class="money_isUse">使用できない紙幣・硬貨のチェックを外してください​</div>
-
-				<div class="form-button">
-					<input type="submit" name="submit" class="payment-button"
-						id="paymentBtn" value="支払い">
+			<section class="suggestion-area">
+				<div class="amount-message">
+					<div class="amount-label">合計金額は</div>
+					<div class="amount-large">
+						￥
+						<%=amount%></div>
+					<div class="amount-text">です。</div>
 				</div>
-			</form>
 
-			<div class="payment-nav-buttons">
-				<input type="button" class="payment-btn" value="戻る"
-					onclick="location.href='${pageContext.request.contextPath}/HomeServlet'">
+				<div class="suggestion-card">
+					<div class="suggestion-title">この組み合わせで支払う</div>
 
-				<input type="button" class="payment-btn" value="支出ログ"
-					onclick="location.href='${pageContext.request.contextPath}/PaymentLogServlet'">
-			</div>
+					<div class="money-suggestion-list">
+						<%
+						for (int i = 0; i < moneyTypes.length; i++) {
+							if (payCounts[i] > 0) {
+						%>
+						<div class="money-suggestion-row">
+							<img
+								src="${pageContext.request.contextPath}/images/money/<%=moneyImagePaths[i]%>"
+								alt="<%=moneyTypes[i]%>円" class="money-image"> <span
+								class="money-dots">・・・</span> <span class="money-count">×
+								<%=payCounts[i]%></span>
+						</div>
+						<%
+						}
+						}
+						%>
+					</div>
+				</div>
+
+				<div class="total-pay-amount">
+					総支払金額：<%=payAmount%>
+				</div>
+
+				<div class="suggestion-buttons">
+					<form method="POST"
+						action="${pageContext.request.contextPath}/PaymentServlet">
+						<input type="hidden" name="amount" value="<%=amount%>"> <input
+							type="hidden" name="action" value="other"> <input
+							type="submit" class="payment-btn" value="別の支払い方">
+					</form>
+
+					<form method="POST"
+						action="${pageContext.request.contextPath}/PaymentServlet">
+						<input type="hidden" name="amount" value="<%=amount%>"> <input
+							type="hidden" name="payAmount" value="<%=payAmount%>"> <input
+							type="hidden" name="change" value="<%=change%>"> <input
+							type="hidden" name="action" value="confirm">
+
+						<%
+						for (int i = 0; i < moneyTypes.length; i++) {
+						%>
+						<input type="hidden" name="payCount<%=i%>"
+							value="<%=payCounts[i]%>">
+						<%
+						}
+						%>
+
+						<input type="submit" class="payment-button" value="確定">
+					</form>
+				</div>
+			</section>
 		</main>
 		<!-- メインここまで -->
 		<!-- フッターここから -->

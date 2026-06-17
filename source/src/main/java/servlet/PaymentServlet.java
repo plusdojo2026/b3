@@ -183,7 +183,7 @@ public class PaymentServlet extends HttpServlet {
 		request.setAttribute("moneyTypes", moneyTypes);
 		request.setAttribute("payCounts", bestPayCounts);
 
-		request.getRequestDispatcher("/WEB-INF/jsp/payment_confirm.jsp.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/jsp/payment_suggestion.jsp").forward(request, response);
 		return;
 	}
 
