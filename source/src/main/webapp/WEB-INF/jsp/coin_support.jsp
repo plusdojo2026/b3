@@ -37,7 +37,7 @@
 					金額を入力して探す<span>（上限は￥2,000）</span>
 				</h3>
 				<input type="number" inputmode="numeric" id="amountInput"
-					name="amountInput" min="0" max="2000" placeholder="￥500-">
+					name="amountInput" min="0" max="2000" placeholder="￥500-" required>
 
 				<%--検索ボタン --%>
 				<button type="submit" id="btnSearchAmount" name="submitType"
