@@ -37,10 +37,10 @@
 		<main>
 			<!-- 検索機能 -->
 
-			<div name="search_map" id="search_map">
+			<div class="search_map" id="search_map">
 				<input type="text" id="keyword" placeholder="施設名、住所">
 				<div class="search_btn">
-					<img src="/webapp/images/nav/search.png" alt="検索">
+					<img src="${pageContext.request.contextPath}/images/nav/search.png" alt="検索">
 				</div>
 			</div>
 
