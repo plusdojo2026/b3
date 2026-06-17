@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+String errorMsg = (String) request.getAttribute("errorMsg");
+%>
 <!doctype html>
 <html lang="ja">
 <head>
@@ -50,13 +53,9 @@
 					name="passwordConfirm" class="signup-input" id="passwordConfirm"
 					maxlength="20" required>
 				</label>
-				<%
-				if (request.getAttribute("errorMsg") != null) {
-				%>
-				<p class="error-message"><%=request.getAttribute("errorMsg")%></p>
-				<%
-				}
-				%>
+				<p class="error-message">
+					<%=errorMsg != null ? errorMsg : ""%>
+				</p>
 				<div class="form-buttons">
 					<input type="reset" class="reset-button" name="reset" id="resetBtn"
 						value="リセット"> <input type="submit" class="signup-button"

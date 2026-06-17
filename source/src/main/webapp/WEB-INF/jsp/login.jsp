@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+String errorMsg = (String) request.getAttribute("errorMsg");
+%>
 <!doctype html>
 <html lang="ja">
 <head>
@@ -45,13 +48,11 @@
 				</label> <label class="auto-login"> <input type="checkbox"
 					name="autoLogin" id="autoLogin"> 次回から自動ログイン
 				</label>
-				<%
-				if (request.getAttribute("errorMsg") != null) {
-				%>
-				<p class="error-message"><%=request.getAttribute("errorMsg")%></p>
-				<%
-				}
-				%>
+				<p class="error-message">
+					<%=errorMsg != null ? errorMsg : ""%>
+				</p>
+
+
 				<div class="form-buttons">
 					<input type="submit" class="login-button" name="submit"
 						id="loginBtn" value="ログイン">
