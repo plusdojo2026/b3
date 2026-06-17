@@ -13,6 +13,7 @@
 	href="${pageContext.request.contextPath}/css/home_wallet.css">
 <script src="${pageContext.request.contextPath}/js/common.js" defer></script>
 <script src="${pageContext.request.contextPath}/js/home.js" defer></script>
+<script src="${pageContext.request.contextPath}/js/wallet.js" defer></script>
 <link rel="icon"
 	href="${pageContext.request.contextPath}/favicon/favicon.png">
 </head>
@@ -47,53 +48,54 @@
 					<!-- 10000円 -->
 					<div class="money-type">
 						<img src="/b3/images/money/tenThousandYen.png"> × <input
-							type="number" name="tenThousandYen" min="0" value="${wallet.tenThousandYen}">
+							type="number" name="tenThousandYen" id="tenThousandYen" min="0" value="${wallet.tenThousandYen}">
 					</div>
 					<!-- 5000円 -->
 					<div class="money-type">
 						<img src="/b3/images/money/fiveThousandYen.png"> × <input
-							type="number" name="fiveThousandYen" min="0" value="${wallet.fiveThousandYen}">
+							type="number" name="fiveThousandYen" id="fiveThousandYen" min="0" value="${wallet.fiveThousandYen}">
 					</div>
 					<!-- 1000円 -->
 					<div class="money-type">
 						<img src="/b3/images/money/oneThousandYen.png"> × <input
-							type="number" name="oneThousandYen" min="0" value="${wallet.oneThousandYen}">
+							type="number" name="oneThousandYen" id="oneThousandYen"  min="0" value="${wallet.oneThousandYen}">
 					</div>
 					<!-- 500円 -->
 					<div class="money-type">
 						<img src="/b3/images/money/fiveHundredYen.png"> × <input
-							type="number" name="fiveHundredYen" min="0" value="${wallet.fiveHundredYen}">
+							type="number" name="fiveHundredYen" id="fiveHundredYen"  min="0" value="${wallet.fiveHundredYen}">
 					</div>
 					<!-- 100円 -->
 					<div class="money-type">
 						<img src="/b3/images/money/oneHundredYen.png"> × <input
-							type="number" name="oneHundredYen" min="0" value="${wallet.oneHundredYen}">
+							type="number" name="oneHundredYen" id="oneHundredYen"  min="0" value="${wallet.oneHundredYen}">
 					</div>
 					<!-- 50円 -->
 					<div class="money-type">
 						<img src="/b3/images/money/fiftyYen.png"> × <input
-							type="number" name="fiftyYen" min="0" value="${wallet.fiftyYen}">
+							type="number" name="fiftyYen"  id="fiftyYen" min="0" value="${wallet.fiftyYen}">
 					</div>
 					<!-- 10円 -->
 					<div class="money-type">
 						<img src="/b3/images/money/tenYen.png"> × <input
-							type="number" name="tenYen" min="0" value="${wallet.tenYen}">
+							type="number" name="tenYen" id="tenYen" min="0" value="${wallet.tenYen}">
 					</div>
 					<!-- 5円 -->
 					<div class="money-type">
 						<img src="/b3/images/money/fiveYen.png"> × <input
-							type="number" name="fiveYen" min="0" value="${wallet.fiveYen}">
+							type="number" name="fiveYen"  id="fiveYen" min="0" value="${wallet.fiveYen}">
 					</div>
 					<!-- 1円 -->
 					<div class="money-type">
 						<img src="/b3/images/money/oneYen.png"> × <input
-							type="number" name="oneYen" min="0" value="${wallet.oneYen}">
+							type="number" name="oneYen"  id="oneYen" min="0" value="${wallet.oneYen}">
 					</div>
 				</div>
-
+				<p id="msg"></p>
 				<div class="button-regist">
-					<button type="submit" name="submit" value="更新">登録</button>
+					<button type="submit" name="submit" id="editBtn" value="更新">登録</button>	
 				</div>
+				<p id="output"></p>
 
 			</form>
 
