@@ -92,3 +92,48 @@ function checkNoResult() {
 	// 表示されているコラムが 0 件ならメッセージを表示、それ以外は非表示
 	msg.style.display = visible.length === 0 ? "block" : "none"; 
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+	
+	// 全てのコラム要素を取得（検索対象）
+	const items = document.querySelectorAll(".column-item");
+	
+	// 検索フォームの入力欄
+	const searchInput = document.querySelector("input[name='keyword']");
+	
+	// 検索ボタン
+	const searchBtn = document.querySelector(".search-box button");
+	
+	// 画面遷移なしで検索処理　
+	// 入力されたキーワードがタイトルか本文にあるコラムだけを表示する
+	function filterBySearch() {
+		const keyword = searchInput.value.trim(); //入力された文字列
+	
+	
+	items.forEach(item => {
+		const text = item.innerText; // タイトル、本文含めたコラム全体のテキスト
+		
+		// キーワードが空の場合　全件表示する
+		// キーワードが含まれているもの　表示する
+		// 含まれていない場合　非表示に
+		if (keyword === "" || text.includes(keyword)) {
+			item.style.display = "block"; // 表示
+		} else {
+			item.style.display = "none"; // 非表示
+		}
+	});
+}	
+	// preventDefaultで画面遷移を止めてjsの検索だけ実行する
+	searchBtn.addEventListener("click", (e) => {
+		e.preventDefault();
+		filterBySearch();
+	});
+	
+	// Enterキーでも検索できるように
+	searchInput.addEventListener("keyup", e => {
+		if (e.key === "Enter") {
+			e.preventDefault();
+			filterBySearch();
+		}
+	});
+});
