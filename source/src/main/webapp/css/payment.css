@@ -64,3 +64,130 @@
 	font-weight: 450;
 	font-size: 107%
 }
+
+/* -------------------------------------- */
+/* --------payment_suggestion.jsp-------- */
+/* -------------------------------------- */
+
+
+/* 支払い提案画面ここから */
+.suggestion-area {
+	width: 100%;
+	padding: 22px 28px 90px;
+	box-sizing: border-box;
+	text-align: center;
+}
+
+.amount-message {
+	margin-top: 10px;
+	margin-bottom: 24px;
+	font-weight: bold;
+}
+
+.amount-label {
+	font-size: 18px;
+	margin-bottom: 6px;
+}
+
+.amount-large {
+	font-size: 42px;
+	line-height: 1.1;
+	margin: 0;
+}
+
+.amount-text {
+	font-size: 18px;
+	margin-top: 8px;
+}
+
+.suggestion-card {
+	width: 100%;
+	max-width: 340px;
+	margin: 0 auto;
+	padding: 22px 22px 18px;
+	box-sizing: border-box;
+	border: 3px solid #2f7d32;
+	border-radius: 20px;
+	background-color: #fff;
+}
+
+.suggestion-title {
+	font-size: 18px;
+	font-weight: bold;
+	margin-bottom: 18px;
+}
+
+.money-suggestion-list {
+	display: flex;
+	flex-direction: column;
+	gap: 14px;
+}
+
+.money-suggestion-row {
+	display: grid;
+	grid-template-columns: 110px 70px 48px;
+	align-items: center;
+	justify-content: center;
+	column-gap: 8px;
+}
+
+.money-image {
+	width: 96px;
+	height: 54px;
+	object-fit: contain;
+	justify-self: center;
+}
+
+.money-dots {
+	font-size: 22px;
+	font-weight: bold;
+	letter-spacing: 8px;
+	text-align: center;
+	white-space: nowrap;
+}
+
+.money-count {
+	font-size: 22px;
+	font-weight: bold;
+	text-align: left;
+	white-space: nowrap;
+}
+
+.total-pay-amount {
+	margin-top: 24px;
+	font-size: 22px;
+	font-weight: bold;
+}
+
+.suggestion-buttons {
+	width: 100%;
+	max-width: 340px;
+	margin: 22px auto 0;
+	display: flex;
+	justify-content: space-between;
+	gap: 18px;
+}
+
+.suggestion-buttons form {
+	width: 50%;
+	margin: 0;
+}
+
+.suggestion-buttons input[type="submit"] {
+	width: 100%;
+	height: 48px;
+	border: none;
+	border-radius: 7px;
+	background-color: #08751d;
+	color: #fff;
+	font-size: 18px;
+	font-weight: bold;
+	box-sizing: border-box;
+}
+/* 支払い提案画面ここまで */
+
+
+
+
+
+

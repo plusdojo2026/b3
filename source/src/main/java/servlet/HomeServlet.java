@@ -21,6 +21,7 @@ public class HomeServlet extends HttpServlet {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
+		request.getRequestDispatcher("/WEB-INF/jsp/home.jsp").forward(request, response);
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 
