@@ -32,68 +32,81 @@
 		<!-- ヘッダーここまで -->
 		<main class="wallet-page">
 			<section class="total-amount">
-				<div>現在の予算</div>
-				<div>
+				<div class="current-budget">現在の予算</div>
+				<div class="amount">
 					<!-- 合計金額を入れる -->
-					${totalAmount}
+					&yen;${totalAmount}
 				</div>
 			</section>
 
-			<div>所持金額を入力してください(枚数)</div>
+			<div class=wallet-possession>所持金額を入力してください(枚数)</div>
 
 			<form method="post" action="/b3/WalletServlet">
 
 				<div class="money-list">
 					<!--お金の種類ごとの入力欄-->
 					<!-- 10000円 -->
+				
 					<div class="money-type">
 						<img src="/b3/images/money/tenThousandYen.png"> × <input
-							type="number" name="tenThousandYen" id="tenThousandYen" min="0" value="${wallet.tenThousandYen}">
+							type="number" name="tenThousandYen" id="tenThousandYen" min="0"
+							value="${wallet.tenThousandYen}">
 					</div>
 					<!-- 5000円 -->
 					<div class="money-type">
 						<img src="/b3/images/money/fiveThousandYen.png"> × <input
-							type="number" name="fiveThousandYen" id="fiveThousandYen" min="0" value="${wallet.fiveThousandYen}">
+							type="number" name="fiveThousandYen" id="fiveThousandYen" min="0"
+							value="${wallet.fiveThousandYen}">
 					</div>
 					<!-- 1000円 -->
 					<div class="money-type">
 						<img src="/b3/images/money/oneThousandYen.png"> × <input
-							type="number" name="oneThousandYen" id="oneThousandYen"  min="0" value="${wallet.oneThousandYen}">
+							type="number" name="oneThousandYen" id="oneThousandYen" min="0"
+							value="${wallet.oneThousandYen}">
 					</div>
+					
+					<!-- 空白 -->
+					<div class="money-type empty"></div>
 					<!-- 500円 -->
 					<div class="money-type">
 						<img src="/b3/images/money/fiveHundredYen.png"> × <input
-							type="number" name="fiveHundredYen" id="fiveHundredYen"  min="0" value="${wallet.fiveHundredYen}">
+							type="number" name="fiveHundredYen" id="fiveHundredYen" min="0"
+							value="${wallet.fiveHundredYen}">
 					</div>
 					<!-- 100円 -->
 					<div class="money-type">
 						<img src="/b3/images/money/oneHundredYen.png"> × <input
-							type="number" name="oneHundredYen" id="oneHundredYen"  min="0" value="${wallet.oneHundredYen}">
+							type="number" name="oneHundredYen" id="oneHundredYen" min="0"
+							value="${wallet.oneHundredYen}">
 					</div>
 					<!-- 50円 -->
 					<div class="money-type">
 						<img src="/b3/images/money/fiftyYen.png"> × <input
-							type="number" name="fiftyYen"  id="fiftyYen" min="0" value="${wallet.fiftyYen}">
+							type="number" name="fiftyYen" id="fiftyYen" min="0"
+							value="${wallet.fiftyYen}">
 					</div>
 					<!-- 10円 -->
 					<div class="money-type">
 						<img src="/b3/images/money/tenYen.png"> × <input
-							type="number" name="tenYen" id="tenYen" min="0" value="${wallet.tenYen}">
+							type="number" name="tenYen" id="tenYen" min="0"
+							value="${wallet.tenYen}">
 					</div>
 					<!-- 5円 -->
 					<div class="money-type">
 						<img src="/b3/images/money/fiveYen.png"> × <input
-							type="number" name="fiveYen"  id="fiveYen" min="0" value="${wallet.fiveYen}">
+							type="number" name="fiveYen" id="fiveYen" min="0"
+							value="${wallet.fiveYen}">
 					</div>
 					<!-- 1円 -->
 					<div class="money-type">
 						<img src="/b3/images/money/oneYen.png"> × <input
-							type="number" name="oneYen"  id="oneYen" min="0" value="${wallet.oneYen}">
+							type="number" name="oneYen" id="oneYen" min="0"
+							value="${wallet.oneYen}">
 					</div>
 				</div>
 				<p id="msg"></p>
 				<div class="button-regist">
-					<button type="submit" name="submit" id="editBtn" value="更新">登録</button>	
+					<button type="submit" name="submit" id="editBtn" value="更新">登録</button>
 				</div>
 				<p id="output"></p>
 
