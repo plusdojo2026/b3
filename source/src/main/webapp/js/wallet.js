@@ -21,7 +21,7 @@ document.getElementById('editBtn').onclick = function(event) {
 			return;
 		}
 	}
-	document.getElementById('output').textContent ='登録しました。';
+	
 };
 
 

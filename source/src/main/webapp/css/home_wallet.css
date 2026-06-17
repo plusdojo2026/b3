@@ -1,1 +1,126 @@
 @charset "UTF-8";
+
+/* --------------------------- */
+/* -------- wallet.jsp -------- */
+/* --------------------------- */
+
+/*現在の予算エリア*/
+.total-amount {
+	background-color: green;
+	padding: 24px 16px;
+	margin: 10px;
+	border-radius:6px;
+}
+
+/*「現在の予算」表示*/
+.current-budget {
+	color: white;
+	font-size: 22px;
+	font-weight: bold;
+	margin-bottom: 12px;
+}
+
+/* 合計金額の表示 */
+.amount {
+	background-color: white;
+	border-radius: 8px;
+	height: 52px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 30px;
+	font-weight: bold;
+}
+
+/*「所持金額を入力してください(枚数)」表示*/
+.wallet-possession {
+	font-size: 18px;
+	font-weight: bold;
+	border-bottom: 2px solid green;
+	justify-content: left;
+	margin: 12px 16px 20px;
+	padding-bottom: 4px;
+	padding-top:6px;
+}
+
+/* お金の種類のレイアウト 2列グリッド */
+.money-list {
+	width: 90%;
+	margin: 0 auto;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 12px 8px;
+}
+/*中央揃え*/
+.money-type {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+/* 1000円の右側にある空白 */
+.empty {
+	visibility: hidden;
+}
+
+/* 小銭の画像 */
+.money-type img {
+	width: 50px;
+	height: auto;
+}
+
+/* 札の画像 srcにThousandが含まれてるものを選択 */
+.money-type img[src*="Thousand"] {
+	width: 120px;
+	height: auto;
+}
+
+/* 入力欄 */
+.money-type input {
+	width: 38px;
+	height: 32px;
+	text-align: center;
+	box-sizing: border-box;
+	border-radius: 6px;
+}
+
+/* 登録ボタン */
+#editBtn {
+	background-color: green;
+	color: white;
+	border: 1px solid green;
+	width: 78px;
+	height: 42px;
+	border-radius: 6px;
+	font-size: 16px;
+	cursor: pointer;
+}
+/*登録ボタン ホバーアクション*/
+#editBtn:hover {
+	background-color: #b3ffd8;
+	color: green;
+	border: 1px solid green;
+}
+
+/*ボタン 配置*/
+.button-regist {
+	display: flex;
+	justify-content: right;
+	gap: 28px;
+	margin-right: 28px;
+}
+/*エラー文字*/
+#msg{
+	font-size:16px;
+	font-weight: bold;
+	text-align: right;
+	color:green;
+}
+
+
+
+
+
+
+
+
