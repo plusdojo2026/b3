@@ -5,9 +5,7 @@
 /* -------------------------- */
 
 /* 小ボタン */
-.payment-btn,
-.manual-btn,
-.suggestion-buttons input[type="submit"] {
+.payment-btn, .manual-btn, .suggestion-buttons input[type="submit"] {
 	width: 146px;
 	height: 48px;
 	border-radius: 6px;
@@ -22,8 +20,7 @@
 }
 
 /* 大ボタン */
-.payment-button,
-.log-back-btn {
+.payment-button, .log-back-btn {
 	width: 320px;
 	height: 48px;
 	border-radius: 6px;
@@ -37,11 +34,8 @@
 	transition: 0.2s;
 }
 
-.payment-btn:hover,
-.manual-btn:hover,
-.suggestion-buttons input[type="submit"]:hover,
-.payment-button:hover,
-.log-back-btn:hover {
+.payment-btn:hover, .manual-btn:hover, .suggestion-buttons input[type="submit"]:hover,
+	.payment-button:hover, .log-back-btn:hover {
 	background-color: #ffffff;
 	color: green;
 	border-color: green;
@@ -74,9 +68,7 @@
 	text-align: center;
 }
 
-.form-button,
-.payment-nav-buttons,
-.payment-log-buttons {
+.form-button, .payment-nav-buttons, .payment-log-buttons {
 	display: flex;
 	justify-content: center;
 }
@@ -151,7 +143,8 @@
 	display: block;
 }
 
-.money-option:has(input[type="checkbox"]:not(:checked)) .money-option-image {
+.money-option:has(input[type="checkbox"]:not(:checked)) .money-option-image
+	{
 	opacity: 0.35;
 	filter: grayscale(100%);
 }
@@ -172,8 +165,7 @@
 	font-weight: bold;
 }
 
-.amount-label,
-.amount-text {
+.amount-label, .amount-text {
 	font-size: 18px;
 }
 
@@ -327,6 +319,13 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	transition: 0.2s;
+	box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.35);
+	cursor: pointer;
+}
+
+.payment-log-card:hover {
+	transform: translateY(-4px);
 }
 
 .payment-log-amount {
