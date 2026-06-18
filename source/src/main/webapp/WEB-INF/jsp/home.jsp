@@ -29,6 +29,22 @@
 		</header>
 		<!-- ヘッダーここまで -->
 		<a href="${pageContext.request.contextPath}/WalletServlet">予算登録・編集へ</a>
+		
+		<!-- コラム枠 -->
+		<div class="column-box" onclick="location.href='${pageContext.request.contextPath}/ColumnServlet'">
+		    <div class="column-title">コラム</div>
+		
+		    <div class="column-content">
+		
+		        <%-- キャラ画像（まだ無いのでコメントアウト） --%>
+		        <%-- <img src="${pageContext.request.contextPath}/images/character/pitao.png" class="column-character"> --%>
+		
+		        <div class="column-balloon">
+		            ${randomColumn.title_ja}って知ってる？
+		        </div>
+		    </div>
+		</div>
+		
 		<!-- 下部ナビここから -->
 		<footer class="bottom-menu">
 			<a href="${pageContext.request.contextPath}/CoinSupportServlet"

@@ -70,5 +70,63 @@ public class ColumnDao {
 			
 		return list;
 	}
-	
+
+	// マイページのコラム欄でランダムにタイトルを表示する処理
+	// ランダムで1件取得
+	public Column findRandom() {
+	    Connection conn = null;
+	    Column col = null;
+
+	    // JDBCドライバを読み込む
+	    try {
+	        try {
+	            Class.forName("com.mysql.cj.jdbc.Driver");
+	        } catch (ClassNotFoundException e) {
+	            // TODO 自動生成された catch ブロック
+	            e.printStackTrace();
+	        }
+
+	        // データベースに接続する
+	        conn = DriverManager.getConnection(
+	                "jdbc:mysql://localhost:3306/b3?characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=GMT%2B9",
+	                "root", "password");
+
+	        // ランダムで1件取得するSQL
+	        String sql = "SELECT * FROM columns ORDER BY RAND() LIMIT 1";
+	        PreparedStatement pStmt = conn.prepareStatement(sql);
+
+	        // SELECT文を実行し、結果を取得
+	        ResultSet rs = pStmt.executeQuery();
+
+	        // 結果が1件だけ返る
+	        if (rs.next()) {
+	            col = new Column();
+
+	            // DBの値をColumnに入れる
+	            col.setId(rs.getInt("id"));
+	            col.setTitle_ja(rs.getString("title_ja"));
+	            col.setTitle_en(rs.getString("title_en"));
+	            col.setColumn_ja(rs.getString("column_ja"));
+	            col.setColumn_en(rs.getString("column_en"));
+	            col.setCategory(rs.getString("category"));
+	        }
+
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        col = null;
+
+	    } finally {
+	        // データベース切断
+	        if (conn != null) {
+	            try {
+	                conn.close();
+	            } catch (SQLException e) {
+	                e.printStackTrace();
+	            }
+	        }
+	    }
+
+	    return col;
+	}
 }
+
