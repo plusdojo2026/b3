@@ -195,3 +195,40 @@
 /* --------------------------- */
 /* -------- mypage.jsp -------- */
 /* --------------------------- */
+
+
+ /*ボタンを表示するエリア(ナイトモード) */
+.sample2Area {
+  width          : 100px;               /* ボタンの横幅       */
+}
+ 
+ /*チェックボックス*/
+.sample2Area input[type="checkbox"] {
+  display        : none;            /* チェックボックス非表示 */
+}
+ 
+ /*チェックボックスのラベル（標準)*/
+.sample2Area label {
+  display        : block;               /* ボックス要素に変更 */
+  box-sizing     : border-box;          /* 枠線を含んだサイズ */
+  text-align     : left;                /* 文字位置は中央     */
+  border         : 2px solid #78bd78;   /* 枠線               */
+  border-radius  : 3px;                 /* 角丸               */
+  line-height    : 1;                   /* 1行の高さ          */
+  height         : 50px;                /* ボタンの高さ       */
+}
+ 
+ /* 移動BOX（標準）*/
+.sample2Area #sample2box {
+  display        :inline-block;
+  height         : 46px;                /* ボタンの高さ       */
+  width          : 50%;                 /* ボタンの高さ       */
+  background     : #ddd;                /* 背景色             */
+  transition     : .3s;                 /* ゆっくり変化       */
+}
+ 
+ /* ON側のチェックボックスの移動BOX（ONのとき)*/
+.sample2Area #sample2check:checked + label #sample2box {
+  transform      : translateX(100%);    /* BOXを右に移動      */
+  background     : #78bd78;             /* 背景色             */
+}
