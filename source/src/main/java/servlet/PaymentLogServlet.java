@@ -2,6 +2,7 @@ package servlet;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -35,9 +36,9 @@ public class PaymentLogServlet extends HttpServlet {
 
 		try {
 			PaymentDao paymentDao = new PaymentDao();
-			List<Payment> paymentList = paymentDao.findByUserId(loginUser.getId());
+			List<Map<String, Object>> paymentLogList = paymentDao.findLogByUserId(loginUser.getId());
 
-			request.setAttribute("paymentList", paymentList);
+			request.setAttribute("paymentLogList", paymentLogList);
 			request.getRequestDispatcher("/WEB-INF/jsp/payment_log.jsp").forward(request, response);
 			return;
 

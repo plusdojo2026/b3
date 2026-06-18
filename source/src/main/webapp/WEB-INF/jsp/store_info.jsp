@@ -47,15 +47,15 @@
 			<!-- カテゴリー -->
 			<div class="category_filter">
 				<button type="button" class="filter-btn active"
-					data-category="Cashonly" aria-pressed="true">現金のみ</button>
+					data-category="cashonly" aria-pressed="true">現金のみ</button>
 				<button type="button" class="filter-btn"
-					data-category="Cashlessonly" aria-pressed="false">
+					data-category="cashlessonly" aria-pressed="false">
 					キャッシュレスのみ</button>
-				<button type="button" class="filter-btn" data-category="Both"
+				<button type="button" class="filter-btn" data-category="both"
 					aria-pressed="false">両対応</button>
 				<button type="button" class="filter-btn" data-category="ATM"
 					aria-pressed="false">ATM</button>
-				<button type="button" class="filter-btn" data-category="Exchange"
+				<button type="button" class="filter-btn" data-category="exchange"
 					aria-pressed="false">外貨両替機</button>
 			</div>
 			

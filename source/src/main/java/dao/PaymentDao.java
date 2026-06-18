@@ -8,6 +8,8 @@ import java.sql.Statement;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import dto.Payment;
 
@@ -60,6 +62,43 @@ public class PaymentDao {
 		conn.close();
 
 		return paymentList;
+	}
+
+	public List<Map<String, Object>> findLogByUserId(int userId) throws Exception {
+		List<Map<String, Object>> paymentLogList = new ArrayList<>();
+
+		Class.forName("com.mysql.cj.jdbc.Driver");
+
+		Connection conn = DriverManager.getConnection(
+				"jdbc:mysql://localhost:3306/b3?characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=GMT%2B9",
+				"root", "password");
+
+		String sql = "SELECT " + "p.id, " + "p.amount, "
+				+ "COALESCE(SUM(b.type_money * b.count_money), 0) AS pay_amount, "
+				+ "COALESCE(SUM(b.type_money * b.count_money), 0) - p.amount AS change_amount " + "FROM payments p "
+				+ "LEFT JOIN breakdowns b ON p.id = b.payment_id " + "WHERE p.user_id = ? " + "GROUP BY p.id, p.amount "
+				+ "ORDER BY p.id DESC";
+
+		PreparedStatement pStmt = conn.prepareStatement(sql);
+		pStmt.setInt(1, userId);
+		ResultSet rs = pStmt.executeQuery();
+
+		while (rs.next()) {
+			Map<String, Object> paymentLog = new HashMap<>();
+
+			paymentLog.put("id", rs.getInt("id"));
+			paymentLog.put("amount", rs.getInt("amount"));
+			paymentLog.put("payAmount", rs.getInt("pay_amount"));
+			paymentLog.put("changeAmount", rs.getInt("change_amount"));
+
+			paymentLogList.add(paymentLog);
+
+		}
+
+		rs.close();
+		pStmt.close();
+		conn.close();
+		return paymentLogList;
 	}
 
 }
