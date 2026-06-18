@@ -115,15 +115,15 @@ String successMsg = (String) request.getAttribute("successMsg");
 			<a href="${pageContext.request.contextPath}/CoinSupportServlet"
 				class="nav-item"> <img class="nav-img normal-img"
 				src="${pageContext.request.contextPath}/images/nav/coin_support_normal.png"
-				alt="小銭活用"> <img class="nav-img hover-img"
+				alt="ぴったり小銭消費ガイド"> <img class="nav-img hover-img"
 				src="${pageContext.request.contextPath}/images/nav/coin_support_hover.png"
-				alt="小銭活用">
+				alt="ぴったり小銭消費ガイド">
 			</a> <a href="${pageContext.request.contextPath}/StoreServlet"
 				class="nav-item"> <img class="nav-img normal-img"
 				src="${pageContext.request.contextPath}/images/nav/store_info_normal.png"
-				alt="店舗情報"> <img class="nav-img hover-img"
+				alt="施設情報"> <img class="nav-img hover-img"
 				src="${pageContext.request.contextPath}/images/nav/store_info_hover.png"
-				alt="店舗情報">
+				alt="施設情報">
 			</a>
 
 			<div class="nav-space"></div>
@@ -144,9 +144,9 @@ String successMsg = (String) request.getAttribute("successMsg");
 				class="nav-center active"> <img
 				class="nav-img center-img normal-img"
 				src="${pageContext.request.contextPath}/images/nav/payment_normal.png"
-				alt="支払い"> <img class="nav-img center-img hover-img"
+				alt="支出登録"> <img class="nav-img center-img hover-img"
 				src="${pageContext.request.contextPath}/images/nav/payment_hover.png"
-				alt="支払い">
+				alt="支出登録">
 			</a>
 
 		</footer>
