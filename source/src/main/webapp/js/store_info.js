@@ -10,7 +10,13 @@ document.addEventListener('DOMContentLoaded', () => {
 	//カテゴリーボタンON,OFF
 	document.querySelectorAll(".filter-btn").forEach(btn => {
 		btn.addEventListener("click", () => {
-			btn.classList.toggle("active");
+			// クラスのON/OFF切り替え
+			const isActive = btn.classList.toggle("active");
+			
+			// WAI-ARIA（アクセシビリティ属性）の状態も連動して切り替え
+			btn.setAttribute("aria-pressed", isActive ? "true" : "false");
+			
+			// 絞り込み関数を実行
 			category_filter();
 		});
 	});
@@ -31,6 +37,25 @@ document.addEventListener('DOMContentLoaded', () => {
 function getSelectedCategories() {
 	return [...document.querySelectorAll(".filter-btn.active")]
 		.map(btn => btn.dataset.category);
+}
+
+function category_filter() {
+	// 上の関数を呼び出して、ONのカテゴリー配列（例: ["Cashonly", "ATM"]）を取得
+	const selectedCategories = getSelectedCategories();
+
+	// 全データから、選択されたカテゴリーに一致するものだけを抽出
+	const filteredList = store_list.filter(store => {
+		// ボタンが1つも押されていない（全てOFF）場合は、全件表示
+		if (selectedCategories.length === 0) {
+			return true;
+		}
+		
+		// 店のカテゴリーが、ONになっているカテゴリー配列に含まれているかチェック
+		return selectedCategories.includes(store.category);
+	});
+
+	// ③ 絞り込んだ結果のデータで画面（HTML）を再描画
+	displayStores(filteredList);
 }
 
 //キーワード入力取得
