@@ -1,5 +1,52 @@
 @charset "UTF-8";
 
+/* -------------------------- */
+/* --------全ページ共通-------- */
+/* -------------------------- */
+
+/* 小ボタン */
+.payment-btn,
+.manual-btn,
+.suggestion-buttons input[type="submit"] {
+	width: 146px;
+	height: 48px;
+	border-radius: 6px;
+	cursor: pointer;
+	background-color: green;
+	color: white;
+	border: 1px solid green;
+	font-weight: 450;
+	font-size: 107%;
+	box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.35);
+	transition: 0.2s;
+}
+
+/* 大ボタン */
+.payment-button,
+.log-back-btn {
+	width: 320px;
+	height: 48px;
+	border-radius: 6px;
+	cursor: pointer;
+	background-color: green;
+	color: white;
+	border: 1px solid green;
+	font-weight: 450;
+	font-size: 107%;
+	box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.35);
+	transition: 0.2s;
+}
+
+.payment-btn:hover,
+.manual-btn:hover,
+.suggestion-buttons input[type="submit"]:hover,
+.payment-button:hover,
+.log-back-btn:hover {
+	background-color: #ffffff;
+	color: green;
+	border-color: green;
+}
+
 /* --------------------------- */
 /* --------payment.jsp-------- */
 /* --------------------------- */
@@ -12,71 +59,50 @@
 	display: flex;
 	margin: 12px auto;
 	padding: 8px;
+	width: 280px;
+	height: 90px;
+	border: 1px solid green;
+	border-radius: 8px;
 	font-size: 46px;
 	font-weight: 480;
 	text-align: right;
-	border-radius: 8px;
-	border: 1px solid green;
-	width: 280px;
-	height: 90px;
 }
 
 .money_isUse {
+	margin-top: 24px;
 	font-size: 13px;
 	text-align: center;
-	margin-top: 24px;
 }
 
-.form-button {
+.form-button,
+.payment-nav-buttons,
+.payment-log-buttons {
 	display: flex;
 	justify-content: center;
-}
-
-.payment-button {
-	width: 320px;
-	height: 48px;
-	border-radius: 6px;
-	font-size: 14px;
-	cursor: pointer;
-	background-color: green;
-	color: white;
-	border: 1px solid green;
-	font-weight: 450;
-	font-size: 107%;
-	box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.35);
 }
 
 .payment-nav-buttons {
-	display: flex;
-	justify-content: center;
 	gap: 28px;
 }
 
-.payment-btn {
-	width: 146px;
-	height: 48px;
-	border-radius: 6px;
-	font-size: 14px;
-	cursor: pointer;
-	background-color: green;
-	color: white;
-	border: 1px solid green;
+.payment-nav-buttons .payment-btn {
 	margin-top: 20px;
-	font-weight: 450;
-	font-size: 107%;
-	box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.35);
+}
+
+.payment-log-buttons {
+	margin: 24px auto 48px;
 }
 
 .message-area {
 	width: 100%;
 	height: 18px;
-	margin: -8px 0 20px 0;
+	margin: -8px 0 20px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	font-size: 13px;
 	line-height: 18px;
-	background-color: #ffffff;
+	background-color: #fff;
 }
 
 .error-message {
@@ -89,12 +115,13 @@
 	text-align: center;
 }
 
+/* 使用可能金種チェック */
 .money-check-area {
 	width: 320px;
-	margin: 10px auto 10px;
+	margin: 10px auto;
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
-	gap: 12px 12px;
+	gap: 12px;
 	justify-items: center;
 	align-items: center;
 }
@@ -106,6 +133,11 @@
 	justify-content: center;
 	align-items: center;
 	cursor: pointer;
+	transition: 0.2s;
+}
+
+.money-option:hover {
+	transform: translateY(-4px);
 }
 
 .money-option input[type="checkbox"] {
@@ -123,11 +155,10 @@
 	opacity: 0.35;
 	filter: grayscale(100%);
 }
+
 /* -------------------------------------- */
 /* --------payment_suggestion.jsp-------- */
 /* -------------------------------------- */
-
-/* 支払い提案画面 */
 .suggestion-area {
 	width: 100%;
 	padding: 22px 28px 90px;
@@ -141,19 +172,22 @@
 	font-weight: bold;
 }
 
-.amount-label {
+.amount-label,
+.amount-text {
 	font-size: 18px;
+}
+
+.amount-label {
 	margin-bottom: 6px;
 }
 
 .amount-large {
+	margin: 0;
 	font-size: 42px;
 	line-height: 1.1;
-	margin: 0;
 }
 
 .amount-text {
-	font-size: 18px;
 	margin-top: 8px;
 }
 
@@ -170,9 +204,9 @@
 }
 
 .suggestion-title {
+	margin-bottom: 18px;
 	font-size: 18px;
 	font-weight: bold;
-	margin-bottom: 18px;
 }
 
 .money-suggestion-list {
@@ -183,7 +217,7 @@
 
 .money-suggestion-row {
 	display: grid;
-	grid-template-columns: 110px 70px 48px;
+	grid-template-columns: 110px 70px 70px;
 	align-items: center;
 	justify-content: center;
 	column-gap: 8px;
@@ -211,12 +245,24 @@
 	white-space: nowrap;
 }
 
+.manual-pay-count {
+	width: 42px;
+	height: 28px;
+	box-sizing: border-box;
+	border: 1px solid #2f7d32;
+	border-radius: 6px;
+	font-size: 16px;
+	text-align: center;
+	transform: translateY(-3px);
+}
+
 .total-pay-amount {
 	margin-top: 24px;
 	font-size: 22px;
 	font-weight: bold;
 }
 
+/* 提案画面 */
 .suggestion-buttons {
 	width: 100%;
 	max-width: 340px;
@@ -228,52 +274,54 @@
 }
 
 .suggestion-buttons form {
-	width: 50%;
+	width: 146px;
 	margin: 0;
 	padding: 0;
 	display: flex;
-	align-items: center;
 	justify-content: center;
+	align-items: center;
 }
 
 .suggestion-buttons input[type="submit"] {
-	width: 100%;
-	height: 48px;
-	margin: 0 !important;
-	padding: 0 !important;
-	border: none;
-	border-radius: 7px;
-	background-color: #08751d;
-	color: #fff;
-	font-size: 18px;
-	font-weight: bold;
+	margin: 0;
+	padding: 0;
 	line-height: 48px;
 	box-sizing: border-box;
-	display: block;
-	position: static !important;
-	box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.35);
 }
 
-.payment-log-buttons {
-	margin: 24px auto 48px auto;
+/* 手入力画面 */
+.manual-buttons {
+	margin-top: 24px;
 	display: flex;
 	justify-content: center;
-
-	
+	align-items: center;
+	gap: 24px;
 }
+
+.manual-message-area {
+	width: 100%;
+	height: 18px;
+	margin-top: 12px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 13px;
+	line-height: 18px;
+	background-color: #fff;
+}
+
 /* ------------------------------- */
 /* --------payment_log.jsp-------- */
 /* ------------------------------- */
-
 .payment-log-area {
 	width: 100%;
 	margin: 0 auto;
 }
 
 .payment-log-card {
-	margin: 16px auto;
 	width: 320px;
 	height: 64px;
+	margin: 16px auto;
 	border: 1px solid green;
 	border-radius: 12px;
 	display: flex;
@@ -282,31 +330,14 @@
 }
 
 .payment-log-amount {
-	margin: auto 0 auto 20px;
+	margin-left: 20px;
 	font-size: 30px;
 	font-weight: 550;
 }
 
 .log-card-details {
 	width: 120px;
-	margin: auto 0 auto 20px;
+	margin-right: 12px;
 	font-size: 14px;
 	text-align: left;
-}
-
-
-.log-back-btn {
-	width: 320px;
-	height: 48px;
-	border-radius: 6px;
-	font-size: 14px;
-	justify-content: center;
-	text-align: center;
-	cursor: pointer;
-	background-color: green;
-	color: white;
-	border: 1px solid green;
-	font-weight: 450;
-	font-size: 107%;
-	box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.35);
 }

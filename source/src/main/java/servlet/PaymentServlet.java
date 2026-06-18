@@ -86,10 +86,17 @@ public class PaymentServlet extends HttpServlet {
 			request.getRequestDispatcher("/WEB-INF/jsp/payment.jsp").forward(request, response);
 			return;
 		}
-
+		// 財布情報チェック
 		if (wallet == null) {
 			request.setAttribute("errorMsg", "財布情報が見つかりませんでした。");
 			request.getRequestDispatcher("/WEB-INF/jsp/payment.jsp").forward(request, response);
+			return;
+		}
+		// 別の支払方法分岐
+		if ("other".equals(action)) {
+			request.setAttribute("manualMode", true);
+			request.setAttribute("amount", amount);
+			request.getRequestDispatcher("/WEB-INF/jsp/payment_suggestion.jsp").forward(request, response);
 			return;
 		}
 
@@ -105,12 +112,32 @@ public class PaymentServlet extends HttpServlet {
 				} else {
 					confirmPayCounts[i] = Integer.parseInt(payCountStr);
 				}
+				if (confirmPayCounts[i] < 0) {
+					request.setAttribute("errorMsg", "枚数は0以上で入力してください。");
+					request.setAttribute("manualMode", true);
+					request.setAttribute("amount", amount);
+					request.getRequestDispatcher("/WEB-INF/jsp/payment_suggestion.jsp").forward(request, response);
+					return;
+				}
 			}
 
 			int confirmPayAmount = 0;
 
 			for (int i = 0; i < confirmMoneyTypes.length; i++) {
 				confirmPayAmount += confirmMoneyTypes[i] * confirmPayCounts[i];
+			}
+			int[] currentWalletCounts = { wallet.getTenThousandYen(), wallet.getFiveThousandYen(),
+					wallet.getOneThousandYen(), wallet.getFiveHundredYen(), wallet.getOneHundredYen(),
+					wallet.getFiftyYen(), wallet.getTenYen(), wallet.getFiveYen(), wallet.getOneYen() };
+
+			for (int i = 0; i < confirmPayCounts.length; i++) {
+				if (confirmPayCounts[i] > currentWalletCounts[i]) {
+					request.setAttribute("errorMsg", "財布にある枚数を超えています。");
+					request.setAttribute("manualMode", true);
+					request.setAttribute("amount", amount);
+					request.getRequestDispatcher("/WEB-INF/jsp/payment_suggestion.jsp").forward(request, response);
+					return;
+				}
 			}
 
 			int confirmChange = confirmPayAmount - amount;

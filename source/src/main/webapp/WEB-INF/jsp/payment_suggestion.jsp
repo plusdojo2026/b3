@@ -5,11 +5,25 @@ String errorMsg = (String) request.getAttribute("errorMsg");
 Integer amount = (Integer) request.getAttribute("amount");
 Integer payAmount = (Integer) request.getAttribute("payAmount");
 Integer change = (Integer) request.getAttribute("change");
-String amountText = String.format("%,d", amount);
-String payAmountText = String.format("%,d", payAmount);
-String changeText = String.format("%,d", change);
 int[] moneyTypes = (int[]) request.getAttribute("moneyTypes");
 int[] payCounts = (int[]) request.getAttribute("payCounts");
+Boolean manualMode = (Boolean) request.getAttribute("manualMode");
+
+if (manualMode == null) {
+	manualMode = false;
+}
+
+if (amount == null) {
+	amount = 0;
+}
+
+if (moneyTypes == null) {
+	moneyTypes = new int[] { 10000, 5000, 1000, 500, 100, 50, 10, 5, 1 };
+}
+
+String amountText = String.format("%,d", amount);
+String payAmountText = payAmount != null ? String.format("%,d", payAmount) : "";
+String changeText = change != null ? String.format("%,d", change) : "";
 
 String[] moneyImagePaths = { "tenThousandYen.png", "fiveThousandYen.png", "oneThousandYen.png", "fiveHundredYen.png",
 		"oneHundredYen.png", "fiftyYen.png", "tenYen.png", "fiveYen.png", "oneYen.png" };
@@ -35,13 +49,16 @@ String[] moneyImagePaths = { "tenThousandYen.png", "fiveThousandYen.png", "oneTh
 		<header class="header">
 			<a href="${pageContext.request.contextPath}/HomeServlet"> <img
 				src="${pageContext.request.contextPath}/images/logo/logo.png"
-				alt="ロゴ" class="logo"></a>
+				alt="ロゴ" class="logo">
+			</a>
 			<div class="page-title">支出登録</div>
 			<a href="${pageContext.request.contextPath}/HomeServlet"> <img
 				src="${pageContext.request.contextPath}/images/logo/home.png"
-				alt="ホーム" class="toHome"></a>
+				alt="ホーム" class="toHome">
+			</a>
 		</header>
 		<!-- ヘッダーここまで -->
+
 		<!-- メインここから -->
 		<main class="main">
 			<section class="suggestion-area">
@@ -49,10 +66,58 @@ String[] moneyImagePaths = { "tenThousandYen.png", "fiveThousandYen.png", "oneTh
 					<div class="amount-label">合計金額は</div>
 					<div class="amount-large">
 						￥
-						<%=amountText%></div>
+						<%=amountText%>
+					</div>
 					<div class="amount-text">です。</div>
 				</div>
 
+				<%
+				if (manualMode) {
+				%>
+				<div class="suggestion-card">
+					<div class="suggestion-title">別の支払い方を入力</div>
+
+					<form method="POST"
+						action="${pageContext.request.contextPath}/PaymentServlet">
+						<input type="hidden" name="amount" value="<%=amount%>"> <input
+							type="hidden" name="action" value="confirm">
+
+						<div class="money-suggestion-list">
+							<%
+							for (int i = 0; i < moneyTypes.length; i++) {
+							%>
+							<div class="money-suggestion-row">
+								<img
+									src="${pageContext.request.contextPath}/images/money/<%=moneyImagePaths[i]%>"
+									alt="<%=moneyTypes[i]%>円" class="money-image"> <span
+									class="money-dots">・・・</span> <span class="money-count">
+									× <input type="number" name="payCount<%=i%>" value="0" min="0"
+									class="manual-pay-count">
+								</span>
+							</div>
+							<%
+							}
+							%>
+						</div>
+						<div class="manual-buttons">
+							<input type="button" class="manual-btn" value="戻る"
+								onclick="history.back()"> <input type="submit"
+								class="manual-btn" value="確定">
+						</div>
+						<div class="manual-message-area">
+							<%
+							if (errorMsg != null) {
+							%>
+							<span class="error-message"><%=errorMsg%></span>
+							<%
+							}
+							%>
+						</div>
+					</form>
+				</div>
+				<%
+				} else {
+				%>
 				<div class="suggestion-card">
 					<div class="suggestion-title">この組み合わせで支払う</div>
 
@@ -65,8 +130,9 @@ String[] moneyImagePaths = { "tenThousandYen.png", "fiveThousandYen.png", "oneTh
 							<img
 								src="${pageContext.request.contextPath}/images/money/<%=moneyImagePaths[i]%>"
 								alt="<%=moneyTypes[i]%>円" class="money-image"> <span
-								class="money-dots">・・・</span> <span class="money-count">×
-								<%=payCounts[i]%></span>
+								class="money-dots">・・・</span> <span class="money-count">
+								× <%=payCounts[i]%>
+							</span>
 						</div>
 						<%
 						}
@@ -106,9 +172,13 @@ String[] moneyImagePaths = { "tenThousandYen.png", "fiveThousandYen.png", "oneTh
 						<input type="submit" class="payment-button" value="確定">
 					</form>
 				</div>
+				<%
+				}
+				%>
 			</section>
 		</main>
 		<!-- メインここまで -->
+
 		<!-- フッターここから -->
 		<footer class="bottom-menu">
 			<a href="${pageContext.request.contextPath}/CoinSupportServlet"
