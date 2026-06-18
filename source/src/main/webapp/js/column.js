@@ -32,6 +32,10 @@ function setupAccordion() {
 			// 開いていれば閉じる、閉じていれば開く
 			full.style.display = isOpen ? "none" : "block";
 			
+			// 開いたらshort部分を消す、閉じたらshortを戻す
+			const short = item.querySelector(".column-short");
+			short.style.display = isOpen ? "block" : "none";
+			
 			// アイコンを ▼（閉じている） / ▲（開いている） に切り替え
 			icon.textContent = isOpen ? "▼" : "▲";
 		});
@@ -49,6 +53,12 @@ function setupCategoryFilter() {
 	buttons.forEach(function (btn) {
 		
 		btn.addEventListener("click", function() {
+			
+			// activeの付け替え
+			buttons.forEach(function(b){
+				b.classList.remove("active");
+			});
+			btn.classList.add("active");
 			
 			// 押されたボタンのカテゴリ名を取得
 			const category = btn.dataset.category;
@@ -93,6 +103,7 @@ function checkNoResult() {
 	msg.style.display = visible.length === 0 ? "block" : "none"; 
 }
 
+// 4. カテゴリ絞り込みと検索が共存して使えるように
 document.addEventListener("DOMContentLoaded", () => {
 	
 	// 全てのコラム要素を取得（検索対象）
@@ -109,20 +120,27 @@ document.addEventListener("DOMContentLoaded", () => {
 	function filterBySearch() {
 		const keyword = searchInput.value.trim(); //入力された文字列
 	
+	// 現在選択されているカテゴリを取得
+	const activeBtn = document.querySelector(".category-btn.active");
+	const currentCategory = activeBtn ? activeBtn.dataset.category : "全て";
 	
 	items.forEach(item => {
-		const text = item.innerText; // タイトル、本文含めたコラム全体のテキスト
+		const text = item.innerText; // コラム全体のテキスト
+		const itemCategory = item.dataset.category; // コラムのカテゴリ
 		
-		// キーワードが空の場合　全件表示する
-		// キーワードが含まれているもの　表示する
-		// 含まれていない場合　非表示に
-		if (keyword === "" || text.includes(keyword)) {
-			item.style.display = "block"; // 表示
-		} else {
-			item.style.display = "none"; // 非表示
-		}
+		// カテゴリ数判定
+		const matchCategory = (currentCategory === "全て" || currentCategory ===  itemCategory);
+		
+		// キーワード一致判定
+		const matchKeyword = (keyword === "" || text.includes(keyword));
+		
+		// 両方一致した時だけ表示
+		item.style.display = (matchCategory && matchKeyword) ? "block" : "none";
 	});
-}	
+		
+	checkNoResult();	
+}		
+		
 	// preventDefaultで画面遷移を止めてjsの検索だけ実行する
 	searchBtn.addEventListener("click", (e) => {
 		e.preventDefault();

@@ -87,24 +87,17 @@
 					
 					<!-- 30文字まで（閉じている時） -->
 					<div class="column-short">
-					    <c:choose>
-					        <c:when test="${fn:length(body) > 30}">
-					            ${fn:substring(body, 0, 30)}...
-					        </c:when>
-					        <c:otherwise>
-					            ${body}
-					        </c:otherwise>
-					    </c:choose>
+						<c:choose>
+							<c:when test="${fn:length(body) > 30}">
+								${fn:substring(body, 0, 30)}...
+							</c:when>
+							<c:otherwise>
+								${body}
+							</c:otherwise>
+						</c:choose>
 					</div>
 					
-					<!-- 31文字目以降（開いた時に表示する部分） -->
-					<div class="column-full" style="display:none;">
-					    <c:if test="${fn:length(body) > 30}">
-					        ${fn:substring(body, 30, fn:length(body))}
-					    </c:if>
-					</div>
-					
-					<!-- 本文（全文） -->
+					<!-- 開いたときに表示する全文 -->
 					<div class="column-full" style="display:none;">
 						${body}
 					</div>
