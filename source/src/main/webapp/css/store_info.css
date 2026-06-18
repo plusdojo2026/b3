@@ -1,6 +1,58 @@
 @charset "UTF-8";
 
- .category_filter.filter-btn{
+/*検索*/
+
+/*検索ボックス全体*/
+.search_map {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	max-width: 370px; 
+    height: 40px;
+    background-color: #ffffff;
+    border-radius: 24px; 
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2), 0 -1px 0 rgba(0,0,0,0.02); /* マップ特有の浮き出る影 */
+    padding: 0 16px 0 16px;
+    margin: 10px;
+    box-sizing: border-box;
+    transition: box-shadow 0.3s ease;
+}
+
+.search_map input[type="text"] {
+    flex: 1;
+    height: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 15px;
+    color: #202124;
+    padding: 0;
+}
+
+.search_map .search_btn {
+    background: none;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background-color 0.2s ease;
+}
+
+/*検索ボタン*/
+.search_map .search_btn img {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+    filter: opacity(0.6); 
+}
+
+/*カテゴリ*/
+
+/*カテゴリフィルター*/
+ .category_filter .filter-btn {
 	padding: 6px 4px;
 	font-size: 11.7px;
 	text-align: center;
@@ -12,10 +64,32 @@
 	transition: background-color 0.2s, color 0.2s, border-color 0.2s;
 }
 
-/* 選択中カテゴリ */
- .category_filter.filter-btn.active {
-	background: #008040;
-	color: #fff;
-	border-color: #008040;
-	font-weight: bold;
+/* 赤：cashonly */
+.filter-btn.active[data-category="cashonly"] {
+    background-color: #8B2F2F;
+    color: white;
+}
+
+/* オレンジ：cashlessonly */
+.filter-btn.active[data-category="cashlessonly"] {
+    background-color: #A05A00;
+    color: white;
+}
+
+/* 黄：both */
+.filter-btn.active[data-category="both"] {
+    background-color: #C48F00;
+    color: white;
+}
+
+/* 緑：ATM */
+.filter-btn.active[data-category="ATM"] {
+    background-color: #008040;
+    color: white;
+}
+
+/* 青：exchange */
+.filter-btn.active[data-category="exchange"] {
+    background-color: #004C80;
+    color: white;
 }

@@ -6,28 +6,37 @@ console.log("JSファイルが正常に読み込まれました ");
 //ページ読み込み処理
 document.addEventListener('DOMContentLoaded', () => {
 	//データ読み込み
-	displayStores(store_list);
+	category_filter();
 
 	//カテゴリーボタンON,OFF
 	document.querySelectorAll(".filter-btn").forEach(btn => {
 		btn.addEventListener("click", () => {
 			// クラスのON/OFF切り替え
 			const isActive = btn.classList.toggle("active");
-			
-			// WAI-ARIA（アクセシビリティ属性）の状態も連動して切り替え
+
+			// 状態も連動して切り替え
 			btn.setAttribute("aria-pressed", isActive ? "true" : "false");
-			
+
 			// 絞り込み関数を実行
 			category_filter();
 		});
 	});
 
+	//リアルタイム検索
 	const keywordInput = document.getElementById('keyword');
 	if (keywordInput) {
 		let debounceTimer;
 		keywordInput.addEventListener("input", () => {
 			clearTimeout(debounceTimer);
-			debounceTimer = setTimeout(() => loadStores(), 400);
+			debounceTimer = setTimeout(() => category_filter(), 400); // ここを変更
+		});
+	}
+
+	//検索ボタンが押されたとき
+	const searchBtn = document.querySelector(".search_btn");
+	if (searchBtn) {
+		searchBtn.addEventListener("click", () => {
+			category_filter();
 		});
 	}
 });
@@ -44,18 +53,36 @@ function category_filter() {
 	// 上の関数を呼び出して、ONのカテゴリー配列（例: ["Cashonly", "ATM"]）を取得
 	const selectedCategories = getSelectedCategories();
 
+	// 入力されたキーワードを取得
+	const keyword = getKeyword();
+
 	// 全データから、選択されたカテゴリーに一致するものだけを抽出
 	const filteredList = store_list.filter(store => {
-		// ボタンが1つも押されていない（全てOFF）場合は、全件表示
-		if (selectedCategories.length === 0) {
-			return true;
+
+		// カテゴリ判定
+		let matchCategory = true;
+		if (selectedCategories.length > 0) {
+			// 店舗のカテゴリ文字列
+			const storeCategory = store.category || ""; 
+			
+			// 選択されているボタンのどれか1つでも、店舗のカテゴリ文字列に含まれているか判定
+			matchCategory = selectedCategories.some(cat => storeCategory.includes(cat));
 		}
-		
-		// 店のカテゴリーが、ONになっているカテゴリー配列に含まれているかチェック
-		return selectedCategories.includes(store.category);
+
+		// キーワード判定 (施設名、住所にキーワードが含まれているか)
+		let matchKeyword = true;
+		if (keyword !== "") {
+			const name = store.name_ja || "";
+			const address = store.address_ja || "";
+			// 施設名か住所のどちらかにキーワードが含まれているか
+			matchKeyword = name.includes(keyword) || address.includes(keyword);
+		}
+
+		// 両方の条件（カテゴリ AND キーワード）が一致した時だけtrueを返す
+		return matchCategory && matchKeyword;
 	});
 
-	// ③ 絞り込んだ結果のデータで画面（HTML）を再描画
+	// 絞り込んだ結果のデータで画面（HTML）を再描画
 	displayStores(filteredList);
 }
 
@@ -67,9 +94,25 @@ function getKeyword() {
 	return el ? el.value.trim() : "";
 }
 
+
+
 function displayStores(list) {
 	const container = document.getElementById("store_list");
 	container.innerHTML = "";
+	
+	//件数がゼロのときの表示
+	if (list.length === 0) {
+		container.innerHTML = "<p>該当する施設が見つかりませんでした。</p>";
+		return;
+	}
+	
+	// カテゴリーの日本語マッピング定義
+	const categoryMapping = {
+		'cashonly': '現金のみ',
+		'cashlessonly': 'キャッシュレスのみ',
+		'both': '両対応',
+		'exchange': '外貨両替機'
+	};
 
 	list.forEach(s => {
 		const div = document.createElement("div");
@@ -78,15 +121,22 @@ function displayStores(list) {
 		const distanceText = s.distance !== undefined
 			? `<p>現在地からの距離: ${s.distance.toFixed(2)} km</p>`
 			: '';
-			
-		const mapLink = (s.latitude && s.longitude)
-		? `<p><a href="https://www.google.com/maps/search/?api=1&query=${s.latitude},${s.longitude}" target="_blank" rel="noopener noreferrer" class="map-btn">Googleマップで見る</a></p>`
-		: '';
 
+		const mapLink = (s.latitude && s.longitude)
+			? `<p><a href="https://www.google.com/maps/search/?api=1&query=${s.latitude},${s.longitude}" target="_blank" rel="noopener noreferrer" class="map-btn">Googleマップで見る</a></p>`
+			: '';
+
+		const storeCategory = s.category || "";
+		const cashlessTypeText = (storeCategory.includes("both") || storeCategory.includes("cashlessonly"))
+			? `<p>${s.cashless_type}</p>`
+			: '';
+		//日本語マッピングにあれば変換
+		const categoryJa = categoryMapping[storeCategory] || storeCategory;
+		
 		div.innerHTML = `<h3>${s.name_ja}</h3>
 						<p>${s.address_ja}</p> 
-						<p>${s.category}</p> 
-						<p>${s.cashless_type}</p> 
+						<p>${categoryJa}</p> 
+						<p>${cashlessTypeText}</p> 
 						${distanceText}
 						${mapLink}`;
 		container.appendChild(div);

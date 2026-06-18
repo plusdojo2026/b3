@@ -11,7 +11,7 @@
 	href="${pageContext.request.contextPath}/css/common.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/store_info.css">
-	
+
 <script>
 const store_list = JSON.parse(String.raw`${storeListJson}`);
 </script>
@@ -42,9 +42,11 @@ const store_list = JSON.parse(String.raw`${storeListJson}`);
 
 			<div class="search_map" id="search_map">
 				<input type="text" id="keyword" placeholder="施設名、住所">
-				<div class="search_btn">
-					<img src="${pageContext.request.contextPath}/images/nav/search.png" alt="検索">
-				</div>
+				<button type="button" class="search_btn" aria-label="検索">
+					<img
+						src="${pageContext.request.contextPath}/images/nav/store_search.png"
+						alt="検索">
+				</button>
 			</div>
 
 			<!-- カテゴリー -->
@@ -61,13 +63,13 @@ const store_list = JSON.parse(String.raw`${storeListJson}`);
 				<button type="button" class="filter-btn" data-category="exchange"
 					aria-pressed="false">外貨両替機</button>
 			</div>
-			
-			
+
+
 			<!-- 施設のリスト(内容はjsで) -->
 			<div id="store_list"></div>
 		</main>
-		
-		
+
+
 		<!-- フッターここから -->
 		<footer class="bottom-menu">
 			<a href="${pageContext.request.contextPath}/CoinSupportServlet"
@@ -84,7 +86,7 @@ const store_list = JSON.parse(String.raw`${storeListJson}`);
 		</footer>
 		<!-- フッターここまで -->
 	</div>
-	
+
 
 </body>
 </html>

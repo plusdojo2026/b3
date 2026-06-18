@@ -39,12 +39,12 @@ public class StoreServlet extends HttpServlet {
 		String address_en = request.getParameter("address_en");
 		String cashlessType = request.getParameter("cashlessType");
 
-		/*表示されなくなるのでNG
+		//表示されなくなるのでNG
 		// デフォルト表示を現金のみonにする
 		if (categories == null || categories.length == 0) {
-			categories = new String[] { "cashOnly" };
+			categories = new String[] { "cashonly" };
 		}
-		*/
+		
 		/*
 		 
 		 */
