@@ -33,14 +33,13 @@ const recAmount = document.getElementById('recAmount');
 if (recAmount && targetAmount > 0) {
 	recAmount.textContent = `￥${targetAmount}以下`;
 }
-
+//-------------------------------------------
 // 1. ぴったり小銭消費
+//-------------------------------------------
 //全ての組み合わせを収納するリスト
 const allMatchedPatterns = [];
 
 //商品数1つから4つまでの組み合わせで考えられるものすべて計算
-
-// 初期状態はループをスキップする
 // submitTypeが、manualかwalletのときだけ、中身の計算を実行
 if (submitType === "manual" || submitType === "wallet") {
 
@@ -111,9 +110,9 @@ if (allMatchedPatterns.length === 0) {
 	}
 }
 
-
+//------------------------------------------------
 // 2. その他のおすすめ商品（金額以下の商品の表示）	
-
+//---------------------------------------------------
 // 現在選ばれているカテゴリーを覚えておく変数（初期状態はJSPに合わせたallItems）
 let currentCategory = "allItems";
 
@@ -144,9 +143,9 @@ function updateRecItems() {
 	currentSortedProducts = [...filteredProducts];
 
 	if (sortOrder === "priceAsc") {
-		sortedProducts.sort((a, b) => a.price - b.price); // 安い順
+		currentSortedProducts.sort((a, b) => a.price - b.price); // 安い順
 	} else if (sortOrder === "priceDesc") {
-		sortedProducts.sort((a, b) => b.price - a.price); // 高い順
+		currentSortedProducts.sort((a, b) => b.price - a.price); // 高い順
 	}
 
 	// 絞り込みや並び替えが起きたら、表示件数を最初の30件にリセットする
@@ -194,6 +193,12 @@ function setupCategoryFilter() {
 	// ボタンごとにクリック処理を設定
 	buttons.forEach(function(btn) {
 		btn.addEventListener("click", function() {
+			// 全てのボタンからactiveを消す
+			buttons.forEach(function(b) { b.classList.remove("active"); });
+			
+			// 押されたボタンだけにactiveをつける
+			btn.classList.add("active");
+			
 			// 押されたボタンのカテゴリ名を変数に入れる
 			currentCategory = btn.dataset.category;
 
@@ -202,7 +207,9 @@ function setupCategoryFilter() {
 		});
 	});
 }
-
+// 最初は「すべて」のボタンにactiveをつける
+const defaultBtn = document.querySelector(".category-btn[data-category='allItems']");
+if (defaultBtn) { defaultBtn.classList.add("active"); }
 
 // A. ソートのドロップダウンが変わったときに実行
 document.getElementById('sortOrder').addEventListener('change', updateRecItems);

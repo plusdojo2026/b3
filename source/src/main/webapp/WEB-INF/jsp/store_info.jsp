@@ -66,7 +66,7 @@ const store_list = JSON.parse(String.raw`${storeListJson}`);
 
 
 			<!-- 施設のリスト(内容はjsで) -->
-			<div id="store_list"></div>
+			<div id="store_list" class="store_list"></div>
 		</main>
 
 
