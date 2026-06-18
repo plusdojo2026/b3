@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.List"%>
-<%@ page import="dto.Payment"%>
+<%@ page import="java.util.Map"%>
 
 <%
-List<Payment> paymentList = (List<Payment>) request.getAttribute("paymentList");
+List<Map<String, Object>> paymentLogList = (List<Map<String, Object>>) request.getAttribute("paymentLogList");
 String errorMsg = (String) request.getAttribute("errorMsg");
 %>
 
@@ -56,26 +56,26 @@ String errorMsg = (String) request.getAttribute("errorMsg");
 				%>
 
 				<%
-				if (paymentList == null || paymentList.size() == 0) {
+				if (paymentLogList == null || paymentLogList.size() == 0) {
 				%>
 				<div class="empty-message">支出ログはまだありません。</div>
 				<%
 				} else {
-				for (Payment payment : paymentList) {
+					for (Map<String, Object> paymentLog : paymentLogList) {
 				%>
 				<div class="payment-log-card">
 					<div class="payment-log-amount">
 						¥
-						<%=String.format("%,d", payment.getAmount())%>
+						<%=String.format("%,d", paymentLog.get("amount"))%>
 					</div>
+
 					<div class="log-card-details">
 						<div class="payment-log-pay">
-							支払い：
-							<%=String.format("%,d", payment.getAmount())%>
+							支払い：<%=String.format("%,d", paymentLog.get("payAmount"))%>
 						</div>
+
 						<div class="payment-log-cash">
-							お釣り：
-							<%=String.format("%,d", payment.getAmount())%>
+							お釣り：<%=String.format("%,d", paymentLog.get("changeAmount"))%>
 						</div>
 					</div>
 				</div>
