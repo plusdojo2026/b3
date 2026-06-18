@@ -1,1 +1,21 @@
 @charset "UTF-8";
+
+ .category_filter.filter-btn{
+	padding: 6px 4px;
+	font-size: 11.7px;
+	text-align: center;
+	background: #f2f2f2;
+	border-radius: 14px;
+	border: 1px solid #ddd;
+	color: #3B3B3B;
+	user-select: none;
+	transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+
+/* 選択中カテゴリ */
+ .category_filter.filter-btn.active {
+	background: #008040;
+	color: #fff;
+	border-color: #008040;
+	font-weight: bold;
+}

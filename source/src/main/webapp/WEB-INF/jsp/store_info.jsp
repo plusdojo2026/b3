@@ -2,8 +2,6 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<link rel="stylesheet" href="/webapp/css/common.css">
-<link rel="stylesheet" href="/webapp/css/store_info.css">
 <head>
 <head>
 <meta charset="utf-8" />
@@ -13,6 +11,11 @@
 	href="${pageContext.request.contextPath}/css/common.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/store_info.css">
+	
+<script>
+const store_list = JSON.parse(String.raw`${storeListJson}`);
+</script>
+
 <script src="${pageContext.request.contextPath}/js/common.js" defer></script>
 <script src="${pageContext.request.contextPath}/js/store_info.js" defer></script>
 <link rel="icon"
@@ -82,8 +85,6 @@
 		<!-- フッターここまで -->
 	</div>
 	
-<script>
-const store_list = JSON.parse(String.raw`${storeListJson}`);
-</script>
+
 </body>
 </html>

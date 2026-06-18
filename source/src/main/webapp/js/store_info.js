@@ -2,6 +2,7 @@
 
 console.log("JSファイルが正常に読み込まれました ");
 
+
 //ページ読み込み処理
 document.addEventListener('DOMContentLoaded', () => {
 	//データ読み込み
@@ -77,86 +78,18 @@ function displayStores(list) {
 		const distanceText = s.distance !== undefined
 			? `<p>現在地からの距離: ${s.distance.toFixed(2)} km</p>`
 			: '';
+			
+		const mapLink = (s.latitude && s.longitude)
+		? `<p><a href="https://www.google.com/maps/search/?api=1&query=${s.latitude},${s.longitude}" target="_blank" rel="noopener noreferrer" class="map-btn">Googleマップで見る</a></p>`
+		: '';
 
 		div.innerHTML = `<h3>${s.name_ja}</h3>
 						<p>${s.address_ja}</p> 
 						<p>${s.category}</p> 
 						<p>${s.cashless_type}</p> 
-						${distanceText}`;
+						${distanceText}
+						${mapLink}`;
 		container.appendChild(div);
 	});
 }
-
-/*
-//位置情報追加を待ってから動くようにする
-function getCurrentPosition() {
-	return new Promise((resolve, reject) => {
-		if (!navigator.geolocation) {
-			reject(new Error("位置情報がサポートされていません"));
-			return;
-		}
-		navigator.geolocation.getCurrentPosition(
-			position => resolve({
-				lat: position.coords.latitude,
-				lng: position.coords.longitude
-			}),
-			error => reject(error),
-			{ enableHighAccuracy: true, timeout: 5000 }
-		);
-	});
-}
-
-
-
-//サーブレットへ Ajaxで検索リクエストを送る
-async function fetchStores() {
-	const params = new URLSearchParams();
-
-	const categories = getSelectedCategories();
-	categories.forEach(c => params.append("category", c));
-
-	const keyword = getKeyword();
-	if (keyword) {
-		const keywords = keyword.split(/[\s　]+/).filter(k => k.length > 0);
-		keywords.forEach(k => params.append("keyword", k));
-	}
-
-	const cashlessType = document.getElementById("cashlessType")?.value ?? "";
-    params.append("cashlessType", cashlessType);
-    
-	try {
-		const position = await getCurrentPosition();
-		params.append("lat", position.lat);
-		params.append("lng", position.lng);
-	} catch (err) {
-		console.warn("現在地取得失敗:", err);
-		params.append("lat", "35.681236");
-		params.append("lng", "139.767125");
-	}
-
-	const response = await fetch("StoreServlet?" + params.toString());
-	return response.json();
-}
-
-function loadStores() {
-	fetchStores()
-		.then(data => {
-			store_list = data;
-			displayStores(store_list);
-		})
-		.catch(err => console.error("データ取得失敗:", err));
-}
-
-//カテゴリーで表示・非表示
-function category_filter() {
-	const selected = getSelectedCategories();
-
-	const filtered = store_list.filter(store =>
-		selected.includes(store.category)
-	);
-
-	displayStores(filtered);
-}
-*/
-//店舗リストに表示
 
