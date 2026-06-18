@@ -214,10 +214,7 @@ INSERT INTO stores (
  '東京都千代田区麴町4-2-8', '4-2-8 Kojimachi, Chiyoda-ku, Tokyo',
  35.685103, 139.735944, 'both', 'credit, qr');
  
- --麹町コンビニ(実在)
- ('セブンイレブン麴町駅前店', 'Seven Eleven Kojimachi Ekimae Store',
- '東京都千代田区二番町4-3', '4-3 Nibancho, Chiyoda-ku, Tokyo',
- 35.68624786735896, 139.7366265884323, 'both', 'credit, ic, qr');
+
  
  
 
@@ -560,35 +557,27 @@ INSERT INTO stores (
     category,
     cashless_type
 ) VALUES
-('セブン銀行ATM セブンイレブン麴町駅前店', 
- 'Seven Bank ATM Seven Eleven Kojimachi Ekimae Store',
- '東京都千代田区二番町4-3', 
- '4-3 Nibancho, Chiyoda-ku, Tokyo',
- 35.68624786735896, 
- 139.7366265884323, 
- 'ATM',
- 'cash')
- 
- -- 三菱UFJ銀行 麹町支店
+-- 麹町コンビニ(実在)
+('セブンイレブン麴町駅前店', 'Seven Eleven Kojimachi Ekimae Store',
+ '東京都千代田区二番町4-3', '4-3 Nibancho, Chiyoda-ku, Tokyo',
+ 35.68624786735896, 139.7366265884323, 'both,ATM', 'credit, ic, qr'),
+
+-- 三菱UFJ銀行 麹町支店
 ('三菱UFJ銀行 麹町支店', 'MUFG Bank Kojimachi Branch',
  '東京都千代田区麹町4-1', '4-1 Kojimachi, Chiyoda-ku, Tokyo',
- 35.683056, 139.737778, -- 麹町駅1番出口付近の概算値です
- 'both', 'credit, ic, qr'),
+ 35.683056, 139.737778, 'both', 'credit, ic, qr'),
 
 -- みずほ銀行 麹町支店（ATM・外貨両替あり）
 ('みずほ銀行 麹町支店', 'Mizuho Bank Kojimachi Branch',
  '東京都千代田区麹町5-1', '5-1 Kojimachi, Chiyoda-ku, Tokyo',
- 35.683511, 139.735123, 
- 'ATM,exchange', 'cash'), 
- 
- -- ZTTo morning(キャッシュレスのみ)
- ('ZTTo morning', 'ZTTo morning',
+ 35.683511, 139.735123, 'ATM,exchange', 'cash'),
+
+-- ZTTo morning(キャッシュレスのみ)
+('ZTTo morning', 'ZTTo morning',
  '東京都千代田区平河町2-4-4 owns平河町 1F', '1F owns Hirakawacho, 2-4-4 Hirakawacho, Chiyoda-ku, Tokyo',
- 35.683011, 139.739055, -- 麹町駅・半蔵門駅近くの概算値
- 'cashlessonly', 'credit, ic, qr')
+ 35.683011, 139.739055, 'cashlessonly', 'credit, ic, qr'),
 
 -- コインランドリーきよの（現金のみ）
 ('コインランドリーきよの', 'Coin Laundry Kiyono',
  '東京都千代田区平河町2-2-5', '2-2-5 Hirakawacho, Chiyoda-ku, Tokyo',
- 35.681123, 139.740456,
- 'cashonly', 'cash'); 
+ 35.681123, 139.740456, 'cashonly', 'cash');
