@@ -40,6 +40,7 @@ public class PaymentServlet extends HttpServlet {
 
 		String amountStr = request.getParameter("amount");
 		String action = request.getParameter("action");
+		String[] usableMoneyTypeStrs = request.getParameterValues("moneyType");
 
 		// 入力値チェック
 		if (amountStr == null || amountStr.length() == 0) {
@@ -222,6 +223,47 @@ public class PaymentServlet extends HttpServlet {
 		int[] walletCounts = { wallet.getTenThousandYen(), wallet.getFiveThousandYen(), wallet.getOneThousandYen(),
 				wallet.getFiveHundredYen(), wallet.getOneHundredYen(), wallet.getFiftyYen(), wallet.getTenYen(),
 				wallet.getFiveYen(), wallet.getOneYen() };
+		// 使用可否
+		boolean[] usableMoneyTypes = new boolean[moneyTypes.length];
+
+		for (int i = 0; i < moneyTypes.length; i++) {
+			usableMoneyTypes[i] = false;
+		}
+
+		if (usableMoneyTypeStrs != null) {
+			for (String usableMoneyTypeStr : usableMoneyTypeStrs) {
+				int usableMoneyType = Integer.parseInt(usableMoneyTypeStr);
+
+				for (int i = 0; i < moneyTypes.length; i++) {
+					if (moneyTypes[i] == usableMoneyType) {
+						usableMoneyTypes[i] = true;
+					}
+				}
+			}
+		}
+		for (int i = 0; i < walletCounts.length; i++) {
+			if (!usableMoneyTypes[i]) {
+				walletCounts[i] = 0;
+			}
+		}
+		// 使用可能金種が0でないかチェック
+		int usableWalletTotal = 0;
+
+		for (int i = 0; i < moneyTypes.length; i++) {
+			usableWalletTotal += moneyTypes[i] * walletCounts[i];
+		}
+
+		if (usableWalletTotal == 0) {
+			request.setAttribute("errorMsg", "使用できるお金を1つ以上選択してください。");
+			request.getRequestDispatcher("/WEB-INF/jsp/payment.jsp").forward(request, response);
+			return;
+		}
+
+		if (amount > usableWalletTotal) {
+			request.setAttribute("errorMsg", "選択したお金だけでは金額が足りません。");
+			request.getRequestDispatcher("/WEB-INF/jsp/payment.jsp").forward(request, response);
+			return;
+		}
 
 		// 最適組み合わせ配列作成
 		int[] bestPayCounts = null;

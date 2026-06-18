@@ -54,10 +54,46 @@ String successMsg = (String) request.getAttribute("successMsg");
 					}
 					%>
 				</div>
-
-
 				<div class="money_isUse">使用できない紙幣・硬貨のチェックを外してください​</div>
-
+				<div class="money-check-area">
+					<label class="money-option"> <input type="checkbox"
+						name="moneyType" value="10000" checked> <img
+						src="${pageContext.request.contextPath}/images/money/tenThousandYen.png"
+						alt="10000円" class="money-option-image">
+					</label> <label class="money-option"> <input type="checkbox"
+						name="moneyType" value="5000" checked> <img
+						src="${pageContext.request.contextPath}/images/money/fiveThousandYen.png"
+						alt="5000円" class="money-option-image">
+					</label> <label class="money-option"> <input type="checkbox"
+						name="moneyType" value="1000" checked> <img
+						src="${pageContext.request.contextPath}/images/money/oneThousandYen.png"
+						alt="1000円" class="money-option-image">
+					</label> <label class="money-option"> <input type="checkbox"
+						name="moneyType" value="500" checked> <img
+						src="${pageContext.request.contextPath}/images/money/fiveHundredYen.png"
+						alt="500円" class="money-option-image">
+					</label> <label class="money-option"> <input type="checkbox"
+						name="moneyType" value="100" checked> <img
+						src="${pageContext.request.contextPath}/images/money/oneHundredYen.png"
+						alt="100円" class="money-option-image">
+					</label> <label class="money-option"> <input type="checkbox"
+						name="moneyType" value="50" checked> <img
+						src="${pageContext.request.contextPath}/images/money/fiftyYen.png"
+						alt="50円" class="money-option-image">
+					</label> <label class="money-option"> <input type="checkbox"
+						name="moneyType" value="10" checked> <img
+						src="${pageContext.request.contextPath}/images/money/tenYen.png"
+						alt="10円" class="money-option-image">
+					</label> <label class="money-option"> <input type="checkbox"
+						name="moneyType" value="5" checked> <img
+						src="${pageContext.request.contextPath}/images/money/fiveYen.png"
+						alt="5円" class="money-option-image">
+					</label> <label class="money-option"> <input type="checkbox"
+						name="moneyType" value="1" checked> <img
+						src="${pageContext.request.contextPath}/images/money/oneYen.png"
+						alt="1円" class="money-option-image">
+					</label>
+				</div>
 				<div class="form-button">
 					<input type="submit" name="submit" class="payment-button"
 						id="paymentBtn" value="支払い">

@@ -4,13 +4,13 @@
 /* --------payment.jsp-------- */
 /* --------------------------- */
 .payment-nav {
-	margin-top: 42px;
+	margin-top: 12px;
 	text-align: center;
 }
 
 .amount-input {
 	display: flex;
-	margin: 18px auto;
+	margin: 12px auto;
 	padding: 8px;
 	font-size: 46px;
 	font-weight: 480;
@@ -87,6 +87,41 @@
 .success-message {
 	color: green;
 	text-align: center;
+}
+
+.money-check-area {
+	width: 320px;
+	margin: 10px auto 10px;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 12px 12px;
+	justify-items: center;
+	align-items: center;
+}
+
+.money-option {
+	width: 90px;
+	height: 76px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+}
+
+.money-option input[type="checkbox"] {
+	display: none;
+}
+
+.money-option-image {
+	max-width: 90px;
+	max-height: 70px;
+	object-fit: contain;
+	display: block;
+}
+
+.money-option:has(input[type="checkbox"]:not(:checked)) .money-option-image {
+	opacity: 0.35;
+	filter: grayscale(100%);
 }
 /* -------------------------------------- */
 /* --------payment_suggestion.jsp-------- */
