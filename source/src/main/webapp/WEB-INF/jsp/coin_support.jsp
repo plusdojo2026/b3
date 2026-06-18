@@ -29,10 +29,11 @@
 				alt="ホーム" class="toHome"></a>
 		</header>
 		<!-- ヘッダーここまで -->
-		
+
 		<main>
 			<%--任意の金額入力フォーム（金額を入力して探す）（上限は￥2,000） --%>
-			<form action="${pageContext.request.contextPath}/CoinSupportServlet" method="GET">
+			<form action="${pageContext.request.contextPath}/CoinSupportServlet"
+				method="GET">
 				<h3>
 					金額を入力して探す<span>（上限は￥2,000）</span>
 				</h3>
@@ -44,7 +45,8 @@
 					value="manual">検索</button>
 			</form>
 			<%--財布の小銭から探す（上限は￥2,000） --%>
-			<form action="${pageContext.request.contextPath}/CoinSupportServlet" method="GET">
+			<form action="${pageContext.request.contextPath}/CoinSupportServlet"
+				method="GET">
 				<h3>
 					財布の小銭から探す<span>（上限は￥2,000）</span>
 				</h3>
@@ -53,7 +55,7 @@
 				<p>
 					現在の財布の小銭合計<span>￥${totalCoins}</span>
 				</p>
-				
+
 
 				<%--この小銭を使いきる商品をみるボタン --%>
 				<button type="submit" id="btnUseAllCoins" name="submitType"
@@ -64,14 +66,14 @@
 				<h3>ぴったり使い切る組み合わせ</h3>
 
 				<ul class="matchList" id="matchComboList">
-					
+
 				</ul>
 			</div>
 
 			<%--その他のおすすめ商品（現在の小銭合計をwalletsテーブルから取得） --%>
 			<div class="recItemsArea">
 				<h3>
-					その他のおすすめ商品<span>￥${totalCoins}以下</span>
+					その他のおすすめ商品<span id="recAmount">￥${totalCoins}以下</span>
 				</h3>
 
 
@@ -86,23 +88,17 @@
 				</div>
 			</div>
 			<%--カテゴリーを選択できるフィルターボタン （ServletかJSで連携）--%>
-			<div class="filter-area">
-
-				<label class="filter-btn"> <input type="checkbox"
-					name="category" value="allItems" checked> <span>すべて</span>
-				</label> <label class="filter-btn"> <input type="checkbox"
-					name="category" value="food"> <span>食べ物</span>
-				</label> <label class="filter-btn"> <input type="checkbox"
-					name="category" value="drink"> <span>飲み物</span>
-				</label> <label class="filter-btn"> <input type="checkbox"
-					name="category" value="other"> <span>その他</span>
-				</label>
+			<div class="category-list">
+				<button type="button" class="category-btn" data-category="allItems">すべて</button>
+				<button type="button" class="category-btn" data-category="food">食べ物</button>
+				<button type="button" class="category-btn" data-category="drink">飲み物</button>
+				<button type="button" class="category-btn" data-category="other">その他</button>
 			</div>
 
 			<%--小銭合計以下のおすすめ商品（リストで表示）（最大30件まで）（さらに読み込むボタン(JSで操作））--%>
 			<div class="recItemsArea">
 				<ul class="recList" id="recItemsList">
-					
+
 				</ul>
 
 				<div class="more-btn">
@@ -128,21 +124,22 @@
 		</footer>
 		<!-- フッターここまで -->
 	</div>
-	
+
 	<script>
-	'use strict';
-	//JSPを仲介して、Servletから届いたデータを、JavaScriptが読める配列データに翻訳
-	const allProducts =${recItemsJson};
-	
-	//Servletから「どちらのボタンが押されたか」の目印をもらう
-	const submitType = "${submitType}";
-	
-	//Servletから小銭の合計をもらう
-	const totalCoins = ${totalCoins};
-	
-	//入力フォームに入力された金額をもらう
-	const manualAmount = "${amountInput}";
+		'use strict';
+		//JSPを仲介して、Servletから届いたデータを、JavaScriptが読める配列データに翻訳
+		const allProducts = ${recItemsJson};
+
+		//Servletから「どちらのボタンが押されたか」の目印をもらう
+		const submitType = "${submitType}";
+
+		//Servletから小銭の合計をもらう
+		const totalCoins = ${totalCoins};
+
+		//入力フォームに入力された金額をもらう
+		const manualAmount = "${amountInput}";
 	</script>
-	<script src="${pageContext.request.contextPath}/js/coin_support.js" defer></script>
+	<script src="${pageContext.request.contextPath}/js/coin_support.js"
+		defer></script>
 </body>
 </html>
