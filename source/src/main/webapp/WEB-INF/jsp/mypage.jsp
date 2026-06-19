@@ -68,9 +68,14 @@
 
 			<section class="alert-setting">
 				<div class="alert">アラート設定</div>
+				
+				<div class="alert-money">
 				設定金額<input type="text" name="alert-money" value="">円 
+				</div>
+				<div class="alert-number">
 				設定枚数<input
 					type="number" name="alert-number" min="0" value="">枚
+				</div>	
 			</section>
 
 			<section class="dress-up">

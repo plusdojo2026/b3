@@ -1,7 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="dto.User" %>
+
 <%
-String errorMsg = (String) request.getAttribute("errorMsg");
+User loginUser = (User) session.getAttribute("LoginUser");
+
+if (loginUser == null) {
+	response.sendRedirect(request.getContextPath() + "/LoginServlet");
+	return;
+}
 %>
 <!doctype html>
 <html lang="ja">

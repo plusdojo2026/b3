@@ -154,4 +154,55 @@ public class UserDao {
 
 		pStmt.executeUpdate();
 	}
+
+	public boolean updateUser(int id, String nickname, String loginId, String password) {
+		Connection conn = null;
+		PreparedStatement pStmt = null;
+		boolean result = false;
+
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+
+			conn = DriverManager.getConnection(
+					"jdbc:mysql://localhost:3306/b3?characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=GMT%2B9",
+					"root", "password");
+
+			String sql = "UPDATE users "
+					+ "SET nickname = ?, login_id = ?, password = ?, updated_at = CURRENT_TIMESTAMP " + "WHERE id = ?";
+
+			pStmt = conn.prepareStatement(sql);
+
+			pStmt.setString(1, nickname);
+			pStmt.setString(2, loginId);
+			pStmt.setString(3, password);
+			pStmt.setInt(4, id);
+
+			int count = pStmt.executeUpdate();
+
+			if (count == 1) {
+				result = true;
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (pStmt != null) {
+				try {
+					pStmt.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+		return result;
+	}
 }
