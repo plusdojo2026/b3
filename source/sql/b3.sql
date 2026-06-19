@@ -138,14 +138,14 @@ INSERT INTO products (
 -- コンビニの商品
 (1, 'おにぎり（鮭）', 'Salmon Rice Ball', 150, 'food', 'food_konbini_onigiri'),
 (1, '紅茶ペットボトル', 'Tea Bottle', 120, 'drink', 'petbottle_tea_koucha'),
-(1, 'チョコレートバー', 'Chocolate Bar', 110, 'sweets', 'chocolate_bar'),
+(1, 'チョコレートバー', 'Chocolate Bar', 110, 'food', 'chocolate_bar'),
 (1, 'カップラーメン', 'Cup Ramen', 198, 'food', 'food_cup_ramen_syouyu'),         
-(1, 'ポテトチップス', 'Potato Chips', 158, 'sweets', 'potatochips'),
+(1, 'ポテトチップス', 'Potato Chips', 158, 'food', 'potatochips'),
 
 -- ドラッグストアの商品
-(2, 'ハンドソープ', 'Hand Soap', 298, 'daily', 'sekken_hand_soap_bottle'),
-(2, 'ビタミンCサプリ', 'Vitamin C Supplement', 680, 'daily', 'suppliment_pill_diet'),
-(2, 'マスク（5枚入り）', 'Face Mask (5pcs)', 198, 'daily', 'mask'),
+(2, 'ハンドソープ', 'Hand Soap', 298, 'other', 'sekken_hand_soap_bottle'),
+(2, 'ビタミンCサプリ', 'Vitamin C Supplement', 680, 'other', 'suppliment_pill_diet'),
+(2, 'マスク（5枚入り）', 'Face Mask (5pcs)', 198, 'other', 'mask'),
 
 -- セブンイレブン
 (3, '手巻おにぎり 炭火焼銀しゃけ', 'Hand-Rolled Rice Ball Salmon', 232, 'food', 'temaki_salmon'),
