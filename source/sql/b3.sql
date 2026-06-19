@@ -177,7 +177,14 @@ INSERT INTO products (
 (3, '味しみロースかつ丼', 'Pork Cutlet Rice Bowl',699, 'food', 'chilled_katsu'),
 (3, '肉の旨味とデミグラスのコク　ミートソース', 'Meat Sauce Pasta',496, 'food', 'pasta_meatSauce'),
 (3, 'ケチャップソースの大盛ナポリタン', 'Napolitan Pasta',537, 'food', 'pasta_napolitan');
-
+-- スターバックスの商品
+(8, 'ブリュード コーヒー', 'Brewed Coffee', 440, 'drink', 'brewed_coffee'),
+(8, 'カフェ ミスト', 'Caffè Misto', 495, 'drink', 'cafe_misto'),
+(8, 'ビター クリーム コーヒー', 'Bitter Cream Coffee', 590, 'drink', 'bitter_cream_coffee'),
+(8, 'キャラメル マキアート', 'Caramel Macchiato', 580, 'drink', 'caramel_macchiato'),
+(8, 'スターバックス ラテ', 'Starbucks Latte', 500, 'drink', 'starbucks_latte'),
+(8, 'エスプレッソ アフォガート フラペチーノ', 'Espresso Affogato Frappuccino', 640, 'drink', 'espresso_affogato_frappuccino'),
+(8, 'コーヒー フラペチーノ', 'Coffee Frappuccino', 555, 'drink', 'coffee_frappuccino');
 
 
 create table stores (		
@@ -212,9 +219,36 @@ INSERT INTO stores (
 -- 架空の麴町ドラッグストア
 ('ドラッグストア麴町メディカル', 'Kojimachi Medical Drugstore',
  '東京都千代田区麴町4-2-8', '4-2-8 Kojimachi, Chiyoda-ku, Tokyo',
- 35.685103, 139.735944, 'both', 'credit, qr');
+ 35.685103, 139.735944, 'both', 'credit, qr'),
  
+-- 麹町コンビニ(実在)
+('セブンイレブン麴町駅前店', 'Seven Eleven Kojimachi Ekimae Store',
+ '東京都千代田区二番町4-3', '4-3 Nibancho, Chiyoda-ku, Tokyo',
+ 35.68624786735896, 139.7366265884323, 'both,ATM', 'credit, ic, qr'),
 
+-- 三菱UFJ銀行 麹町支店
+('三菱UFJ銀行 麹町支店', 'MUFG Bank Kojimachi Branch',
+ '東京都千代田区麹町4-1', '4-1 Kojimachi, Chiyoda-ku, Tokyo',
+ 35.683056, 139.737778, 'both', 'credit, ic, qr'),
+
+-- みずほ銀行 麹町支店（ATM・外貨両替あり）
+('みずほ銀行 麹町支店', 'Mizuho Bank Kojimachi Branch',
+ '東京都千代田区麹町5-1', '5-1 Kojimachi, Chiyoda-ku, Tokyo',
+ 35.683511, 139.735123, 'ATM,exchange', 'cash'),
+
+-- ZTTo morning(キャッシュレスのみ)
+('ZTTo morning', 'ZTTo morning',
+ '東京都千代田区平河町2-4-4 owns平河町 1F', '1F owns Hirakawacho, 2-4-4 Hirakawacho, Chiyoda-ku, Tokyo',
+ 35.683011, 139.739055, 'cashlessonly', 'credit, ic, qr'),
+
+-- コインランドリーきよの（現金のみ）
+('コインランドリーきよの', 'Coin Laundry Kiyono',
+ '東京都千代田区平河町2-2-5', '2-2-5 Hirakawacho, Chiyoda-ku, Tokyo',
+ 35.681123, 139.740456, 'cashonly', 'cash'),
+ 
+ ('スターバックス麹町店', 'Starbucks Kojimachi',
+ '東京都千代田区麹町3-2-5', '3-2-5 Kojimachi, Chiyoda-ku, Tokyo',
+ 35.684948, 139.738676, 'both', 'credit, ic, qr');
  
  
 
@@ -557,29 +591,6 @@ INSERT INTO stores (
     category,
     cashless_type
 ) VALUES
--- 麹町コンビニ(実在)
-('セブンイレブン麴町駅前店', 'Seven Eleven Kojimachi Ekimae Store',
- '東京都千代田区二番町4-3', '4-3 Nibancho, Chiyoda-ku, Tokyo',
- 35.68624786735896, 139.7366265884323, 'both,ATM', 'credit, ic, qr'),
 
--- 三菱UFJ銀行 麹町支店
-('三菱UFJ銀行 麹町支店', 'MUFG Bank Kojimachi Branch',
- '東京都千代田区麹町4-1', '4-1 Kojimachi, Chiyoda-ku, Tokyo',
- 35.683056, 139.737778, 'both', 'credit, ic, qr'),
-
--- みずほ銀行 麹町支店（ATM・外貨両替あり）
-('みずほ銀行 麹町支店', 'Mizuho Bank Kojimachi Branch',
- '東京都千代田区麹町5-1', '5-1 Kojimachi, Chiyoda-ku, Tokyo',
- 35.683511, 139.735123, 'ATM,exchange', 'cash'),
-
--- ZTTo morning(キャッシュレスのみ)
-('ZTTo morning', 'ZTTo morning',
- '東京都千代田区平河町2-4-4 owns平河町 1F', '1F owns Hirakawacho, 2-4-4 Hirakawacho, Chiyoda-ku, Tokyo',
- 35.683011, 139.739055, 'cashlessonly', 'credit, ic, qr'),
-
--- コインランドリーきよの（現金のみ）
-('コインランドリーきよの', 'Coin Laundry Kiyono',
- '東京都千代田区平河町2-2-5', '2-2-5 Hirakawacho, Chiyoda-ku, Tokyo',
- 35.681123, 139.740456, 'cashonly', 'cash');
  
 

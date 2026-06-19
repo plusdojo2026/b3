@@ -44,7 +44,7 @@ const store_list = JSON.parse(String.raw`${storeListJson}`);
 				<input type="text" id="keyword" placeholder="施設名、住所">
 				<button type="button" class="search_btn" aria-label="検索">
 					<img
-						src="${pageContext.request.contextPath}/images/nav/store_search.png"
+						src="${pageContext.request.contextPath}/images/store_icon/store_search.png"
 						alt="検索">
 				</button>
 			</div>
