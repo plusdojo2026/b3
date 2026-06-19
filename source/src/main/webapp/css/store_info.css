@@ -138,7 +138,7 @@
     line-height: 1.5;
 }
 
-/* 現在地からの距離（少し強調、または補足として薄くするなどお好みで） */
+/* 現在地からの距離 */
 .store-item .distance {
     font-size: 0.9rem;
     color: #666666;
@@ -149,7 +149,7 @@
 .store-item a {
     display: inline-block;
     margin-top: 10px;
-    color: #0000ee; /* またはブランドカラーの緑 #008040 にしても綺麗です */
+    color: #0000ee;
     text-decoration: underline;
     font-size: 0.95rem;
     font-weight: bold;
