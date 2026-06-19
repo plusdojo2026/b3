@@ -73,6 +73,7 @@ public class WalletServlet extends HttpServlet {
 
 		// 予算登録ページにフォワード
 		request.getRequestDispatcher("/WEB-INF/jsp/wallet.jsp").forward(request, response);
+		
 	}
 
 	/**
@@ -123,6 +124,7 @@ public class WalletServlet extends HttpServlet {
 		// 合計金額の値をjspに渡す
 		request.setAttribute("totalAmount", totalAmount);
 		request.getRequestDispatcher("/WEB-INF/jsp/wallet.jsp").forward(request, response);
+		
 
 	}
 

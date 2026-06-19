@@ -28,7 +28,16 @@
 				alt="ホーム" class="toHome"></a>
 		</header>
 		<!-- ヘッダーここまで -->
+		<section class="money-display">
+		<div class="money-amount">
+					<!-- 合計金額を入れる -->
+					&yen;${totalAmount}
+				</div>
+		
+		
+		
 		<a href="${pageContext.request.contextPath}/WalletServlet">予算登録・編集へ</a>
+		</section>
 		
 		<!-- コラム枠 -->
 		<div class="column-box" onclick="location.href='${pageContext.request.contextPath}/ColumnServlet'">
