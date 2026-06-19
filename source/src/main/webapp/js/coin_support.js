@@ -46,14 +46,15 @@ if (submitType === "manual" || submitType === "wallet") {
 	//1つの商品でぴったりなもの
 	for (let i = 0; i < allProducts.length; i++) {
 		if (allProducts[i].price === targetAmount) {
-			allMatchedPatterns.push([allProducts[i]]);
+			allMatchedPatterns.push(`[ ${allProducts[i].store_name_ja}] ${allProducts[i].name_ja} ￥${allProducts[i].price}`);
 		}
 	}
 	// 2つの商品の合計でぴったりなもの
 	for (let i = 0; i < allProducts.length; i++) {
 		for (let j = i + 1; j < allProducts.length; j++) {
 			if (allProducts[i].price + allProducts[j].price === targetAmount) {
-				allMatchedPatterns.push([allProducts[i], allProducts[j]]);
+				allMatchedPatterns.push(` [${allProducts[i].store_name_ja}] ${allProducts[i].name_ja} ￥${allProducts[i].price}
+            ＋ [${allProducts[j].store_name_ja}] ${allProducts[j].name_ja} ￥${allProducts[j].price}＝ ￥${targetAmount}`);
 			}
 		}
 	}
@@ -63,7 +64,10 @@ if (submitType === "manual" || submitType === "wallet") {
 		for (let j = i + 1; j < allProducts.length; j++) {
 			for (let k = j + 1; k < allProducts.length; k++) {
 				if (allProducts[i].price + allProducts[j].price + allProducts[k].price === targetAmount) {
-					allMatchedPatterns.push([allProducts[i], allProducts[j], allProducts[k]]);
+					allMatchedPatterns.push(`[${allProducts[i].store_name_ja}] ${allProducts[i].name_ja}￥${allProducts[i].price} 
+                ＋ [${allProducts[j].store_name_ja}] ${allProducts[j].name_ja} ￥${allProducts[j].price}
+                ＋ [${allProducts[k].store_name_ja}] ${allProducts[k].name_ja} ￥${allProducts[k].price}＝ ￥${targetAmount}`);
+				}
 			}
 		}
 	}
@@ -75,13 +79,16 @@ if (submitType === "manual" || submitType === "wallet") {
 				for (let m = k + 1; m < allProducts.length; m++) {
 					const total = allProducts[i].price + allProducts[j].price + allProducts[k].price + allProducts[m].price;
 					if (total === targetAmount) {
-						allMatchedPatterns.push([allProducts[i], allProducts[j], allProducts[k], allProducts[m]]);
+						allMatchedPatterns.push(`[${allProducts[i].store_name_ja}] ${allProducts[i].name_ja} ￥${allProducts[i].price}
+                    ＋ [${allProducts[j].store_name_ja}] ${allProducts[j].name_ja} ￥${allProducts[j].price}
+                    ＋ [${allProducts[k].store_name_ja}] ${allProducts[k].name_ja} ￥${allProducts[k].price}
+                    ＋ [${allProducts[m].store_name_ja}] ${allProducts[m].name_ja} ￥${allProducts[m].price}＝ ￥${targetAmount}`);
 					}
 				}
 			}
 		}
 	}
-
+}
 //集まった全パターンをシャッフル
 for (let i = allMatchedPatterns.length - 1; i > 0; i--) {
 	const r = Math.floor(Math.random() * (i + 1));
