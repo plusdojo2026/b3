@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		});
 	}
 
-	//検索ボタンが押されたとき
+	//検索ボタンが押されたとき検索
 	const searchBtn = document.querySelector(".search_btn");
 	if (searchBtn) {
 		searchBtn.addEventListener("click", () => {
@@ -63,8 +63,8 @@ function category_filter() {
 		let matchCategory = true;
 		if (selectedCategories.length > 0) {
 			// 店舗のカテゴリ文字列
-			const storeCategory = store.category || ""; 
-			
+			const storeCategory = store.category || "";
+
 			// 選択されているボタンのどれか1つでも、店舗のカテゴリ文字列に含まれているか判定
 			matchCategory = selectedCategories.some(cat => storeCategory.includes(cat));
 		}
@@ -95,39 +95,49 @@ function getKeyword() {
 }
 
 
-
+//施設情報を表示する
 function displayStores(list) {
 	const container = document.getElementById("store_list");
 	container.innerHTML = "";
-	
+
 	//件数がゼロのときの表示
 	if (list.length === 0) {
 		container.innerHTML = "<p>該当する施設が見つかりませんでした。</p>";
 		return;
 	}
-	
-	// カテゴリーの日本語マッピング
+
+	// カテゴリーのカラム→日本語へ変換マッピング
 	const categoryMapping = {
 		'cashonly': '現金のみ',
 		'cashlessonly': 'キャッシュレスのみ',
 		'both': '両対応',
 		'exchange': '外貨両替機'
 	};
-	
-	// キャッシュレス種類
-	const cashlessTypeMapping = {
-    'credit': 'クレジットカード',
-    'ic': '交通系IC',
-    'qr': 'QRコード決済'
-};
 
-function convertCashlessType(typeString) {
-    return typeString
-        .split(',')               
-        .map(t => t.trim())       
-        .map(t => cashlessTypeMapping[t] || t) 
-        .join(' / ');             
-}
+	//カテゴリー種類が複数あっても日本語で表示する
+	function convertCategory(typeString) {
+		return typeString
+			.split(',')
+			.map(t => t.trim())
+			.map(t => categoryMapping[t] || t)
+			.join(' / ');
+	}
+
+	// キャッシュレス種類の
+	const cashlessTypeMapping = {
+		'credit': 'クレジットカード',
+		'ic': '交通系IC',
+		'qr': 'QRコード決済'
+	};
+
+	//キャッシュレス種類が複数あっても日本語で表示する
+	function convertCashlessType(typeString) {
+		return typeString
+			.split(',')
+			.map(t => t.trim())
+			.map(t => cashlessTypeMapping[t] || t)
+			.join(' / ');
+	}
 
 	list.forEach(s => {
 		const div = document.createElement("div");
@@ -142,17 +152,19 @@ function convertCashlessType(typeString) {
 			: '';
 
 		const storeCategory = s.category || "";
-		const cashlessTypeText = (storeCategory.includes("both") || storeCategory.includes("cashlessonly"))
+		
+		//日本語マッピング変換(category)
+		const categoryText = convertCategory(storeCategory);
+		
+		//both,cashlessのときcashlessTypeを表示
+		const cashlessTypeText = 
+			(storeCategory.includes("both") || storeCategory.includes("cashlessonly"))
 			? `<p>${convertCashlessType(s.cashless_type)}</p>`
 			: '';
-		//日本語マッピングにあれば変換(category)
-		const categoryJa = categoryMapping[storeCategory] || storeCategory;
-		
-		
-		
+
 		div.innerHTML = `<h3>${s.name_ja}</h3>
 						<p>${s.address_ja}</p> 
-						<p>${categoryJa}</p> 
+						<p>${categoryText}</p> 
 						<p>${cashlessTypeText}</p> 
 						${distanceText}
 						${mapLink}`;
