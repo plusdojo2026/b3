@@ -96,6 +96,7 @@ public class ProductDao {
     				p.setName_en(rs.getString("name_en"));
     				p.setPrice(rs.getInt("price"));
     				p.setCategory(rs.getString("category"));
+    				p.setImage_url(rs.getString("image_url"));
     				p.setStore_name_ja(rs.getString("store_name_ja")); 
     			    p.setStore_name_en(rs.getString("store_name_en"));
     				list.add(p);

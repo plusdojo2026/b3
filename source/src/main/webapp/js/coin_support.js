@@ -166,9 +166,15 @@ function updateRecItems() {
 		for (let i = 0; i < limit; i++) {
 			const item = currentSortedProducts[i];
 			const li = document.createElement('li');
-			
+		
+		//画像タグを新しくつくる
+		const img =document.createElement('img');
+		img.src = "images/product/" + item.image_url +".jpg";
+		
 		//リストにテキストをセット	
-		li.textContent = `${item.store_name_ja} ${item.name_ja} ￥${item.price}`;
+		//li.textContent = `${item.image_url} ${item.store_name_ja} ${item.name_ja} ￥${item.price}`;
+		li.appendChild(img);
+		li.append(`${item.store_name_ja} ${item.name_ja} ￥${item.price}`);
 		
 		// 完成したliを「その他のおすすめ」のulタグの中に追加
 		recListUl.appendChild(li);
@@ -184,8 +190,9 @@ function updateRecItems() {
 	}
 }
 
-
+//------------------------------------
 // 3. カテゴリボタンを押したら絞り込みする処理
+//------------------------------------
 function setupCategoryFilter() {
 	// 全てのカテゴリボタンを取得
 	const buttons = document.querySelectorAll(".category-btn");

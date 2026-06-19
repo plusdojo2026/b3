@@ -11,6 +11,7 @@ public class Product implements Serializable{
 	private String name_en;
 	private int price;
 	private String category;
+	private String image_url;
 	private LocalDateTime created_at;
     private LocalDateTime updated_at;
     private String store_name_ja; 
@@ -35,7 +36,12 @@ public class Product implements Serializable{
 		this.store_name_ja = store_name_ja;
 		this.store_name_en = store_name_en;
 	}
-	 
+	public Product(String image_url) {
+		super();
+		this.image_url = image_url;
+	}
+	
+	
 	//引数のないコンストラクタ
 	public Product() {
 		super();
@@ -103,5 +109,10 @@ public class Product implements Serializable{
 	public void setStore_name_en(String store_name_en) {
 		this.store_name_en = store_name_en;
 	}
-	
+	public String getImage_url() {
+		return image_url;
+	}
+	public void setImage_url(String image_url) {
+		this.image_url = image_url;
+	}
 }
