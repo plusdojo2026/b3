@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%
+Integer amount =  (Integer) request.getAttribute("totalCoins");
+
+String amountText = String.format("%,d", amount);
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -56,7 +61,7 @@
 				<h3>財布の小銭から探す<span>（上限は￥2,000）</span></h3>
 
 				<%--現在の財布の小銭合計額をwalletsテーブルから取得 --%>
-				<p>現在の財布の小銭合計<span>￥${totalCoins}</span></p>
+				<p>現在の財布の小銭合計<span>￥<%=amountText%></span></p>
 					
 				<%--この小銭を使いきる商品をみるボタン --%>
 				<button type="submit" id="btnUseAllCoins" name="submitType"
