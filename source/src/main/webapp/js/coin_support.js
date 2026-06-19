@@ -46,15 +46,14 @@ if (submitType === "manual" || submitType === "wallet") {
 	//1つの商品でぴったりなもの
 	for (let i = 0; i < allProducts.length; i++) {
 		if (allProducts[i].price === targetAmount) {
-			allMatchedPatterns.push(`[ ${allProducts[i].store_name_ja}] ${allProducts[i].name_ja} ￥${allProducts[i].price}`);
+			allMatchedPatterns.push([allProducts[i]]);
 		}
 	}
 	// 2つの商品の合計でぴったりなもの
 	for (let i = 0; i < allProducts.length; i++) {
 		for (let j = i + 1; j < allProducts.length; j++) {
 			if (allProducts[i].price + allProducts[j].price === targetAmount) {
-				allMatchedPatterns.push(` [${allProducts[i].store_name_ja}] ${allProducts[i].name_ja} ￥${allProducts[i].price}
-            ＋ [${allProducts[j].store_name_ja}] ${allProducts[j].name_ja} ￥${allProducts[j].price}＝ ￥${targetAmount}`);
+				allMatchedPatterns.push([allProducts[i], allProducts[j]]);
 			}
 		}
 	}
@@ -64,14 +63,11 @@ if (submitType === "manual" || submitType === "wallet") {
 		for (let j = i + 1; j < allProducts.length; j++) {
 			for (let k = j + 1; k < allProducts.length; k++) {
 				if (allProducts[i].price + allProducts[j].price + allProducts[k].price === targetAmount) {
-					allMatchedPatterns.push(`[${allProducts[i].store_name_ja}] ${allProducts[i].name_ja}￥${allProducts[i].price} 
-                ＋ [${allProducts[j].store_name_ja}] ${allProducts[j].name_ja} ￥${allProducts[j].price}
-                ＋ [${allProducts[k].store_name_ja}] ${allProducts[k].name_ja} ￥${allProducts[k].price}＝ ￥${targetAmount}`);
-				}
+					allMatchedPatterns.push([allProducts[i], allProducts[j], allProducts[k]]);
 			}
 		}
 	}
-
+}
 	// 4つの商品の合計でぴったりなもの
 	for (let i = 0; i < allProducts.length; i++) {
 		for (let j = i + 1; j < allProducts.length; j++) {
@@ -79,10 +75,7 @@ if (submitType === "manual" || submitType === "wallet") {
 				for (let m = k + 1; m < allProducts.length; m++) {
 					const total = allProducts[i].price + allProducts[j].price + allProducts[k].price + allProducts[m].price;
 					if (total === targetAmount) {
-						allMatchedPatterns.push(`[${allProducts[i].store_name_ja}] ${allProducts[i].name_ja} ￥${allProducts[i].price}
-                    ＋ [${allProducts[j].store_name_ja}] ${allProducts[j].name_ja} ￥${allProducts[j].price}
-                    ＋ [${allProducts[k].store_name_ja}] ${allProducts[k].name_ja} ￥${allProducts[k].price}
-                    ＋ [${allProducts[m].store_name_ja}] ${allProducts[m].name_ja} ￥${allProducts[m].price}＝ ￥${targetAmount}`);
+						allMatchedPatterns.push([allProducts[i], allProducts[j], allProducts[k], allProducts[m]]);
 					}
 				}
 			}
@@ -105,7 +98,36 @@ if (allMatchedPatterns.length === 0) {
 } else {
 	for (let i = 0; i < Math.min(3, allMatchedPatterns.length); i++) {
 		const li = document.createElement('li');
-		li.textContent = `【パターン${i + 1}】${allMatchedPatterns[i]}`;
+		
+		// 1. 見出しを作る
+		const spanTitle = document.createElement('span');
+		spanTitle.textContent = `【パターン${i + 1}】`;
+		li.appendChild(spanTitle);
+
+		// 2. そのパターンに含まれる商品のリストを取り出す
+		const patternItems = allMatchedPatterns[i];
+		
+		// 3. 表示の段階で、含まれる商品の数だけループして画像と文字を出す
+		patternItems.forEach((item, index) => {
+			
+			// 画像タグを作って、URL（image_url）をセット
+			const img = document.createElement('img');
+			img.src = "images/product/" + item.image_url + ".jpg";
+			img.className = "prod-img";
+		li.appendChild(img); // 画像を画面に追加
+
+			// テキストを組み立てる
+			let itemText = `[${item.store_name_ja}] ${item.name_ja} ￥${item.price}`;
+			
+			// 複数ある場合は間に「 ＋ 」、最後なら「 ＝ ￥合計」をつける
+			if (index < patternItems.length - 1) {
+				itemText += " ＋ ";
+			} else {
+				itemText += ` ＝ ￥${targetAmount}`;
+			}
+			li.append(itemText);
+		});
+		
 		matchComboUl.appendChild(li);
 	}
 }
@@ -170,6 +192,7 @@ function updateRecItems() {
 		//画像タグを新しくつくる
 		const img =document.createElement('img');
 		img.src = "images/product/" + item.image_url +".jpg";
+		img.className = "prod-img";
 		
 		//リストにテキストをセット	
 		//li.textContent = `${item.image_url} ${item.store_name_ja} ${item.name_ja} ￥${item.price}`;
