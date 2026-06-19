@@ -581,3 +581,5 @@ INSERT INTO stores (
 ('コインランドリーきよの', 'Coin Laundry Kiyono',
  '東京都千代田区平河町2-2-5', '2-2-5 Hirakawacho, Chiyoda-ku, Tokyo',
  35.681123, 139.740456, 'cashonly', 'cash');
+ 
+
