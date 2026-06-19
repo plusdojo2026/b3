@@ -113,8 +113,7 @@ if (allMatchedPatterns.length === 0) {
 			// 商品1つずつのHTMLを組み立て
 			itemsHtml += `
 				<div class="single-item-box">
-					<img src="images/product/${item.image_url}" class="prod-img" 
-						
+					<img src="images/product/${item.image_url}.jpg" class="prod-img">
 					<div class="item-store">[${item.store_name_ja}]</div>
 					<div class="item-name">${item.name_ja}</div>
 					<div class="item-price">￥${item.price}</div>
