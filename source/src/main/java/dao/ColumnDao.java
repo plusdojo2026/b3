@@ -90,6 +90,12 @@ public class ColumnDao {
 	        conn = DriverManager.getConnection(
 	                "jdbc:mysql://localhost:3306/b3?characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=GMT%2B9",
 	                "root", "password");
+	        
+	        // ネットワーク接続用
+	        //conn = DriverManager.getConnection(
+	        		//"jdbc:mysql://localhost:3306/b3?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Tokyo&connectTimeout=30000;",
+	        		//"b3", "FYwYHFcfmMuGAnNZ");
+	        
 
 	        // ランダムで1件取得するSQL
 	        String sql = "SELECT * FROM columns ORDER BY RAND() LIMIT 1";
