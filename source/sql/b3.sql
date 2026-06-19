@@ -136,16 +136,16 @@ INSERT INTO products (
     image_url
 ) VALUES
 -- コンビニの商品
-(1, 'おにぎり（鮭）', 'Salmon Rice Ball', 150, 'food', 'test.png'),
-(1, '緑茶ペットボトル', 'Green Tea Bottle', 120, 'drink', 'test.png'),
-(1, 'チョコレートバー', 'Chocolate Bar', 110, 'sweets', 'test.png'),
-(1, 'カップラーメン', 'Cup Ramen', 198, 'food', 'test.png'),         
-(1, 'ポテトチップス', 'Potato Chips', 158, 'sweets', 'test.png'),
+(1, 'おにぎり（鮭）', 'Salmon Rice Ball', 150, 'food', 'food_konbini_onigiri'),
+(1, '紅茶ペットボトル', 'Tea Bottle', 120, 'drink', 'petbottle_tea_koucha'),
+(1, 'チョコレートバー', 'Chocolate Bar', 110, 'sweets', 'chocolate_bar'),
+(1, 'カップラーメン', 'Cup Ramen', 198, 'food', 'food_cup_ramen_syouyu'),         
+(1, 'ポテトチップス', 'Potato Chips', 158, 'sweets', 'potatochips'),
 
 -- ドラッグストアの商品
-(2, 'ハンドソープ', 'Hand Soap', 298, 'daily', 'test.png'),
-(2, 'ビタミンCサプリ', 'Vitamin C Supplement', 680, 'daily', 'test.png'),
-(2, 'マスク（5枚入り）', 'Face Mask (5pcs)', 198, 'daily', 'test.png'),
+(2, 'ハンドソープ', 'Hand Soap', 298, 'daily', 'sekken_hand_soap_bottle'),
+(2, 'ビタミンCサプリ', 'Vitamin C Supplement', 680, 'daily', 'suppliment_pill_diet'),
+(2, 'マスク（5枚入り）', 'Face Mask (5pcs)', 198, 'daily', 'mask'),
 
 -- セブンイレブン
 (3, '手巻おにぎり 炭火焼銀しゃけ', 'Hand-Rolled Rice Ball Salmon', 232, 'food', 'temaki_salmon'),
