@@ -20,7 +20,7 @@
 .logins {
 	display: block;
 	position: relative;
-	margin-bottom: 22px;
+	margin-bottom: 7px;
 	padding-left: 12px;
 	font-size: 15px;
 }
@@ -51,11 +51,13 @@
 /* 入力欄 */
 .signup-input {
 	width: 100%;
-	height: 26px;
+	margin: 1px 0 20px 0;
+	box-sizing: border-box;
+	border-radius: 8px;
 	border: 1px solid green;
-	border-radius: 4px;
-	padding: 4px 8px;
-	font-size: 15px;
+	padding: 6px 10px;
+	font-size: 14px;
+	background-color: #ffffff;
 }
 
 /* 入力中 */
@@ -72,33 +74,28 @@
 }
 
 /* 会員登録画面-ボタンたち */
-.reset-button, .signup-button {
-	width: 78px;
-	height: 42px;
-	border-radius: 6px;
-	font-size: 14px;
-	cursor: pointer;
-}
-
-/* リセットボタン */
-.reset-button {
-	background-color: white;
-	color: black;
-	border: 1px solid green;
-	box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.35);
-}
-
-/* 登録ボタン */
+.reset-button,
 .signup-button {
+	width: 95px;
+	height: 40px;
+	border-radius: 6px;
+	cursor: pointer;
 	background-color: green;
 	color: white;
 	border: 1px solid green;
+	font-weight: 450;
+	font-size: 14px;
 	box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.35);
+	transition: 0.2s;
 }
 
-.reset-button:hover, .signup-button:hover {
-	opacity: 0.75;
+.reset-button:hover,
+.signup-button:hover {
+	background-color: #ffffff;
+	color: green;
+	border-color: green;
 }
+
 /* 新規登録・ログインリンク */
 .acount-msg {
 	text-decoration: none;
@@ -136,12 +133,13 @@
 /* 入力欄 */
 .login-input {
 	width: 100%;
-	height: 26px;
+	margin: 12px 0 20px 0;
+	box-sizing: border-box;
+	border-radius: 8px;
 	border: 1px solid green;
-	border-radius: 4px;
-	padding: 4px 8px;
-	font-size: 15px;
-	margin-top: 24px;
+	padding: 6px 10px;
+	font-size: 14px;
+	background-color: #ffffff;
 }
 
 /* 入力中 */
@@ -167,19 +165,23 @@
 
 /* ログインボタン */
 .login-button {
-	border-radius: 6px;
-	font-size: 14px;
-	cursor: pointer;
-	height: 42px;
 	width: 100%;
+	height: 48px;
+	border-radius: 6px;
+	cursor: pointer;
 	background-color: green;
 	color: white;
 	border: 1px solid green;
+	font-weight: 450;
+	font-size: 107%;
 	box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.35);
+	transition: 0.2s;
 }
 
 .login-button:hover {
-	opacity: 0.75;
+	background-color: #ffffff;
+	color: green;
+	border-color: green;
 }
 /* エラーメッセージ */
 .error-message {
@@ -196,41 +198,40 @@
 /* -------- mypage.jsp -------- */
 /* --------------------------- */
 
-
- /*ボタンを表示するエリア(ナイトモード) */
+/*ボタンを表示するエリア(ナイトモード) */
 .sample2Area {
-  width          : 100px;               /* ボタンの横幅       */
+	width: 100px; /* ボタンの横幅       */
 }
- 
- /*チェックボックス*/
+
+/*チェックボックス*/
 .sample2Area input[type="checkbox"] {
-  display        : none;            /* チェックボックス非表示 */
+	display: none; /* チェックボックス非表示 */
 }
- 
- /*チェックボックスのラベル（標準)*/
+
+/*チェックボックスのラベル（標準)*/
 .sample2Area label {
-  display        : block;               /* ボックス要素に変更 */
-  box-sizing     : border-box;          /* 枠線を含んだサイズ */
-  text-align     : left;                /* 文字位置は中央     */
-  border         : 2px solid #78bd78;   /* 枠線               */
-  border-radius  : 3px;                 /* 角丸               */
-  line-height    : 1;                   /* 1行の高さ          */
-  height         : 40px;                /* ボタンの高さ       */
+	display: block; /* ボックス要素に変更 */
+	box-sizing: border-box; /* 枠線を含んだサイズ */
+	text-align: left; /* 文字位置は中央     */
+	border: 2px solid #78bd78; /* 枠線               */
+	border-radius: 3px; /* 角丸               */
+	line-height: 1; /* 1行の高さ          */
+	height: 40px; /* ボタンの高さ       */
 }
- 
- /* 移動BOX（標準）*/
+
+/* 移動BOX（標準）*/
 .sample2Area #sample2box {
-  display        :inline-block;
-  height         : 36.5px;                /* ボタンの高さ       */
-  width          : 50%;                 /* ボタンの高さ       */
-  background     : #ddd;                /* 背景色             */
-  transition     : .3s;                 /* ゆっくり変化       */
+	display: inline-block;
+	height: 36.5px; /* ボタンの高さ       */
+	width: 50%; /* ボタンの高さ       */
+	background: #ddd; /* 背景色             */
+	transition: .3s; /* ゆっくり変化       */
 }
- 
- /* ON側のチェックボックスの移動BOX（ONのとき)*/
-.sample2Area #sample2check:checked + label #sample2box {
-  transform      : translateX(100%);    /* BOXを右に移動      */
-  background     : #78bd78;             /* 背景色             */
+
+/* ON側のチェックボックスの移動BOX（ONのとき)*/
+.sample2Area #sample2check:checked+label #sample2box {
+	transform: translateX(100%); /* BOXを右に移動      */
+	background: #78bd78; /* 背景色             */
 }
 
 /* マイページ全体 */
@@ -243,7 +244,7 @@
 	padding-bottom: 12px;
 	margin-bottom: 12px;
 	padding-bottom: 12px;
-    margin-bottom: 12px;
+	margin-bottom: 12px;
 }
 
 .mypage section:last-of-type {
@@ -260,7 +261,7 @@
 	padding: 10px 12px;
 	padding-bottom: 0;
 	margin-bottom: 0;
-	box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
 	margin-left: 23px;
 	margin-right: 23px;
 	border-bottom: none;
@@ -271,14 +272,12 @@
 }
 
 /* 名前とIDの表示 */
-.user-id,
-.nickname {
+.user-id, .nickname {
 	margin: 12px 0 4px 30px;
 	font-weight: 450;
 }
 
-.user-id div,
-.nickname div {
+.user-id div, .nickname div {
 	border: 1px solid #008080;
 	padding: 6px 12px;
 	border-radius: 8px;
@@ -347,23 +346,21 @@
 }
 
 /* 各行を横並びにして整列 */
-.alert-setting .alert-money,
-.alert-setting .alert-number {
-  display: flex;
-  align-items: center;
-  gap: 6px; /* ラベルと入力欄の間の余白 */
-  margin-top: 6px;
-  margin-left: auto; 
-  justify-content: flex-end;
+.alert-setting .alert-money, .alert-setting .alert-number {
+	display: flex;
+	align-items: center;
+	gap: 6px; /* ラベルと入力欄の間の余白 */
+	margin-top: 6px;
+	margin-left: auto;
+	justify-content: flex-end;
 }
 
 /* 入力欄の幅調整（必要なら） */
-.alert-setting input[type="text"],
-.alert-setting input[type="number"] {
-  width: 120px;
-  padding: 4px 6px;
-  border: 1px solid #008080;
-  border-radius: 4px;
+.alert-setting input[type="text"], .alert-setting input[type="number"] {
+	width: 120px;
+	padding: 4px 6px;
+	border: 1px solid #008080;
+	border-radius: 4px;
 }
 
 /* 着せ替え機能 */
@@ -375,20 +372,31 @@
 }
 
 .dress-up button {
-  flex: 1;
-  width: 21%;
-  height: 40px;
-  border-radius: 12px;
-  border: 1px solid #ccc;
-  margin: 10px 4px;
-  cursor: pointer;
-  margin: 6;
+	flex: 1;
+	width: 21%;
+	height: 40px;
+	border-radius: 12px;
+	border: 1px solid #ccc;
+	margin: 10px 4px;
+	cursor: pointer;
+	margin: 6;
 }
 
-.dress-up button:nth-of-type(1) {background-color: #80ff80;}
-.dress-up button:nth-of-type(2) {background-color: #80ffff;}
-.dress-up button:nth-of-type(3) {background-color: #ff75ff;}
-.dress-up button:nth-of-type(4) {background-color: #f5ad5c;}
+.dress-up button:nth-of-type(1) {
+	background-color: #80ff80;
+}
+
+.dress-up button:nth-of-type(2) {
+	background-color: #80ffff;
+}
+
+.dress-up button:nth-of-type(3) {
+	background-color: #ff75ff;
+}
+
+.dress-up button:nth-of-type(4) {
+	background-color: #f5ad5c;
+}
 
 /* ログアウト */
 .logout {
@@ -416,4 +424,75 @@
 	color: f2f2f2;
 	outline: none;
 	background-color: green;
+}
+
+/* --------------------------- */
+/* -------- mypage.jsp -------- */
+/* --------------------------- */
+.edit-button {
+	width: 95px;
+	height: 40px;
+	border-radius: 6px;
+	cursor: pointer;
+	background-color: green;
+	color: white;
+	border: 1px solid green;
+	font-weight: 450;
+	font-size: 14px;
+	box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.35);
+	transition: 0.2s;
+}
+
+.edit-button:hover {
+	background-color: #ffffff;
+	color: green;
+	border-color: green;
+}
+
+.progfile-edit-nav {
+	text-align: left;
+	font-weight: bold;
+	margin: 8px auto;
+}
+
+.profile_edit_area {
+	width: 340px;
+	margin: 10px auto;
+	background-color: white;
+	border: 1px solid green;
+	padding: 12px;
+	box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.35);
+	border-radius: 32px;
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 12px;
+}
+
+.profile-edit-form {
+	width: 230px;
+	margin: 10px auto;
+}
+
+.edit-input {
+	width: 100%;
+	margin: 1px 0 20px 0;
+	box-sizing: border-box;
+	border-radius: 8px;
+	border: 1px solid green;
+	padding: 6px 10px;
+	font-size: 14px;
+	background-color: #ffffff;
+}
+
+.form-buttons {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	gap: 35px;
+	margin-top: 4px;
 }

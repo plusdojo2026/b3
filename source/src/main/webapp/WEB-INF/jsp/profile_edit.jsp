@@ -40,28 +40,30 @@ User loginUser = (User) session.getAttribute("loginUser");
 				<p class="progfile-edit-nav">プロフィールの編集</p>
 				<form method="POST"
 					action="${pageContext.request.contextPath}/UserEditServlet"
-					id="profile-edit-form">
+					id="profile-edit-form" class="profile-edit-form">
 					<label class="edits">ニックネーム<br> <input type="text"
-						name="nickname" class="edit-nickname" id="nickname" maxlength="20"
-						value="<%=loginUser.getNickname()%>"><br>
+						name="nickname" class="edit-nickname edit-input" id="nickname"
+						maxlength="20" value="<%=loginUser.getNickname()%>"><br>
 					</label> <label class="edits">ユーザーID<br> <input type="text"
-						name="loginId" class="edit-loginId" id="loginId" maxlength="20"
-						value="<%=loginUser.getLoginId()%>"><br>
+						name="loginId" class="edit-loginId edit-input" id="loginId"
+						maxlength="20" value="<%=loginUser.getLoginId()%>"><br>
 					</label> <label class="edits">現在のパスワード<br> <input
-						type="password" name="isPassword" class="edit-isPassword"
-						id="isPassword" maxlength="20" required><br>
+						type="password" name="isPassword"
+						class="edit-isPassword edit-input" id="isPassword" maxlength="20"
+						required><br>
 					</label> <label class="edits">新しいパスワード<br> <input
-						type="password" name="password" class="edit-password"
+						type="password" name="password" class="edit-password edit-input"
 						id="password" maxlength="20"><br>
 					</label> <label class="edits">新しいパスワード（確認用）<br> <input
 						type="password" name="passwordConfirm"
-						class="edit-passwordConfirm" id="passwordConfirm" maxlength="20">
+						class="edit-passwordConfirm edit-input" id="passwordConfirm"
+						maxlength="20">
 					</label>
 					<div class="form-bottom-bar"></div>
 					<div class="form-buttons">
-						<input type="button" onclick="history.back()" class="reset-button"
+						<input type="button" onclick="history.back()" class="edit-button"
 							name="cancel" id="cancelBtn" value="キャンセル"> <input
-							type="submit" class="signup-button" name="submit" id="editBtn"
+							type="submit" class="edit-button" name="submit" id="editBtn"
 							value="変更の保存">
 					</div>
 				</form>
