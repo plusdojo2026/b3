@@ -1,4 +1,275 @@
 @charset "UTF-8";
+/* -------------------------- */
+/* -------- home.jsp -------- */
+/* -------------------------- */
+.home-wallet-view {
+	width: 340px;
+	margin: 10px auto;
+	background-color: green;
+	border: none;
+	padding: 12px;
+	box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.35);
+	border-radius: 12px;
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 12px;
+}
+
+.home-money-amount {
+	width: 244px;
+	height: 64px;
+	background-color: white;
+	box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.35);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 32px;
+	font-weight: bold;
+	position: relative;
+}
+
+/* ピタお画像 */
+.character-pos {
+	flex-shrink: 0;
+	background-color: white;
+	border-radius: 50%;
+}
+
+.home-pitao {
+	width: 80px;
+	height: auto;
+	display: block;
+}
+
+.home-money-amount {
+	width: 224px;
+	height: 60px;
+	background-color: white;
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.home-eye-btn {
+	position: absolute;
+	top: 6px;
+	left: 6px;
+	border: none;
+	background: transparent;
+	padding: 0;
+	cursor: pointer;
+	font-size: 16px;
+}
+
+/* 金額 */
+.home-money-amount span {
+	font-size: 28px;
+	font-weight: bold;
+}
+
+/* お金一覧は下に落とす */
+.home-money-list {
+	width: 100%;
+	margin-top: 12px;
+}
+
+.home-money-list {
+	width: 320px;
+	margin: 10px auto;
+	width: 100%;
+	margin-top: 12px;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 12px;
+	justify-items: center;
+	align-items: center;
+	margin-top: 12px;
+}
+
+.home-money-type {
+	width: 90px;
+	height: 76px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	transition: 0.2s;
+}
+
+.home-money-images {
+	max-width: 90px;
+	max-height: 70px;
+	object-fit: contain;
+	display: block;
+}
+
+.money-option {
+	width: 90px;
+	height: 76px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	transition: 0.2s;
+}
+
+.money-option input[type="text"] {
+	display: none;
+}
+
+.money-option-image {
+	max-width: 90px;
+	max-height: 70px;
+	object-fit: contain;
+	display: block;
+}
+
+.toWallet {
+	margin: 0 auto;
+	padding: 8px;
+	background-color: white;
+	text-align: center;
+	width: 244px;
+	height: 66;
+	justify-content: center;
+	text-decoration: none;
+	display: flex;
+	box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.35);
+	border-radius: 8px;
+	transition: 0.2s;
+	color: black;
+	font-weight: 480;
+}
+
+.toWallet:hover {
+	transform: translateY(-4px);
+}
+
+.toPayment-button {
+	width: 146px;
+	height: 48px;
+	border-radius: 6px;
+	cursor: pointer;
+	background-color: green;
+	color: white;
+	border: 1px solid green;
+	font-weight: 450;
+	font-size: 107%;
+	box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.35);
+	transition: 0.2s;
+}
+
+.home-coin-support {
+	width: 340px;
+	height: 108px;
+	margin: 10px auto 16px auto;
+	border: 1px solid green;
+	padding: 12px;
+	box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.35);
+	border-radius: 12px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 6px;
+	box-sizing: border-box;
+}
+
+.support-title {
+	width: 100%;
+	text-align: left;
+	font-weight: bold;
+}
+
+.home-column-content {
+	font-size: 13px;
+}
+
+.toPaymentArea {
+	display: flex;
+	justify-content: center;
+	gap: 12px;
+}
+
+.toPayment-button:hover {
+	background-color: #ffffff;
+	color: green;
+	border: none;
+}
+
+.toPayment-input {
+	width: 146px;
+	height: 48px;
+	border: 1px solid greeen;
+	display: flex;
+	padding: 8px;
+	border-radius: 8px;
+	font-size: 24px;
+	font-weight: 480;
+	text-align: right;
+	border: 1px solid green;
+}
+
+.home-column {
+	width: 340px;
+	margin: 10px auto;
+	border: 1px solid green;
+	padding: 12px;
+	box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.35);
+	border-radius: 12px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 6px;
+	box-sizing: border-box;
+}
+
+.home-column-content {
+	cursor: pointer;
+}
+
+.section-bottom {
+	margin-bottom: 48px;
+}
+
+.home-money-list {
+	/* 最初は閉じる */
+	max-height: 0;
+	opacity: 0;
+	overflow: hidden;
+
+	transition: max-height 0.35s ease, opacity 0.25s ease;
+}
+
+/* openが付いたら表示 */
+.home-money-list.open {
+	max-height: 400px;
+	opacity: 1;
+}
+
+
+
+
+.money-option {
+	position: relative;
+}
+
+.money-count {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+
+	background-color: rgba(255, 255, 255, 0.8);
+	color: black;
+	font-size: 18px;
+	font-weight: bold;
+	padding: 2px 8px;
+	border-radius: 12px;
+	pointer-events: none;
+}
 
 /* --------------------------- */
 /* -------- wallet.jsp -------- */
@@ -9,7 +280,7 @@
 	background-color: green;
 	padding: 24px 16px;
 	margin: 10px;
-	border-radius:6px;
+	border-radius: 6px;
 }
 
 /*「現在の予算」表示*/
@@ -40,7 +311,7 @@
 	justify-content: left;
 	margin: 12px 16px 20px;
 	padding-bottom: 4px;
-	padding-top:6px;
+	padding-top: 6px;
 }
 
 /* お金の種類のレイアウト 2列グリッド */
@@ -110,17 +381,9 @@
 	margin-right: 28px;
 }
 /*エラー文字*/
-#msg{
-	font-size:16px;
+#msg {
+	font-size: 16px;
 	font-weight: bold;
 	text-align: right;
-	color:green;
+	color: green;
 }
-
-
-
-
-
-
-
-

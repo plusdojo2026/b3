@@ -29,6 +29,12 @@ public class PaymentServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		String amount = request.getParameter("amount");
+
+		if (amount != null) {
+			request.setAttribute("amount", amount);
+		}
+
 		request.getRequestDispatcher("/WEB-INF/jsp/payment.jsp").forward(request, response);
 	}
 
