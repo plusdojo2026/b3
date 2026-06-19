@@ -112,17 +112,45 @@
 	</div>
 	
 	</main>
-<!-- フッターここから -->
+		<!-- フッターここから -->
 		<footer class="bottom-menu">
+
 			<a href="${pageContext.request.contextPath}/CoinSupportServlet"
-				class="nav-item">仮</a> <a
-				href="${pageContext.request.contextPath}/StoreServlet"
-				class="nav-item">仮</a>
+				class="nav-item"> <img class="nav-img normal-img"
+				src="${pageContext.request.contextPath}/images/nav/coin_support_normal.png"
+				alt="ぴったり小銭消費ガイド"> <img class="nav-img hover-img"
+				src="${pageContext.request.contextPath}/images/nav/coin_support_hover.png"
+				alt="ぴったり小銭消費ガイド">
+			</a> <a href="${pageContext.request.contextPath}/StoreServlet"
+				class="nav-item"> <img class="nav-img normal-img"
+				src="${pageContext.request.contextPath}/images/nav/store_info_normal.png"
+				alt="施設情報"> <img class="nav-img hover-img"
+				src="${pageContext.request.contextPath}/images/nav/store_info_hover.png"
+				alt="施設情報">
+			</a>
+
 			<div class="nav-space"></div>
+
 			<a href="${pageContext.request.contextPath}/ColumnServlet"
-				class="nav-item">仮</a> <a href="${pageContext.request.contextPath}/MyPageServlet" class="nav-item">仮</a> <a
-				href="${pageContext.request.contextPath}/PaymentServlet"
-				class="nav-center">仮</a>
+				class="nav-item active"> <img class="nav-img normal-img"
+				src="${pageContext.request.contextPath}/images/nav/column_normal.png"
+				alt="コラム"> <img class="nav-img hover-img"
+				src="${pageContext.request.contextPath}/images/nav/column_hover.png"
+				alt="コラム">
+			</a> <a href="${pageContext.request.contextPath}/MyPageServlet"
+				class="nav-item"> <img class="nav-img normal-img"
+				src="${pageContext.request.contextPath}/images/nav/mypage_normal.png"
+				alt="マイページ"> <img class="nav-img hover-img"
+				src="${pageContext.request.contextPath}/images/nav/mypage_hover.png"
+				alt="マイページ">
+			</a> <a href="${pageContext.request.contextPath}/PaymentServlet"
+				class="nav-center"> <img class="nav-img center-img normal-img"
+				src="${pageContext.request.contextPath}/images/nav/payment_normal.png"
+				alt="支出登録"> <img class="nav-img center-img hover-img"
+				src="${pageContext.request.contextPath}/images/nav/payment_hover.png"
+				alt="支出登録">
+			</a>
+
 		</footer>
 		<!-- フッターここまで -->
 	</div>
