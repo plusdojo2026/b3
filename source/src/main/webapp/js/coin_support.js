@@ -98,35 +98,37 @@ if (allMatchedPatterns.length === 0) {
 } else {
 	for (let i = 0; i < Math.min(3, allMatchedPatterns.length); i++) {
 		const li = document.createElement('li');
+		//CSSのためにクラス名をつける
+		li.className = "match-pattern-box";
 		
-		// 1. 見出しを作る
-		const spanTitle = document.createElement('span');
-		spanTitle.textContent = `【パターン${i + 1}】`;
-		li.appendChild(spanTitle);
-
-		// 2. そのパターンに含まれる商品のリストを取り出す
+		// そのパターンに含まれる商品のリストを取り出す
 		const patternItems = allMatchedPatterns[i];
 		
-		// 3. 表示の段階で、含まれる商品の数だけループして画像と文字を出す
-		patternItems.forEach((item, index) => {
+		// 商品ごとのHTMLを組み立てるための変数
+		let itemsHtml = "";
+		
+		// パターンに含まれる商品の数だけループして、HTMLの文字を作っていく
+		patternItems.forEach((item) => {
 			
-			// 画像タグを作って、URL（image_url）をセット
-			const img = document.createElement('img');
-			img.src = "images/product/" + item.image_url + ".jpg";
-			img.className = "prod-img";
-		li.appendChild(img); // 画像を画面に追加
-
-			// テキストを組み立てる
-			let itemText = `[${item.store_name_ja}] ${item.name_ja} ￥${item.price}`;
-			
-			// 複数ある場合は間に「 ＋ 」、最後なら「 ＝ ￥合計」をつける
-			if (index < patternItems.length - 1) {
-				itemText += " ＋ ";
-			} else {
-				itemText += ` ＝ ￥${targetAmount}`;
-			}
-			li.append(itemText);
+			// 商品1つずつのHTMLを組み立て
+			itemsHtml += `
+				<div class="single-item-box">
+					<img src="images/product/${item.image_url}" class="prod-img" 
+						
+					<div class="item-store">[${item.store_name_ja}]</div>
+					<div class="item-name">${item.name_ja}</div>
+					<div class="item-price">￥${item.price}</div>
+				</div>
+			`;
 		});
+		
+		// バッククォートでliの中身を上書きする
+		li.innerHTML = `
+			<div class="pattern-title">【パターン${i + 1}】</div>
+			<div class="pattern-items-container">
+				${itemsHtml}
+			</div>
+		`;
 		
 		matchComboUl.appendChild(li);
 	}
@@ -191,7 +193,7 @@ function updateRecItems() {
 		
 		//画像タグを新しくつくる
 		const img =document.createElement('img');
-		img.src = "images/product/" + item.image_url +".jpg";
+		img.src = "images/product/" + item.image_url+".jpg";
 		img.className = "prod-img";
 		
 		//リストにテキストをセット	
