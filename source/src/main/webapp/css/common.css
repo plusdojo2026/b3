@@ -121,6 +121,7 @@ body {
 	transform: translateX(-50%);
 	border: 2px solid #fff;
 	z-index: 110;
+	transition: 0.1s;
 	box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.45);
 }
 
@@ -137,6 +138,7 @@ body {
 .center-img {
 	width: 72px;
 	height: 72px;
+	transition: 0.1s;
 }
 
 /* 通常時 */
