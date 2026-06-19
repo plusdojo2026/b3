@@ -29,7 +29,8 @@
 		</header>
 		<!-- ヘッダーここまで -->
 		<!-- メインここから -->
-
+		
+		
 		<section class="money-display">
 			<div class="home-wallet-view">
 				<div class="character-pos">
