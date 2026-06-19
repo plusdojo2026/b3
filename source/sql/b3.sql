@@ -176,8 +176,7 @@ INSERT INTO products (
 (3, 'じっくり煮込んだポークカレー', 'Pork Curry',537, 'food', 'chilled_curry'),
 (3, '味しみロースかつ丼', 'Pork Cutlet Rice Bowl',699, 'food', 'chilled_katsu'),
 (3, '肉の旨味とデミグラスのコク　ミートソース', 'Meat Sauce Pasta',496, 'food', 'pasta_meatSauce'),
-(3, 'ケチャップソースの大盛ナポリタン', 'Napolitan Pasta',537, 'food', 'pasta_napolitan');
--- スターバックスの商品
+(3, 'ケチャップソースの大盛ナポリタン', 'Napolitan Pasta',537, 'food', 'pasta_napolitan'),
 (8, 'ブリュード コーヒー', 'Brewed Coffee', 440, 'drink', 'brewed_coffee'),
 (8, 'カフェ ミスト', 'Caffè Misto', 495, 'drink', 'cafe_misto'),
 (8, 'ビター クリーム コーヒー', 'Bitter Cream Coffee', 590, 'drink', 'bitter_cream_coffee'),
@@ -577,20 +576,6 @@ INSERT INTO columns (
     'The materials used for Japanese coins change depending on economic conditions and metal prices. For example, the 5-yen coin adopted brass after World War II due to material shortages. The 500-yen coin has undergone multiple redesigns to prevent counterfeiting. Coin materials are chosen based on cost, durability, and security considerations.',
     '雑学'
 );
-
-
--- storesテーブル追加
-
-INSERT INTO stores (
-    name_ja,
-    name_en,
-    address_ja,
-    address_en,
-    latitude,
-    longitude,
-    category,
-    cashless_type
-) VALUES
 
  
 
