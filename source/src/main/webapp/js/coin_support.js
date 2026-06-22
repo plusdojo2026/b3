@@ -93,7 +93,16 @@ for (let i = allMatchedPatterns.length - 1; i > 0; i--) {
 //シャッフルした結果から最大3つだけをmatchComboUlに貼り付ける
 if (allMatchedPatterns.length === 0) {
 	const li = document.createElement('li');
-	li.textContent = " ぴったりになる組み合わせはありませんでした";
+	
+	// 1. JSPのbodyタグから "ja" または "en" を読み取る
+    const currentLang = document.body.dataset.lang;
+    
+	// 2. 言語によって文字を切り替える
+    if (currentLang === 'en') {
+        li.textContent = "No perfect combinations found.";
+    } else {
+        li.textContent = "ぴったりになる組み合わせはありませんでした";
+    }
 	matchComboUl.appendChild(li);
 } else {
 	for (let i = 0; i < Math.min(3, allMatchedPatterns.length); i++) {
