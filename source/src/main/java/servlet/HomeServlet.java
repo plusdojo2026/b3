@@ -53,6 +53,13 @@ public class HomeServlet extends HttpServlet {
 		request.setAttribute("wallet", wallet);
 		request.setAttribute("totalAmount", totalAmount);
 
+		// 合計枚数を算出する。
+		int totalCount = wallet.getTenThousandYen() + wallet.getFiveThousandYen() + wallet.getOneThousandYen()
+				+ wallet.getFiveHundredYen() + wallet.getOneHundredYen() + wallet.getFiftyYen() + wallet.getTenYen()
+				+ wallet.getFiveYen() + wallet.getOneYen();
+		
+		request.setAttribute("totalCount", totalCount);
+
 		request.getRequestDispatcher("/WEB-INF/jsp/home.jsp").forward(request, response);
 	}
 }
