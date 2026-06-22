@@ -30,7 +30,10 @@
 		<!-- ヘッダーここまで -->
 		<!-- メインここから -->
 		<div class="massage1">
+		<div id="total-amount"></div>
+		<div id="coin-amount"></div>
 			予算が少なくなってきたでござる
+			
 		</div>
 		
 		<section class="money-display">
