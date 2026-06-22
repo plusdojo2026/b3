@@ -74,7 +74,7 @@
 				<div class="alert"><fmt:message key="mypage.alert" /></div>
 				
 				<div class="alert-money">
-				<fmt:message key="mypage.amount" />￥<input type="text" name="alert-money" value=""> 
+				<fmt:message key="mypage.amount" /><input type="text" name="alert-money" value=""><fmt:message key="mypage.en" />
 				</div>
 				<div class="alert-number">
 				<fmt:message key="mypage.quantity" /><input
