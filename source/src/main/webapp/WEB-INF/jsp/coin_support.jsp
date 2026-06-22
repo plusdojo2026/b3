@@ -119,7 +119,7 @@ String amountText = String.format("%,d", amount);
 
 			<!-- ぴったり小銭消費ガイド -->
 			<a href="${pageContext.request.contextPath}/CoinSupportServlet"
-				class="nav-item"> <img class="nav-img normal-img"
+				class="nav-item active"> <img class="nav-img normal-img"
 				src="${pageContext.request.contextPath}/images/nav/coin_support_normal${pageContext.response.locale.language == 'en' ? '_en' : ''}.png"
 				alt="<fmt:message key='menu.coin_support' />"> <img
 				class="nav-img hover-img"
@@ -127,7 +127,7 @@ String amountText = String.format("%,d", amount);
 				alt="<fmt:message key='menu.coin_support' />">
 			<!-- 施設情報 -->
 			</a> <a href="${pageContext.request.contextPath}/StoreServlet"
-				class="nav-item active"> <img class="nav-img normal-img"
+				class="nav-item"> <img class="nav-img normal-img"
 				src="${pageContext.request.contextPath}/images/nav/store_info_normal${pageContext.response.locale.language == 'en' ? '_en' : ''}.png"
 				alt="<fmt:message key='menu.store_info' />"> <img
 				class="nav-img hover-img"

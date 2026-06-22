@@ -113,7 +113,7 @@ String errorMsg = (String) request.getAttribute("errorMsg");
 				alt="<fmt:message key='menu.coin_support' />">
 			<!-- 施設情報 -->
 			</a> <a href="${pageContext.request.contextPath}/StoreServlet"
-				class="nav-item active"> <img class="nav-img normal-img"
+				class="nav-item"> <img class="nav-img normal-img"
 				src="${pageContext.request.contextPath}/images/nav/store_info_normal${pageContext.response.locale.language == 'en' ? '_en' : ''}.png"
 				alt="<fmt:message key='menu.store_info' />"> <img
 				class="nav-img hover-img"
@@ -141,7 +141,7 @@ String errorMsg = (String) request.getAttribute("errorMsg");
 				alt="<fmt:message key='menu.mypage' />">
 			<!-- 支出登録 -->
 			</a> <a href="${pageContext.request.contextPath}/PaymentServlet"
-				class="nav-center"> <img class="nav-img center-img normal-img"
+				class="nav-center active"> <img class="nav-img center-img normal-img"
 				src="${pageContext.request.contextPath}/images/nav/payment_normal${pageContext.response.locale.language == 'en' ? '_en' : ''}.png"
 				alt="<fmt:message key='menu.payment' />"> <img
 				class="nav-img center-img hover-img"

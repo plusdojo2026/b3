@@ -152,7 +152,7 @@
 				alt="<fmt:message key='menu.coin_support' />">
 			<!-- 施設情報 -->
 			</a> <a href="${pageContext.request.contextPath}/StoreServlet"
-				class="nav-item active"> <img class="nav-img normal-img"
+				class="nav-item"> <img class="nav-img normal-img"
 				src="${pageContext.request.contextPath}/images/nav/store_info_normal${pageContext.response.locale.language == 'en' ? '_en' : ''}.png"
 				alt="<fmt:message key='menu.store_info' />"> <img
 				class="nav-img hover-img"
@@ -172,7 +172,7 @@
 				alt="<fmt:message key='menu.column' />">
 			<!-- マイページ -->
 			</a> <a href="${pageContext.request.contextPath}/MyPageServlet"
-				class="nav-item"> <img class="nav-img normal-img"
+				class="nav-item active"> <img class="nav-img normal-img"
 				src="${pageContext.request.contextPath}/images/nav/mypage_normal${pageContext.response.locale.language == 'en' ? '_en' : ''}.png"
 				alt="<fmt:message key='menu.mypage' />"> <img
 				class="nav-img hover-img"
