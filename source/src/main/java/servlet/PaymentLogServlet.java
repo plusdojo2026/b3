@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.PaymentDao;
-import dto.Payment;
 import dto.User;
 
 @WebServlet("/PaymentLogServlet")
@@ -28,6 +27,8 @@ public class PaymentLogServlet extends HttpServlet {
 
 		HttpSession session = request.getSession();
 		User loginUser = (User) session.getAttribute("loginUser");
+		
+
 
 		if (loginUser == null) {
 			response.sendRedirect(request.getContextPath() + "/LoginServlet");
