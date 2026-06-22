@@ -109,7 +109,7 @@
 	</div>
 	
 	<div id="noResultMessage" style="display:none;">
-		<fmt:message key="column.noArticle" />
+		<fmt:message key="column.noArticles" />
 	</div>
 	
 	</main>
