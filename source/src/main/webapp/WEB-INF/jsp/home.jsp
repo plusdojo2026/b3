@@ -29,13 +29,10 @@
 		</header>
 		<!-- ヘッダーここまで -->
 		<!-- メインここから -->
-		<div class="massage1">
-		<div id="total-amount"></div>
-		<div id="coin-amount"></div>
-			予算が少なくなってきたでござる
-			
-		</div>
-		
+		<div id="total-amount">${totalAmount}</div>
+		<div id="coin-amount">${totalCount}</div>
+		<div class="massage1">予算が少なくなってきたでござる</div>
+
 		<section class="money-display">
 			<div class="home-wallet-view">
 				<div class="character-pos">

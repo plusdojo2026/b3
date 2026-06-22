@@ -4,6 +4,7 @@ const amountInput = document.querySelector('.amount-input');
 
 let isComposing = false;
 
+
 // 全角数字 → 半角数字
 function toHalfWidthNumber(value) {
 	return value.replace(/[０-９]/g, function(s) {
@@ -94,4 +95,11 @@ if (eyeBtn) {
 		}
 	});
 }
+/*  予算アラート機能  */
+
+let alertHomeAmount = Number(homeWalletAmount.textContent.replace(/[^0-9]/g, ''));
+
+if()
+
+
 
