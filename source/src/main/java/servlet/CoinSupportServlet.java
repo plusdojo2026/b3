@@ -90,6 +90,16 @@ public class CoinSupportServlet extends HttpServlet {
 			// DAOのメソッドを呼び出して、金額以下の全商品を取得（その他のおすすめ部分に表示）
 			List<Product> recItemsList = productDao.getProducts(targetPrice);
 
+			// 英語モードのときは、商品名と店舗名を英語で上書きする
+			String currentLang = (String) session.getAttribute("currentLang");
+			if ("en".equals(currentLang)) {
+				for (Product item : recItemsList) {
+					// JS側が読み込む_jaの変数に、英語用のデータを上書き
+					item.setName_ja(item.getName_en());
+					item.setStore_name_ja(item.getStore_name_en());
+				}
+			}
+
 			// 取得したリストを、Gsonを使ってJSON（文字）に変換する
 			Gson gson = new Gson();
 			String recItemsJson = gson.toJson(recItemsList);
@@ -106,8 +116,6 @@ public class CoinSupportServlet extends HttpServlet {
 		request.setAttribute("totalCoins", totalCoins);
 		request.setAttribute("submitType", submitType);
 		request.setAttribute("amountInput", amountInput);
-//	request.setAttribute("matchComboList", matchComboList);
-//    request.setAttribute("recItemsList", recItemsList);
 
 //	JSPを表示する
 		request.getRequestDispatcher("/WEB-INF/jsp/coin_support.jsp").forward(request, response);
