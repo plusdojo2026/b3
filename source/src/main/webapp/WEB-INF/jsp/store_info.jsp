@@ -33,7 +33,7 @@ const store_list = JSON.parse(String.raw`${storeListJson}`);
 			<a href="${pageContext.request.contextPath}/HomeServlet"> <img
 				src="${pageContext.request.contextPath}/images/logo/logo.png"
 				alt="ロゴ" class="logo"></a>
-			<div class="page-title">施設情報</div>
+			<div class="page-title"><fmt:message key="store_info.title" /></div>
 			<a href="${pageContext.request.contextPath}/HomeServlet"> <img
 				src="${pageContext.request.contextPath}/images/logo/home.png"
 				alt="ホーム" class="toHome"></a>
@@ -66,7 +66,7 @@ const store_list = JSON.parse(String.raw`${storeListJson}`);
 					aria-pressed="false"><fmt:message key="store_info.c.both" /></button>
 				<!-- ATM -->
 				<button type="button" class="filter-btn" data-category="ATM"
-					aria-pressed="false"><fmt:message key="store_info.c.ATM" /></button>
+					aria-pressed="false">ATM</button>
 				<!-- 外貨両替機 -->
 				<button type="button" class="filter-btn" data-category="exchange"
 					aria-pressed="false"><fmt:message key="store_info.c.exchange" /></button>
