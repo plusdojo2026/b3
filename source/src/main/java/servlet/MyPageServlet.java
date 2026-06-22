@@ -33,6 +33,7 @@ public class MyPageServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		
 
 		// ユーザーごとのidを取得
 		HttpSession session = request.getSession();
@@ -46,6 +47,11 @@ public class MyPageServlet extends HttpServlet {
 			return;
 		}
 
+		// セッションにcurrentLangが一回も入っていなければ、デフォルトとしてjaを入れる
+				if (session.getAttribute("currentLang") == null) {
+					session.setAttribute("currentLang", "ja");
+				}
+				
 		request.setAttribute("user", loginUser);
 		// マイページにフォワード
 		request.getRequestDispatcher("/WEB-INF/jsp/mypage.jsp").forward(request, response);
@@ -67,7 +73,23 @@ public class MyPageServlet extends HttpServlet {
 		String displaymode = request.getParameter("displaymode");
 		String night = request.getParameter("night");
 		String language = request.getParameter("language");
-
+		
+		// ==========================================
+		//  プロパティファイル用のセッション保存を追加
+		// ==========================================
+		java.util.Locale locale;
+		if ("en".equals(language)) {
+			locale = new java.util.Locale("en"); // 英語
+		} else {
+			locale = new java.util.Locale("ja"); // 日本語
+		}
+		
+		// JSTLのタグ（fmt:message）が自動でこの言語を認識できるようにセッションに保存
+		javax.servlet.jsp.jstl.core.Config.set(request.getSession(), javax.servlet.jsp.jstl.core.Config.FMT_LOCALE, locale);
+		
+		// 後でJavaScript（coin_support.jsなど）で「今どっちの言語？」と判定するために文字でも保存しておくと便利です
+		request.getSession().setAttribute("currentLang", "en".equals(language) ? "en" : "ja");
+		
 		request.getRequestDispatcher("/WEB-INF/jsp/mypage.jsp").forward(request, response);
 	}
 

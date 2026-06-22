@@ -1,12 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setBundle basename="messages" />
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>予算・登録編集 - こぜピタ</title>
+<title>マイページ - こぜピタ</title>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/common.css">
 <link rel="stylesheet"
@@ -24,7 +26,7 @@
 			<a href="${pageContext.request.contextPath}/HomeServlet"> <img
 				src="${pageContext.request.contextPath}/images/logo/logo.png"
 				alt="ロゴ" class="logo"></a>
-			<div class="page-title">マイページ</div>
+			<div class="page-title"><fmt:message key="mypage.title" /></div>
 			<a href="${pageContext.request.contextPath}/HomeServlet"> <img
 				src="${pageContext.request.contextPath}/images/logo/home.png"
 				alt="ホーム" class="toHome"></a>
@@ -59,11 +61,13 @@
 			</section>
 
 			<section class="multilingual-feature">
+			<form action="MyPageServlet" method="post">
 				<div class=multilingual>多言語機能</div>
-				<select class="pull-input">
-					<option value="japanese">日本語</option>
-					<option value="english">英語</option>
+				<select class="pull-input" name="language" onchange="this.form.submit()">
+					<option value="ja" ${sessionScope.currentLang != 'en' ? 'selected' : ''}>日本語</option>
+					<option value="en" ${sessionScope.currentLang == 'en' ? 'selected' : ''}>英語</option>
 				</select>
+			</form>	
 			</section>
 
 			<section class="alert-setting">
