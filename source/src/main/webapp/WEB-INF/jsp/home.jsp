@@ -29,7 +29,9 @@
 		</header>
 		<!-- ヘッダーここまで -->
 		<!-- メインここから -->
-		
+		<div class="massage1">
+			予算が少なくなってきたでござる
+		</div>
 		
 		<section class="money-display">
 			<div class="home-wallet-view">
