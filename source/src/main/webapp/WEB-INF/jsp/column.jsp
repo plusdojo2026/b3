@@ -26,7 +26,7 @@
 			<a href="${pageContext.request.contextPath}/HomeServlet"> <img
 				src="${pageContext.request.contextPath}/images/logo/logo.png"
 				alt="ロゴ" class="logo"></a>
-			<div class="page-title">コラム</div>
+			<div class="page-title"><fmt:message key="column.title" /></div>
 			<a href="${pageContext.request.contextPath}/HomeServlet"> <img
 				src="${pageContext.request.contextPath}/images/logo/home.png"
 				alt="ホーム" class="toHome"></a>
@@ -37,21 +37,21 @@
 	<!-- 検索フォーム -->
 	<div class="search-box">
 		<form method="GET" action="ColumnServlet">
-			<input type="text" name="keyword" maxlength="30" placeholder="検索したい内容を入力">
-			<button type="submit">検索</button>
+			<input type="text" name="keyword" maxlength="30" placeholder="<fmt:message key='column.searchamessage' />">
+			<button type="submit"><fmt:message key="column.search" /></button>
 		</form>
 	</div>
 	
 	<!-- カテゴリ -->
 	<div class="category-list">
-		<div class="category-btn" data-category="全て">全て</div>
-		<div class="category-btn" data-category="冠婚葬祭">冠婚葬祭</div>
-		<div class="category-btn" data-category="日常生活">日常生活</div>
-		<div class="category-btn" data-category="贈り物">贈り物</div>
-		<div class="category-btn" data-category="ビジネス">ビジネス</div>
-		<div class="category-btn" data-category="恋愛・結婚">恋愛・結婚</div>
-		<div class="category-btn" data-category="家庭・親戚">家庭・親戚</div>
-		<div class="category-btn" data-category="雑学">雑学</div>
+		<div class="category-btn" data-category="全て"><fmt:message key="column.all" /></div>
+		<div class="category-btn" data-category="冠婚葬祭"><fmt:message key="column.occasions" /></div>
+		<div class="category-btn" data-category="日常生活"><fmt:message key="column.dailyLife" /></div>
+		<div class="category-btn" data-category="贈り物"><fmt:message key="column.gifts" /></div>
+		<div class="category-btn" data-category="ビジネス"><fmt:message key="column.bussiness" /></div>
+		<div class="category-btn" data-category="恋愛・結婚"><fmt:message key="column.relationships" /></div>
+		<div class="category-btn" data-category="家庭・親戚"><fmt:message key="column.family" /></div>
+		<div class="category-btn" data-category="雑学"><fmt:message key="column.trivia" /></div>
 	</div>
 	
 	<!-- コラム一覧  -->
@@ -109,7 +109,7 @@
 	</div>
 	
 	<div id="noResultMessage" style="display:none;">
-		該当するコラムが見つかりませんでした
+		<fmt:message key="column.noArticle" />
 	</div>
 	
 	</main>
