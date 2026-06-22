@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setBundle basename="messages" />
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 Integer amount =  (Integer) request.getAttribute("totalCoins");
@@ -30,7 +32,7 @@ String amountText = String.format("%,d", amount);
 			<a href="${pageContext.request.contextPath}/HomeServlet"> <img
 				src="${pageContext.request.contextPath}/images/logo/logo.png"
 				alt="ロゴ" class="logo"></a>
-			<div class="page-title">ぴったり小銭消費ガイド</div>
+			<div class="page-title"><fmt:message key="coin.title" /></div>
 			<a href="${pageContext.request.contextPath}/HomeServlet"> <img
 				src="${pageContext.request.contextPath}/images/logo/home.png"
 				alt="ホーム" class="toHome"></a>
@@ -42,14 +44,14 @@ String amountText = String.format("%,d", amount);
 			<div class="search-box">
 			<form action="${pageContext.request.contextPath}/CoinSupportServlet"
 				method="GET">
-				<h3>金額を入力して探す<span>（上限は￥2,000）</span></h3>
+				<h3><fmt:message key="coin.optional" /><span><fmt:message key="coin.maximum" /></span></h3>
 				<div class="search-inputs">
 				<input type="number" inputmode="numeric" id="amountInput"
 					name="amountInput" min="0" max="2000" placeholder="￥500-" required>
 
 				<%--検索ボタン --%>
 				<button type="submit" id="btnSearchAmount" name="submitType"
-					value="manual">検索</button>
+					value="manual"><fmt:message key="coin.search" /></button>
 				</div>
 			</form>
 			</div>
@@ -58,45 +60,45 @@ String amountText = String.format("%,d", amount);
 			<div class="walletsForm">
 			<form action="${pageContext.request.contextPath}/CoinSupportServlet"
 				method="GET">
-				<h3>財布の小銭から探す<span>（上限は￥2,000）</span></h3>
+				<h3><fmt:message key="coin.wallet" /><span><fmt:message key="coin.maximum" /></span></h3>
 
 				<%--現在の財布の小銭合計額をwalletsテーブルから取得 --%>
-				<p>現在の財布の小銭合計<span>￥<%=amountText%></span></p>
+				<p><fmt:message key="coin.totalCoin" /><span>￥<%=amountText%></span></p>
 					
 				<%--この小銭を使いきる商品をみるボタン --%>
 				<button type="submit" id="btnUseAllCoins" name="submitType"
-					value="wallet">この小銭を使い切る商品をみる</button>
+					value="wallet"><fmt:message key="coin.productsSerch" /></button>
 			</form>
 			</div>
 			
 			
 			<%--ぴったり使い切る組み合わせ （リストで表示）（最大4つまで（SQLで操作）））--%>
 			<div class="matchComboArea">
-				<h3>ぴったり使い切る組み合わせ</h3>
+				<h3><fmt:message key="coin.pittari" /></h3>
 				<ul class="matchList" id="matchComboList">
 				</ul>
 			</div>
 
 			<%--その他のおすすめ商品（現在の小銭合計をwalletsテーブルから取得） --%>
 			<div class="recItemsArea">
-				<h3>その他のおすすめ商品<span id="recAmount">￥${totalCoins}以下</span></h3>
+				<h3><fmt:message key="coin.recItems" /><span id="recAmount">￥${totalCoins}<fmt:message key="coin.ika" /></span></h3>
 					
 				<%--ソートを選択できるドロップダウン --%>
 				<div class="sort-area">
 					<%--<label for="sortOrder">並び替え：</label> --%>
 					<select id="sortOrder" name="sortOrder">
-						<option value="recommend">おすすめ順</option>
-						<option value="priceAsc">金額が安い順</option>
-						<option value="priceDesc">金額が高い順</option>
+						<option value="recommend"><fmt:message key="coin.rec" /></option>
+						<option value="priceAsc"><fmt:message key="coin.low" /></option>
+						<option value="priceDesc"><fmt:message key="coin.high" /></option>
 					</select>
 				</div>
 			</div>
 			<%--カテゴリーを選択できるフィルターボタン （ServletかJSで連携）--%>
 			<div class="category-list">
-				<button type="button" class="category-btn" data-category="allItems">すべて</button>
-				<button type="button" class="category-btn" data-category="food">食べ物</button>
-				<button type="button" class="category-btn" data-category="drink">飲み物</button>
-				<button type="button" class="category-btn" data-category="other">その他</button>
+				<button type="button" class="category-btn" data-category="allItems"><fmt:message key="coin.all" /></button>
+				<button type="button" class="category-btn" data-category="food"><fmt:message key="coin.food" /></button>
+				<button type="button" class="category-btn" data-category="drink"><fmt:message key="coin.drink" /></button>
+				<button type="button" class="category-btn" data-category="other"><fmt:message key="coin.other" /></button>
 			</div>
 
 			<%--小銭合計以下のおすすめ商品（リストで表示）（最大30件まで）（さらに読み込むボタン(JSで操作））--%>
@@ -106,7 +108,7 @@ String amountText = String.format("%,d", amount);
 				</ul>
 
 				<div class="more-btn">
-					<button type="button" id="btnLoadMore">さらに読み込む</button>
+					<button type="button" id="btnLoadMore"><fmt:message key="coin.more" /></button>
 				</div>
 			</div>
 
