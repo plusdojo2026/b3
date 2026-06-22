@@ -16,6 +16,11 @@ public class WalletDao {
 		conn = DriverManager.getConnection(
 				"jdbc:mysql://localhost:3306/b3?characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=GMT%2B9",
 				"root", "password");
+		
+        // ネットワーク接続用
+        //conn = DriverManager.getConnection(
+        		//"jdbc:mysql://localhost:3306/b3?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Tokyo&connectTimeout=30000;",
+        		//"b3", "FYwYHFcfmMuGAnNZ");
 
 		String sql = "INSERT INTO wallets " + "(ten_thousand_yen, five_thousand_yen, one_thousand_yen, "
 				+ "five_hundred_yen, one_hundred_yen, fifty_yen, " + "ten_yen, five_yen, one_yen) "

@@ -1,12 +1,12 @@
 package dao;
 
-import dto.User;
-import dto.Wallet;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+
+import dto.User;
+import dto.Wallet;
 
 public class UserDao {
 
@@ -20,6 +20,11 @@ public class UserDao {
 			conn = DriverManager.getConnection(
 					"jdbc:mysql://localhost:3306/b3?characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=GMT%2B9",
 					"root", "password");
+			
+	        // ネットワーク接続用
+	        //conn = DriverManager.getConnection(
+	        		//"jdbc:mysql://localhost:3306/b3?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Tokyo&connectTimeout=30000;",
+	        		//"b3", "FYwYHFcfmMuGAnNZ");
 
 			String sql = "SELECT id, wallet_id, login_id, password, nickname, display_mode, night, language "
 					+ "FROM users " + "WHERE login_id = ? AND password = ?";

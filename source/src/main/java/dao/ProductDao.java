@@ -26,6 +26,11 @@ public class ProductDao {
 		conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b3?"
 				+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
 				"root", "password");
+		
+        // ネットワーク接続用
+        //conn = DriverManager.getConnection(
+        		//"jdbc:mysql://localhost:3306/b3?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Tokyo&connectTimeout=30000;",
+        		//"b3", "FYwYHFcfmMuGAnNZ");
 
 		// SQL文を準備する
 		String sql = "SELECT (five_hundred_yen*500+ one_hundred_yen*100+ fifty_yen*50+ ten_yen*10+ five_yen*5+ one_yen*1) "

@@ -5,10 +5,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
-
 import java.util.ArrayList;
-import java.util.List;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import dto.Payment;
@@ -43,6 +42,11 @@ public class PaymentDao {
 		Connection conn = DriverManager.getConnection(
 				"jdbc:mysql://localhost:3306/b3?characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=GMT%2B9",
 				"root", "password");
+		
+        // ネットワーク接続用
+        //conn = DriverManager.getConnection(
+        		//"jdbc:mysql://localhost:3306/b3?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Tokyo&connectTimeout=30000;",
+        		//"b3", "FYwYHFcfmMuGAnNZ");
 
 		String sql = "SELECT id, user_id, amount FROM payments WHERE user_id = ? ORDER BY id DESC";
 		PreparedStatement pStmt = conn.prepareStatement(sql);
