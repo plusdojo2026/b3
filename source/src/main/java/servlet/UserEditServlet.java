@@ -79,8 +79,8 @@ public class UserEditServlet extends HttpServlet {
 		}
 
 		// ユーザーID形式チェック
-		if (!loginId.matches("^[A-Za-z0-9]{4,20}$")) {
-			request.setAttribute("errorMsg", "ユーザーIDは4〜20文字の半角英数字で入力してください。");
+		if (!loginId.matches("^[A-Za-z0-9]{8,20}$")) {
+			request.setAttribute("errorMsg", "ユーザーIDは8〜20文字の半角英数字で入力してください。");
 			request.getRequestDispatcher("/WEB-INF/jsp/profile_edit.jsp").forward(request, response);
 			return;
 		}
