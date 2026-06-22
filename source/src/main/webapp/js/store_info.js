@@ -189,9 +189,11 @@ function displayStores(list) {
 		const div = document.createElement("div");
 		div.className = "store-item";
 
-		const distanceText = s.distance !== undefined
-			? `<p>${i18n.noStoresFound[currentLang]}</p>`
-			: '';
+		let distanceText = '';
+        if (s.distance !== undefined) {
+            const rawTemplate = i18n.distanceText[currentLang];
+            distanceText = `<p>${rawTemplate.replace("{0}", s.distance.toFixed(2))}</p>`;
+        }
 
 		const mapLink = (s.latitude && s.longitude)
 			? `<p><a href="https://www.google.com/maps/search/?api=1&query=${s.latitude},${s.longitude}" target="_blank" rel="noopener noreferrer" class="map-btn">${i18n.viewOnGoogleMaps[currentLang]}</a></p>`
