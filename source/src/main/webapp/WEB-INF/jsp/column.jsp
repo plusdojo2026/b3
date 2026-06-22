@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setBundle basename="messages" />
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
@@ -115,41 +116,52 @@
 		<!-- フッターここから -->
 		<footer class="bottom-menu">
 
+			<!-- ぴったり小銭消費ガイド -->
 			<a href="${pageContext.request.contextPath}/CoinSupportServlet"
 				class="nav-item"> <img class="nav-img normal-img"
-				src="${pageContext.request.contextPath}/images/nav/coin_support_normal.png"
-				alt="ぴったり小銭消費ガイド"> <img class="nav-img hover-img"
-				src="${pageContext.request.contextPath}/images/nav/coin_support_hover.png"
-				alt="ぴったり小銭消費ガイド">
+				src="${pageContext.request.contextPath}/images/nav/coin_support_normal${pageContext.response.locale.language == 'en' ? '_en' : ''}.png"
+				alt="<fmt:message key='menu.coin_support' />"> <img
+				class="nav-img hover-img"
+				src="${pageContext.request.contextPath}/images/nav/coin_support_hover${pageContext.response.locale.language == 'en' ? '_en' : ''}.png"
+				alt="<fmt:message key='menu.coin_support' />">
+			<!-- 施設情報 -->
 			</a> <a href="${pageContext.request.contextPath}/StoreServlet"
 				class="nav-item"> <img class="nav-img normal-img"
-				src="${pageContext.request.contextPath}/images/nav/store_info_normal.png"
-				alt="施設情報"> <img class="nav-img hover-img"
-				src="${pageContext.request.contextPath}/images/nav/store_info_hover.png"
-				alt="施設情報">
+				src="${pageContext.request.contextPath}/images/nav/store_info_normal${pageContext.response.locale.language == 'en' ? '_en' : ''}.png"
+				alt="<fmt:message key='menu.store_info' />"> <img
+				class="nav-img hover-img"
+				src="${pageContext.request.contextPath}/images/nav/store_info_hover${pageContext.response.locale.language == 'en' ? '_en' : ''}.png"
+				alt="<fmt:message key='menu.store_info' />">
 			</a>
 
 			<div class="nav-space"></div>
-
+			
+			<!-- コラム -->
 			<a href="${pageContext.request.contextPath}/ColumnServlet"
 				class="nav-item active"> <img class="nav-img normal-img"
-				src="${pageContext.request.contextPath}/images/nav/column_normal.png"
-				alt="コラム"> <img class="nav-img hover-img"
-				src="${pageContext.request.contextPath}/images/nav/column_hover.png"
-				alt="コラム">
+				src="${pageContext.request.contextPath}/images/nav/column_normal${pageContext.response.locale.language == 'en' ? '_en' : ''}.png"
+				alt="<fmt:message key='menu.column' />"> <img
+				class="nav-img hover-img"
+				src="${pageContext.request.contextPath}/images/nav/column_hover${pageContext.response.locale.language == 'en' ? '_en' : ''}.png"
+				alt="<fmt:message key='menu.column' />">
+			<!-- マイページ -->
 			</a> <a href="${pageContext.request.contextPath}/MyPageServlet"
 				class="nav-item"> <img class="nav-img normal-img"
-				src="${pageContext.request.contextPath}/images/nav/mypage_normal.png"
-				alt="マイページ"> <img class="nav-img hover-img"
-				src="${pageContext.request.contextPath}/images/nav/mypage_hover.png"
-				alt="マイページ">
+				src="${pageContext.request.contextPath}/images/nav/mypage_normal${pageContext.response.locale.language == 'en' ? '_en' : ''}.png"
+				alt="<fmt:message key='menu.mypage' />"> <img
+				class="nav-img hover-img"
+				src="${pageContext.request.contextPath}/images/nav/mypage_hover${pageContext.response.locale.language == 'en' ? '_en' : ''}.png"
+				alt="<fmt:message key='menu.mypage' />">
+			<!-- 支出登録 -->
 			</a> <a href="${pageContext.request.contextPath}/PaymentServlet"
 				class="nav-center"> <img class="nav-img center-img normal-img"
-				src="${pageContext.request.contextPath}/images/nav/payment_normal.png"
-				alt="支出登録"> <img class="nav-img center-img hover-img"
-				src="${pageContext.request.contextPath}/images/nav/payment_hover.png"
-				alt="支出登録">
+				src="${pageContext.request.contextPath}/images/nav/payment_normal${pageContext.response.locale.language == 'en' ? '_en' : ''}.png"
+				alt="<fmt:message key='menu.payment' />"> <img
+				class="nav-img center-img hover-img"
+				src="${pageContext.request.contextPath}/images/nav/payment_hover${pageContext.response.locale.language == 'en' ? '_en' : ''}.png"
+				alt="<fmt:message key='menu.payment' />">
 			</a>
+
 
 		</footer>
 		<!-- フッターここまで -->
