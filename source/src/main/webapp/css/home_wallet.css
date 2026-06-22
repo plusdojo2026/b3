@@ -280,6 +280,11 @@
 	pointer-events: none;
 }
 
+#total-amount,
+#coin-amount {
+	display: none;
+}
+
 /* --------------------------- */
 /* -------- wallet.jsp -------- */
 /* --------------------------- */
