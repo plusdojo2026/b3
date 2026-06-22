@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setBundle basename="messages" />
+	
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,7 +25,7 @@ const store_list = JSON.parse(String.raw`${storeListJson}`);
 	href="${pageContext.request.contextPath}/favicon/favicon.png">
 </head>
 </head>
-<body>
+<body data-lang="${sessionScope.currentLang}">
 
 	<div class="app">
 		<!-- ヘッダーここから -->
@@ -41,7 +44,7 @@ const store_list = JSON.parse(String.raw`${storeListJson}`);
 			<!-- 検索機能 -->
 
 			<div class="search_map" id="search_map">
-				<input type="text" id="keyword" placeholder="施設名、住所">
+				<input type="text" id="keyword" placeholder="<fmt:message key="store_info.search" />">
 				<button type="button" class="search_btn" aria-label="検索">
 					<img
 						src="${pageContext.request.contextPath}/images/store_icon/store_search.png"
@@ -51,17 +54,22 @@ const store_list = JSON.parse(String.raw`${storeListJson}`);
 
 			<!-- カテゴリー -->
 			<div class="category_filter">
+				<!-- 現金のみ -->
 				<button type="button" class="filter-btn active"
-					data-category="cashonly" aria-pressed="true">現金のみ</button>
+					data-category="cashonly" aria-pressed="true"><fmt:message key="store_info.c.cashonly" /></button>
+				<!-- キャッシュレスのみ -->
 				<button type="button" class="filter-btn"
 					data-category="cashlessonly" aria-pressed="false">
-					キャッシュレスのみ</button>
+					<fmt:message key="store_info.c.cashlessonly" /></button>
+				<!-- 両対応 -->
 				<button type="button" class="filter-btn" data-category="both"
-					aria-pressed="false">両対応</button>
+					aria-pressed="false"><fmt:message key="store_info.c.both" /></button>
+				<!-- ATM -->
 				<button type="button" class="filter-btn" data-category="ATM"
-					aria-pressed="false">ATM</button>
+					aria-pressed="false"><fmt:message key="store_info.c.ATM" /></button>
+				<!-- 外貨両替機 -->
 				<button type="button" class="filter-btn" data-category="exchange"
-					aria-pressed="false">外貨両替機</button>
+					aria-pressed="false"><fmt:message key="store_info.c.exchange" /></button>
 			</div>
 
 
