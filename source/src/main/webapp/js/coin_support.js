@@ -31,7 +31,7 @@ if (submitType === "manual") {
 const recAmount = document.getElementById('recAmount');
 //「画面に書き換える場所が準備」されていて、かつ「ユーザーが任意の金額を検索した」とき、金額をセットする
 if (recAmount && targetAmount > 0) {
-	recAmount.textContent = `￥${targetAmount}以下`;
+	recAmount.textContent = `￥${targetAmount}`;
 }
 //-------------------------------------------
 // 1. ぴったり小銭消費
@@ -64,10 +64,10 @@ if (submitType === "manual" || submitType === "wallet") {
 			for (let k = j + 1; k < allProducts.length; k++) {
 				if (allProducts[i].price + allProducts[j].price + allProducts[k].price === targetAmount) {
 					allMatchedPatterns.push([allProducts[i], allProducts[j], allProducts[k]]);
+				}
 			}
 		}
 	}
-}
 	// 4つの商品の合計でぴったりなもの
 	for (let i = 0; i < allProducts.length; i++) {
 		for (let j = i + 1; j < allProducts.length; j++) {
@@ -93,32 +93,32 @@ for (let i = allMatchedPatterns.length - 1; i > 0; i--) {
 //シャッフルした結果から最大3つだけをmatchComboUlに貼り付ける
 if (allMatchedPatterns.length === 0) {
 	const li = document.createElement('li');
-	
+
 	// 1. JSPのbodyタグから "ja" または "en" を読み取る
-    const currentLang = document.body.dataset.lang;
-    
+	const currentLang = document.body.dataset.lang;
+
 	// 2. 言語によって文字を切り替える
-    if (currentLang === 'en') {
-        li.textContent = "No perfect combinations found.";
-    } else {
-        li.textContent = "ぴったりになる組み合わせはありませんでした";
-    }
+	if (currentLang === 'en') {
+		li.textContent = "No perfect combinations found.";
+	} else {
+		li.textContent = "ぴったりになる組み合わせはありませんでした";
+	}
 	matchComboUl.appendChild(li);
 } else {
 	for (let i = 0; i < Math.min(3, allMatchedPatterns.length); i++) {
 		const li = document.createElement('li');
 		//CSSのためにクラス名をつける
 		li.className = "match-pattern-box";
-		
+
 		// そのパターンに含まれる商品のリストを取り出す
 		const patternItems = allMatchedPatterns[i];
-		
+
 		// 商品ごとのHTMLを組み立てるための変数
 		let itemsHtml = "";
-		
+
 		// パターンに含まれる商品の数だけループして、HTMLの文字を作っていく
 		patternItems.forEach((item) => {
-			
+
 			// 商品1つずつのHTMLを組み立て
 			itemsHtml += `
 				<div class="single-item-box">
@@ -129,15 +129,22 @@ if (allMatchedPatterns.length === 0) {
 				</div>
 			`;
 		});
-		
+
+		// バッククォートでliの中身を上書きする
+		// JSPのbodyから言語を読み取る
+		const currentLang = document.body.dataset.lang;
+
+		// 言語によって切り替える
+		const patternText = (currentLang === 'en') ? 'Pattern' : 'パターン';
+
 		// バッククォートでliの中身を上書きする
 		li.innerHTML = `
-			<div class="pattern-title">【パターン${i + 1}】</div>
+			<div class="pattern-title">【${patternText} ${i + 1}】</div>
 			<div class="pattern-items-container">
 				${itemsHtml}
 			</div>
 		`;
-		
+
 		matchComboUl.appendChild(li);
 	}
 }
@@ -186,29 +193,29 @@ function updateRecItems() {
 	// 実際に画面を描画する関数を呼び出す
 	renderProducts();
 }
-	// 画面に表示する
-	function renderProducts() {
-		// 「その他のおすすめ」リストを空にする
-		recListUl.innerHTML = "";
+// 画面に表示する
+function renderProducts() {
+	// 「その他のおすすめ」リストを空にする
+	recListUl.innerHTML = "";
 
-		// 30件か、絞り込んだ全データ数の、どちらか小さい方を上限にする
-		const limit = Math.min(currentDisplayCount, currentSortedProducts.length);
+	// 30件か、絞り込んだ全データ数の、どちらか小さい方を上限にする
+	const limit = Math.min(currentDisplayCount, currentSortedProducts.length);
 
-		// 0件目から現在の制限件数（30件、60件…）までをループして画面に出す
-		for (let i = 0; i < limit; i++) {
-			const item = currentSortedProducts[i];
-			const li = document.createElement('li');
-		
+	// 0件目から現在の制限件数（30件、60件…）までをループして画面に出す
+	for (let i = 0; i < limit; i++) {
+		const item = currentSortedProducts[i];
+		const li = document.createElement('li');
+
 		//画像タグを新しくつくる
-		const img =document.createElement('img');
-		img.src = "images/product/" + item.image_url+".jpg";
+		const img = document.createElement('img');
+		img.src = "images/product/" + item.image_url + ".jpg";
 		img.className = "prod-img";
-		
+
 		//リストにテキストをセット	
 		//li.textContent = `${item.image_url} ${item.store_name_ja} ${item.name_ja} ￥${item.price}`;
 		li.appendChild(img);
 		li.append(`${item.store_name_ja} ${item.name_ja} ￥${item.price}`);
-		
+
 		// 完成したliを「その他のおすすめ」のulタグの中に追加
 		recListUl.appendChild(li);
 	}
@@ -235,10 +242,10 @@ function setupCategoryFilter() {
 		btn.addEventListener("click", function() {
 			// 全てのボタンからactiveを消す
 			buttons.forEach(function(b) { b.classList.remove("active"); });
-			
+
 			// 押されたボタンだけにactiveをつける
 			btn.classList.add("active");
-			
+
 			// 押されたボタンのカテゴリ名を変数に入れる
 			currentCategory = btn.dataset.category;
 

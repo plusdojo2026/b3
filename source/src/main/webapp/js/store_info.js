@@ -74,8 +74,14 @@ function category_filter() {
 		if (keyword !== "") {
 			const name = store.name_ja || "";
 			const address = store.address_ja || "";
-			// 施設名か住所のどちらかにキーワードが含まれているか
-			matchKeyword = name.includes(keyword) || address.includes(keyword);
+
+			// スペース区切りで複数ワードに分割
+			const words = keyword.split(/\s+/);
+
+			// 全てのワードが name または address に含まれているか（AND検索）
+			matchKeyword = words.every(w =>
+				name.includes(w) || address.includes(w)
+			);
 		}
 
 		// 両方の条件（カテゴリ AND キーワード）が一致した時だけtrueを返す
@@ -99,43 +105,83 @@ function getKeyword() {
 function displayStores(list) {
 	const container = document.getElementById("store_list");
 	container.innerHTML = "";
+	
+	// JSPからjaまたはenを読み取る
+    const currentLang = document.body.dataset.lang || "ja"; // デフォルト 'ja'
+	
+	
+	// 言語によって文字を切り替えるための翻訳データ（多言語辞書）
+    const i18n = {
+        noStoresFound: {
+            ja: "該当する施設が見つかりませんでした。",
+            en: "No matching facilities found."
+        },
+        distanceText: {
+            ja: "現在地からの距離: {0} km",
+            en: "Distance from current location: {0} km"
+        },
+        viewOnGoogleMaps: {
+            ja: "Googleマップで見る",
+            en: "View on Google Maps"
+        },
+        // カテゴリーのマッピング
+        category: {
+            'cashonly':     { ja: '現金のみ', en: 'Cash Only' },
+            'cashlessonly': { ja: 'キャッシュレスのみ', en: 'Cashless Only' },
+            'both':         { ja: '両対応', en: 'Both Acceptable' },
+            'exchange':     { ja: '外貨両替機', en: 'Currency Exchange' }
+        },
+        // キャッシュレス種類のマッピング
+        cashlessType: {
+            'credit': { ja: 'クレジットカード', en: 'Credit Card' },
+            'ic':     { ja: '交通系IC', en: 'Transit IC' },
+            'qr':     { ja: 'QRコード決済', en: 'QR Code' }
+        }
+    };
 
 	//件数がゼロのときの表示
 	if (list.length === 0) {
-		container.innerHTML = "<p>該当する施設が見つかりませんでした。</p>";
+		container.innerHTML = "<p>${i18n.noStoresFound[currentLang]}</p>";
 		return;
 	}
 
+	
 	// カテゴリーのカラム→日本語へ変換マッピング
-	const categoryMapping = {
+	/*const categoryMapping = {
 		'cashonly': '現金のみ',
 		'cashlessonly': 'キャッシュレスのみ',
 		'both': '両対応',
 		'exchange': '外貨両替機'
-	};
+	};*/
 
-	//カテゴリー種類が複数あっても日本語で表示する
+	//カテゴリー種類が複数あっても表示する
 	function convertCategory(typeString) {
 		return typeString
 			.split(',')
 			.map(t => t.trim())
-			.map(t => categoryMapping[t] || t)
+			.map(t => {
+                const match = i18n.category[t];
+                return match ? match[currentLang] : t;
+            })
 			.join(' / ');
 	}
 
 	// キャッシュレス種類の
-	const cashlessTypeMapping = {
+	/*const cashlessTypeMapping = {
 		'credit': 'クレジットカード',
 		'ic': '交通系IC',
 		'qr': 'QRコード決済'
-	};
+	};*/
 
-	//キャッシュレス種類が複数あっても日本語で表示する
+	//キャッシュレス種類が複数あっても指定言語で表示する
 	function convertCashlessType(typeString) {
 		return typeString
 			.split(',')
 			.map(t => t.trim())
-			.map(t => cashlessTypeMapping[t] || t)
+			.map(t => {
+                const match = i18n.cashlessType[t];
+                return match ? match[currentLang] : t;
+            })
 			.join(' / ');
 	}
 
@@ -144,30 +190,34 @@ function displayStores(list) {
 		div.className = "store-item";
 
 		const distanceText = s.distance !== undefined
-			? `<p>現在地からの距離: ${s.distance.toFixed(2)} km</p>`
+			? `<p>${i18n.noStoresFound[currentLang]}</p>`
 			: '';
 
 		const mapLink = (s.latitude && s.longitude)
-			? `<p><a href="https://www.google.com/maps/search/?api=1&query=${s.latitude},${s.longitude}" target="_blank" rel="noopener noreferrer" class="map-btn">Googleマップで見る</a></p>`
+			? `<p><a href="https://www.google.com/maps/search/?api=1&query=${s.latitude},${s.longitude}" target="_blank" rel="noopener noreferrer" class="map-btn">${i18n.viewOnGoogleMaps[currentLang]}</a></p>`
 			: '';
 
 		const storeCategory = s.category || "";
-		
+
 		//日本語マッピング変換(category)
 		const categoryText = convertCategory(storeCategory);
-		
-		//both,cashlessのときcashlessTypeを表示
-		const cashlessTypeText = 
-			(storeCategory.includes("both") || storeCategory.includes("cashlessonly"))
-			? `<p>${convertCashlessType(s.cashless_type)}</p>`
-			: '';
 
-		div.innerHTML = `<h3>${s.name_ja}</h3>
-						<p>${s.address_ja}</p> 
-						<p>${categoryText}</p> 
-						<p>${cashlessTypeText}</p> 
-						${distanceText}
-						${mapLink}`;
+		//both,cashlessのときcashlessTypeを表示
+		const cashlessTypeText =
+			(storeCategory.includes("both") || storeCategory.includes("cashlessonly"))
+				? `<p>${convertCashlessType(s.cashless_type)}</p>`
+				: '';
+				
+		// 店舗名や住所、DB等から多言語で取得できている場合は切り替える
+        const storeName = (currentLang === 'en' && s.name_en) ? s.name_en : s.name_ja;
+        const storeAddress = (currentLang === 'en' && s.address_en) ? s.address_en : s.address_ja;
+
+		div.innerHTML = `<h3>${storeName}</h3>
+                        <p>${storeAddress}</p> 
+                        <p>${categoryText}</p> 
+                        <p>${cashlessTypeText}</p> 
+                        ${distanceText}
+                        ${mapLink}`;
 		container.appendChild(div);
 	});
 }

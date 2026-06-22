@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setBundle basename="messages" />
 <%
 String errorMsg = (String) request.getAttribute("errorMsg");
 Integer amount = (Integer) request.getAttribute("amount");
@@ -51,7 +53,7 @@ String[] moneyImagePaths = { "tenThousandYen.png", "fiveThousandYen.png", "oneTh
 				src="${pageContext.request.contextPath}/images/logo/logo.png"
 				alt="ロゴ" class="logo">
 			</a>
-			<div class="page-title">支出登録</div>
+			<div class="page-title"><fmt:message key="payment.title" /></div>
 			<a href="${pageContext.request.contextPath}/HomeServlet"> <img
 				src="${pageContext.request.contextPath}/images/logo/home.png"
 				alt="ホーム" class="toHome">
@@ -63,19 +65,19 @@ String[] moneyImagePaths = { "tenThousandYen.png", "fiveThousandYen.png", "oneTh
 		<main class="main">
 			<section class="suggestion-area">
 				<div class="amount-message">
-					<div class="amount-label">合計金額は</div>
+					<div class="amount-label"><fmt:message key="payment.suggestion.amount" /></div>
 					<div class="amount-large">
 						￥
 						<%=amountText%>
 					</div>
-					<div class="amount-text">です。</div>
+					<div class="amount-text"><fmt:message key="payment.suggestion.amount.end" /></div>
 				</div>
 
 				<%
 				if (manualMode) {
 				%>
 				<div class="suggestion-card">
-					<div class="suggestion-title">別の支払い方を入力</div>
+					<div class="suggestion-title"><fmt:message key="payment.suggestion.other" /></div>
 
 					<form method="POST"
 						action="${pageContext.request.contextPath}/PaymentServlet">
@@ -100,9 +102,9 @@ String[] moneyImagePaths = { "tenThousandYen.png", "fiveThousandYen.png", "oneTh
 							%>
 						</div>
 						<div class="manual-buttons">
-							<input type="button" class="manual-btn" value="戻る"
+							<input type="button" class="manual-btn" value="<fmt:message key='payment.suggestion.back' />"
 								onclick="history.back()"> <input type="submit"
-								class="manual-btn" value="確定">
+								class="manual-btn" value="<fmt:message key='payment.suggestion.confirm' />">
 						</div>
 						<div class="manual-message-area">
 							<%
@@ -119,7 +121,7 @@ String[] moneyImagePaths = { "tenThousandYen.png", "fiveThousandYen.png", "oneTh
 				} else {
 				%>
 				<div class="suggestion-card">
-					<div class="suggestion-title">この組み合わせで支払う</div>
+					<div class="suggestion-title"><fmt:message key="payment.suggestion.title" /></div>
 
 					<div class="money-suggestion-list">
 						<%
@@ -142,7 +144,7 @@ String[] moneyImagePaths = { "tenThousandYen.png", "fiveThousandYen.png", "oneTh
 				</div>
 
 				<div class="total-pay-amount">
-					総支払金額：¥<%=payAmountText%>
+					<fmt:message key="payment.suggestion.total" />：¥<%=payAmountText%>
 				</div>
 
 				<div class="suggestion-buttons">
@@ -150,7 +152,7 @@ String[] moneyImagePaths = { "tenThousandYen.png", "fiveThousandYen.png", "oneTh
 						action="${pageContext.request.contextPath}/PaymentServlet">
 						<input type="hidden" name="amount" value="<%=amount%>"> <input
 							type="hidden" name="action" value="other"> <input
-							type="submit" class="payment-btn" value="別の支払い方">
+							type="submit" class="payment-btn" value="<fmt:message key='payment.suggestion.other' />">
 					</form>
 
 					<form method="POST"
@@ -169,7 +171,7 @@ String[] moneyImagePaths = { "tenThousandYen.png", "fiveThousandYen.png", "oneTh
 						}
 						%>
 
-						<input type="submit" class="payment-button" value="確定">
+						<input type="submit" class="payment-button" value="<fmt:message key='payment.suggestion.confirm' />">
 					</form>
 				</div>
 				<%

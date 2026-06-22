@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<fmt:setBundle basename="messages" />
 <%@ page import="java.util.List"%>
 <%@ page import="java.util.Map"%>
 
@@ -35,7 +37,9 @@ String errorMsg = (String) request.getAttribute("errorMsg");
 				alt="ロゴ" class="logo">
 			</a>
 
-			<div class="page-title">支出ログ</div>
+			<div class="page-title">
+				<fmt:message key="payment.log" />
+			</div>
 
 			<a href="${pageContext.request.contextPath}/HomeServlet"> <img
 				src="${pageContext.request.contextPath}/images/logo/home.png"
@@ -58,10 +62,12 @@ String errorMsg = (String) request.getAttribute("errorMsg");
 				<%
 				if (paymentLogList == null || paymentLogList.size() == 0) {
 				%>
-				<div class="empty-message">支出ログはまだありません。</div>
+				<div class="empty-message">
+					<fmt:message key="payment.log.null" />
+				</div>
 				<%
 				} else {
-					for (Map<String, Object> paymentLog : paymentLogList) {
+				for (Map<String, Object> paymentLog : paymentLogList) {
 				%>
 				<div class="payment-log-card">
 					<div class="payment-log-amount">
@@ -71,11 +77,13 @@ String errorMsg = (String) request.getAttribute("errorMsg");
 
 					<div class="log-card-details">
 						<div class="payment-log-pay">
-							支払い：<%=String.format("%,d", paymentLog.get("payAmount"))%>
+							<fmt:message key="payment.log.pay" />
+							：<%=String.format("%,d", paymentLog.get("payAmount"))%>
 						</div>
 
 						<div class="payment-log-cash">
-							お釣り：<%=String.format("%,d", paymentLog.get("changeAmount"))%>
+							<fmt:message key="payment.log.change" />
+							：<%=String.format("%,d", paymentLog.get("changeAmount"))%>
 						</div>
 					</div>
 				</div>
@@ -85,7 +93,8 @@ String errorMsg = (String) request.getAttribute("errorMsg");
 				%>
 
 				<div class="payment-log-buttons">
-					<input type="button" class="log-back-btn" value="戻る"
+					<input type="button" class="log-back-btn"
+						value="<fmt:message key='payment.log.back' />"
 						onclick="location.href='${pageContext.request.contextPath}/PaymentServlet'">
 				</div>
 			</section>
@@ -95,18 +104,41 @@ String errorMsg = (String) request.getAttribute("errorMsg");
 		<!-- フッターここから -->
 		<footer class="bottom-menu">
 			<a href="${pageContext.request.contextPath}/CoinSupportServlet"
-				class="nav-item">仮</a> <a
-				href="${pageContext.request.contextPath}/StoreServlet"
-				class="nav-item">仮</a>
+				class="nav-item"> <img class="nav-img normal-img"
+				src="${pageContext.request.contextPath}/images/nav/coin_support_normal.png"
+				alt="ぴったり小銭消費ガイド"> <img class="nav-img hover-img"
+				src="${pageContext.request.contextPath}/images/nav/coin_support_hover.png"
+				alt="ぴったり小銭消費ガイド">
+			</a> <a href="${pageContext.request.contextPath}/StoreServlet"
+				class="nav-item"> <img class="nav-img normal-img"
+				src="${pageContext.request.contextPath}/images/nav/store_info_normal.png"
+				alt="施設情報"> <img class="nav-img hover-img"
+				src="${pageContext.request.contextPath}/images/nav/store_info_hover.png"
+				alt="施設情報">
+			</a>
 
 			<div class="nav-space"></div>
 
 			<a href="${pageContext.request.contextPath}/ColumnServlet"
-				class="nav-item">仮</a> <a
-				href="${pageContext.request.contextPath}/MyPageServlet"
-				class="nav-item">仮</a> <a
-				href="${pageContext.request.contextPath}/PaymentServlet"
-				class="nav-center">仮</a>
+				class="nav-item"> <img class="nav-img normal-img"
+				src="${pageContext.request.contextPath}/images/nav/column_normal.png"
+				alt="コラム"> <img class="nav-img hover-img"
+				src="${pageContext.request.contextPath}/images/nav/column_hover.png"
+				alt="コラム">
+			</a> <a href="${pageContext.request.contextPath}/MyPageServlet"
+				class="nav-item"> <img class="nav-img normal-img"
+				src="${pageContext.request.contextPath}/images/nav/mypage_normal.png"
+				alt="マイページ"> <img class="nav-img hover-img"
+				src="${pageContext.request.contextPath}/images/nav/mypage_hover.png"
+				alt="マイページ">
+			</a> <a href="${pageContext.request.contextPath}/PaymentServlet"
+				class="nav-center active"> <img
+				class="nav-img center-img normal-img"
+				src="${pageContext.request.contextPath}/images/nav/payment_normal.png"
+				alt="支出登録"> <img class="nav-img center-img hover-img"
+				src="${pageContext.request.contextPath}/images/nav/payment_hover.png"
+				alt="支出登録">
+			</a>
 		</footer>
 		<!-- フッターここまで -->
 	</div>
