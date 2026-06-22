@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setBundle basename="messages" />
 
 <!DOCTYPE html>
 <html>
@@ -24,7 +26,7 @@
 			<a href="${pageContext.request.contextPath}/HomeServlet"> <img
 				src="${pageContext.request.contextPath}/images/logo/logo.png"
 				alt="ロゴ" class="logo"></a>
-			<div class="page-title">予算登録・編集</div>
+			<div class="page-title"><fmt:message key="wallet.title" /></div>
 			<a href="${pageContext.request.contextPath}/HomeServlet"> <img
 				src="${pageContext.request.contextPath}/images/logo/home.png"
 				alt="ホーム" class="toHome"></a>
@@ -32,14 +34,14 @@
 		<!-- ヘッダーここまで -->
 		<main class="wallet-page">
 			<section class="total-amount">
-				<div class="current-budget">現在の予算</div>
+				<div class="current-budget"><fmt:message key="wallet.currentbudget" /></div>
 				<div class="amount">
 					<!-- 合計金額を入れる -->
 					&yen;${totalAmount}
 				</div>
 			</section>
 
-			<div class=wallet-possession>所持金額を入力してください(枚数)</div>
+			<div class=wallet-possession><fmt:message key="wallet.message.amount" /></div>
 
 			<form method="post" action="/b3/WalletServlet">
 
@@ -106,7 +108,7 @@
 				</div>
 				<p id="msg"></p>
 				<div class="button-regist">
-					<button type="submit" name="submit" id="editBtn" value="更新">登録</button>
+					<button type="submit" name="submit" id="editBtn" value="更新"><fmt:message key="wallet.regist.button" /></button>
 				</div>
 				<p id="output"></p>
 
