@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setBundle basename="messages" />
 <%
 String errorMsg = (String) request.getAttribute("errorMsg");
 String successMsg = (String) request.getAttribute("successMsg");
@@ -26,7 +28,7 @@ String successMsg = (String) request.getAttribute("successMsg");
 			<a href="${pageContext.request.contextPath}/HomeServlet"> <img
 				src="${pageContext.request.contextPath}/images/logo/logo.png"
 				alt="ロゴ" class="logo"></a>
-			<div class="page-title">支出登録</div>
+			<div class="page-title"><fmt:message key="payment.title" /></div>
 			<a href="${pageContext.request.contextPath}/HomeServlet"> <img
 				src="${pageContext.request.contextPath}/images/logo/home.png"
 				alt="ホーム" class="toHome"></a>
@@ -34,7 +36,7 @@ String successMsg = (String) request.getAttribute("successMsg");
 		<!-- ヘッダーここまで -->
 		<!-- メインここから -->
 		<main class="main">
-			<div class="payment-nav">合計金額を入力してください</div>
+			<div class="payment-nav" ><fmt:message key="payment.message.amount" /></div>
 			<form method="POST"
 				action="${pageContext.request.contextPath}/PaymentServlet"
 				id="payment-form">
@@ -54,7 +56,7 @@ String successMsg = (String) request.getAttribute("successMsg");
 					}
 					%>
 				</div>
-				<div class="money_isUse">使用できない紙幣・硬貨のチェックを外してください​</div>
+				<div class="money_isUse"><fmt:message key="payment.message.check" /></div>
 				<div class="money-check-area">
 					<label class="money-option"> <input type="checkbox"
 						name="moneyType" value="10000" checked> <img
@@ -96,15 +98,14 @@ String successMsg = (String) request.getAttribute("successMsg");
 				</div>
 				<div class="form-button">
 					<input type="submit" name="submit" class="payment-button"
-						id="paymentBtn" value="支払い">
+						id="paymentBtn" value="<fmt:message key='payment.button' />">
 				</div>
 			</form>
-
 			<div class="payment-nav-buttons">
-				<input type="button" class="payment-btn" value="戻る"
+				<input type="button" class="payment-btn" value="<fmt:message key='payment.back' />"
 					onclick="location.href='${pageContext.request.contextPath}/HomeServlet'">
 
-				<input type="button" class="payment-btn" value="支出ログ"
+				<input type="button" class="payment-btn" value="<fmt:message key='payment.log' />"
 					onclick="location.href='${pageContext.request.contextPath}/PaymentLogServlet'">
 			</div>
 		</main>
