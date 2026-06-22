@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <fmt:setBundle basename="messages" />
 
 <!DOCTYPE html>
@@ -34,24 +34,24 @@
 		<!-- ヘッダーここまで -->
 		<main class="mypage">
 			<section class="profile-edit">
-				<div class="profile">プロフィール</div>
+				<div class="profile"><fmt:message key="mypage.profile" /></div>
 				<div class="user-id">
-				ユーザID
+				<fmt:message key="mypage.userID" />
 					<!-- ユーザIDを表示 -->
 					<div>${user.loginId}</div>
 				</div>
 				<div class="nickname">
-				ニックネーム
+				<fmt:message key="mypage.nickname" />
 					<!-- ニックネームを表示 -->
 					<div>${user.nickname}</div>
 				</div>
 				<form action="UserEditServlet" method="get">
-					<input type="submit" value="編集">
+					<input type="submit" value="<fmt:message key='mypage.button.edit' />">
 				</form>
 			</section>
 
 			<section class="night-mode">
-				<div class="night">ナイトモード</div>
+				<div class="night"><fmt:message key="mypage.nightmode" /></div>
 				<div class="sample2Area" id="makeImg">
 					<input type="checkbox" id="sample2check" checked=""> 
 					<label for="sample2check">
@@ -62,22 +62,22 @@
 
 			<section class="multilingual-feature">
 			<form action="MyPageServlet" method="post">
-				<div class=multilingual>多言語機能</div>
+				<div class=multilingual><fmt:message key="mypage.multilingual" /></div>
 				<select class="pull-input" name="language" onchange="this.form.submit()">
 					<option value="ja" ${sessionScope.currentLang != 'en' ? 'selected' : ''}>日本語</option>
-					<option value="en" ${sessionScope.currentLang == 'en' ? 'selected' : ''}>英語</option>
+					<option value="en" ${sessionScope.currentLang == 'en' ? 'selected' : ''}>English</option>
 				</select>
 			</form>	
 			</section>
 
 			<section class="alert-setting">
-				<div class="alert">アラート設定</div>
+				<div class="alert"><fmt:message key="mypage.alert" /></div>
 				
 				<div class="alert-money">
-				設定金額<input type="text" name="alert-money" value="">円 
+				<fmt:message key="mypage.amount" /><input type="text" name="alert-money" value="">円 
 				</div>
 				<div class="alert-number">
-				設定枚数<input
+				<fmt:message key="mypage.quantity" /><input
 					type="number" name="alert-number" min="0" value="">枚
 				</div>	
 			</section>

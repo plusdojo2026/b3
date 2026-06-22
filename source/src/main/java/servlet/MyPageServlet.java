@@ -66,6 +66,11 @@ public class MyPageServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		// doGet(request, response);
 
+		HttpSession session = request.getSession();
+		
+		// セッションから現在のログインユーザー情報を取得する
+		User loginUser = (User) session.getAttribute("loginUser");
+		
 		// リクエストパラメータを取得
 		String loginId = request.getParameter("loginId");
 		String password = request.getParameter("password");
@@ -87,10 +92,14 @@ public class MyPageServlet extends HttpServlet {
 		// JSTLのタグ（fmt:message）が自動でこの言語を認識できるようにセッションに保存
 		javax.servlet.jsp.jstl.core.Config.set(request.getSession(), javax.servlet.jsp.jstl.core.Config.FMT_LOCALE, locale);
 		
-		// 後でJavaScript（coin_support.jsなど）で「今どっちの言語？」と判定するために文字でも保存しておくと便利です
+		// 後でJavaScript（coin_support.jsなど）で「今どっちの言語？」と判定するために文字でも保存しておくと
 		request.getSession().setAttribute("currentLang", "en".equals(language) ? "en" : "ja");
 		
-		request.getRequestDispatcher("/WEB-INF/jsp/mypage.jsp").forward(request, response);
+		// JSPの ${user} にデータを引き継ぐためにリクエストにセットする
+		request.setAttribute("user", loginUser);
+		
+		//リダイレクト
+		response.sendRedirect("MyPageServlet");
 	}
 
 }
