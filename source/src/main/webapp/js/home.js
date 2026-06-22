@@ -119,11 +119,11 @@ const message1 = document.getElementById("message1");
 if (alertHomeAmount != null && alertHomeCount != null && message1 != null) {
 	const homeCashAmount = Number(alertHomeAmount.textContent.replace(/[^0-9]/g, ''));
 	const homeCoinCount = Number(alertHomeCount.textContent.replace(/[^0-9]/g, ''));
-
-	if (homeCashAmount < 10000) {
-		message1.textContent = "予算が少なくなってきたでござる";
-	} else if(homeCoinCount > 20) {
+	
+	if (homeCoinCount > 20) {
 		message1.textContent = "小銭が多くなってきたでござる";
+	} else if (homeCashAmount < 10000) {
+		message1.textContent = "予算が少なくなってきたでござる";
 	} else {
 		message1.textContent = "通常でござる。CSSで隠れるでござる";
 	}
