@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <fmt:setBundle basename="messages" />
 
 <!DOCTYPE html>
@@ -26,64 +26,102 @@
 			<a href="${pageContext.request.contextPath}/HomeServlet"> <img
 				src="${pageContext.request.contextPath}/images/logo/logo.png"
 				alt="ロゴ" class="logo"></a>
-			<div class="page-title"><fmt:message key="mypage.title" /></div>
+			<div class="page-title">
+				<fmt:message key="mypage.title" />
+			</div>
 			<a href="${pageContext.request.contextPath}/HomeServlet"> <img
 				src="${pageContext.request.contextPath}/images/logo/home.png"
 				alt="ホーム" class="toHome"></a>
 		</header>
 		<!-- ヘッダーここまで -->
+
 		<main class="mypage">
 			<section class="profile-edit">
-				<div class="profile"><fmt:message key="mypage.profile" /></div>
+				<div class="profile">
+					<fmt:message key="mypage.profile" />
+				</div>
 				<div class="user-id">
-				<fmt:message key="mypage.userID" />
+					<fmt:message key="mypage.userID" />
 					<!-- ユーザIDを表示 -->
 					<div>${user.loginId}</div>
 				</div>
 				<div class="nickname">
-				<fmt:message key="mypage.nickname" />
+					<fmt:message key="mypage.nickname" />
 					<!-- ニックネームを表示 -->
 					<div>${user.nickname}</div>
 				</div>
 				<form action="UserEditServlet" method="get">
-					<input type="submit" value="<fmt:message key='mypage.button.edit' />">
+					<input type="submit"
+						value="<fmt:message key='mypage.button.edit' />">
 				</form>
 			</section>
 
 			<section class="night-mode">
-				<div class="night"><fmt:message key="mypage.nightmode" /></div>
+				<div class="night">
+					<fmt:message key="mypage.nightmode" />
+				</div>
 				<div class="sample2Area" id="makeImg">
-					<input type="checkbox" id="sample2check" checked=""> 
-					<label for="sample2check">
+					<input type="checkbox" id="sample2check" checked=""> <label
+						for="sample2check">
 						<div id="sample2box"></div>
 					</label>
 				</div>
 			</section>
 
 			<section class="multilingual-feature">
-			<form action="MyPageServlet" method="post">
-				<div class=multilingual><fmt:message key="mypage.multilingual" /></div>
-				<select class="pull-input" name="language" onchange="this.form.submit()">
-					<option value="ja" ${sessionScope.currentLang != 'en' ? 'selected' : ''}>日本語</option>
-					<option value="en" ${sessionScope.currentLang == 'en' ? 'selected' : ''}>English</option>
-				</select>
-			</form>	
+				<form action="MyPageServlet" method="post">
+					<input type="hidden" name="action" value="language">
+					<div class="multilingual">
+						<fmt:message key="mypage.multilingual" />
+					</div>
+					<select class="pull-input" name="language"
+						onchange="this.form.submit()">
+						<option value="ja"
+							${sessionScope.currentLang != 'en' ? 'selected' : ''}>日本語</option>
+						<option value="en"
+							${sessionScope.currentLang == 'en' ? 'selected' : ''}>English</option>
+					</select>
+				</form>
 			</section>
 
 			<section class="alert-setting">
-				<div class="alert"><fmt:message key="mypage.alert" /></div>
-				
-				<div class="alert-money">
-				<fmt:message key="mypage.amount" /><input type="text" name="alert-money" value=""><fmt:message key="mypage.en" />
+				<div class="alert">
+					<fmt:message key="mypage.alert" />
 				</div>
-				<div class="alert-number">
-				<fmt:message key="mypage.quantity" /><input
-					type="number" name="alert-number" min="0" value=""><fmt:message key="mypage.mai" />
-				</div>	
+
+				<form action="MyPageServlet" method="post" class="alert-form">
+					<input type="hidden" name="action" value="alert">
+
+					<div class="alert-row">
+						<div class="alert-item">
+							<span class="alert-label"> <fmt:message
+									key="mypage.amount" />
+							</span> <input type="text" name="alertAmount"
+								value="${user.alertAmount}"> <span class="alert-unit">
+								<fmt:message key="mypage.en" />
+							</span>
+						</div>
+
+						<div class="alert-item">
+							<span class="alert-label"> <fmt:message
+									key="mypage.quantity" />
+							</span> <input type="number" name="alertCount" min="0"
+								value="${user.alertCount}"> <span class="alert-unit">
+								<fmt:message key="mypage.mai" />
+							</span>
+						</div>
+					</div>
+
+					<div class="alert-button-area">
+						<input type="submit" value="変更">
+					</div>
+				</form>
 			</section>
 
 			<section class="dress-up">
-				<div class="dress"><fmt:message key="mypage.themes" /></div>
+				<div class="dress">
+					<fmt:message key="mypage.themes" />
+				</div>
 				<button type="button" onclick="changeTheme('green')"></button>
 				<button type="button" onclick="changeTheme('blue')"></button>
 				<button type="button" onclick="changeTheme('purple')"></button>
@@ -91,16 +129,16 @@
 			</section>
 
 			<section class="logout-user">
-				<div class="logout"><fmt:message key="mypage.logout" /></div>
+				<div class="logout">
+					<fmt:message key="mypage.logout" />
+				</div>
 				<form action="LogoutServlet" method="post">
-					<input type="submit" value="<fmt:message key='mypage.button.logout' />">
+					<input type="submit"
+						value="<fmt:message key='mypage.button.logout' />">
 				</form>
-
 			</section>
-
-
-
 		</main>
+
 		<!-- フッターここから -->
 		<footer class="bottom-menu">
 

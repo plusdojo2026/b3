@@ -82,7 +82,7 @@ public class SignupServlet extends HttpServlet {
 			request.getRequestDispatcher("/WEB-INF/jsp/signup.jsp").forward(request, response);
 			return;
 		}
-		User user = new User(0, 0, loginId, password, nickname, "green", false, "ja");
+		User user = new User(0, 0, loginId, password, nickname, "green", false, "ja", 10000, 20);
 
 		boolean result = dao.insertWithWallet(user);
 
@@ -94,4 +94,5 @@ public class SignupServlet extends HttpServlet {
 			request.getRequestDispatcher("/WEB-INF/jsp/signup.jsp").forward(request, response);
 		}
 	}
+
 }

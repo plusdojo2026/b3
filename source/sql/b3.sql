@@ -10,7 +10,9 @@ password varchar (20),
 nickname varchar (30),		
 display_mode varchar (10),		
 night BOOLEAN ,		
-language varchar(10) ,		
+language varchar(10) ,
+alert_amount int NOT NULL DEFAULT 10000,
+alert_count int NOT NULL DEFAULT 20,
 created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP	
 );

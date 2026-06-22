@@ -115,16 +115,24 @@ if (eyeBtn != null && moneyListView != null && homeWalletAmount != null) {
 const alertHomeAmount = document.getElementById("total-amount");
 const alertHomeCount = document.getElementById("coin-amount");
 const message1 = document.getElementById("message1");
+const alertArea = document.querySelector(".alert-area");
+const alertAmountElement = document.getElementById("alert-amount");
+const alertCountElement = document.getElementById("alert-count");
 
-if (alertHomeAmount != null && alertHomeCount != null && message1 != null) {
+if (alertHomeAmount != null && alertHomeCount != null && message1 != null && alertArea != null
+	&& alertAmountElement != null && alertCountElement != null) {
 	const homeCashAmount = Number(alertHomeAmount.textContent.replace(/[^0-9]/g, ''));
 	const homeCoinCount = Number(alertHomeCount.textContent.replace(/[^0-9]/g, ''));
-	
-	if (homeCoinCount > 20) {
+
+	const alertAmount = Number(alertAmountElement.textContent.replace(/[^0-9]/g, ''));
+	const alertCount = Number(alertCountElement.textContent.replace(/[^0-9]/g, ''));
+	if (homeCoinCount > alertCount) {
 		message1.textContent = "小銭が多くなってきたでござる";
-	} else if (homeCashAmount < 10000) {
+		alertArea.classList.remove("is-hidden");
+	} else if (homeCashAmount < alertAmount) {
 		message1.textContent = "予算が少なくなってきたでござる";
+		alertArea.classList.remove("is-hidden");
 	} else {
-		message1.textContent = "通常でござる。CSSで隠れるでござる";
+		alertArea.classList.add("is-hidden");
 	}
 }

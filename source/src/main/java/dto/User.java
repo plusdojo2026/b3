@@ -9,9 +9,11 @@ public class User {
 	private String displayMode;
 	private boolean night;
 	private String language;
+	private int alertAmount;
+	private int alertCount;
 
 	public User(int id, int walletId, String loginId, String password, String nickname, String displayMode,
-			boolean night, String language) {
+			boolean night, String language, int alertAmount, int alertCount) {
 		this.id = id;
 		this.walletId = walletId;
 		this.loginId = loginId;
@@ -20,6 +22,8 @@ public class User {
 		this.displayMode = displayMode;
 		this.night = night;
 		this.language = language;
+		this.alertAmount = alertAmount;
+		this.alertCount = alertCount;
 	}
 
 //	ゲッターとセッター
@@ -85,5 +89,21 @@ public class User {
 
 	public void setLanguage(String language) {
 		this.language = language;
+	}
+
+	public int getAlertAmount() {
+		return alertAmount;
+	}
+
+	public void setAlertAmount(int alertAmount) {
+		this.alertAmount = alertAmount;
+	}
+
+	public int getAlertCount() {
+		return alertCount;
+	}
+
+	public void setAlertCount(int alertCount) {
+		this.alertCount = alertCount;
 	}
 }

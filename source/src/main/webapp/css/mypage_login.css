@@ -74,8 +74,7 @@
 }
 
 /* 会員登録画面-ボタンたち */
-.reset-button,
-.signup-button {
+.reset-button, .signup-button {
 	width: 144px;
 	height: 40px;
 	border-radius: 6px;
@@ -89,8 +88,7 @@
 	transition: 0.2s;
 }
 
-.reset-button:hover,
-.signup-button:hover {
+.reset-button:hover, .signup-button:hover {
 	background-color: #ffffff;
 	color: green;
 	border-color: green;
@@ -193,56 +191,18 @@
 	line-height: 18px;
 	background-color: #ffffff;
 }
-
-/* --------------------------- */
+/* ---------------------------- */
 /* -------- mypage.jsp -------- */
-/* --------------------------- */
-
-/*ボタンを表示するエリア(ナイトモード) */
-.sample2Area {
-	width: 100px; /* ボタンの横幅       */
-}
-
-/*チェックボックス*/
-.sample2Area input[type="checkbox"] {
-	display: none; /* チェックボックス非表示 */
-}
-
-/*チェックボックスのラベル（標準)*/
-.sample2Area label {
-	display: block; /* ボックス要素に変更 */
-	box-sizing: border-box; /* 枠線を含んだサイズ */
-	text-align: left; /* 文字位置は中央     */
-	border: 2px solid #78bd78; /* 枠線               */
-	border-radius: 3px; /* 角丸               */
-	line-height: 1; /* 1行の高さ          */
-	height: 40px; /* ボタンの高さ       */
-}
-
-/* 移動BOX（標準）*/
-.sample2Area #sample2box {
-	display: inline-block;
-	height: 36.5px; /* ボタンの高さ       */
-	width: 50%; /* ボタンの高さ       */
-	background: #ddd; /* 背景色             */
-	transition: .3s; /* ゆっくり変化       */
-}
-
-/* ON側のチェックボックスの移動BOX（ONのとき)*/
-.sample2Area #sample2check:checked+label #sample2box {
-	transform: translateX(100%); /* BOXを右に移動      */
-	background: #78bd78; /* 背景色             */
-}
+/* ---------------------------- */
 
 /* マイページ全体 */
 .mypage {
-	padding: 8px 12px 16px;
+	padding: 8px 12px 90px;
 }
 
+/* 各機能エリア */
 .mypage section {
 	border-bottom: 1px solid #008040;
-	padding-bottom: 12px;
-	margin-bottom: 12px;
 	padding-bottom: 12px;
 	margin-bottom: 12px;
 }
@@ -253,133 +213,228 @@
 	margin-bottom: 0;
 }
 
-/* プロフィール　枠 */
-.profile-edit {
-	background-color: #fff;
-	border-radius: 10px;
-	border: 1px solid #008080;
-	padding: 10px 12px;
-	padding-bottom: 0;
-	margin-bottom: 0;
-	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
-	margin-left: 23px;
-	margin-right: 23px;
-	border-bottom: none;
-}
-
-.profile {
+/* 共通見出し */
+.profile, .night, .multilingual, .alert, .dress, .logout {
 	font-weight: 600;
 }
 
-/* 名前とIDの表示 */
+/* 共通ボタン */
+.profile-edit input[type="submit"], .alert-setting input[type="submit"],
+	.logout-user input[type="submit"] {
+	height: 40px;
+	background-color: green;
+	color: white;
+	border: 1px solid green;
+	border-radius: 10px;
+	padding: 0 14px;
+	font-size: 14px;
+	line-height: 40px;
+	text-align: center;
+	outline: none;
+	cursor: pointer;
+	transition: 0.2s;
+	box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.35);
+}
+
+.profile-edit input[type="submit"]:hover, .alert-setting input[type="submit"]:hover,
+	.logout-user input[type="submit"]:hover {
+	background-color: #ffffff;
+	color: green;
+	border-color: green;
+}
+
+.alert-setting input[type="submit"], .logout-user input[type="submit"] {
+	width: 90px;
+}
+/* プロフィール */
+.profile-edit {
+	background-color: #fff;
+	border: 1px solid #008080;
+	border-radius: 12px;
+	padding: 14px 16px 12px;
+	margin: 0 23px;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+}
+
 .user-id, .nickname {
-	margin: 12px 0 4px 30px;
+	width: 250px;
+	margin: 14px auto 6px;
 	font-weight: 450;
+	text-align: left;
 }
 
 .user-id div, .nickname div {
+	width: 100%;
+	margin: 4px 0 0;
+	padding: 8px 12px;
 	border: 1px solid #008080;
-	padding: 6px 12px;
 	border-radius: 8px;
-	width: 200px;
-	margin: 0 auto;
-	text-align: center;
 	background-color: #fafafa;
+	text-align: center;
+	box-sizing: border-box;
+}
+
+.profile-edit form {
+	width: fit-content;
+	margin: 6px 8px 4px auto;
 }
 
 /* 編集ボタン */
 .profile-edit input[type="submit"] {
-	background-color: green;
-	color: white;
-	border: 1px solid green;
-	box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.35);
-	border-radius: 10px;
-	padding: 8px 14px;
-	font-size: 14px;
-	outline: none;
-	margin-top: 10px;
-}
-
-.profile-edit form {
-	margin-left: auto;
-	width: fit-content;
-	margin-right: 6px;
+	min-width: 68px;
+	height: 34px;
+	line-height: 34px;
+	padding: 0 12px;
 }
 
 /* ナイトモード */
 .night-mode {
 	display: flex;
 	align-items: center;
-	gap: 12px;
-	margin-left: 23px;
-	margin-right: 23px;
-	font-weight: 600;
+	justify-content: space-between;
+	margin: 0 23px;
+	min-height: 52px;
 }
 
+/* ナイトモード切替ボタン */
 .sample2Area {
-	margin-left: auto;
+	width: 92px;
+	margin-left: 0;
 }
 
-/* 他言語機能 */
+.sample2Area input[type="checkbox"] {
+	display: none;
+}
+
+.sample2Area label {
+	display: block;
+	box-sizing: border-box;
+	height: 34px;
+	border: 2px solid #78bd78;
+	border-radius: 6px;
+	line-height: 1;
+	text-align: left;
+	background-color: #ffffff;
+	cursor: pointer;
+}
+
+.sample2Area #sample2box {
+	display: inline-block;
+	width: 50%;
+	height: 30px;
+	background-color: #ddd;
+	border-radius: 4px;
+	transition: 0.3s;
+}
+
+.sample2Area #sample2check:checked+label #sample2box {
+	transform: translateX(100%);
+	background-color: #78bd78;
+}
+
+/* 多言語機能 */
 .multilingual-feature {
+	margin: 0 23px;
+}
+
+.multilingual-feature form {
 	display: flex;
 	align-items: center;
-	margin-left: 23px;
-	margin-right: 23px;
-	font-weight: 600;
+	justify-content: space-between;
+	width: 100%;
+	min-height: 52px;
 }
 
 .pull-input {
-	margin-left: auto;
-	width: 100px;
+	width: 126px;
+	height: 30px;
+	padding: 2px 8px;
+	border: 1px solid #777;
+	border-radius: 2px;
+	background-color: #ffffff;
+	font-size: 14px;
 	text-align: center;
+	cursor: pointer;
+}
+
+.pull-input:hover {
+	border-color: green;
+}
+
+.pull-input:focus {
+	outline: none;
+	border: 1px solid green;
 }
 
 /* アラート機能 */
 .alert-setting {
-	margin-left: 23px;
-	margin-right: 23px;
+	margin: 0 23px;
 }
 
-.alert {
-	font-weight: 600;
+.alert-form {
+	width: 100%;
 }
 
-/* 各行を横並びにして整列 */
-.alert-setting .alert-money, .alert-setting .alert-number {
+.alert-row {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	gap: 4px;
+	margin-top: 8px;
+}
+
+.alert-item {
 	display: flex;
 	align-items: center;
-	gap: 6px; /* ラベルと入力欄の間の余白 */
-	margin-top: 6px;
-	margin-left: auto;
 	justify-content: flex-end;
+	gap: 6px;
+	font-size: 14px;
 }
 
-/* 入力欄の幅調整（必要なら） */
+.alert-label {
+	width: 72px;
+	font-weight: 500;
+}
+
+.alert-unit {
+	font-size: 14px;
+}
+
 .alert-setting input[type="text"], .alert-setting input[type="number"] {
-	width: 120px;
-	padding: 4px 6px;
+	width: 150px;
+	height: 32px;
+	box-sizing: border-box;
+	padding: 4px 8px;
 	border: 1px solid #008080;
-	border-radius: 4px;
+	border-radius: 5px;
+	font-size: 14px;
+	background-color: #ffffff;
+}
+
+.alert-setting input[type="text"]:focus, .alert-setting input[type="number"]:focus
+	{
+	outline: none;
+	border: 2px solid #008080;
+}
+
+.alert-button-area {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 10px;
 }
 
 /* 着せ替え機能 */
 .dress-up {
-	font-weight: 600;
-	gap: 10px;
-	margin-left: 23px;
-	margin-right: 23px;
+	margin: 0 23px;
 }
 
 .dress-up button {
-	flex: 1;
 	width: 21%;
 	height: 40px;
-	border-radius: 12px;
+	margin: 6px 4px;
 	border: 1px solid #ccc;
-	margin: 10px 4px;
+	border-radius: 12px;
 	cursor: pointer;
-	margin: 6;
 }
 
 .dress-up button:nth-of-type(1) {
@@ -399,36 +454,18 @@
 }
 
 /* ログアウト */
-.logout {
-	font-weight: 600;
-}
-
 .logout-user {
-	margin-left: 23px;
-	margin-right: 23px;
+	margin: 0 23px;
 }
 
 .logout-user form {
-	margin-left: auto;
 	width: fit-content;
+	margin-left: auto;
 }
 
-.logout-user input[type="submit"] {
-	color: white;
-	font-weight: 550;
-	flex: 1;
-	border: 1px solid #ccc;
-	border-radius: 16px;
-	padding: 8px 14px;
-	font-size: 14px;
-	color: f2f2f2;
-	outline: none;
-	background-color: green;
-}
-
-/* --------------------------- */
-/* -------- mypage.jsp -------- */
-/* --------------------------- */
+/* --------------------------------- */
+/* -------- mypage_edit.jsp -------- */
+/* --------------------------------- */
 .edit-button {
 	width: 95px;
 	height: 40px;
@@ -462,7 +499,7 @@
 	border: 1px solid green;
 	padding: 12px;
 	box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.35);
-	border-radius: 32px;
+	border-radius: 12px;
 	display: flex;
 	align-items: center;
 	gap: 12px;
@@ -487,6 +524,11 @@
 	padding: 6px 10px;
 	font-size: 14px;
 	background-color: #ffffff;
+}
+
+.edit-input:focus {
+	outline: none;
+	border: 1px solid green;
 }
 
 .form-buttons {

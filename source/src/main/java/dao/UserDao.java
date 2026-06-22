@@ -20,14 +20,14 @@ public class UserDao {
 			conn = DriverManager.getConnection(
 					"jdbc:mysql://localhost:3306/b3?characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=GMT%2B9",
 					"root", "password");
-			
-	        // ネットワーク接続用
-	        //conn = DriverManager.getConnection(
-	        		//"jdbc:mysql://localhost:3306/b3?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Tokyo&connectTimeout=30000;",
-	        		//"b3", "FYwYHFcfmMuGAnNZ");
 
-			String sql = "SELECT id, wallet_id, login_id, password, nickname, display_mode, night, language "
-					+ "FROM users " + "WHERE login_id = ? AND password = ?";
+			// ネットワーク接続用
+			// conn = DriverManager.getConnection(
+			// "jdbc:mysql://localhost:3306/b3?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Tokyo&connectTimeout=30000;",
+			// "b3", "FYwYHFcfmMuGAnNZ");
+
+			String sql = "SELECT id, wallet_id, login_id, password, nickname, display_mode, night, language, "
+					+ "alert_amount, alert_count " + "FROM users " + "WHERE login_id = ? AND password = ?";
 
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
@@ -39,7 +39,8 @@ public class UserDao {
 			if (rs.next()) {
 				user = new User(rs.getInt("id"), rs.getInt("wallet_id"), rs.getString("login_id"),
 						rs.getString("password"), rs.getString("nickname"), rs.getString("display_mode"),
-						rs.getBoolean("night"), rs.getString("language"));
+						rs.getBoolean("night"), rs.getString("language"), rs.getInt("alert_amount"),
+						rs.getInt("alert_count"));
 			}
 
 		} catch (Exception e) {
@@ -199,6 +200,43 @@ public class UserDao {
 				}
 			}
 
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+		return result;
+	}
+
+	public boolean updateAlertSetting(int userId, int alertAmount, int alertCount) {
+		Connection conn = null;
+		boolean result = false;
+
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+
+			conn = DriverManager.getConnection(
+					"jdbc:mysql://localhost:3306/b3?characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=GMT%2B9",
+					"root", "password");
+
+			String sql = "UPDATE users SET alert_amount = ?, alert_count = ? WHERE id = ?";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+
+			pStmt.setInt(1, alertAmount);
+			pStmt.setInt(2, alertCount);
+			pStmt.setInt(3, userId);
+
+			if (pStmt.executeUpdate() == 1) {
+				result = true;
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
 			if (conn != null) {
 				try {
 					conn.close();

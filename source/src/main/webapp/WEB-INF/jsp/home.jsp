@@ -29,12 +29,17 @@
 		</header>
 		<!-- ヘッダーここまで -->
 		<!-- メインここから -->
+		<div class="alert-area is-hidden">
+			<img
+				src="${pageContext.request.contextPath}/images/character/cozeninja.png"
+				class="home-cozeninja">
+			<div class="message1" id="message1">予算が少なくなってきたでござる</div>
+		</div>
 		<div id="total-amount">${totalAmount}</div>
 		<div id="coin-amount">${totalCount}</div>
-		<div class="message1" id="message1">予算が少なくなってきたでござる</div>
-		<img 
-			src="${pageContext.request.contextPath}/images/character/cozeninja.png" 
-			class="home-cozeninja">
+		<div id="alert-amount">${sessionScope.loginUser.alertAmount}</div>
+		<div id="alert-count">${sessionScope.loginUser.alertCount}</div>
+
 
 		<section class="money-display">
 			<div class="home-wallet-view">
