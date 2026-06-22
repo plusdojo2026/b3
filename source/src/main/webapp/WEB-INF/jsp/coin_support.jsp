@@ -23,7 +23,7 @@ String amountText = String.format("%,d", amount);
 <link rel="icon"
 	href="${pageContext.request.contextPath}/favicon/favicon.png">
 </head>
-<body>
+<body data-lang="${sessionScope.currentLang}">
 	<div class="app">
 		<!-- ヘッダーここから -->
 		<header class="header">

@@ -74,16 +74,16 @@
 				<div class="alert"><fmt:message key="mypage.alert" /></div>
 				
 				<div class="alert-money">
-				<fmt:message key="mypage.amount" /><input type="text" name="alert-money" value="">円 
+				<fmt:message key="mypage.amount" />￥<input type="text" name="alert-money" value=""> 
 				</div>
 				<div class="alert-number">
 				<fmt:message key="mypage.quantity" /><input
-					type="number" name="alert-number" min="0" value="">枚
+					type="number" name="alert-number" min="0" value=""><fmt:message key="mypage.mai" />
 				</div>	
 			</section>
 
 			<section class="dress-up">
-				<div class="dress">着せ替え機能</div>
+				<div class="dress"><fmt:message key="mypage.themes" /></div>
 				<button type="button" onclick="changeTheme('green')"></button>
 				<button type="button" onclick="changeTheme('blue')"></button>
 				<button type="button" onclick="changeTheme('purple')"></button>
@@ -91,9 +91,9 @@
 			</section>
 
 			<section class="logout-user">
-				<div class="logout">ログアウト</div>
+				<div class="logout"><fmt:message key="mypage.logout" /></div>
 				<form action="LogoutServlet" method="post">
-					<input type="submit" value="ログアウト">
+					<input type="submit" value="<fmt:message key='mypage.button.logout' />">
 				</form>
 
 			</section>
