@@ -214,13 +214,19 @@
 }
 
 /* 共通見出し */
-.profile, .night, .multilingual, .alert, .dress, .logout {
+.profile,
+.night,
+.multilingual,
+.alert,
+.dress,
+.logout {
 	font-weight: 600;
 }
 
 /* 共通ボタン */
-.profile-edit input[type="submit"], .alert-setting input[type="submit"],
-	.logout-user input[type="submit"] {
+.profile-edit input[type="submit"],
+.alert-setting input[type="submit"],
+.logout-user input[type="submit"] {
 	height: 40px;
 	background-color: green;
 	color: white;
@@ -236,16 +242,24 @@
 	box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.35);
 }
 
-.profile-edit input[type="submit"]:hover, .alert-setting input[type="submit"]:hover,
-	.logout-user input[type="submit"]:hover {
+.profile-edit input[type="submit"]:hover,
+.alert-setting input[type="submit"]:hover,
+.logout-user input[type="submit"]:hover {
 	background-color: #ffffff;
 	color: green;
 	border-color: green;
 }
 
-.alert-setting input[type="submit"], .logout-user input[type="submit"] {
+.alert-setting input[type="submit"],
+.logout-user input[type="submit"] {
 	width: 90px;
 }
+
+/* ログアウトボタンの文字中央揃え調整 */
+.logout-user input[type="submit"] {
+	padding: 0;
+}
+
 /* プロフィール */
 .profile-edit {
 	background-color: #fff;
@@ -256,14 +270,16 @@
 	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
 }
 
-.user-id, .nickname {
+.user-id,
+.nickname {
 	width: 250px;
 	margin: 14px auto 6px;
 	font-weight: 450;
 	text-align: left;
 }
 
-.user-id div, .nickname div {
+.user-id div,
+.nickname div {
 	width: 100%;
 	margin: 4px 0 0;
 	padding: 8px 12px;
@@ -325,9 +341,10 @@
 	background-color: #ddd;
 	border-radius: 4px;
 	transition: 0.3s;
+	cursor: pointer;
 }
 
-.sample2Area #sample2check:checked+label #sample2box {
+.sample2Area #sample2check:checked + label #sample2box {
 	transform: translateX(100%);
 	background-color: #78bd78;
 }
@@ -400,7 +417,8 @@
 	font-size: 14px;
 }
 
-.alert-setting input[type="text"], .alert-setting input[type="number"] {
+.alert-setting input[type="text"],
+.alert-setting input[type="number"] {
 	width: 150px;
 	height: 32px;
 	box-sizing: border-box;
@@ -411,8 +429,8 @@
 	background-color: #ffffff;
 }
 
-.alert-setting input[type="text"]:focus, .alert-setting input[type="number"]:focus
-	{
+.alert-setting input[type="text"]:focus,
+.alert-setting input[type="number"]:focus {
 	outline: none;
 	border: 2px solid #008080;
 }
