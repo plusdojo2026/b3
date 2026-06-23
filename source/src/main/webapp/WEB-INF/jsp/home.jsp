@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <fmt:setBundle basename="messages" />
 <!doctype html>
@@ -7,7 +8,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>ホーム - こぜピタ</title>
+<title><fmt:message key="home.tab.title" /></title>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/common.css">
 <link rel="stylesheet"
@@ -26,7 +27,9 @@
 			<a href="${pageContext.request.contextPath}/HomeServlet"> <img
 				src="${pageContext.request.contextPath}/images/logo/logo.png"
 				alt="ロゴ" class="logo"></a>
-			<div class="page-title">メインメニュー</div>
+			<div class="page-title">
+				<fmt:message key="home.title" />
+			</div>
 			<a href="${pageContext.request.contextPath}/HomeServlet"> <img
 				src="${pageContext.request.contextPath}/images/logo/home.png"
 				alt="ホーム" class="toHome"></a>
@@ -34,11 +37,18 @@
 		<!-- ヘッダーここまで -->
 
 		<!-- メインここから -->
-		<div class="alert-area is-hidden">
+		<div class="alert-area is-hidden" id="alertArea"
+			data-msg-no-budget="<fmt:message key='home.ninja.no_budget' />"
+			data-msg-too-many-coins="<fmt:message key='home.ninja.too_many_coins' />"
+			data-msg-low-budget="<fmt:message key='home.ninja.low_budget' />">
+
 			<img
 				src="${pageContext.request.contextPath}/images/character/cozeninja.png"
 				class="home-cozeninja">
-			<div class="message1" id="message1">予算が少なくなってきたでござる</div>
+
+			<div class="message1" id="message1">
+				<fmt:message key="home.ninja.low_budget" />
+			</div>
 		</div>
 
 		<div id="total-amount">${totalAmount}</div>
@@ -109,7 +119,8 @@
 					</label>
 				</div>
 				<a href="${pageContext.request.contextPath}/WalletServlet"
-					class="toWallet" id="tutorial-wallet-edit">現金の追加・編集</a>
+					class="toWallet" id="tutorial-wallet-edit"><fmt:message
+						key="home.wallet-edit" /></a>
 			</div>
 		</section>
 
@@ -118,10 +129,13 @@
 			<form method="GET"
 				action="${pageContext.request.contextPath}/PaymentServlet"
 				id="payment-form">
-				<div class="support-title">決済支援</div>
+				<div class="support-title">
+					<fmt:message key="home.payment" />
+				</div>
 				<div class="toPaymentArea">
 					<input type="text" maxlength="8" name="amount"
-						class="toPayment-input"> <input type="submit" value="支払い→"
+						class="toPayment-input"> <input type="submit"
+						value="<fmt:message key="home.toPayment-input" />"
 						class="toPayment-button">
 				</div>
 			</form>
@@ -129,7 +143,9 @@
 
 		<!-- コラム枠 -->
 		<div class="home-column section-bottom">
-			<div class="support-title">コラム</div>
+			<div class="support-title">
+				<fmt:message key="home.column" />
+			</div>
 
 			<div class="home-column-content"
 				onclick="location.href='${pageContext.request.contextPath}/ColumnServlet'">
@@ -137,7 +153,9 @@
 				<%-- キャラ画像（まだ無いのでコメントアウト） --%>
 				<%-- <img src="${pageContext.request.contextPath}/images/character/pitao.png" class="column-character"> --%>
 
-				<div class="column-balloon">${randomColumn.title_ja}</div>
+				<div class="column-balloon">
+					<c:out value="${columnTitle}" />
+				</div>
 			</div>
 		</div>
 		<!-- メインここまで -->

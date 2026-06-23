@@ -48,9 +48,34 @@ public class HomeServlet extends HttpServlet {
 		}
 
 		// ランダムコラムを取得して JSP に渡す
+		String lang = request.getParameter("lang");
+
+		if (lang != null) {
+		    session.setAttribute("currentLang", lang); 
+		} else {
+		    lang = (String) session.getAttribute("currentLang");
+		    if (lang == null) {
+		        lang = "ja";
+		        session.setAttribute("currentLang", lang);
+		    }
+		}
+
+		// DBからランダムコラムを取得
 		ColumnDao dao = new ColumnDao();
 		Column randomColumn = dao.findRandom();
-		request.setAttribute("randomColumn", randomColumn);
+
+		// セッションの言語に合わせてタイトルを選ぶ
+		String columnTitle = "";
+		if (randomColumn != null) {
+		    if ("en".equals(lang)) {
+		        columnTitle = randomColumn.getTitle_en(); // 英語
+		    } else {
+		        columnTitle = randomColumn.getTitle_ja(); // 日本語
+		    }
+		}
+
+		// JSPへ渡す
+		request.setAttribute("columnTitle", columnTitle);;
 
 		// 合計金額を算出する。
 

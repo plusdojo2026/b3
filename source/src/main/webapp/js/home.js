@@ -135,15 +135,15 @@ if (alertHomeAmount != null && alertHomeCount != null && message1 != null && ale
 		const alertCount = Number(alertCountElement.textContent.replace(/[^0-9]/g, ''));
 
 		if (homeCashAmount === 0) {
-			message1.textContent = "予算を登録するでござる";
+			message1.textContent = alertArea.dataset.msgNoBudget;
 			alertArea.classList.remove("is-hidden");
 
 		} else if (homeCoinCount > alertCount) {
-			message1.textContent = "小銭が多くなってきたでござる";
+			message1.textContent = alertArea.dataset.msgTooManyCoins;
 			alertArea.classList.remove("is-hidden");
 
 		} else if (homeCashAmount < alertAmount) {
-			message1.textContent = "予算が少なくなってきたでござる";
+			message1.textContent = alertArea.dataset.msgLowBudget;
 			alertArea.classList.remove("is-hidden");
 
 		} else {
