@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<fmt:setBundle basename="messages" />
 <!doctype html>
 <html lang="ja">
 <head>
@@ -10,6 +12,8 @@
 	href="${pageContext.request.contextPath}/css/common.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/home_wallet.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/introjs.min.css">
 <script src="${pageContext.request.contextPath}/js/common.js" defer></script>
 <script src="${pageContext.request.contextPath}/js/home.js" defer></script>
 <link rel="icon"
@@ -28,6 +32,7 @@
 				alt="ホーム" class="toHome"></a>
 		</header>
 		<!-- ヘッダーここまで -->
+
 		<!-- メインここから -->
 		<div class="alert-area is-hidden">
 			<img
@@ -35,15 +40,15 @@
 				class="home-cozeninja">
 			<div class="message1" id="message1">予算が少なくなってきたでござる</div>
 		</div>
+
 		<div id="total-amount">${totalAmount}</div>
 		<div id="coin-amount">${totalCount}</div>
 		<div id="alert-amount">${sessionScope.loginUser.alertAmount}</div>
 		<div id="alert-count">${sessionScope.loginUser.alertCount}</div>
 		<div id="show-tutorial">${showTutorial}</div>
 
-
 		<section class="money-display">
-			<div class="home-wallet-view">
+			<div class="home-wallet-view" id="tutorial-wallet">
 				<div class="character-pos">
 					<img
 						src="${pageContext.request.contextPath}/images/character/pitao.png"
@@ -104,12 +109,11 @@
 					</label>
 				</div>
 				<a href="${pageContext.request.contextPath}/WalletServlet"
-					class="toWallet">現金の追加・編集</a>
+					class="toWallet" id="tutorial-wallet-edit">現金の追加・編集</a>
 			</div>
 		</section>
 
 		<!-- 簡易決済支援 -->
-
 		<section class="home-coin-support">
 			<form method="GET"
 				action="${pageContext.request.contextPath}/PaymentServlet"
@@ -121,8 +125,6 @@
 						class="toPayment-button">
 				</div>
 			</form>
-
-
 		</section>
 
 		<!-- コラム枠 -->
@@ -139,19 +141,25 @@
 			</div>
 		</div>
 		<!-- メインここまで -->
+
 		<!-- フッターここから -->
 		<footer class="bottom-menu">
 
 			<!-- ぴったり小銭消費ガイド -->
 			<a href="${pageContext.request.contextPath}/CoinSupportServlet"
-				class="nav-item"> <img class="nav-img normal-img"
+				class="nav-item" id="tutorial-nav-coin"> <img
+				class="nav-img normal-img"
 				src="${pageContext.request.contextPath}/images/nav/coin_support_normal${pageContext.response.locale.language == 'en' ? '_en' : ''}.png"
 				alt="<fmt:message key='menu.coin_support' />"> <img
 				class="nav-img hover-img"
 				src="${pageContext.request.contextPath}/images/nav/coin_support_hover${pageContext.response.locale.language == 'en' ? '_en' : ''}.png"
-				alt="<fmt:message key='menu.coin_support' />"> <!-- 施設情報 -->
-			</a> <a href="${pageContext.request.contextPath}/StoreServlet"
-				class="nav-item"> <img class="nav-img normal-img"
+				alt="<fmt:message key='menu.coin_support' />">
+			</a>
+
+			<!-- 施設情報 -->
+			<a href="${pageContext.request.contextPath}/StoreServlet"
+				class="nav-item" id="tutorial-nav-store"> <img
+				class="nav-img normal-img"
 				src="${pageContext.request.contextPath}/images/nav/store_info_normal${pageContext.response.locale.language == 'en' ? '_en' : ''}.png"
 				alt="<fmt:message key='menu.store_info' />"> <img
 				class="nav-img hover-img"
@@ -163,21 +171,30 @@
 
 			<!-- コラム -->
 			<a href="${pageContext.request.contextPath}/ColumnServlet"
-				class="nav-item"> <img class="nav-img normal-img"
+				class="nav-item" id="tutorial-nav-column"> <img
+				class="nav-img normal-img"
 				src="${pageContext.request.contextPath}/images/nav/column_normal${pageContext.response.locale.language == 'en' ? '_en' : ''}.png"
 				alt="<fmt:message key='menu.column' />"> <img
 				class="nav-img hover-img"
 				src="${pageContext.request.contextPath}/images/nav/column_hover${pageContext.response.locale.language == 'en' ? '_en' : ''}.png"
-				alt="<fmt:message key='menu.column' />"> <!-- マイページ -->
-			</a> <a href="${pageContext.request.contextPath}/MyPageServlet"
-				class="nav-item"> <img class="nav-img normal-img"
+				alt="<fmt:message key='menu.column' />">
+			</a>
+
+			<!-- マイページ -->
+			<a href="${pageContext.request.contextPath}/MyPageServlet"
+				class="nav-item" id="tutorial-nav-mypage"> <img
+				class="nav-img normal-img"
 				src="${pageContext.request.contextPath}/images/nav/mypage_normal${pageContext.response.locale.language == 'en' ? '_en' : ''}.png"
 				alt="<fmt:message key='menu.mypage' />"> <img
 				class="nav-img hover-img"
 				src="${pageContext.request.contextPath}/images/nav/mypage_hover${pageContext.response.locale.language == 'en' ? '_en' : ''}.png"
-				alt="<fmt:message key='menu.mypage' />"> <!-- 支出登録 -->
-			</a> <a href="${pageContext.request.contextPath}/PaymentServlet"
-				class="nav-center"> <img class="nav-img center-img normal-img"
+				alt="<fmt:message key='menu.mypage' />">
+			</a>
+
+			<!-- 支出登録 -->
+			<a href="${pageContext.request.contextPath}/PaymentServlet"
+				class="nav-center" id="tutorial-nav-payment"> <img
+				class="nav-img center-img normal-img"
 				src="${pageContext.request.contextPath}/images/nav/payment_normal${pageContext.response.locale.language == 'en' ? '_en' : ''}.png"
 				alt="<fmt:message key='menu.payment' />"> <img
 				class="nav-img center-img hover-img"
@@ -188,5 +205,8 @@
 		</footer>
 		<!-- フッターここまで -->
 	</div>
+
+	<script src="${pageContext.request.contextPath}/js/intro.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/tutorial.js"></script>
 </body>
 </html>

@@ -186,7 +186,8 @@
 	background-color: white;
 	text-align: center;
 	width: 244px;
-	border: 1px solid green; height : 66;
+	border: 1px solid green;
+	height: 66;
 	justify-content: center;
 	text-decoration: none;
 	display: flex;
@@ -448,4 +449,158 @@
 	font-weight: bold;
 	text-align: right;
 	color: green;
+}
+
+/* ---------------------------- */
+/* ----- tutorial / intro.js --- */
+/* ---------------------------- */
+
+/* スキップボタンは非表示 */
+.introjs-tooltip.koze-tutorial-tooltip .introjs-skipbutton {
+	display: none !important;
+}
+
+/* 吹き出し本体 */
+.introjs-tooltip.koze-tutorial-tooltip {
+	width: 320px;
+	min-width: 300px;
+	max-width: calc(100vw - 42px);
+	padding: 0;
+	border: 2px solid #008040;
+	border-radius: 18px;
+	background-color: #fffef8;
+	color: #333;
+	box-sizing: border-box;
+	box-shadow: 0 12px 28px rgba(0, 0, 0, 0.28);
+	font-family: inherit;
+}
+
+/* 吹き出しヘッダー */
+.introjs-tooltip.koze-tutorial-tooltip .introjs-tooltip-header {
+	padding: 14px 16px 8px;
+	border-bottom: 1px solid rgba(0, 128, 64, 0.18);
+}
+
+/* タイトル */
+.introjs-tooltip.koze-tutorial-tooltip .introjs-tooltip-title {
+	font-size: 17px;
+	font-weight: 700;
+	line-height: 1.5;
+	color: #006b38;
+}
+
+/* 説明文 */
+.introjs-tooltip.koze-tutorial-tooltip .introjs-tooltiptext {
+	padding: 12px 16px 14px;
+	font-size: 14px;
+	line-height: 1.75;
+	color: #333;
+}
+
+/* 進捗バー */
+.introjs-tooltip.koze-tutorial-tooltip .introjs-progress {
+	height: 5px;
+	margin: 0 16px 12px;
+	border-radius: 999px;
+	background-color: #e5efe5;
+	overflow: hidden;
+}
+
+.introjs-tooltip.koze-tutorial-tooltip .introjs-progressbar {
+	height: 5px;
+	border-radius: 999px;
+	background-color: green;
+}
+
+/* ボタンエリア */
+.introjs-tooltip.koze-tutorial-tooltip .introjs-tooltipbuttons {
+	display: flex;
+	justify-content: flex-end;
+	gap: 10px;
+	padding: 0 16px 16px;
+	border-top: none;
+}
+
+/* 共通ボタン */
+.introjs-tooltip.koze-tutorial-tooltip .introjs-button {
+	min-width: 82px;
+	height: 36px;
+	padding: 0 16px;
+	border: 1px solid green;
+	border-radius: 999px;
+	background-color: #ffffff;
+	color: green;
+	font-size: 13px;
+	font-weight: 600;
+	line-height: 34px;
+	text-align: center;
+	text-shadow: none;
+	box-shadow: none;
+	box-sizing: border-box;
+	cursor: pointer;
+	transition: 0.2s;
+}
+
+/* 次へボタン */
+.introjs-tooltip.koze-tutorial-tooltip .introjs-nextbutton,
+	.introjs-tooltip.koze-tutorial-tooltip .introjs-donebutton {
+	background-color: green;
+	color: #ffffff;
+}
+
+.introjs-tooltip.koze-tutorial-tooltip .introjs-nextbutton:hover,
+	.introjs-tooltip.koze-tutorial-tooltip .introjs-donebutton:hover {
+	background-color: #ffffff;
+	color: green;
+	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.22);
+}
+
+/* 戻るボタン */
+.introjs-tooltip.koze-tutorial-tooltip .introjs-prevbutton {
+	background-color: #ffffff;
+	color: #555;
+	border-color: #ccc;
+}
+
+.introjs-tooltip.koze-tutorial-tooltip .introjs-prevbutton:hover {
+	background-color: #f5f5f5;
+	color: #333;
+	border-color: #aaa;
+}
+
+
+.introjs-tooltip.koze-tutorial-tooltip .introjs-disabled,
+	.introjs-tooltip.koze-tutorial-tooltip .introjs-disabled:hover {
+	background-color: #eeeeee;
+	color: #999999;
+	border-color: #dddddd;
+	box-shadow: none;
+	cursor: default;
+	opacity: 0.45;
+}
+
+/* ハイライト枠 */
+.introjs-helperLayer {
+	border-radius: 14px;
+	box-shadow: 0 0 0 2px rgba(0, 128, 64, 0.75), rgba(33, 33, 33, 0.45) 0 0
+		0 5000px !important;
+}
+
+/* スマホ幅調整 */
+@media screen and (max-width: 390px) {
+	.introjs-tooltip.koze-tutorial-tooltip {
+		width: 310px;
+		max-width: calc(100vw - 32px);
+	}
+	.introjs-tooltip.koze-tutorial-tooltip .introjs-tooltip-title {
+		font-size: 16px;
+	}
+	.introjs-tooltip.koze-tutorial-tooltip .introjs-tooltiptext {
+		font-size: 13px;
+	}
+}
+
+/* 中央固定時は矢印を消す */
+.introjs-tooltip.koze-tutorial-tooltip .introjs-arrow {
+	display: none !important;
 }

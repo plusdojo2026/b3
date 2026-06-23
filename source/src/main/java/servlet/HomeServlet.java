@@ -38,8 +38,11 @@ public class HomeServlet extends HttpServlet {
 		}
 
 		Boolean showTutorial = (Boolean) session.getAttribute("showTutorial");
+		String tutorialParam = request.getParameter("tutorial");
 
-		if (showTutorial != null && showTutorial) {
+		if ("1".equals(tutorialParam)) {
+			request.setAttribute("showTutorial", true);
+		} else if (showTutorial != null && showTutorial) {
 			request.setAttribute("showTutorial", true);
 			session.removeAttribute("showTutorial");
 		}
