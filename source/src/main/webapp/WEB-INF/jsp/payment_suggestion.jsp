@@ -45,7 +45,7 @@ String[] moneyImagePaths = {"tenThousandYen.png", "fiveThousandYen.png", "oneTho
 <link rel="icon"
 	href="${pageContext.request.contextPath}/favicon/favicon.png">
 </head>
-<body>
+<body data-lang="${sessionScope.currentLang}">
 	<div class="app">
 		<!-- ヘッダーここから -->
 		<header class="header">
@@ -277,11 +277,16 @@ String[] moneyImagePaths = {"tenThousandYen.png", "fiveThousandYen.png", "oneTho
 			}
 
 			if (totalCount === 0) {
-				alert('支払う紙幣・硬貨を1枚以上入力してください。');
-				return false;
-			}
+				const currentLang = document.body.dataset.lang;
 
-			return true;
+			    if (currentLang === 'en') {
+			        alert('Please enter at least one bill or coin.');
+			    } else {
+			        alert('支払う紙幣・硬貨を1枚以上入力してください。');
+			    }
+
+			    return false;
+			};
 		}
 	</script>
 </body>
