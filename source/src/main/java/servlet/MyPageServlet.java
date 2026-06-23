@@ -133,8 +133,7 @@ public class MyPageServlet extends HttpServlet {
 		}
 
 		// JSTLのタグ（fmt:message）が自動でこの言語を認識できるようにセッションに保存
-		javax.servlet.jsp.jstl.core.Config.set(request.getSession(), javax.servlet.jsp.jstl.core.Config.FMT_LOCALE,
-				locale);
+		javax.servlet.jsp.jstl.core.Config.set(request.getSession(), javax.servlet.jsp.jstl.core.Config.FMT_LOCALE,locale);
 
 		// 後でJavaScript（coin_support.jsなど）で「今どっちの言語？」と判定するために文字でも保存しておくと
 		request.getSession().setAttribute("currentLang", "en".equals(language) ? "en" : "ja");

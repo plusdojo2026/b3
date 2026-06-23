@@ -4,7 +4,7 @@
 <fmt:setBundle basename="messages" />
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
-Integer amount =  (Integer) request.getAttribute("totalCoins");
+Integer amount = (Integer) request.getAttribute("totalCoins");
 
 String amountText = String.format("%,d", amount);
 %>
