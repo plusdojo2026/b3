@@ -115,6 +115,31 @@
 	text-shadow: #333;
 }
 
+/*言語切り替えボタン*/
+.lang-switch {
+    display: flex;
+    justify-content: flex-end; 
+    align-items: center;
+    /*padding: 10px 20px;*/
+    font-weight: bold;
+    gap: 8px; 
+    color: #ccc; 
+}
+
+/* リンク（JP/EN）の共通デザイン */
+.lang-switch a {
+    text-decoration: none;
+    color: #666; 
+    padding: 4px 8px;
+    border-radius: 4px;
+    transition: all 0.3s ease; 
+}
+
+.lang-switch a:hover {
+    background-color: #f0f0f0; 
+    color: #333; 
+}
+
 /* --------------------------- */
 /* -------- login.jsp -------- */
 /* --------------------------- */
