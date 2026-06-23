@@ -15,7 +15,7 @@ String errorMsg = (String) request.getAttribute("errorMsg");
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>支出ログ - こぜピタ</title>
+<title><fmt:message key="payment.log.tab" /></title>
 
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/common.css">

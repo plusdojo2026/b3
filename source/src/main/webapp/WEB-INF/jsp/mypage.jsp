@@ -113,7 +113,7 @@
 					</div>
 
 					<div class="alert-button-area">
-						<input type="submit" value="変更">
+						<input type="submit" value="<fmt:message key='mypage.change' />">
 					</div>
 				</form>
 			</section>

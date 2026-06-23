@@ -47,7 +47,7 @@ public class LangageServlet extends HttpServlet {
             response.sendRedirect(request.getContextPath() + "/LoginServlet");
         }
     }
-};
+}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
