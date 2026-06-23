@@ -11,7 +11,7 @@ String successMsg = (String) request.getAttribute("successMsg");
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>支出登録 - こぜピタ</title>
+<title><fmt:message key="payment.tab" /></title>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/common.css">
 <link rel="stylesheet"
