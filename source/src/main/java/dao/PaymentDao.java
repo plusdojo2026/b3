@@ -45,7 +45,7 @@ public class PaymentDao {
 		
         // ネットワーク接続用
         //conn = DriverManager.getConnection(
-        		//"jdbc:mysql://localhost:3306/b3?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Tokyo&connectTimeout=30000;",
+        		//"jdbc:mysql://localhost:3306/b3?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Tokyo&connectTimeout=30000",
         		//"b3", "FYwYHFcfmMuGAnNZ");
 
 		String sql = "SELECT id, user_id, amount FROM payments WHERE user_id = ? ORDER BY id DESC";
