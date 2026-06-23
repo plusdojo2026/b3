@@ -93,7 +93,7 @@ public class ColumnDao {
 	        
 	        // ネットワーク接続用
 	        //conn = DriverManager.getConnection(
-	        		//"jdbc:mysql://localhost:3306/b3?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Tokyo&connectTimeout=30000;",
+	        		//"jdbc:mysql://localhost:3306/b3?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Tokyo&connectTimeout=30000",
 	        		//"b3", "FYwYHFcfmMuGAnNZ");
 	        
 
