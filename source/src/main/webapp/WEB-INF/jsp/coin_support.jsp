@@ -13,7 +13,7 @@ String amountText = String.format("%,d", amount);
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>ぴったり小銭消費ガイド- こぜピタ</title>
+<title><fmt:message key="coin.tab" /></title>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/common.css">
 <link rel="stylesheet"

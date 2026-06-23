@@ -2,16 +2,19 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="dto.User"%>
 <%
-String errorMsg = (String) request.getAttribute("errorMsg");
-String successMsg = (String) request.getAttribute("successMsg");
+String errorMsgKey = (String) request.getAttribute("errorMsgKey");
+String successMsgKey = (String) request.getAttribute("successMsgKey");
 User loginUser = (User) session.getAttribute("loginUser");
 %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<fmt:setBundle basename="messages" />
+
 <!doctype html>
 <html lang="ja">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>プロフィール編集 - こぜピタ</title>
+<title><fmt:message key="profile_edit.tab.title" /></title>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/common.css">
 <link rel="stylesheet"
@@ -28,7 +31,7 @@ User loginUser = (User) session.getAttribute("loginUser");
 			<a href="${pageContext.request.contextPath}/HomeServlet"> <img
 				src="${pageContext.request.contextPath}/images/logo/logo.png"
 				alt="ロゴ" class="logo"></a>
-			<div class="page-title">プロフィール編集</div>
+			<div class="page-title"><fmt:message key="profile_edit.title" /></div>
 			<a href="${pageContext.request.contextPath}/HomeServlet"> <img
 				src="${pageContext.request.contextPath}/images/logo/home.png"
 				alt="ホーム" class="toHome"></a>
@@ -37,24 +40,24 @@ User loginUser = (User) session.getAttribute("loginUser");
 		<!-- メインここから -->
 		<main class="main">
 			<div class="profile_edit_area">
-				<p class="progfile-edit-nav">プロフィールの編集</p>
+				<p class="progfile-edit-nav"><fmt:message key="profile_edit.nav.title" /></p>
 				<form method="POST"
 					action="${pageContext.request.contextPath}/UserEditServlet"
 					id="profile-edit-form" class="profile-edit-form">
-					<label class="edits">ニックネーム<br> <input type="text"
+					<label class="edits"><fmt:message key="profile_edit.nickname" /><br> <input type="text"
 						name="nickname" class="edit-nickname edit-input" id="nickname"
 						maxlength="20" value="<%=loginUser.getNickname()%>"><br>
-					</label> <label class="edits">ユーザーID<br> <input type="text"
+					</label> <label class="edits"><fmt:message key="profile_edit.loginId" /><br> <input type="text"
 						name="loginId" class="edit-loginId edit-input" id="loginId"
 						maxlength="20" value="<%=loginUser.getLoginId()%>"><br>
-					</label> <label class="edits">現在のパスワード<br> <input
+					</label> <label class="edits"><fmt:message key="profile_edit.isPassword" /><br> <input
 						type="password" name="isPassword"
 						class="edit-isPassword edit-input" id="isPassword" maxlength="20"
 						required><br>
-					</label> <label class="edits">新しいパスワード<br> <input
+					</label> <label class="edits"><fmt:message key="profile_edit.edit-password" /><br> <input
 						type="password" name="password" class="edit-password edit-input"
 						id="password" maxlength="20"><br>
-					</label> <label class="edits">新しいパスワード（確認用）<br> <input
+					</label> <label class="edits"><fmt:message key="profile_edit.passwordConfirm" /><br> <input
 						type="password" name="passwordConfirm"
 						class="edit-passwordConfirm edit-input" id="passwordConfirm"
 						maxlength="20">
@@ -62,20 +65,20 @@ User loginUser = (User) session.getAttribute("loginUser");
 					<div class="form-bottom-bar"></div>
 					<div class="form-buttons">
 						<input type="button" onclick="history.back()" class="edit-button"
-							name="cancel" id="cancelBtn" value="キャンセル"> <input
+							name="cancel" id="cancelBtn" value="<fmt:message key="profile_edit.cancel" />"> <input
 							type="submit" class="edit-button" name="submit" id="editBtn"
-							value="変更の保存">
+							value="<fmt:message key="profile_edit.edit" />">
 					</div>
 				</form>
 				<div class="message-area">
 					<%
-					if (errorMsg != null) {
+					if (errorMsgKey != null) {
 					%>
-					<span class="error-message"><%=errorMsg%></span>
+					<span class="error-message"><fmt:message key="<%=errorMsgKey%>" /></span>
 					<%
-					} else if (successMsg != null) {
+					} else if (successMsgKey != null) {
 					%>
-					<span class="success-message"><%=successMsg%></span>
+					<span class="success-message"><fmt:message key="<%=successMsgKey%>" /></span>
 					<%
 					}
 					%>

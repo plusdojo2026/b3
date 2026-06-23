@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,14 +14,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.UserDao;
-import dao.WalletDao;
-import dao.PaymentDao;
 import dao.BreakdownDao;
+import dao.PaymentDao;
+import dao.WalletDao;
+import dto.Breakdown;
+import dto.Payment;
 import dto.User;
 import dto.Wallet;
-import dto.Payment;
-import dto.Breakdown;
 
 @WebServlet("/PaymentServlet")
 public class PaymentServlet extends HttpServlet {
@@ -43,6 +44,13 @@ public class PaymentServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		request.setCharacterEncoding("UTF-8");
+		HttpSession session = request.getSession();
+
+		String lang = (String) session.getAttribute("currentLang");
+
+		Locale locale = "en".equals(lang) ? Locale.ENGLISH : Locale.JAPANESE;
+
+		ResourceBundle bundle = ResourceBundle.getBundle("messages", locale);
 
 		String amountStr = request.getParameter("amount");
 		String action = request.getParameter("action");
@@ -50,13 +58,13 @@ public class PaymentServlet extends HttpServlet {
 
 		// 入力値チェック
 		if (amountStr == null || amountStr.length() == 0) {
-			request.setAttribute("errorMsg", "金額を入力してください。");
+			request.setAttribute("errorMsg", bundle.getString("payment.error.amount.empty"));
 			request.getRequestDispatcher("/WEB-INF/jsp/payment.jsp").forward(request, response);
 			return;
 		}
 
 		if (!amountStr.matches("^[0-9]+$")) {
-			request.setAttribute("errorMsg", "金額は半角数字で入力してください。");
+			request.setAttribute("errorMsg", bundle.getString("payment.error.amount.numeric"));
 			request.getRequestDispatcher("/WEB-INF/jsp/payment.jsp").forward(request, response);
 			return;
 		}
@@ -64,16 +72,16 @@ public class PaymentServlet extends HttpServlet {
 		int amount = Integer.parseInt(amountStr);
 
 		if (amount <= 0) {
-			request.setAttribute("errorMsg", "1円以上の金額を入力してください。");
+			request.setAttribute("errorMsg",bundle.getString("payment.error.amount.min") );
 			request.getRequestDispatcher("/WEB-INF/jsp/payment.jsp").forward(request, response);
 			return;
 		}
 		if (amount >= 1000000) {
-			request.setAttribute("errorMsg", "100万円未満の金額を入力してください。");
+			request.setAttribute("errorMsg", bundle.getString("payment.error.amount.max"));
 			request.getRequestDispatcher("/WEB-INF/jsp/payment.jsp").forward(request, response);
 			return;
 		}
-		HttpSession session = request.getSession();
+
 		User loginUser = (User) session.getAttribute("loginUser");
 
 		if (loginUser == null) {
@@ -88,13 +96,13 @@ public class PaymentServlet extends HttpServlet {
 			wallet = walletDao.selectById(loginUser.getWalletId());
 		} catch (Exception e) {
 			e.printStackTrace();
-			request.setAttribute("errorMsg", "財布情報の取得に失敗しました。");
+			request.setAttribute("errorMsg",  bundle.getString("payment.error.wallet.fetch"));
 			request.getRequestDispatcher("/WEB-INF/jsp/payment.jsp").forward(request, response);
 			return;
 		}
 		// 財布情報チェック
 		if (wallet == null) {
-			request.setAttribute("errorMsg", "財布情報が見つかりませんでした。");
+			request.setAttribute("errorMsg", bundle.getString("payment.error.wallet.notfound"));
 			request.getRequestDispatcher("/WEB-INF/jsp/payment.jsp").forward(request, response);
 			return;
 		}
@@ -116,7 +124,7 @@ public class PaymentServlet extends HttpServlet {
 				if (payCountStr == null || payCountStr.length() == 0) {
 					confirmPayCounts[i] = 0;
 				} else if (!payCountStr.matches("^[0-9]+$")) {
-					request.setAttribute("errorMsg", "枚数は半角数字で入力してください。");
+					request.setAttribute("errorMsg", bundle.getString("payment.error.count.numeric"));
 					request.setAttribute("manualMode", true);
 					request.setAttribute("amount", amount);
 					request.getRequestDispatcher("/WEB-INF/jsp/payment_suggestion.jsp").forward(request, response);
@@ -133,7 +141,7 @@ public class PaymentServlet extends HttpServlet {
 			}
 
 			if (confirmPayAmount == 0) {
-				request.setAttribute("errorMsg", "支払う紙幣・硬貨を1枚以上入力してください。");
+				request.setAttribute("errorMsg", bundle.getString("payment.error.count.min"));
 				request.setAttribute("manualMode", true);
 				request.setAttribute("amount", amount);
 				request.setAttribute("moneyTypes", confirmMoneyTypes);
@@ -142,7 +150,7 @@ public class PaymentServlet extends HttpServlet {
 				return;
 			}
 			if (confirmPayAmount < amount) {
-				request.setAttribute("errorMsg", "支払金額が不足しています。");
+				request.setAttribute("errorMsg", bundle.getString("payment.error.amount.shortage"));
 				request.setAttribute("manualMode", true);
 				request.setAttribute("amount", amount);
 				request.setAttribute("moneyTypes", confirmMoneyTypes);
@@ -156,7 +164,7 @@ public class PaymentServlet extends HttpServlet {
 
 			for (int i = 0; i < confirmPayCounts.length; i++) {
 				if (confirmPayCounts[i] > currentWalletCounts[i]) {
-					request.setAttribute("errorMsg", "財布にある枚数を超えています。");
+					request.setAttribute("errorMsg", bundle.getString("payment.error.count.over"));
 					request.setAttribute("manualMode", true);
 					request.setAttribute("amount", amount);
 					request.setAttribute("moneyTypes", confirmMoneyTypes);
@@ -230,7 +238,7 @@ public class PaymentServlet extends HttpServlet {
 
 				conn.commit();
 
-				request.setAttribute("successMsg", "支出を登録しました。");
+				request.setAttribute("successMsg", bundle.getString("payment.success.register"));
 				request.getRequestDispatcher("/WEB-INF/jsp/payment.jsp").forward(request, response);
 				return;
 
@@ -245,7 +253,7 @@ public class PaymentServlet extends HttpServlet {
 					}
 				}
 
-				request.setAttribute("errorMsg", "支出登録に失敗しました。");
+				request.setAttribute("errorMsg", bundle.getString("payment.error.register"));
 				request.getRequestDispatcher("/WEB-INF/jsp/payment.jsp").forward(request, response);
 				return;
 			} finally {
@@ -265,7 +273,7 @@ public class PaymentServlet extends HttpServlet {
 				+ wallet.getFiftyYen() * 50 + wallet.getTenYen() * 10 + wallet.getFiveYen() * 5 + wallet.getOneYen();
 
 		if (amount > walletTotal) {
-			request.setAttribute("errorMsg", "財布の合計金額を超えています。");
+			request.setAttribute("errorMsg", bundle.getString("payment.error.wallet.total"));
 			request.getRequestDispatcher("/WEB-INF/jsp/payment.jsp").forward(request, response);
 			return;
 		}
@@ -307,13 +315,13 @@ public class PaymentServlet extends HttpServlet {
 		}
 
 		if (usableWalletTotal == 0) {
-			request.setAttribute("errorMsg", "使用できるお金を1つ以上選択してください。");
+			request.setAttribute("errorMsg", bundle.getString("payment.error.money.select"));
 			request.getRequestDispatcher("/WEB-INF/jsp/payment.jsp").forward(request, response);
 			return;
 		}
 
 		if (amount > usableWalletTotal) {
-			request.setAttribute("errorMsg", "選択したお金だけでは金額が足りません。");
+			request.setAttribute("errorMsg", bundle.getString("payment.error.money.insufficient"));
 			request.getRequestDispatcher("/WEB-INF/jsp/payment.jsp").forward(request, response);
 			return;
 		}
@@ -382,7 +390,7 @@ public class PaymentServlet extends HttpServlet {
 		}
 
 		if (bestPayCounts == null) {
-			request.setAttribute("errorMsg", "支払える組み合わせが見つかりませんでした。");
+			request.setAttribute("errorMsg", bundle.getString("payment.error.combination.notfound"));
 			request.getRequestDispatcher("/WEB-INF/jsp/payment.jsp").forward(request, response);
 			return;
 		}
