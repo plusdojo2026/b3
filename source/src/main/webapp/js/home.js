@@ -86,6 +86,7 @@ if (amountInput != null) {
 const eyeBtn = document.getElementById("eyeBtn");
 const moneyListView = document.getElementById("wallet-money-list");
 const homeWalletAmount = document.getElementById("home-wallet-amount");
+const eyeIcon = eyeBtn ? eyeBtn.querySelector(".eye-icon") : null;
 
 if (eyeBtn != null && moneyListView != null && homeWalletAmount != null) {
 	const originalWalletAmount = homeWalletAmount.textContent;
@@ -98,11 +99,11 @@ if (eyeBtn != null && moneyListView != null && homeWalletAmount != null) {
 
 		if (moneyListView.classList.contains("open")) {
 			// open が付いた時
-			eyeBtn.textContent = "閉";
+			eyeIcon.src = contextPath + "/images/home_eye/open-eye.png";
 			homeWalletAmount.textContent = originalWalletAmount;
 		} else {
 			// open が外れた時
-			eyeBtn.textContent = "目";
+			eyeIcon.src = contextPath + "/images/home_eye/blind-eye.png";
 			homeWalletAmount.textContent = "~~~~~~";
 		}
 	});

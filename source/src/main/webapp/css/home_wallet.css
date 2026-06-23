@@ -119,6 +119,12 @@
 	font-size: 16px;
 }
 
+.eye-icon {
+	width: 24px;
+	height: auto;
+	z-index: 2;
+}
+
 /* 金額 */
 .home-money-amount span {
 	font-size: 28px;
