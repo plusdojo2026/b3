@@ -126,7 +126,9 @@ if (alertHomeAmount != null && alertHomeCount != null && message1 != null && ale
 
 	const alertAmount = Number(alertAmountElement.textContent.replace(/[^0-9]/g, ''));
 	const alertCount = Number(alertCountElement.textContent.replace(/[^0-9]/g, ''));
-	if (homeCoinCount > alertCount) {
+	if (homeCashAmount = 0) {
+		message1.textContent = "予算を登録するでござる";
+	} else if (homeCoinCount > alertCount) {
 		message1.textContent = "小銭が多くなってきたでござる";
 		alertArea.classList.remove("is-hidden");
 	} else if (homeCashAmount < alertAmount) {

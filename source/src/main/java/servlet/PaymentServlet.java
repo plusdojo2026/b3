@@ -115,15 +115,14 @@ public class PaymentServlet extends HttpServlet {
 
 				if (payCountStr == null || payCountStr.length() == 0) {
 					confirmPayCounts[i] = 0;
-				} else {
-					confirmPayCounts[i] = Integer.parseInt(payCountStr);
-				}
-				if (confirmPayCounts[i] < 0) {
-					request.setAttribute("errorMsg", "枚数は0以上で入力してください。");
+				} else if (!payCountStr.matches("^[0-9]+$")) {
+					request.setAttribute("errorMsg", "枚数は半角数字で入力してください。");
 					request.setAttribute("manualMode", true);
 					request.setAttribute("amount", amount);
 					request.getRequestDispatcher("/WEB-INF/jsp/payment_suggestion.jsp").forward(request, response);
 					return;
+				} else {
+					confirmPayCounts[i] = Integer.parseInt(payCountStr);
 				}
 			}
 
@@ -131,6 +130,25 @@ public class PaymentServlet extends HttpServlet {
 
 			for (int i = 0; i < confirmMoneyTypes.length; i++) {
 				confirmPayAmount += confirmMoneyTypes[i] * confirmPayCounts[i];
+			}
+
+			if (confirmPayAmount == 0) {
+				request.setAttribute("errorMsg", "支払う紙幣・硬貨を1枚以上入力してください。");
+				request.setAttribute("manualMode", true);
+				request.setAttribute("amount", amount);
+				request.setAttribute("moneyTypes", confirmMoneyTypes);
+				request.setAttribute("payCounts", confirmPayCounts);
+				request.getRequestDispatcher("/WEB-INF/jsp/payment_suggestion.jsp").forward(request, response);
+				return;
+			}
+			if (confirmPayAmount < amount) {
+				request.setAttribute("errorMsg", "支払金額が不足しています。");
+				request.setAttribute("manualMode", true);
+				request.setAttribute("amount", amount);
+				request.setAttribute("moneyTypes", confirmMoneyTypes);
+				request.setAttribute("payCounts", confirmPayCounts);
+				request.getRequestDispatcher("/WEB-INF/jsp/payment_suggestion.jsp").forward(request, response);
+				return;
 			}
 			int[] currentWalletCounts = { wallet.getTenThousandYen(), wallet.getFiveThousandYen(),
 					wallet.getOneThousandYen(), wallet.getFiveHundredYen(), wallet.getOneHundredYen(),
@@ -141,6 +159,8 @@ public class PaymentServlet extends HttpServlet {
 					request.setAttribute("errorMsg", "財布にある枚数を超えています。");
 					request.setAttribute("manualMode", true);
 					request.setAttribute("amount", amount);
+					request.setAttribute("moneyTypes", confirmMoneyTypes);
+					request.setAttribute("payCounts", confirmPayCounts);
 					request.getRequestDispatcher("/WEB-INF/jsp/payment_suggestion.jsp").forward(request, response);
 					return;
 				}
