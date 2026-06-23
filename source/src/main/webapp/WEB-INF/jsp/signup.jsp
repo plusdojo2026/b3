@@ -36,6 +36,10 @@ User loginUser = (User) session.getAttribute("LoginUser");
 		<!-- ヘッダーここまで -->
 		<!-- メインここから -->
 		<main class="main">
+		<div class="lang-switch">
+    		<a href="${pageContext.request.contextPath}/LanguageServlet?lang=ja&from=${pageContext.request.servletPath}">JP</a> | 
+    		<a href="${pageContext.request.contextPath}/LanguageServlet?lang=en&from=${pageContext.request.servletPath}">EN</a>
+		</div>
 			<div class="signup-nav">あなたの情報を登録してください</div>
 
 			<form method="POST"
