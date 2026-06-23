@@ -68,7 +68,7 @@
 			<c:if test="${sessionScope.currentLang != 'en'}">
 				<c:set var="title" value="${col.title_ja}" scope="request"/>
 			</c:if>
-			<c:if test="${sessionScope.currentLang == 'en'}}">
+			<c:if test="${sessionScope.currentLang == 'en'}">
 				<c:set var="title" value="${col.title_en}" scope="request"/>
 			</c:if>
 			
