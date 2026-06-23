@@ -2,7 +2,9 @@ package servlet;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import java.util.ResourceBundle;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -27,8 +29,13 @@ public class PaymentLogServlet extends HttpServlet {
 
 		HttpSession session = request.getSession();
 		User loginUser = (User) session.getAttribute("loginUser");
-		
 
+		// 言語
+		String lang = (String) request.getSession().getAttribute("currentLang");
+
+		Locale locale = "en".equals(lang) ? Locale.ENGLISH : Locale.JAPANESE;
+
+		ResourceBundle bundle = ResourceBundle.getBundle("messages", locale);
 
 		if (loginUser == null) {
 			response.sendRedirect(request.getContextPath() + "/LoginServlet");
@@ -45,7 +52,7 @@ public class PaymentLogServlet extends HttpServlet {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			request.setAttribute("errorMsg", "支出ログの取得に失敗しました。");
+			request.setAttribute("errorMsg", bundle.getString("payment.log.error.fetch"));
 			request.getRequestDispatcher("/WEB-INF/jsp/payment_log.jsp").forward(request, response);
 			return;
 		}
