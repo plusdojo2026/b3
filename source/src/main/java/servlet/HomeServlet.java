@@ -37,6 +37,13 @@ public class HomeServlet extends HttpServlet {
 			id = loginUser.getId();
 		}
 
+		Boolean showTutorial = (Boolean) session.getAttribute("showTutorial");
+
+		if (showTutorial != null && showTutorial) {
+			request.setAttribute("showTutorial", true);
+			session.removeAttribute("showTutorial");
+		}
+
 		// ランダムコラムを取得して JSP に渡す
 		ColumnDao dao = new ColumnDao();
 		Column randomColumn = dao.findRandom();

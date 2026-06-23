@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.UserDao;
 import dto.User;
@@ -87,8 +88,19 @@ public class SignupServlet extends HttpServlet {
 		boolean result = dao.insertWithWallet(user);
 
 		if (result) {
-			// ここに、チュートリアル機能をのちに記述
-			response.sendRedirect(request.getContextPath() + "/LoginServlet");
+			User loginUser = dao.findByLoginIdAndPassword(loginId, password);
+
+			if (loginUser == null) {
+				response.sendRedirect(request.getContextPath() + "/LoginServlet");
+				return;
+			}
+
+			HttpSession session = request.getSession();
+			session.setAttribute("loginUser", loginUser);
+			session.setAttribute("showTutorial", true);
+
+			response.sendRedirect(request.getContextPath() + "/HomeServlet");
+			return;
 		} else {
 			request.setAttribute("errorMsg", "登録に失敗しました。");
 			request.getRequestDispatcher("/WEB-INF/jsp/signup.jsp").forward(request, response);

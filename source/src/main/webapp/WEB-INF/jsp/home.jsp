@@ -39,6 +39,7 @@
 		<div id="coin-amount">${totalCount}</div>
 		<div id="alert-amount">${sessionScope.loginUser.alertAmount}</div>
 		<div id="alert-count">${sessionScope.loginUser.alertCount}</div>
+		<div id="show-tutorial">${showTutorial}</div>
 
 
 		<section class="money-display">
@@ -148,8 +149,7 @@
 				alt="<fmt:message key='menu.coin_support' />"> <img
 				class="nav-img hover-img"
 				src="${pageContext.request.contextPath}/images/nav/coin_support_hover${pageContext.response.locale.language == 'en' ? '_en' : ''}.png"
-				alt="<fmt:message key='menu.coin_support' />">
-			<!-- 施設情報 -->
+				alt="<fmt:message key='menu.coin_support' />"> <!-- 施設情報 -->
 			</a> <a href="${pageContext.request.contextPath}/StoreServlet"
 				class="nav-item"> <img class="nav-img normal-img"
 				src="${pageContext.request.contextPath}/images/nav/store_info_normal${pageContext.response.locale.language == 'en' ? '_en' : ''}.png"
@@ -160,7 +160,7 @@
 			</a>
 
 			<div class="nav-space"></div>
-			
+
 			<!-- コラム -->
 			<a href="${pageContext.request.contextPath}/ColumnServlet"
 				class="nav-item"> <img class="nav-img normal-img"
@@ -168,16 +168,14 @@
 				alt="<fmt:message key='menu.column' />"> <img
 				class="nav-img hover-img"
 				src="${pageContext.request.contextPath}/images/nav/column_hover${pageContext.response.locale.language == 'en' ? '_en' : ''}.png"
-				alt="<fmt:message key='menu.column' />">
-			<!-- マイページ -->
+				alt="<fmt:message key='menu.column' />"> <!-- マイページ -->
 			</a> <a href="${pageContext.request.contextPath}/MyPageServlet"
 				class="nav-item"> <img class="nav-img normal-img"
 				src="${pageContext.request.contextPath}/images/nav/mypage_normal${pageContext.response.locale.language == 'en' ? '_en' : ''}.png"
 				alt="<fmt:message key='menu.mypage' />"> <img
 				class="nav-img hover-img"
 				src="${pageContext.request.contextPath}/images/nav/mypage_hover${pageContext.response.locale.language == 'en' ? '_en' : ''}.png"
-				alt="<fmt:message key='menu.mypage' />">
-			<!-- 支出登録 -->
+				alt="<fmt:message key='menu.mypage' />"> <!-- 支出登録 -->
 			</a> <a href="${pageContext.request.contextPath}/PaymentServlet"
 				class="nav-center"> <img class="nav-img center-img normal-img"
 				src="${pageContext.request.contextPath}/images/nav/payment_normal${pageContext.response.locale.language == 'en' ? '_en' : ''}.png"
