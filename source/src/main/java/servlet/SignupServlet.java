@@ -40,37 +40,46 @@ public class SignupServlet extends HttpServlet {
 		nickname = nickname == null ? "" : nickname.trim();
 		password = password == null ? "" : password.trim();
 		passwordConfirm = passwordConfirm == null ? "" : passwordConfirm.trim();
+		
+		// 1. セッションから現在の言語を取得する
+		String currentLang = (String) request.getSession().getAttribute("currentLang");
+
+		// 2. 言語に応じたLocaleを設定する
+		java.util.Locale locale = "en".equals(currentLang) ? java.util.Locale.ENGLISH : java.util.Locale.JAPANESE;
+
+		// 3. プロパティファイル（messages.properties）を読み込む
+		java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("messages", locale);
 
 		// 未入力チェック
 		if (loginId.isEmpty() || nickname.isEmpty() || password.isEmpty() || passwordConfirm.isEmpty()) {
-			request.setAttribute("errorMsg", "未入力の項目があります。");
+			request.setAttribute("errorMsg", bundle.getString("error.required"));
 			request.getRequestDispatcher("/WEB-INF/jsp/signup.jsp").forward(request, response);
 			return;
 		}
 
 		// パスワード確認
 		if (!password.equals(passwordConfirm)) {
-			request.setAttribute("errorMsg", "パスワードが一致しません。");
+			request.setAttribute("errorMsg", bundle.getString("error.pwMismatch"));
 			request.getRequestDispatcher("/WEB-INF/jsp/signup.jsp").forward(request, response);
 			return;
 		}
 		// ユーザーID形式チェック
 		if (!loginId.matches("^[A-Za-z0-9]{8,20}$")) {
-			request.setAttribute("errorMsg", "ユーザーIDは8〜20文字の半角英数字で入力してください。");
+			request.setAttribute("errorMsg", bundle.getString("error.loginIdFormat"));
 			request.getRequestDispatcher("/WEB-INF/jsp/signup.jsp").forward(request, response);
 			return;
 		}
 
 		// ニックネーム長さチェック
 		if (nickname.length() > 30) {
-			request.setAttribute("errorMsg", "ニックネームは30文字以内で入力してください。");
+			request.setAttribute("errorMsg", bundle.getString("error.nicknameLength"));
 			request.getRequestDispatcher("/WEB-INF/jsp/signup.jsp").forward(request, response);
 			return;
 		}
 
 		// パスワード形式チェック
 		if (!password.matches("^(?=.*[A-Za-z])(?=.*[0-9])[!-~]{8,20}$")) {
-			request.setAttribute("errorMsg", "パスワードは8〜20文字で、半角英字と数字を両方含めてください。");
+			request.setAttribute("errorMsg", bundle.getString("error.passwordFormat"));
 			request.getRequestDispatcher("/WEB-INF/jsp/signup.jsp").forward(request, response);
 			return;
 		}
@@ -79,7 +88,7 @@ public class SignupServlet extends HttpServlet {
 		UserDao dao = new UserDao();
 
 		if (dao.existsByLoginId(loginId)) {
-			request.setAttribute("errorMsg", "このユーザーIDは既に使われています。");
+			request.setAttribute("errorMsg", bundle.getString("error.loginIdExists"));
 			request.getRequestDispatcher("/WEB-INF/jsp/signup.jsp").forward(request, response);
 			return;
 		}
@@ -102,7 +111,7 @@ public class SignupServlet extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/HomeServlet");
 			return;
 		} else {
-			request.setAttribute("errorMsg", "登録に失敗しました。");
+			request.setAttribute("errorMsg", bundle.getString("error.signupFailed"));
 			request.getRequestDispatcher("/WEB-INF/jsp/signup.jsp").forward(request, response);
 		}
 	}

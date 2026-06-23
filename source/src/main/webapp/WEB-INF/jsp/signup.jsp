@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setLocale value="${sessionScope.currentLang}" />
+<fmt:setBundle basename="messages" />
 <%@ page import="dto.User"%>
 
 <%
@@ -11,7 +14,7 @@ User loginUser = (User) session.getAttribute("LoginUser");
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>新規登録 - こぜピタ</title>
+<title><fmt:message key="signup.tab" /></title>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/mypage_login.css">
 <link rel="stylesheet"
@@ -28,7 +31,7 @@ User loginUser = (User) session.getAttribute("LoginUser");
 			<a href="${pageContext.request.contextPath}/SignupServlet"> <img
 				src="${pageContext.request.contextPath}/images/logo/logo.png"
 				alt="ロゴ" class="logo"></a>
-			<div class="page-title">会員登録</div>
+			<div class="page-title"><fmt:message key="signup.title" /></div>
 			<a href="${pageContext.request.contextPath}/SignupServlet"> <img
 				src="${pageContext.request.contextPath}/images/logo/home.png"
 				alt="ホーム" class="toHome"></a>
@@ -37,26 +40,26 @@ User loginUser = (User) session.getAttribute("LoginUser");
 		<!-- メインここから -->
 		<main class="main">
 		<div class="lang-switch">
-    		<a href="${pageContext.request.contextPath}/LanguageServlet?lang=ja&from=${pageContext.request.servletPath}">JP</a> | 
-    		<a href="${pageContext.request.contextPath}/LanguageServlet?lang=en&from=${pageContext.request.servletPath}">EN</a>
+    		<a href="${pageContext.request.contextPath}/LanguageServlet?lang=ja&from=/SignupServlet">JP</a> |
+    		<a href="${pageContext.request.contextPath}/LanguageServlet?lang=en&from=/SignupServlet">EN</a>
 		</div>
-			<div class="signup-nav">あなたの情報を登録してください</div>
+			<div class="signup-nav"><fmt:message key="signup.nav" /></div>
 
 			<form method="POST"
 				action="${pageContext.request.contextPath}/SignupServlet"
 				id="signup-form">
 
-				<label class="logins"> ユーザーID <span class="input-note">※英数字のみ</span>
+				<label class="logins"> <fmt:message key="signup.userid" /> <span class="input-note"><fmt:message key="signup.id" /></span>
 					<input type="text" name="loginId" class="signup-input" id="loginId"
 					maxlength="20" required>
-				</label> <label class="logins"> ニックネーム <span class="input-note">例）レオナルド</span>
+				</label> <label class="logins"> <fmt:message key="signup.nickname" /> <span class="input-note"><fmt:message key="signup.nick" /></span>
 					<input type="text" name="nickname" class="signup-input"
 					id="nickname" maxlength="30" required>
-				</label> <label class="logins"> パスワード <span class="input-note">※英字のみ、数字のみ、記号のみ不可</span>
+				</label> <label class="logins"> <fmt:message key="signup.password" /> <span class="input-note"><fmt:message key="signup.pw" /></span>
 					<input type="password" name="password" class="signup-input"
 					id="password" maxlength="20" required>
-				</label> <label class="logins logins-bottom"> パスワードの再入力 <span
-					class="input-note">※上記と同一のものを入力してください</span> <input type="password"
+				</label> <label class="logins logins-bottom"> <fmt:message key="signup.confirmpw" /> <span
+					class="input-note"><fmt:message key="signup.pwmemo" /></span> <input type="password"
 					name="passwordConfirm" class="signup-input" id="passwordConfirm"
 					maxlength="20" required>
 				</label>
@@ -65,12 +68,12 @@ User loginUser = (User) session.getAttribute("LoginUser");
 				</p>
 				<div class="form-buttons">
 					<input type="reset" class="reset-button" name="reset" id="resetBtn"
-						value="リセット"> <input type="submit" class="signup-button"
-						name="submit" id="signupBtn" value="登録">
+						value="<fmt:message key="signup.reset" />"> <input type="submit" class="signup-button"
+						name="submit" id="signupBtn" value="<fmt:message key="signup.register" />">
 				</div>
 			</form>
 			<a href="${pageContext.request.contextPath}/LoginServlet"
-				class="acount-msg">アカウントを既にお持ちの方はこちら</a>
+				class="acount-msg"><fmt:message key="signup.msg" /></a>
 		</main>
 		<!-- メインここまで -->
 	</div>

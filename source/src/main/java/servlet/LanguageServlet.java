@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,14 +11,14 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class LangageServlet
  */
-@WebServlet("/LangageServlet")
-public class LangageServlet extends HttpServlet {
+@WebServlet("/LanguageServlet")
+public class LanguageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LangageServlet() {
+    public LanguageServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -40,14 +41,15 @@ public class LangageServlet extends HttpServlet {
             request.getSession().setAttribute("currentLang", lang);
         }
 
-        // 4. 元いた画面にそのまま送り返す（空っぽならホーム画面へ）
+     // 4. 元いたサーブレットにそのまま送り返す
         if (fromPage != null && !fromPage.isEmpty()) {
+            // fromPageの中にサーブレットのパスが入ってくるので、そのまま結合する
             response.sendRedirect(request.getContextPath() + fromPage);
         } else {
+            // 空っぽなら、ログイン画面のサーブレットに飛ばす
             response.sendRedirect(request.getContextPath() + "/LoginServlet");
         }
-    }
-}
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

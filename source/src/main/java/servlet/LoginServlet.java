@@ -35,8 +35,18 @@ public class LoginServlet extends HttpServlet {
 		loginId = loginId == null ? "" : loginId.trim();
 		password = password == null ? "" : password.trim();
 
+		// 1. セッションから現在の言語を取得する
+		String currentLang = (String) request.getSession().getAttribute("currentLang");
+
+		// 2. 言語に応じたLocaleを設定する
+		java.util.Locale locale = "en".equals(currentLang) ? java.util.Locale.ENGLISH : java.util.Locale.JAPANESE;
+
+		// 3. プロパティファイル（messages.properties）を読み込む
+		java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("messages", locale);
+		
+		
 		if (loginId.isEmpty() || password.isEmpty()) {
-			request.setAttribute("errorMsg", "ユーザーIDまたはパスワードを入力してください。");
+			request.setAttribute("errorMsg", bundle.getString("login.error.required"));
 			request.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response);
 			return;
 		}
@@ -51,7 +61,7 @@ public class LoginServlet extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/HomeServlet");
 
 		} else {
-			request.setAttribute("errorMsg", "ユーザーIDまたはパスワードが違います。");
+			request.setAttribute("errorMsg", bundle.getString("login.error.mismatch"));
 			request.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response);
 		}
 	}
