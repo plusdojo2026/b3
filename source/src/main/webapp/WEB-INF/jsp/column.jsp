@@ -61,20 +61,23 @@
 		<!-- listの中身を１件ずつcolに入れて繰り返す -->
 		<c:forEach var="col" items="${list}">
 		
+		<c:set var="title" value="" scope="request"/>
+		<c:set var="body" value="" scope="request"/>
+		
 			<!-- タイトルを、言語に応じて変数に入れる -->
-			<c:if test="${lang == 'ja'}">
-				<c:set var="title" value="${col.title_ja}"/>
+			<c:if test="${sessionScope.currentLang != 'en'}">
+				<c:set var="title" value="${col.title_ja}" scope="request"/>
 			</c:if>
-			<c:if test="${lang == 'en'}">
-				<c:set var="title" value="${col.title_en}"/>
+			<c:if test="${sessionScope.currentLang == 'en'}}">
+				<c:set var="title" value="${col.title_en}" scope="request"/>
 			</c:if>
 			
 			<!-- 本文を、言語に応じて変数に入れる -->
-			<c:if test="${lang == 'ja'}">
-				<c:set var="body" value="${col.column_ja}"/>
+			<c:if test="${sessionScope.currentLang != 'en'}">
+				<c:set var="body" value="${col.column_ja}" scope="request"/>
 			</c:if>
-			<c:if test="${lang == 'en'}">
-				<c:set var="body" value="${col.column_en}"/>
+			<c:if test="${sessionScope.currentLang == 'en'}">
+				<c:set var="body" value="${col.column_en}" scope="request"/>
 			</c:if>
 			
 				<!-- １件分のコラムを表示するブロック -->
