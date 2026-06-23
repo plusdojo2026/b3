@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import dao.UserDao;
 import dto.User;
 
+
 @WebServlet("/UserEditServlet")
 public class UserEditServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -66,28 +67,28 @@ public class UserEditServlet extends HttpServlet {
 
 		// 基本項目だけ必須
 		if (nickname.isEmpty() || loginId.isEmpty() || isPassword.isEmpty()) {
-			request.setAttribute("errorMsg", "未入力の項目があります。");
+			request.setAttribute("errorMsgKey", "error.profile_edit.required");
 			request.getRequestDispatcher("/WEB-INF/jsp/profile_edit.jsp").forward(request, response);
 			return;
 		}
 
 		// 現在のパスワード確認
 		if (!isPassword.equals(loginUser.getPassword())) {
-			request.setAttribute("errorMsg", "現在のパスワードが正しくありません。");
+			request.setAttribute("errorMsgKey", "error.profile_edit.password.current_incorrect");
 			request.getRequestDispatcher("/WEB-INF/jsp/profile_edit.jsp").forward(request, response);
 			return;
 		}
 
 		// ユーザーID形式チェック
 		if (!loginId.matches("^[A-Za-z0-9]{8,20}$")) {
-			request.setAttribute("errorMsg", "ユーザーIDは8〜20文字の半角英数字で入力してください。");
+			request.setAttribute("errorMsgKey", "error.profile_edit.login_id.invalid_format");
 			request.getRequestDispatcher("/WEB-INF/jsp/profile_edit.jsp").forward(request, response);
 			return;
 		}
 
 		// ニックネーム長さチェック
 		if (nickname.length() > 30) {
-			request.setAttribute("errorMsg", "ニックネームは30文字以内で入力してください。");
+			request.setAttribute("errorMsgKey", "error.profile_edit.nickname.too_long");
 			request.getRequestDispatcher("/WEB-INF/jsp/profile_edit.jsp").forward(request, response);
 			return;
 		}
@@ -97,7 +98,7 @@ public class UserEditServlet extends HttpServlet {
 		// ログインID重複チェック
 		// 自分の現在のIDと同じならOK
 		if (!loginId.equals(loginUser.getLoginId()) && dao.existsByLoginId(loginId)) {
-			request.setAttribute("errorMsg", "このユーザーIDは既に使われています。");
+			request.setAttribute("errorMsgKey", "error.profile_edit.login_id.duplicate");
 			request.getRequestDispatcher("/WEB-INF/jsp/profile_edit.jsp").forward(request, response);
 			return;
 		}
@@ -110,20 +111,20 @@ public class UserEditServlet extends HttpServlet {
 			changePassword = true;
 
 			if (password.isEmpty() || passwordConfirm.isEmpty()) {
-				request.setAttribute("errorMsg", "新しいパスワードと確認用パスワードを両方入力してください。");
+				request.setAttribute("errorMsgKey", "error.profile_edit.password.new_required");
 				request.getRequestDispatcher("/WEB-INF/jsp/profile_edit.jsp").forward(request, response);
 				return;
 			}
 
 			if (!password.equals(passwordConfirm)) {
-				request.setAttribute("errorMsg", "パスワードが一致しません。");
+				request.setAttribute("errorMsgKey", "error.profile_edit.password.mismatch");
 				request.getRequestDispatcher("/WEB-INF/jsp/profile_edit.jsp").forward(request, response);
 				return;
 			}
 
 			// パスワード形式チェック
 			if (!password.matches("^(?=.*[A-Za-z])(?=.*[0-9])[!-~]{8,20}$")) {
-				request.setAttribute("errorMsg", "パスワードは8〜20文字で、半角英字と数字を両方含めてください。");
+				request.setAttribute("errorMsgKey", "error.profile_edit.password.invalid_format");
 				request.getRequestDispatcher("/WEB-INF/jsp/profile_edit.jsp").forward(request, response);
 				return;
 			}
@@ -141,13 +142,13 @@ public class UserEditServlet extends HttpServlet {
 			session.setAttribute("loginUser", loginUser);
 
 			if (changePassword) {
-				request.setAttribute("successMsg", "プロフィールとパスワードを更新しました。");
+				request.setAttribute("successMsgKey", "success.profile_edit.update_with_password");
 			} else {
-				request.setAttribute("successMsg", "プロフィールを更新しました。");
+				request.setAttribute("successMsgKey", "success.profile_edit.update");
 			}
 
 		} else {
-			request.setAttribute("errorMsg", "プロフィールの更新に失敗しました。");
+			request.setAttribute("errorMsgKey", "error.profile_edit.update_failed");
 		}
 
 		request.getRequestDispatcher("/WEB-INF/jsp/profile_edit.jsp").forward(request, response);
