@@ -118,23 +118,36 @@ const message1 = document.getElementById("message1");
 const alertArea = document.querySelector(".alert-area");
 const alertAmountElement = document.getElementById("alert-amount");
 const alertCountElement = document.getElementById("alert-count");
+const showTutorialElement = document.getElementById("show-tutorial");
 
 if (alertHomeAmount != null && alertHomeCount != null && message1 != null && alertArea != null
-	&& alertAmountElement != null && alertCountElement != null) {
-	const homeCashAmount = Number(alertHomeAmount.textContent.replace(/[^0-9]/g, ''));
-	const homeCoinCount = Number(alertHomeCount.textContent.replace(/[^0-9]/g, ''));
+	&& alertAmountElement != null && alertCountElement != null && showTutorialElement != null) {
 
-	const alertAmount = Number(alertAmountElement.textContent.replace(/[^0-9]/g, ''));
-	const alertCount = Number(alertCountElement.textContent.replace(/[^0-9]/g, ''));
-	if (homeCashAmount = 0) {
-		message1.textContent = "予算を登録するでござる";
-	} else if (homeCoinCount > alertCount) {
-		message1.textContent = "小銭が多くなってきたでござる";
-		alertArea.classList.remove("is-hidden");
-	} else if (homeCashAmount < alertAmount) {
-		message1.textContent = "予算が少なくなってきたでござる";
-		alertArea.classList.remove("is-hidden");
-	} else {
+	const showTutorial = showTutorialElement.textContent.trim() === "true";
+
+	if (showTutorial) {
 		alertArea.classList.add("is-hidden");
+	} else {
+		const homeCashAmount = Number(alertHomeAmount.textContent.replace(/[^0-9]/g, ''));
+		const homeCoinCount = Number(alertHomeCount.textContent.replace(/[^0-9]/g, ''));
+
+		const alertAmount = Number(alertAmountElement.textContent.replace(/[^0-9]/g, ''));
+		const alertCount = Number(alertCountElement.textContent.replace(/[^0-9]/g, ''));
+
+		if (homeCashAmount === 0) {
+			message1.textContent = "予算を登録するでござる";
+			alertArea.classList.remove("is-hidden");
+
+		} else if (homeCoinCount > alertCount) {
+			message1.textContent = "小銭が多くなってきたでござる";
+			alertArea.classList.remove("is-hidden");
+
+		} else if (homeCashAmount < alertAmount) {
+			message1.textContent = "予算が少なくなってきたでござる";
+			alertArea.classList.remove("is-hidden");
+
+		} else {
+			alertArea.classList.add("is-hidden");
+		}
 	}
 }
