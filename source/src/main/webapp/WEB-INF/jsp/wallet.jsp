@@ -42,7 +42,8 @@
 				</div>
 				<div class="amount">
 					<!-- 合計金額を入れる -->
-					&yen;${totalAmount}
+					&yen;
+					<fmt:formatNumber value="${totalAmount}" pattern="#,##0" />
 				</div>
 			</section>
 

@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <fmt:setLocale value="${sessionScope.currentLang}" />
 <fmt:setBundle basename="messages" />
 <!doctype html>
@@ -21,7 +22,7 @@
 <link rel="icon"
 	href="${pageContext.request.contextPath}/favicon/favicon.png">
 <script>
-const contextPath = "${pageContext.request.contextPath}";
+	const contextPath = "${pageContext.request.contextPath}";
 </script>
 
 
@@ -72,15 +73,19 @@ const contextPath = "${pageContext.request.contextPath}";
 						src="${pageContext.request.contextPath}/images/character/pitao.png"
 						class="home-pitao">
 				</div>
-				
+
 				<!--ブラインドボタン-->
 				<div class="home-money-amount">
-				<button type="button" class="home-eye-btn" id="eyeBtn">
-					<img src="${pageContext.request.contextPath}/images/home_eye/blind-eye.png" alt="表示" class="eye-icon">
-				</button>
-				<span id="home-wallet-amount">&yen;${totalAmount}</span>
+					<button type="button" class="home-eye-btn" id="eyeBtn">
+						<img
+							src="${pageContext.request.contextPath}/images/home_eye/blind-eye.png"
+							alt="表示" class="eye-icon">
+					</button>
+					<span id="home-wallet-amount"> &yen;<fmt:formatNumber
+							value="${totalAmount}" pattern="#,##0" />
+					</span>
 				</div>
-				
+
 				<div class="home-money-list" id="wallet-money-list">
 					<!--お金の種類ごとの表示-->
 					<!-- 10000円 -->
