@@ -58,13 +58,13 @@
 			</section>
 
 			<section class="multilingual-feature">
-				<form action="MyPageServlet" method="post">
-					<input type="hidden" name="action" value="language">
+				<form action="LanguageServlet" method="get">
+					<input type="hidden" name="from" value="/MyPageServlet">
 					<div class="multilingual">
 						<fmt:message key="mypage.multilingual" />
 					</div>
-					<select class="pull-input" name="language"
-						onchange="this.form.submit()">
+					
+					<select class="pull-input" name="lang" onchange="this.form.submit()">
 						<option value="ja"
 							${sessionScope.currentLang != 'en' ? 'selected' : ''}>日本語</option>
 						<option value="en"
