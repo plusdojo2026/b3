@@ -18,6 +18,7 @@
 <script>
 const store_list = JSON.parse(String.raw`${storeListJson}`);
 const contextPath = "<%= request.getContextPath() %>";
+var currentLang = "${sessionScope.currentLang}".startsWith("en") ? "en" : "ja";
 </script>
 
 <script src="${pageContext.request.contextPath}/js/common.js" defer></script>

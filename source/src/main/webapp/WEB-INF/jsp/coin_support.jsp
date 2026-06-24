@@ -47,8 +47,13 @@ String amountText = String.format("%,d", amount);
 				method="GET">
 				<h3><fmt:message key="coin.optional" /><span><fmt:message key="coin.maximum" /></span></h3>
 				<div class="search-inputs">
+				
+				<fmt:message key="search.required" var="reqMsg" />
+				<fmt:message key="search.maxError" var="maxMsg" />
 				<input type="number" inputmode="numeric" id="amountInput"
-					name="amountInput" min="0" max="2000" placeholder="￥500-" required>
+					name="amountInput" min="0" max="2000" placeholder="￥500-" required 
+					oninvalid="if(this.validity.valueMissing){this.setCustomValidity('${reqMsg}')} else if(this.validity.rangeOverflow){this.setCustomValidity('${maxMsg}')}"
+       				oninput="this.setCustomValidity('')">
 
 				<%--検索ボタン --%>
 				<button type="submit" id="btnSearchAmount" name="submitType"
