@@ -122,37 +122,7 @@ public class MyPageServlet extends HttpServlet {
 		String night = request.getParameter("night");
 		String language = request.getParameter("language");
 
-		// ==========================================
-		// プロパティファイル用のセッション保存を追加
-		// ==========================================
-		java.util.Locale locale;
-		
-		// 1. ログイン画面で既に保存された言語（currentLang）があるかチェックする
-		String currentLang = (String) request.getSession().getAttribute("currentLang");
-		
-		// 2.空っぽなら、データベースに登録されている初期言語（language）を使う
-		if (currentLang == null) {
-			currentLang = language; 
-		}
 
-		// 3. 最終的に決まった言語（currentLang）が「en」なら英語、それ以外なら日本語にする
-		if ("en".equals(currentLang)) {
-			locale = new java.util.Locale("en"); 
-		} else {
-			locale = new java.util.Locale("ja"); 
-		}
-
-		// JSTLのタグ（fmt:message）がこの言語を認識できるようにセッションに保存
-		javax.servlet.jsp.jstl.core.Config.set(request.getSession(), javax.servlet.jsp.jstl.core.Config.FMT_LOCALE, locale);
-
-		// 今の言語状態をセッションに上書き保存
-		request.getSession().setAttribute("currentLang", currentLang);
-
-		// JSPの ${user} にデータを引き継ぐためにリクエストにセットする
-		request.setAttribute("user", loginUser);
-
-		// リダイレクト
-		response.sendRedirect("MyPageServlet");
 	}
 
 }
