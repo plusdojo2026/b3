@@ -19,29 +19,18 @@ import dto.User;
 public class MyPageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
 	public MyPageServlet() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 
 		// ユーザーごとのidを取得
 		HttpSession session = request.getSession();
 		User loginUser = (User) session.getAttribute("loginUser");
-		int id = 0;
-		if (loginUser != null) {
-			id = loginUser.getId();
-		} else {
+
+		if (loginUser == null) {
 			// ログイン画面に送還する処理
 			response.sendRedirect("LoginServlet");
 			return;
@@ -53,23 +42,32 @@ public class MyPageServlet extends HttpServlet {
 		}
 
 		request.setAttribute("user", loginUser);
+
+		// アラート成功メッセージがあれば表示して、表示後に消す
+		String alertSuccessMsg = (String) session.getAttribute("alertSuccessMsg");
+		if (alertSuccessMsg != null) {
+			request.setAttribute("alertSuccessMsg", alertSuccessMsg);
+			session.removeAttribute("alertSuccessMsg");
+		}
+
 		// マイページにフォワード
 		request.getRequestDispatcher("/WEB-INF/jsp/mypage.jsp").forward(request, response);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		// doGet(request, response);
+
+		request.setCharacterEncoding("UTF-8");
 
 		HttpSession session = request.getSession();
 
 		// セッションから現在のログインユーザー情報を取得する
 		User loginUser = (User) session.getAttribute("loginUser");
+
+		if (loginUser == null) {
+			response.sendRedirect("LoginServlet");
+			return;
+		}
 
 		String action = request.getParameter("action");
 
@@ -77,16 +75,18 @@ public class MyPageServlet extends HttpServlet {
 			String alertAmountStr = request.getParameter("alertAmount");
 			String alertCountStr = request.getParameter("alertCount");
 
-			if (alertAmountStr == null || alertAmountStr.length() == 0 || alertCountStr == null
-					|| alertCountStr.length() == 0) {
-				request.setAttribute("errorMsg", "アラート設定を入力してください。");
+			alertAmountStr = alertAmountStr == null ? "" : alertAmountStr.trim();
+			alertCountStr = alertCountStr == null ? "" : alertCountStr.trim();
+
+			if (alertAmountStr.isEmpty() || alertCountStr.isEmpty()) {
+				request.setAttribute("alertErrorMsg", "アラート設定を入力してください。");
 				request.setAttribute("user", loginUser);
 				request.getRequestDispatcher("/WEB-INF/jsp/mypage.jsp").forward(request, response);
 				return;
 			}
 
 			if (!alertAmountStr.matches("^[0-9]+$") || !alertCountStr.matches("^[0-9]+$")) {
-				request.setAttribute("errorMsg", "アラート設定は半角数字で入力してください。");
+				request.setAttribute("alertErrorMsg", "アラート設定は半角数字で入力してください。");
 				request.setAttribute("user", loginUser);
 				request.getRequestDispatcher("/WEB-INF/jsp/mypage.jsp").forward(request, response);
 				return;
@@ -103,26 +103,18 @@ public class MyPageServlet extends HttpServlet {
 				loginUser.setAlertCount(alertCount);
 				session.setAttribute("loginUser", loginUser);
 
-				response.sendRedirect("MyPageServlet");
+				request.setAttribute("alertSuccessMsg", "アラート設定を変更しました。");
+				request.setAttribute("user", loginUser);
+				request.getRequestDispatcher("/WEB-INF/jsp/mypage.jsp").forward(request, response);
 				return;
 			}
 
-			request.setAttribute("errorMsg", "アラート設定の更新に失敗しました。");
+			request.setAttribute("alertErrorMsg", "アラート設定の更新に失敗しました。");
 			request.setAttribute("user", loginUser);
 			request.getRequestDispatcher("/WEB-INF/jsp/mypage.jsp").forward(request, response);
 			return;
-
 		}
 
-		// リクエストパラメータを取得
-		String loginId = request.getParameter("loginId");
-		String password = request.getParameter("password");
-		String nickname = request.getParameter("nickname");
-		String displaymode = request.getParameter("displaymode");
-		String night = request.getParameter("night");
-		String language = request.getParameter("language");
-
-
+		doGet(request, response);
 	}
-
 }

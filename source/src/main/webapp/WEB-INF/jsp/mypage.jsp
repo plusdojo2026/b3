@@ -63,8 +63,9 @@
 					<div class="multilingual">
 						<fmt:message key="mypage.multilingual" />
 					</div>
-					
-					<select class="pull-input" name="lang" onchange="this.form.submit()">
+
+					<select class="pull-input" name="lang"
+						onchange="this.form.submit()">
 						<option value="ja"
 							${sessionScope.currentLang != 'en' ? 'selected' : ''}>日本語</option>
 						<option value="en"
@@ -103,6 +104,11 @@
 
 					<div class="alert-button-area">
 						<input type="submit" value="<fmt:message key='mypage.change' />">
+					</div>
+
+					<div class="alert-message-area">
+						<div class="alert-success-message">${alertSuccessMsg}</div>
+						<div class="alert-error-message">${alertErrorMsg}</div>
 					</div>
 				</form>
 			</section>

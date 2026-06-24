@@ -409,12 +409,34 @@
 /* --------------------------------- */
 .success-message {
 	color: green;
-	height: 18px;
+	height: 16px;
 	margin: 12px 0 12px 0;
 	text-align: center;
 	font-size: 13px;
 	line-height: 18px;
 	background-color: #ffffff;
+}
+
+.alert-success-message, .alert-error-message {
+	height: 14px;
+	margin: 4px 0 4px 0;
+	text-align: center;
+	font-size: 13px;
+	line-height: 18px;
+	background-color: #ffffff;
+}
+
+.alert-success-message {
+	color: #008040;
+}
+
+.alert-error-message {
+	color: red;
+}
+
+/* 中身が空のときは非表示 */
+.alert-success-message:empty, .alert-error-message:empty {
+	display: none;
 }
 
 .edit-button {
