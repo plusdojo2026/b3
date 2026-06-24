@@ -213,7 +213,7 @@ INSERT INTO stores (
     cashless_type
 ) VALUES
 -- 架空の麴町コンビニ
-('コンビニ麴町ステーション店', 'Kojimachi Station Convenience Store',
+('コンビニ麹町ステーション店', 'Kojimachi Station Convenience Store',
  '東京都千代田区麹町3-5-12', '3-5-12 Kojimachi, Chiyoda-ku, Tokyo',
  35.683404, 139.738650, 'both', 'credit, ic, qr'),
 

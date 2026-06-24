@@ -95,21 +95,24 @@ function category_filter() {
 		}
 
 		// キーワード判定 (施設名、住所にキーワードが含まれているか)
+
+		console.log("検索実行時のチェック:", {
+			keyword: keyword,
+			langType: typeof currentLang !== 'undefined' ? currentLang : "変数自体が存在しません",
+			storeSample: store
+		});
+
 		let matchKeyword = true;
-		if (keyword !== "") {
-			const langElement = document.getElementById("lang");
-			const selectedLanguage = langElement ? langElement.value : "ja";
-
-			const name = (selectedLanguage === "en" ? store.name_en : store.name_ja) || "";
-			const address = (selectedLanguage === "en" ? store.address_en : store.address_ja) || "";
-
-			const words = keyword.split(/\s+/);
-
-			matchKeyword = words.every(w =>
-				name.toLowerCase().includes(w.toLowerCase()) ||
-				address.toLowerCase().includes(w.toLowerCase())
-			);
-		}
+		const words = keyword.trim().toLowerCase().split(/[\s\u3000\u00A0]+/).filter(Boolean);
+		if (words.length > 0) {
+			// 言語に応じてデータを小文字化して取得
+			const isEn = (typeof currentLang !== 'undefined' && currentLang === 'en');
+			
+			const searchName = ((isEn ? (store.name_en || store.name_ja) : store.name_ja) || "").toLowerCase();
+			const searchAddress = ((isEn ? (store.address_en || store.address_ja) : store.address_ja) || "").toLowerCase();
+			// すべての単語が含まれているかチェック
+			matchKeyword = words.every(w => searchName.includes(w) || searchAddress.includes(w));
+			}
 
 		// 両方の条件（カテゴリ AND キーワード）が一致した時だけtrueを返す
 		return matchCategory && matchKeyword;
