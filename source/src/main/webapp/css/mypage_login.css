@@ -240,10 +240,8 @@
 
 /* 共通見出し */
 .profile,
-.night,
 .multilingual,
 .alert,
-.dress,
 .logout {
 	font-weight: 600;
 }
@@ -326,52 +324,6 @@
 	height: 34px;
 	line-height: 34px;
 	padding: 0 12px;
-}
-
-/* ナイトモード */
-.night-mode {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	margin: 0 23px;
-	min-height: 52px;
-}
-
-/* ナイトモード切替ボタン */
-.sample2Area {
-	width: 92px;
-	margin-left: 0;
-}
-
-.sample2Area input[type="checkbox"] {
-	display: none;
-}
-
-.sample2Area label {
-	display: block;
-	box-sizing: border-box;
-	height: 34px;
-	border: 2px solid #78bd78;
-	border-radius: 6px;
-	line-height: 1;
-	text-align: left;
-	background-color: #ffffff;
-	cursor: pointer;
-}
-
-.sample2Area #sample2box {
-	display: inline-block;
-	width: 50%;
-	height: 30px;
-	background-color: #ddd;
-	border-radius: 4px;
-	transition: 0.3s;
-	cursor: pointer;
-}
-
-.sample2Area #sample2check:checked + label #sample2box {
-	transform: translateX(100%);
-	background-color: #78bd78;
 }
 
 /* 多言語機能 */
@@ -466,35 +418,6 @@
 	margin-top: 10px;
 }
 
-/* 着せ替え機能 */
-.dress-up {
-	margin: 0 23px;
-}
-
-.dress-up button {
-	width: 21%;
-	height: 40px;
-	margin: 6px 4px;
-	border: 1px solid #ccc;
-	border-radius: 12px;
-	cursor: pointer;
-}
-
-.dress-up button:nth-of-type(1) {
-	background-color: #80ff80;
-}
-
-.dress-up button:nth-of-type(2) {
-	background-color: #80ffff;
-}
-
-.dress-up button:nth-of-type(3) {
-	background-color: #ff75ff;
-}
-
-.dress-up button:nth-of-type(4) {
-	background-color: #f5ad5c;
-}
 
 /* ログアウト */
 .logout-user {

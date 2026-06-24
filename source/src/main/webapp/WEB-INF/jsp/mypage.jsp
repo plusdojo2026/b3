@@ -34,7 +34,7 @@
 				alt="ホーム" class="toHome"></a>
 		</header>
 		<!-- ヘッダーここまで -->
-
+		<!-- メインここから -->
 		<main class="mypage">
 			<section class="profile-edit">
 				<div class="profile">
@@ -54,18 +54,6 @@
 					<input type="submit"
 						value="<fmt:message key='mypage.button.edit' />">
 				</form>
-			</section>
-
-			<section class="night-mode">
-				<div class="night">
-					<fmt:message key="mypage.nightmode" />
-				</div>
-				<div class="sample2Area" id="makeImg">
-					<input type="checkbox" id="sample2check" checked=""> <label
-						for="sample2check">
-						<div id="sample2box"></div>
-					</label>
-				</div>
 			</section>
 
 			<section class="multilingual-feature">
@@ -118,15 +106,6 @@
 				</form>
 			</section>
 
-			<section class="dress-up">
-				<div class="dress">
-					<fmt:message key="mypage.themes" />
-				</div>
-				<button type="button" onclick="changeTheme('green')"></button>
-				<button type="button" onclick="changeTheme('blue')"></button>
-				<button type="button" onclick="changeTheme('purple')"></button>
-				<button type="button" onclick="changeTheme('orange')"></button>
-			</section>
 
 			<section class="logout-user">
 				<div class="logout">
@@ -138,7 +117,7 @@
 				</form>
 			</section>
 		</main>
-
+		<!-- メインここまで -->
 		<!-- フッターここから -->
 		<footer class="bottom-menu">
 
@@ -149,8 +128,7 @@
 				alt="<fmt:message key='menu.coin_support' />"> <img
 				class="nav-img hover-img"
 				src="${pageContext.request.contextPath}/images/nav/coin_support_hover${pageContext.response.locale.language == 'en' ? '_en' : ''}.png"
-				alt="<fmt:message key='menu.coin_support' />">
-			<!-- 施設情報 -->
+				alt="<fmt:message key='menu.coin_support' />"> <!-- 施設情報 -->
 			</a> <a href="${pageContext.request.contextPath}/StoreServlet"
 				class="nav-item"> <img class="nav-img normal-img"
 				src="${pageContext.request.contextPath}/images/nav/store_info_normal${pageContext.response.locale.language == 'en' ? '_en' : ''}.png"
@@ -161,7 +139,7 @@
 			</a>
 
 			<div class="nav-space"></div>
-			
+
 			<!-- コラム -->
 			<a href="${pageContext.request.contextPath}/ColumnServlet"
 				class="nav-item"> <img class="nav-img normal-img"
@@ -169,16 +147,14 @@
 				alt="<fmt:message key='menu.column' />"> <img
 				class="nav-img hover-img"
 				src="${pageContext.request.contextPath}/images/nav/column_hover${pageContext.response.locale.language == 'en' ? '_en' : ''}.png"
-				alt="<fmt:message key='menu.column' />">
-			<!-- マイページ -->
+				alt="<fmt:message key='menu.column' />"> <!-- マイページ -->
 			</a> <a href="${pageContext.request.contextPath}/MyPageServlet"
 				class="nav-item active"> <img class="nav-img normal-img"
 				src="${pageContext.request.contextPath}/images/nav/mypage_normal${pageContext.response.locale.language == 'en' ? '_en' : ''}.png"
 				alt="<fmt:message key='menu.mypage' />"> <img
 				class="nav-img hover-img"
 				src="${pageContext.request.contextPath}/images/nav/mypage_hover${pageContext.response.locale.language == 'en' ? '_en' : ''}.png"
-				alt="<fmt:message key='menu.mypage' />">
-			<!-- 支出登録 -->
+				alt="<fmt:message key='menu.mypage' />"> <!-- 支出登録 -->
 			</a> <a href="${pageContext.request.contextPath}/PaymentServlet"
 				class="nav-center"> <img class="nav-img center-img normal-img"
 				src="${pageContext.request.contextPath}/images/nav/payment_normal${pageContext.response.locale.language == 'en' ? '_en' : ''}.png"
