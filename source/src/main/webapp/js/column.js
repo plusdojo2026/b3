@@ -4,6 +4,7 @@
 window.onload = function() {
 	setupAccordion();
 	setupCategoryFilter();
+	setupSearchFilter();
 	checkNoResult();
 };
 
@@ -43,7 +44,48 @@ function setupAccordion() {
 }
 
 
-// 2. カテゴリボタンを押したら絞り込みする処理
+// 2. 検索処理
+function filterBySearch() {
+
+	const items = document.querySelectorAll(".column-item");
+	const searchInput = document.querySelector("input[name='keyword']");
+
+	const keyword = searchInput.value.trim();
+
+	// 現在選択中のカテゴリ取得
+	const activeBtn = document.querySelector(".category-btn.active");
+	const currentCategory = activeBtn
+		? activeBtn.dataset.category
+		: "全て";
+
+	items.forEach(function(item) {
+
+		const text = item.innerText;
+		const itemCategory = item.dataset.category;
+
+		// カテゴリ一致判定
+		const matchCategory =
+			(currentCategory === "全て" ||
+			 currentCategory === itemCategory);
+
+		// キーワード一致判定
+		const matchKeyword =
+			(keyword === "" ||
+			 text.includes(keyword));
+
+		// 両方一致した場合のみ表示
+		item.style.display =
+			(matchCategory && matchKeyword)
+				? "block"
+				: "none";
+	});
+
+	checkNoResult();
+}
+
+
+
+// 3. カテゴリボタンを押したら絞り込みする処理
 function setupCategoryFilter() {
 	
 	// 全てのカテゴリボタンを取得
@@ -60,31 +102,41 @@ function setupCategoryFilter() {
 			});
 			btn.classList.add("active");
 			
-			// 押されたボタンのカテゴリ名を取得
-			const category = btn.dataset.category;
-			
-			// 全てのコラムを取得
-			const items = document.querySelectorAll(".column-item");
-			
-			// コラムを１つずつチェック
-			items.forEach(function (item) {
-				
-				// コラムが持つカテゴリを取得
-				const itemCategory = item.dataset.category;
-				
-				// 全てなら全部を表示、それ以外なら一致するカテゴリだけ表示する
-				item.style.display = 
-					(category === "全て" || category === itemCategory)
-						? "block" : "none";
-			});
-			
-			// 絞り込み後に結果が０件であるというメッセージを表示するかチェック
-			checkNoResult();
+			// カテゴリ処理の際に検索ワードも取得する。
+			filterBySearch();
 		});
 	});
 };
 
-// 3. 表示されているコラムが０件の際に表示するメッセージ
+
+
+// 4. 検索処理
+function setupSearchFilter() {
+	const searchInput =
+		document.querySelector("input[name='keyword']");
+
+	const searchBtn =
+		document.querySelector(".search-box button");
+
+	// 検索ボタン
+	searchBtn.addEventListener("click", function(e) {
+
+		e.preventDefault();
+		filterBySearch();
+	});
+
+	// Enterキー検索
+	searchInput.addEventListener("keyup", function(e) {
+
+		if (e.key === "Enter") {
+			e.preventDefault();
+			filterBySearch();
+		}
+});		
+}
+
+
+// 5. 表示されているコラムが０件の際に表示するメッセージ
 
 function checkNoResult() {
 	
@@ -102,57 +154,3 @@ function checkNoResult() {
 	// 表示されているコラムが 0 件ならメッセージを表示、それ以外は非表示
 	msg.style.display = visible.length === 0 ? "block" : "none"; 
 }
-
-// 4. カテゴリ絞り込みと検索が共存して使えるように
-document.addEventListener("DOMContentLoaded", () => {
-	
-	// 全てのコラム要素を取得（検索対象）
-	const items = document.querySelectorAll(".column-item");
-	
-	// 検索フォームの入力欄
-	const searchInput = document.querySelector("input[name='keyword']");
-	
-	// 検索ボタン
-	const searchBtn = document.querySelector(".search-box button");
-	
-	// 画面遷移なしで検索処理　
-	// 入力されたキーワードがタイトルか本文にあるコラムだけを表示する
-	function filterBySearch() {
-		const keyword = searchInput.value.trim(); //入力された文字列
-	
-	// 現在選択されているカテゴリを取得
-	const activeBtn = document.querySelector(".category-btn.active");
-	const currentCategory = activeBtn ? activeBtn.dataset.category : "全て";
-	
-	items.forEach(item => {
-		const text = item.innerText; // コラム全体のテキスト
-		const itemCategory = item.dataset.category; // コラムのカテゴリ
-		
-		// カテゴリ数判定
-		const matchCategory = (currentCategory === "全て" || currentCategory ===  itemCategory);
-		
-		// キーワード一致判定
-		const matchKeyword = (keyword === "" || text.includes(keyword));
-		
-		// 両方一致した時だけ表示
-		item.style.display = (matchCategory && matchKeyword) ? "block" : "none";
-	});
-		
-	checkNoResult();	
-}		
-		
-	// preventDefaultで画面遷移を止めてjsの検索だけ実行する
-	searchBtn.addEventListener("click", (e) => {
-		e.preventDefault();
-		filterBySearch();
-	});
-	
-	// Enterキーでも検索できるように
-	searchInput.addEventListener("keyup", e => {
-		if (e.key === "Enter") {
-			e.preventDefault();
-			filterBySearch();
-		}
-	});
-});
-
