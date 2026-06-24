@@ -117,27 +117,27 @@
 
 /*言語切り替えボタン*/
 .lang-switch {
-    display: flex;
-    justify-content: flex-end; 
-    align-items: center;
-    /*padding: 10px 20px;*/
-    font-weight: bold;
-    gap: 8px; 
-    color: #ccc; 
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	/*padding: 10px 20px;*/
+	font-weight: bold;
+	gap: 8px;
+	color: #ccc;
 }
 
 /* リンク（JP/EN）の共通デザイン */
 .lang-switch a {
-    text-decoration: none;
-    color: #666; 
-    padding: 4px 8px;
-    border-radius: 4px;
-    transition: all 0.3s ease; 
+	text-decoration: none;
+	color: #666;
+	padding: 4px 8px;
+	border-radius: 4px;
+	transition: all 0.3s ease;
 }
 
 .lang-switch a:hover {
-    background-color: #f0f0f0; 
-    color: #333; 
+	background-color: #f0f0f0;
+	color: #333;
 }
 
 /* --------------------------- */
@@ -169,21 +169,6 @@
 .login-input:focus {
 	outline: none;
 	border: 2px solid green;
-}
-
-/* 次回以降自動ログインボタン */
-.auto-login {
-	display: flex;
-	align-items: center;
-	justify-content: left;
-	gap: 4px;
-	margin: 16px 0 12px;
-	font-size: 14px;
-}
-
-.auto-login input {
-	width: 16px;
-	height: 16px;
 }
 
 /* ログインボタン */
@@ -239,17 +224,13 @@
 }
 
 /* 共通見出し */
-.profile,
-.multilingual,
-.alert,
-.logout {
+.profile, .multilingual, .alert, .logout {
 	font-weight: 600;
 }
 
 /* 共通ボタン */
-.profile-edit input[type="submit"],
-.alert-setting input[type="submit"],
-.logout-user input[type="submit"] {
+.profile-edit input[type="submit"], .alert-setting input[type="submit"],
+	.logout-user input[type="submit"] {
 	height: 40px;
 	background-color: green;
 	color: white;
@@ -265,16 +246,14 @@
 	box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.35);
 }
 
-.profile-edit input[type="submit"]:hover,
-.alert-setting input[type="submit"]:hover,
-.logout-user input[type="submit"]:hover {
+.profile-edit input[type="submit"]:hover, .alert-setting input[type="submit"]:hover,
+	.logout-user input[type="submit"]:hover {
 	background-color: #ffffff;
 	color: green;
 	border-color: green;
 }
 
-.alert-setting input[type="submit"],
-.logout-user input[type="submit"] {
+.alert-setting input[type="submit"], .logout-user input[type="submit"] {
 	width: 90px;
 }
 
@@ -293,16 +272,14 @@
 	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
 }
 
-.user-id,
-.nickname {
+.user-id, .nickname {
 	width: 250px;
 	margin: 14px auto 6px;
 	font-weight: 450;
 	text-align: left;
 }
 
-.user-id div,
-.nickname div {
+.user-id div, .nickname div {
 	width: 100%;
 	margin: 4px 0 0;
 	padding: 8px 12px;
@@ -394,8 +371,7 @@
 	font-size: 14px;
 }
 
-.alert-setting input[type="text"],
-.alert-setting input[type="number"] {
+.alert-setting input[type="text"], .alert-setting input[type="number"] {
 	width: 150px;
 	height: 32px;
 	box-sizing: border-box;
@@ -406,8 +382,8 @@
 	background-color: #ffffff;
 }
 
-.alert-setting input[type="text"]:focus,
-.alert-setting input[type="number"]:focus {
+.alert-setting input[type="text"]:focus, .alert-setting input[type="number"]:focus
+	{
 	outline: none;
 	border: 2px solid #008080;
 }
@@ -417,7 +393,6 @@
 	justify-content: flex-end;
 	margin-top: 10px;
 }
-
 
 /* ログアウト */
 .logout-user {

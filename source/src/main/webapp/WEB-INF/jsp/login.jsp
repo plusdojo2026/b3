@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <fmt:setLocale value="${sessionScope.currentLang}" />
 <fmt:setBundle basename="messages" />
 <%
@@ -28,7 +28,9 @@ String errorMsg = (String) request.getAttribute("errorMsg");
 			<a href="${pageContext.request.contextPath}/SignupServlet"> <img
 				src="${pageContext.request.contextPath}/images/logo/logo.png"
 				alt="ロゴ" class="logo"></a>
-			<div class="page-title"><fmt:message key="login.title" /></div>
+			<div class="page-title">
+				<fmt:message key="login.title" />
+			</div>
 			<a href="${pageContext.request.contextPath}/SignupServlet"> <img
 				src="${pageContext.request.contextPath}/images/logo/home.png"
 				alt="ホーム" class="toHome"></a>
@@ -36,23 +38,23 @@ String errorMsg = (String) request.getAttribute("errorMsg");
 		<!-- ヘッダーここまで -->
 		<!-- メインここから -->
 		<main class="main">
-		<div class="lang-switch">
-    		<a href="${pageContext.request.contextPath}/LanguageServlet?lang=ja&from=/LoginServlet">JP</a> |
-    		<a href="${pageContext.request.contextPath}/LanguageServlet?lang=en&from=/LoginServlet">EN</a>
-		</div>
+			<div class="lang-switch">
+				<a
+					href="${pageContext.request.contextPath}/LanguageServlet?lang=ja&from=/LoginServlet">JP</a>
+				| <a
+					href="${pageContext.request.contextPath}/LanguageServlet?lang=en&from=/LoginServlet">EN</a>
+			</div>
 
 			<form method="POST"
 				action="${pageContext.request.contextPath}/LoginServlet"
 				id="login-form">
 
-				<label class="logins" id="login-label-top"> <fmt:message key="login.userid" /> <input
-					type="text" name="loginId" class="login-input" id="loginId"
-					maxlength="20" required>
-				</label><label class="logins logins-bottom"> <fmt:message key="login.password" /> <input
-					type="password" name="password" class="login-input" id="password"
-					maxlength="20" required>
-				</label> <label class="auto-login"> <input type="checkbox"
-					name="autoLogin" id="autoLogin"> <fmt:message key="login.auto" />
+				<label class="logins" id="login-label-top"> <fmt:message
+						key="login.userid" /> <input type="text" name="loginId"
+					class="login-input" id="loginId" maxlength="20" required>
+				</label><label class="logins logins-bottom"> <fmt:message
+						key="login.password" /> <input type="password" name="password"
+					class="login-input" id="password" maxlength="20" required>
 				</label>
 				<p class="error-message">
 					<%=errorMsg != null ? errorMsg : ""%>
