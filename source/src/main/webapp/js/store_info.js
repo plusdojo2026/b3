@@ -165,7 +165,7 @@ function displayStores(list) {
 
 	//件数がゼロのときの表示
 	if (list.length === 0) {
-		container.innerHTML = "<p>${i18n.noStoresFound[currentLang]}</p>";
+		container.innerHTML = `<p>${i18n.noStoresFound[currentLang]}</p>`;
 		return;
 	}
 
