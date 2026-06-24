@@ -87,7 +87,7 @@ String amountText = String.format("%,d", amount);
 
 			<%--その他のおすすめ商品（現在の小銭合計をwalletsテーブルから取得） --%>
 			<div class="recItemsArea">
-				<h3><fmt:message key="coin.recItems" /><span id="recAmount">￥${totalCoins}<fmt:message key="coin.ika" /></span></h3>
+				<h3><fmt:message key="coin.recItems" /><span id="recAmount">￥<%=amountText%><fmt:message key="coin.ika" /></span></h3>
 					
 				<%--ソートを選択できるドロップダウン --%>
 				<div class="sort-area">
