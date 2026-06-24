@@ -12,7 +12,6 @@ import javax.servlet.http.HttpSession;
 import dao.UserDao;
 import dto.User;
 
-
 @WebServlet("/UserEditServlet")
 public class UserEditServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -20,22 +19,20 @@ public class UserEditServlet extends HttpServlet {
 	// 編集画面を表示する
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 
-		// ユーザーごとのidを取得
+		// ユーザー情報を取得
 		HttpSession session = request.getSession();
 		User loginUser = (User) session.getAttribute("loginUser");
-		int id = 0;
-		if (loginUser != null) {
-			id = loginUser.getId();
-		} else {
-			// ログイン画面に送還する処理
-			response.sendRedirect("LoginServlet");
+
+		if (loginUser == null) {
+			// ログインしていなければログイン画面へ
+			response.sendRedirect(request.getContextPath() + "/LoginServlet");
 			return;
 		}
 
 		request.setAttribute("user", loginUser);
-		// マイページにフォワード
+
+		// プロフィール編集画面にフォワード
 		request.getRequestDispatcher("/WEB-INF/jsp/profile_edit.jsp").forward(request, response);
 	}
 
@@ -132,6 +129,9 @@ public class UserEditServlet extends HttpServlet {
 			updatePassword = password;
 		}
 
+		// プロフィール情報が変更されたか判定
+		boolean changeProfile = !nickname.equals(loginUser.getNickname()) || !loginId.equals(loginUser.getLoginId());
+
 		boolean result = dao.updateUser(loginUser.getId(), nickname, loginId, updatePassword);
 
 		if (result) {
@@ -141,8 +141,11 @@ public class UserEditServlet extends HttpServlet {
 
 			session.setAttribute("loginUser", loginUser);
 
-			if (changePassword) {
+			// 更新内容に応じて成功メッセージを分ける
+			if (changeProfile && changePassword) {
 				request.setAttribute("successMsgKey", "success.profile_edit.update_with_password");
+			} else if (changePassword) {
+				request.setAttribute("successMsgKey", "success.profile_edit.password_update");
 			} else {
 				request.setAttribute("successMsgKey", "success.profile_edit.update");
 			}
@@ -153,5 +156,4 @@ public class UserEditServlet extends HttpServlet {
 
 		request.getRequestDispatcher("/WEB-INF/jsp/profile_edit.jsp").forward(request, response);
 	}
-
 }

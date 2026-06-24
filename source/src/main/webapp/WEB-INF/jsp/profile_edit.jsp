@@ -32,7 +32,9 @@ User loginUser = (User) session.getAttribute("loginUser");
 			<a href="${pageContext.request.contextPath}/HomeServlet"> <img
 				src="${pageContext.request.contextPath}/images/logo/logo.png"
 				alt="ロゴ" class="logo"></a>
-			<div class="page-title"><fmt:message key="profile_edit.title" /></div>
+			<div class="page-title">
+				<fmt:message key="profile_edit.title" />
+			</div>
 			<a href="${pageContext.request.contextPath}/HomeServlet"> <img
 				src="${pageContext.request.contextPath}/images/logo/home.png"
 				alt="ホーム" class="toHome"></a>
@@ -41,32 +43,38 @@ User loginUser = (User) session.getAttribute("loginUser");
 		<!-- メインここから -->
 		<main class="main">
 			<div class="profile_edit_area">
-				<p class="progfile-edit-nav"><fmt:message key="profile_edit.nav.title" /></p>
+				<p class="progfile-edit-nav">
+					<fmt:message key="profile_edit.nav.title" />
+				</p>
 				<form method="POST"
 					action="${pageContext.request.contextPath}/UserEditServlet"
 					id="profile-edit-form" class="profile-edit-form">
-					<label class="edits"><fmt:message key="profile_edit.nickname" /><br> <input type="text"
+					<label class="edits"><fmt:message
+							key="profile_edit.nickname" /><br> <input type="text"
 						name="nickname" class="edit-nickname edit-input" id="nickname"
-						maxlength="20" value="<%=loginUser.getNickname()%>"><br>
-					</label> <label class="edits"><fmt:message key="profile_edit.loginId" /><br> <input type="text"
-						name="loginId" class="edit-loginId edit-input" id="loginId"
-						maxlength="20" value="<%=loginUser.getLoginId()%>"><br>
-					</label> <label class="edits"><fmt:message key="profile_edit.isPassword" /><br> <input
-						type="password" name="isPassword"
-						class="edit-isPassword edit-input" id="isPassword" maxlength="20"
-						required><br>
-					</label> <label class="edits"><fmt:message key="profile_edit.edit-password" /><br> <input
+						value="<%=loginUser.getNickname()%>"><br> </label> <label
+						class="edits"><fmt:message key="profile_edit.loginId" /><br>
+						<input type="text" name="loginId" class="edit-loginId edit-input"
+						id="loginId" value="<%=loginUser.getLoginId()%>"><br>
+					</label> <label class="edits"><fmt:message
+							key="profile_edit.isPassword" /><br> <input type="password"
+						name="isPassword" class="edit-isPassword edit-input"
+						id="isPassword" maxlength="20" required><br> </label> <label
+						class="edits"><fmt:message
+							key="profile_edit.edit-password" /><br> <input
 						type="password" name="password" class="edit-password edit-input"
-						id="password" maxlength="20"><br>
-					</label> <label class="edits"><fmt:message key="profile_edit.passwordConfirm" /><br> <input
+						id="password" maxlength="20"><br> </label> <label
+						class="edits"><fmt:message
+							key="profile_edit.passwordConfirm" /><br> <input
 						type="password" name="passwordConfirm"
 						class="edit-passwordConfirm edit-input" id="passwordConfirm"
-						maxlength="20">
-					</label>
+						maxlength="20"> </label>
 					<div class="form-bottom-bar"></div>
 					<div class="form-buttons">
-						<input type="button" onclick="history.back()" class="edit-button"
-							name="cancel" id="cancelBtn" value="<fmt:message key="profile_edit.cancel" />"> <input
+						<input type="button"
+							onclick="location.href='${pageContext.request.contextPath}/MyPageServlet'"
+							class="edit-button" name="cancel" id="cancelBtn"
+							value="<fmt:message key='profile_edit.cancel' />"><input
 							type="submit" class="edit-button" name="submit" id="editBtn"
 							value="<fmt:message key="profile_edit.edit" />">
 					</div>
@@ -75,11 +83,13 @@ User loginUser = (User) session.getAttribute("loginUser");
 					<%
 					if (errorMsgKey != null) {
 					%>
-					<span class="error-message"><fmt:message key="<%=errorMsgKey%>" /></span>
+					<span class="error-message"><fmt:message
+							key="<%=errorMsgKey%>" /></span>
 					<%
 					} else if (successMsgKey != null) {
 					%>
-					<span class="success-message"><fmt:message key="<%=successMsgKey%>" /></span>
+					<span class="success-message"><fmt:message
+							key="<%=successMsgKey%>" /></span>
 					<%
 					}
 					%>
@@ -97,8 +107,7 @@ User loginUser = (User) session.getAttribute("loginUser");
 				alt="<fmt:message key='menu.coin_support' />"> <img
 				class="nav-img hover-img"
 				src="${pageContext.request.contextPath}/images/nav/coin_support_hover${pageContext.response.locale.language == 'en' ? '_en' : ''}.png"
-				alt="<fmt:message key='menu.coin_support' />">
-			<!-- 施設情報 -->
+				alt="<fmt:message key='menu.coin_support' />"> <!-- 施設情報 -->
 			</a> <a href="${pageContext.request.contextPath}/StoreServlet"
 				class="nav-item"> <img class="nav-img normal-img"
 				src="${pageContext.request.contextPath}/images/nav/store_info_normal${pageContext.response.locale.language == 'en' ? '_en' : ''}.png"
@@ -109,7 +118,7 @@ User loginUser = (User) session.getAttribute("loginUser");
 			</a>
 
 			<div class="nav-space"></div>
-			
+
 			<!-- コラム -->
 			<a href="${pageContext.request.contextPath}/ColumnServlet"
 				class="nav-item"> <img class="nav-img normal-img"
@@ -117,16 +126,14 @@ User loginUser = (User) session.getAttribute("loginUser");
 				alt="<fmt:message key='menu.column' />"> <img
 				class="nav-img hover-img"
 				src="${pageContext.request.contextPath}/images/nav/column_hover${pageContext.response.locale.language == 'en' ? '_en' : ''}.png"
-				alt="<fmt:message key='menu.column' />">
-			<!-- マイページ -->
+				alt="<fmt:message key='menu.column' />"> <!-- マイページ -->
 			</a> <a href="${pageContext.request.contextPath}/MyPageServlet"
 				class="nav-item active"> <img class="nav-img normal-img"
 				src="${pageContext.request.contextPath}/images/nav/mypage_normal${pageContext.response.locale.language == 'en' ? '_en' : ''}.png"
 				alt="<fmt:message key='menu.mypage' />"> <img
 				class="nav-img hover-img"
 				src="${pageContext.request.contextPath}/images/nav/mypage_hover${pageContext.response.locale.language == 'en' ? '_en' : ''}.png"
-				alt="<fmt:message key='menu.mypage' />">
-			<!-- 支出登録 -->
+				alt="<fmt:message key='menu.mypage' />"> <!-- 支出登録 -->
 			</a> <a href="${pageContext.request.contextPath}/PaymentServlet"
 				class="nav-center"> <img class="nav-img center-img normal-img"
 				src="${pageContext.request.contextPath}/images/nav/payment_normal${pageContext.response.locale.language == 'en' ? '_en' : ''}.png"
