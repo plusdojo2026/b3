@@ -9,11 +9,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 
 import dao.StoreDao;
 import dto.Store;
+import dto.User;
 
 /**
  * Servlet implementation class StoreServlet
@@ -24,10 +26,22 @@ public class StoreServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		request.setCharacterEncoding("UTF-8");
-	    response.setContentType("text/html; charset=UTF-8");
-		
+		response.setContentType("text/html; charset=UTF-8");
+
+		// ユーザーごとのidを取得
+		HttpSession session = request.getSession();
+		User loginUser = (User) session.getAttribute("loginUser");
+		int id ;
+		if (loginUser != null) {
+			id = loginUser.getId();
+		} else {
+			// ログイン画面に送還する処理
+			response.sendRedirect("LoginServlet");
+			return;
+		}
+
 		// 検索
 		String[] keyword = request.getParameterValues("keyword");
 		// カテゴリーフィルタ
@@ -39,12 +53,12 @@ public class StoreServlet extends HttpServlet {
 		String address_en = request.getParameter("address_en");
 		String cashlessType = request.getParameter("cashlessType");
 
-		//表示されなくなるのでNG
+		// 表示されなくなるのでNG
 		// デフォルト表示を現金のみonにする
 		if (categories == null || categories.length == 0) {
 			categories = new String[] { "cashonly" };
 		}
-		
+
 		/*
 		 
 		 */
@@ -74,26 +88,26 @@ public class StoreServlet extends HttpServlet {
 				categories, keyword);
 
 		if (storeList != null && !storeList.isEmpty()) {
-			//距離の計算
-	        for (Store s : storeList) {
-	            double dist = calcDistance(userLat, userLng, s.getLatitude(), s.getLongitude());
-	            s.setDistance(dist);
-	        }
-	        // 距離の昇順にソート
-	        storeList.sort(Comparator.comparingDouble(Store::getDistance));
+			// 距離の計算
+			for (Store s : storeList) {
+				double dist = calcDistance(userLat, userLng, s.getLatitude(), s.getLongitude());
+				s.setDistance(dist);
+			}
+			// 距離の昇順にソート
+			storeList.sort(Comparator.comparingDouble(Store::getDistance));
 		}
-	        // Gsonを使ってJSON文字列に変換
-	        Gson gson = new Gson();
-	        String storeListJson = gson.toJson(storeList);
-	        
-	     // JSP に渡す
-	        request.setAttribute("storeListJson", storeListJson);
-	        request.setAttribute("storeList", storeList);
-	        request.setAttribute("userLat", userLat);
-	        request.setAttribute("userLng", userLng);
-		
+		// Gsonを使ってJSON文字列に変換
+		Gson gson = new Gson();
+		String storeListJson = gson.toJson(storeList);
+
+		// JSP に渡す
+		request.setAttribute("storeListJson", storeListJson);
 		request.setAttribute("storeList", storeList);
-		
+		request.setAttribute("userLat", userLat);
+		request.setAttribute("userLng", userLng);
+
+		request.setAttribute("storeList", storeList);
+
 		request.getRequestDispatcher("/WEB-INF/jsp/store_info.jsp").forward(request, response);
 //	        response.setContentType("application/json; charset=UTF-8");
 //	        PrintWriter out = response.getWriter();
