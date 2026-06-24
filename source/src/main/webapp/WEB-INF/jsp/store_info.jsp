@@ -7,7 +7,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title><fmt:message key="store_info.tab" /></title>
@@ -18,13 +17,13 @@
 
 <script>
 const store_list = JSON.parse(String.raw`${storeListJson}`);
+const contextPath = "<%= request.getContextPath() %>";
 </script>
 
 <script src="${pageContext.request.contextPath}/js/common.js" defer></script>
 <script src="${pageContext.request.contextPath}/js/store_info.js" defer></script>
 <link rel="icon"
 	href="${pageContext.request.contextPath}/favicon/favicon.png">
-</head>
 </head>
 <body data-lang="${sessionScope.currentLang}">
 

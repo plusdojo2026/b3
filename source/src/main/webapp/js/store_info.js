@@ -8,6 +8,28 @@ document.addEventListener('DOMContentLoaded', () => {
 	//データ読み込み
 	category_filter();
 
+	// すでに位置情報を送信したか？
+    if (!sessionStorage.getItem("locationSent")) {
+
+    navigator.geolocation.getCurrentPosition(
+        pos => {
+            const lat = pos.coords.latitude;
+            const lng = pos.coords.longitude;
+
+            sessionStorage.setItem("locationSent", "true");
+
+            window.location.href = contextPath + "/StoreServlet?lat=" + lat + "&lng=" + lng;
+        },
+        err => {
+            console.warn("位置情報が取得できませんでした。デフォルト値を使用します。");
+
+            sessionStorage.setItem("locationSent", "true");
+
+            window.location.href = contextPath + "/StoreServlet";
+        }
+    );
+
+    }
 	//カテゴリーボタンON,OFF
 	document.querySelectorAll(".filter-btn").forEach(btn => {
 		btn.addEventListener("click", () => {
@@ -21,6 +43,8 @@ document.addEventListener('DOMContentLoaded', () => {
 			category_filter();
 		});
 	});
+
+
 
 	//リアルタイム検索
 	const keywordInput = document.getElementById('keyword');
