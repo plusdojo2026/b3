@@ -7,6 +7,7 @@ String successMsgKey = (String) request.getAttribute("successMsgKey");
 User loginUser = (User) session.getAttribute("loginUser");
 %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<fmt:setLocale value="${sessionScope.currentLang}" />
 <fmt:setBundle basename="messages" />
 
 <!doctype html>
