@@ -39,7 +39,7 @@ public class ColumnServlet extends HttpServlet {
 		// ユーザーごとのidを取得
 				HttpSession session = request.getSession();
 				User loginUser = (User) session.getAttribute("loginUser");
-				int id = 0;
+				int id ;
 				if (loginUser != null) {
 					id = loginUser.getId();
 				} else {
