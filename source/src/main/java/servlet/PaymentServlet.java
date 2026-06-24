@@ -29,6 +29,18 @@ public class PaymentServlet extends HttpServlet {
 	// 支出登録画面を表示する
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		// ユーザーごとのidを取得
+		HttpSession session = request.getSession();
+		User loginUser = (User) session.getAttribute("loginUser");
+		int id ;
+		if (loginUser != null) {
+			id = loginUser.getId();
+		} else {
+			// ログイン画面に送還する処理
+			response.sendRedirect("LoginServlet");
+			return;
+		}
 
 		String amount = request.getParameter("amount");
 

@@ -30,6 +30,15 @@ public class PaymentLogServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		User loginUser = (User) session.getAttribute("loginUser");
 
+		int id;
+		if (loginUser != null) {
+			id = loginUser.getId();
+		} else {
+			// ログイン画面に送還する処理
+			response.sendRedirect("LoginServlet");
+			return;
+		}
+
 		// 言語
 		String lang = (String) request.getSession().getAttribute("currentLang");
 
