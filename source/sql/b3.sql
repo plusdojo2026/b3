@@ -214,23 +214,23 @@ INSERT INTO stores (
 ) VALUES
 -- 架空の麴町コンビニ
 ('コンビニ麴町ステーション店', 'Kojimachi Station Convenience Store',
- '東京都千代田区麴町3-5-12', '3-5-12 Kojimachi, Chiyoda-ku, Tokyo',
- 35.684512, 139.737821, 'both', 'credit, ic, qr'),
+ '東京都千代田区麹町3-5-12', '3-5-12 Kojimachi, Chiyoda-ku, Tokyo',
+ 35.683404, 139.738650, 'both', 'credit, ic, qr'),
 
 -- 架空の麴町ドラッグストア
-('ドラッグストア麴町メディカル', 'Kojimachi Medical Drugstore',
- '東京都千代田区麴町4-2-8', '4-2-8 Kojimachi, Chiyoda-ku, Tokyo',
+('ドラッグストア麹町メディカル', 'Kojimachi Medical Drugstore',
+ '東京都千代田区麹町4-2-8', '4-2-8 Kojimachi, Chiyoda-ku, Tokyo',
  35.685103, 139.735944, 'both', 'credit, qr'),
  
 -- 麹町コンビニ(実在)
-('セブンイレブン麴町駅前店', 'Seven Eleven Kojimachi Ekimae Store',
+('セブンイレブン麹町駅前店', 'Seven Eleven Kojimachi Ekimae Store',
  '東京都千代田区二番町4-3', '4-3 Nibancho, Chiyoda-ku, Tokyo',
  35.68624786735896, 139.7366265884323, 'both,ATM', 'credit, ic, qr'),
 
 -- 三菱UFJ銀行 麹町支店
 ('三菱UFJ銀行 麹町支店', 'MUFG Bank Kojimachi Branch',
  '東京都千代田区麹町4-1', '4-1 Kojimachi, Chiyoda-ku, Tokyo',
- 35.683056, 139.737778, 'both', 'credit, ic, qr'),
+ 35.683056, 139.737778, 'ATM', 'credit, ic, qr'),
 
 -- みずほ銀行 麹町支店（ATM・外貨両替あり）
 ('みずほ銀行 麹町支店', 'Mizuho Bank Kojimachi Branch',
