@@ -1,8 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <fmt:setLocale value="${sessionScope.currentLang}" />
 <fmt:setBundle basename="messages" />
+<%
+String alertErrorMsgKey = (String) request.getAttribute("alertErrorMsgKey");
+String alertSuccessMsgKey = (String) request.getAttribute("alertSuccessMsgKey");
+%>
 
 <!DOCTYPE html>
 <html>
@@ -107,8 +112,21 @@
 					</div>
 
 					<div class="alert-message-area">
-						<div class="alert-success-message">${alertSuccessMsg}</div>
-						<div class="alert-error-message">${alertErrorMsg}</div>
+						<%
+						if (alertErrorMsgKey != null) {
+						%>
+						<span class="alert-error-message"> <fmt:message
+								key="<%=alertErrorMsgKey%>" />
+						</span>
+						<%
+						} else if (alertSuccessMsgKey != null) {
+						%>
+						<span class="alert-success-message"> <fmt:message
+								key="<%=alertSuccessMsgKey%>" />
+						</span>
+						<%
+						}
+						%>
 					</div>
 				</form>
 			</section>
@@ -123,6 +141,10 @@
 						value="<fmt:message key='mypage.button.logout' />">
 				</form>
 			</section>
+
+			<div class="message-area"></div>
+
+
 		</main>
 		<!-- メインここまで -->
 		<!-- フッターここから -->

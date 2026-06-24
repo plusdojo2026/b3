@@ -44,10 +44,10 @@ public class MyPageServlet extends HttpServlet {
 		request.setAttribute("user", loginUser);
 
 		// アラート成功メッセージがあれば表示して、表示後に消す
-		String alertSuccessMsg = (String) session.getAttribute("alertSuccessMsg");
+		String alertSuccessMsg = (String) session.getAttribute("alertSuccessMsgKey");
 		if (alertSuccessMsg != null) {
-			request.setAttribute("alertSuccessMsg", alertSuccessMsg);
-			session.removeAttribute("alertSuccessMsg");
+			request.setAttribute("alertSuccessMsgKey", alertSuccessMsg);
+			session.removeAttribute("alertSuccessMsgKey");
 		}
 
 		// マイページにフォワード
@@ -79,14 +79,14 @@ public class MyPageServlet extends HttpServlet {
 			alertCountStr = alertCountStr == null ? "" : alertCountStr.trim();
 
 			if (alertAmountStr.isEmpty() || alertCountStr.isEmpty()) {
-				request.setAttribute("alertErrorMsg", "アラート設定を入力してください。");
+				request.setAttribute("alertErrorMsgKey", "error.alert.input.required");
 				request.setAttribute("user", loginUser);
 				request.getRequestDispatcher("/WEB-INF/jsp/mypage.jsp").forward(request, response);
 				return;
 			}
 
 			if (!alertAmountStr.matches("^[0-9]+$") || !alertCountStr.matches("^[0-9]+$")) {
-				request.setAttribute("alertErrorMsg", "アラート設定は半角数字で入力してください。");
+				request.setAttribute("alertErrorMsgKey", "error.alert.input.invalid_number");
 				request.setAttribute("user", loginUser);
 				request.getRequestDispatcher("/WEB-INF/jsp/mypage.jsp").forward(request, response);
 				return;
@@ -103,13 +103,13 @@ public class MyPageServlet extends HttpServlet {
 				loginUser.setAlertCount(alertCount);
 				session.setAttribute("loginUser", loginUser);
 
-				request.setAttribute("alertSuccessMsg", "アラート設定を変更しました。");
+				request.setAttribute("alertSuccessMsgKey", "success.alert.update");
 				request.setAttribute("user", loginUser);
 				request.getRequestDispatcher("/WEB-INF/jsp/mypage.jsp").forward(request, response);
 				return;
 			}
 
-			request.setAttribute("alertErrorMsg", "アラート設定の更新に失敗しました。");
+			request.setAttribute("alertErrorMsgKey", "error.alert.update_failed");
 			request.setAttribute("user", loginUser);
 			request.getRequestDispatcher("/WEB-INF/jsp/mypage.jsp").forward(request, response);
 			return;
