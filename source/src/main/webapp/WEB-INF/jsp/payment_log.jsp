@@ -23,7 +23,7 @@ String errorMsg = (String) request.getAttribute("errorMsg");
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/payment.css">
 <link rel="icon"
-	href="${pageContext.request.contextPath}/favicon/favicon.png">
+	href="${pageContext.request.contextPath}/images/favicon/favicon.png">
 
 <script src="${pageContext.request.contextPath}/js/common.js" defer></script>
 <script src="${pageContext.request.contextPath}/js/payment.js" defer></script>
