@@ -152,7 +152,7 @@
 				</div>
 				<div class="toPaymentArea">
 					<input type="text" maxlength="8" name="amount"
-						class="toPayment-input"> <input type="submit"
+						class="toPayment-input" inputmode="numeric"> <input type="submit"
 						value="<fmt:message key="home.toPayment-input" />"
 						class="toPayment-button">
 				</div>
