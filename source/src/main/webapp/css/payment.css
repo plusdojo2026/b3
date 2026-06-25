@@ -55,11 +55,17 @@
 	padding: 8px;
 	width: 280px;
 	height: 90px;
-	border: 1px solid green;
+	border: 3px solid green;
 	border-radius: 8px;
 	font-size: 46px;
 	font-weight: 480;
 	text-align: right;
+	
+}
+
+.amount-input:focus {
+	border: 3px solid green;
+	outline: none;
 }
 
 .money_isUse {
