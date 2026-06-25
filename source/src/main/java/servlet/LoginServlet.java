@@ -19,7 +19,20 @@ public class LoginServlet extends HttpServlet {
 	// ログイン画面を表示する
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+			
+		//デフォルトは日本語
+		HttpSession session = request.getSession();
+		String currentLang=(String) session.getAttribute("currentLang");
+		
+		if (currentLang == null || currentLang.isEmpty()) {
+			
+			session.setAttribute("currentLang", "ja");
+			
+			// JSTLのスイッチも、サーバーの設定を無視して日本語に固定する
+			java.util.Locale locale = new java.util.Locale("ja");
+			javax.servlet.jsp.jstl.core.Config.set(session, javax.servlet.jsp.jstl.core.Config.FMT_LOCALE, locale);
+		}
+				
 		request.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response);
 	}
 
