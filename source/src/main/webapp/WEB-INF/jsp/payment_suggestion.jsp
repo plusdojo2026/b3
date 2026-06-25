@@ -188,7 +188,7 @@ String[] moneyImagePaths = {"tenThousandYen.png", "fiveThousandYen.png", "oneTho
 						for (int i = 0; i < moneyTypes.length; i++) {
 						%>
 						<input type="hidden" name="payCount<%=i%>"
-							value="<%=payCounts[i]%>" inputmode="numeric">
+							value="<%=payCounts[i]%>" >
 						<%
 						}
 						%>

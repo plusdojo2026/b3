@@ -42,7 +42,7 @@ String successMsg = (String) request.getAttribute("successMsg");
 				action="${pageContext.request.contextPath}/PaymentServlet"
 				id="payment-form">
 				<label class="payments"> <input type="text" name="amount"
-					class="amount-input" id="amountInput" maxlength="8" value="${param.amount} inputmode="numeric"">
+					class="amount-input" id="amountInput" maxlength="8" value="${param.amount} ">
 				</label>
 				<div class="message-area">
 					<%
