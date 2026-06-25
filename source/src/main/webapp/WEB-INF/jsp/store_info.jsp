@@ -24,7 +24,7 @@ var currentLang = "${sessionScope.currentLang}".startsWith("en") ? "en" : "ja";
 <script src="${pageContext.request.contextPath}/js/common.js" defer></script>
 <script src="${pageContext.request.contextPath}/js/store_info.js" defer></script>
 <link rel="icon"
-	href="${pageContext.request.contextPath}/favicon/favicon.png">
+	href="${pageContext.request.contextPath}/images/favicon/favicon.png">
 </head>
 <body data-lang="${sessionScope.currentLang}">
 
