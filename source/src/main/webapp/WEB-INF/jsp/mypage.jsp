@@ -92,8 +92,8 @@ String alertSuccessMsgKey = (String) request.getAttribute("alertSuccessMsgKey");
 							<span class="alert-label"> <fmt:message
 									key="mypage.amount" />
 							</span> <input type="text" name="alertAmount"
-								value="${user.alertAmount}"> <span class="alert-unit">
-								<fmt:message key="mypage.en" />
+								value="${user.alertAmount}" inputmode="numeric"> <span
+								class="alert-unit"> <fmt:message key="mypage.en" />
 							</span>
 						</div>
 
