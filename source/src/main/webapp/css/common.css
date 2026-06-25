@@ -12,6 +12,12 @@ body {
 	background-color: #eeeeee;
 }
 
+body {
+	font-family: Verdana, Roboto, "Droid Sans", "游ゴシック", YuGothic, "メイリオ",
+		Meiryo, "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "ＭＳ Ｐゴシック",
+		sans-serif;
+}
+
 .app {
 	width: min(100%, 390px);
 	min-height: 100vh;
