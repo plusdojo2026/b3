@@ -20,7 +20,7 @@
 <script src="${pageContext.request.contextPath}/js/common.js" defer></script>
 <script src="${pageContext.request.contextPath}/js/home.js" defer></script>
 <link rel="icon"
-	href="${pageContext.request.contextPath}/favicon/favicon.png">
+	href="${pageContext.request.contextPath}/images/favicon/favicon.png">
 <script>
 	const contextPath = "${pageContext.request.contextPath}";
 </script>
@@ -152,8 +152,8 @@
 				</div>
 				<div class="toPaymentArea">
 					<input type="text" maxlength="8" name="amount"
-						class="toPayment-input" inputmode="numeric"> <input type="submit"
-						value="<fmt:message key="home.toPayment-input" />"
+						class="toPayment-input" inputmode="numeric"> <input
+						type="submit" value="<fmt:message key="home.toPayment-input" />"
 						class="toPayment-button">
 				</div>
 			</form>
@@ -243,6 +243,10 @@
 	</div>
 
 	<script src="${pageContext.request.contextPath}/js/intro.min.js"></script>
+	<script>
+		window.currentLang = "${sessionScope.currentLang}".startsWith("en") ? "en"
+				: "ja";
+	</script>
 	<script src="${pageContext.request.contextPath}/js/tutorial.js"></script>
 </body>
 </html>
