@@ -69,7 +69,8 @@ String amountText = String.format("%,d", amount);
 				<h3><fmt:message key="coin.wallet" /><span><fmt:message key="coin.maximum" /></span></h3>
 
 				<%--現在の財布の小銭合計額をwalletsテーブルから取得 --%>
-				<p><fmt:message key="coin.totalCoin" /><span>￥<%=amountText%></span></p>
+				<p><fmt:message key="coin.totalCoin" />
+				<span>￥<span id="walletTotalAmount"><%=amountText%></span></span>
 					
 				<%--この小銭を使いきる商品をみるボタン --%>
 				<button type="submit" id="btnUseAllCoins" name="submitType"
@@ -87,7 +88,8 @@ String amountText = String.format("%,d", amount);
 
 			<%--その他のおすすめ商品（現在の小銭合計をwalletsテーブルから取得） --%>
 			<div class="recItemsArea">
-				<h3><fmt:message key="coin.recItems" /><span id="recAmount">￥<%=amountText%><fmt:message key="coin.ika" /></span></h3>
+				<h3><fmt:message key="coin.recItems" />
+				<span>￥<span id="recAmount"><%=amountText%></span><fmt:message key="coin.ika" /></span></h3>
 					
 				<%--ソートを選択できるドロップダウン --%>
 				<div class="sort-area">

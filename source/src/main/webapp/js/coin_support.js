@@ -31,7 +31,7 @@ if (submitType === "manual") {
 const recAmount = document.getElementById('recAmount');
 //「画面に書き換える場所が準備」されていて、かつ「ユーザーが任意の金額を検索した」とき、金額をセットする
 if (recAmount && targetAmount > 0) {
-	recAmount.textContent = `￥${targetAmount}`;
+	recAmount.textContent = targetAmount.toLocaleString();
 }
 //-------------------------------------------
 // 1. ぴったり小銭消費

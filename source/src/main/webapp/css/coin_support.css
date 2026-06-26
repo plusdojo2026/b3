@@ -87,6 +87,15 @@ h3 span {
     list-style: none;
     background-color: #fafafa;
 }
+
+/*その他のおすすめ*/
+#recAmount, #walletTotalAmount {
+	font-size: 1.3rem;             
+	font-weight: bold;              
+	color: #111;                    
+	margin: 0 4px;                 
+}
+
 /*ソート*/
 .sort-area {
 	text-align: right;    
