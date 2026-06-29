@@ -137,17 +137,6 @@ INSERT INTO products (
     category,
     image_url
 ) VALUES
--- コンビニの商品
-(1, 'おにぎり（鮭）', 'Salmon Rice Ball', 150, 'food', 'food_konbini_onigiri'),
-(1, '紅茶ペットボトル', 'Tea Bottle', 120, 'drink', 'petbottle_tea_koucha'),
-(1, 'チョコレートバー', 'Chocolate Bar', 110, 'food', 'chocolate_bar'),
-(1, 'カップラーメン', 'Cup Ramen', 198, 'food', 'food_cup_ramen_syouyu'),         
-(1, 'ポテトチップス', 'Potato Chips', 158, 'food', 'potatochips'),
-
--- ドラッグストアの商品
-(2, 'ハンドソープ', 'Hand Soap', 298, 'other', 'sekken_hand_soap_bottle'),
-(2, 'ビタミンCサプリ', 'Vitamin C Supplement', 680, 'other', 'suppliment_pill_diet'),
-(2, 'マスク（5枚入り）', 'Face Mask (5pcs)', 198, 'other', 'mask'),
 
 -- セブンイレブン
 (3, '手巻おにぎり 炭火焼銀しゃけ', 'Hand-Rolled Rice Ball Salmon', 232, 'food', 'temaki_salmon'),
@@ -179,14 +168,21 @@ INSERT INTO products (
 (3, '味しみロースかつ丼', 'Pork Cutlet Rice Bowl',699, 'food', 'chilled_katsu'),
 (3, '肉の旨味とデミグラスのコク　ミートソース', 'Meat Sauce Pasta',496, 'food', 'pasta_meatSauce'),
 (3, 'ケチャップソースの大盛ナポリタン', 'Napolitan Pasta',537, 'food', 'pasta_napolitan'),
+(3,'７プレミアム　オレンジ果汁１００％　４５０ｍｌ', '100% Orange Juice 450ml', 267, 'drink','orange'),
+(3, '７ＰＬやわらかマスク　ふつうサイズ　７枚入', 'Soft Face Masks(7 Pack)', 302, 'other', 'maskM'),
+(3, '７ＰＬ滅菌済はがれにくい救急バン　Ｍ　１２枚', 'Medium, Adhesive Bandages(12 Packs)', 151, 'other', 'bandages'),
+(3, '７ＰＬ　チタンコート　ハサミ', 'Titanium-Coated Scissors', 726, 'other', 'scissors'),
+(3, '７ＰＬ　ひんやり汗ふきシート　せっけん１５枚', 'Body Wipes(15 Packs)',261, 'other','bodywipes' ),
+(3, '７ＰＬ　薬用リップクリーム', 'Medicated Lip Balm', 396, 'other','lipbalm'),
 (8, 'ブリュード コーヒー', 'Brewed Coffee', 440, 'drink', 'brewed_coffee'),
 (8, 'カフェ ミスト', 'Caffè Misto', 495, 'drink', 'cafe_misto'),
 (8, 'ビター クリーム コーヒー', 'Bitter Cream Coffee', 590, 'drink', 'bitter_cream_coffee'),
 (8, 'キャラメル マキアート', 'Caramel Macchiato', 580, 'drink', 'caramel_macchiato'),
 (8, 'スターバックス ラテ', 'Starbucks Latte', 500, 'drink', 'starbucks_latte'),
 (8, 'エスプレッソ アフォガート フラペチーノ', 'Espresso Affogato Frappuccino', 640, 'drink', 'espresso_affogato_frappuccino'),
-(8, 'コーヒー フラペチーノ', 'Coffee Frappuccino', 555, 'drink', 'coffee_frappuccino');
-
+(8, 'コーヒー フラペチーノ', 'Coffee Frappuccino', 555, 'drink', 'coffee_frappuccino'),
+(8, 'ロゴコールドカップグリーン　384ml', 'Logo Cold Cup-Green 384ml', 1300, 'other', 'logocup'),
+(8, 'スターバックス® ティバーナ™ アール グレイ 12袋入り', 'Starbucks® Teavana™ Earl Gray(12 Tea Bags)', 1260, 'other','teabags');
 
 create table stores (		
 id int AUTO_INCREMENT PRIMARY KEY,		
